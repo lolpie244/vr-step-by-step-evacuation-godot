@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk6f6uvskip7d"]
+
+[ext_resource type="Script" uid="uid://bl4wbprh86i6i" path="res://common/rope/rope.gd" id="1_uvgsx"]
+
+[sub_resource type="Curve3D" id="Curve3D_uvgsx"]
+resource_local_to_scene = true
+
+[node name="Rope" type="Path3D"]
+curve = SubResource("Curve3D_uvgsx")
+script = ExtResource("1_uvgsx")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+polygon = PackedVector2Array()
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
