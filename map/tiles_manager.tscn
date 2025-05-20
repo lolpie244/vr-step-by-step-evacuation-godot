@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c1yttln18hh3e"]
+[gd_scene load_steps=11 format=3 uid="uid://c1yttln18hh3e"]
 
 [ext_resource type="Script" uid="uid://dnv0inrmtln26" path="res://map/tile_manager.gd" id="1_rkh0i"]
 [ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://map/tiles/wall.gd" id="2_4y27s"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cd2m4ohb0c7jb" path="res://map/assets/models/wall-corner.glb" id="5_soovh"]
 [ext_resource type="PackedScene" uid="uid://d1m6bfa22uqf2" path="res://map/assets/models/wall-corner-sub.glb" id="6_4y5nv"]
 [ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://map/assets/models/wall.glb" id="6_soovh"]
+[ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://map/tiles/wall_like.gd" id="9_b63hk"]
 
 [node name="TilesManager" type="Node3D"]
 process_mode = 4
@@ -16,6 +17,7 @@ visible = false
 script = ExtResource("1_rkh0i")
 
 [node name="wall" type="Node3D" parent="." node_paths=PackedStringArray("corner_model", "model", "substitute_model")]
+visible = false
 script = ExtResource("2_4y27s")
 corner_model = NodePath("wall-corner")
 type = 2
@@ -44,9 +46,10 @@ model = NodePath("model")
 
 [node name="door" type="Node3D" parent="." node_paths=PackedStringArray("model")]
 visible = false
-script = ExtResource("3_db77c")
+script = ExtResource("9_b63hk")
 type = 3
 is_walkable = true
 model = NodePath("model")
 
 [node name="model" parent="door" instance=ExtResource("2_gnuv6")]
+visible = false

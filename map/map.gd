@@ -5,7 +5,7 @@ extends MeshInstance3D
 var test_map = [
 	["w", "w", "w", "w", "w", "w"],
 	["w", "f", "f", "w", "f", "w"],
-	["w", "f", "f", "w", "f", "w"],
+	["w", "f", "f", "d", "f", "w"],
 	["w", "w", "w", "w", "w", "w"],
 	["w", "f", "f", "w", "f", "w"],
 	["w", "w", "w", "w", "w", "w"],
@@ -22,6 +22,8 @@ func _convert_map(map: Array) -> Array:
 					result[i][j] = Tile.Type.Wall
 				"f":
 					result[i][j] = Tile.Type.Floor
+				"d":
+					result[i][j] = Tile.Type.Door
 				_:
 					push_warning("Unknown tile: on position [%, %]" % i, j)
 					result[i][j] = Tile.Type.None

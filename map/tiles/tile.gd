@@ -11,6 +11,8 @@ enum Type {
 	Staircase,
 }
 
+const WALL_LIKE_TYPES = [Type.Wall, Type.Door, Type.Window]
+
 @export var type: Type
 @export var is_walkable: bool
 
