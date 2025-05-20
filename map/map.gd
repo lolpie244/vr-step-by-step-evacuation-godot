@@ -42,6 +42,8 @@ var test_map = [
 
 
 func _ready() -> void:
+	tile_manager.visible = false
+
 	var plane_mesh := self.mesh as PlaneMesh
 	plane_mesh.size = Vector2(
 		self.get_aabb().size.x * self.scale.x, self.get_aabb().size.z * self.scale.z
@@ -53,6 +55,7 @@ func _ready() -> void:
 	cutoff_material.shader = cutoff_shader
 	cutoff_material.set_shader_parameter("plane_size", plane_mesh.size * 0.5)
 	cutoff_material.set_shader_parameter("plane_pos", Vector2(plane_pos.x, plane_pos.z))
+	cutoff_material.set_shader_parameter("border_color", Color.RED)
 
 	set_map(test_map)
 
@@ -79,7 +82,8 @@ func set_map(raw_map):
 			if tile_mesh is MultiMeshInstance3D:
 				tile_mesh.material_override = self.cutoff_material
 			else:
-				tile_mesh.set_surface_override_material(0, self.cutoff_material)
+				for i in tile_mesh.get_surface_override_material_count():
+					tile_mesh.set_surface_override_material(i, self.cutoff_material)
 
 			grid.set_mesh(x, y, tile_mesh)
 			items.add_child(tile_mesh)

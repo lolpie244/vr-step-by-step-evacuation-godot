@@ -3,6 +3,9 @@ shader_type spatial;
 uniform vec2 plane_pos;
 uniform vec2 plane_size;
 
+uniform sampler2D _albedo: source_color;
+uniform vec4 border_color: source_color;
+
 varying vec2 wvtx;
 
 void vertex() {
@@ -13,6 +16,17 @@ void vertex() {
 void fragment() {
 	vec2 vertexDistance = abs(plane_pos - wvtx);
 	if (vertexDistance.x > plane_size.x || vertexDistance.y > plane_size.y) discard;
+
+	float dist_to_edge = min(
+	    plane_size.x - vertexDistance.x,
+	    plane_size.y - vertexDistance.y
+	);
+
+	float border_dist = smoothstep(0.0, 0.5, dist_to_edge);
+	vec4 alb_color = texture(_albedo, UV);
+
+	ALBEDO = (mix(border_color, alb_color, border_dist)).rgb;
+	EMISSION = (mix(border_color * 7.0, vec4(0.0), border_dist)).rgb;
 }
 
 //void light() {

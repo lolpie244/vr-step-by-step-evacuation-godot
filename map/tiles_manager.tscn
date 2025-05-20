@@ -34,6 +34,7 @@ visible = false
 visible = false
 
 [node name="wall-corner" parent="wall" instance=ExtResource("5_soovh")]
+visible = false
 
 [node name="floor" type="Node3D" parent="." node_paths=PackedStringArray("model")]
 visible = false
@@ -43,6 +44,7 @@ is_walkable = true
 model = NodePath("model")
 
 [node name="model" parent="floor" instance=ExtResource("4_4y27s")]
+visible = false
 
 [node name="door" type="Node3D" parent="." node_paths=PackedStringArray("model")]
 visible = false
