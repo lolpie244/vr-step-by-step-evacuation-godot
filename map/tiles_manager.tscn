@@ -12,6 +12,7 @@
 
 [node name="TilesManager" type="Node3D"]
 process_mode = 4
+visible = false
 script = ExtResource("1_rkh0i")
 
 [node name="wall" type="Node3D" parent="." node_paths=PackedStringArray("corner_model", "model", "substitute_model")]

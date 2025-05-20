@@ -6,7 +6,7 @@ var test_map = [
 	['w', 'w', 'w', 'w', 'w', 'w'],
 	['w', 'f', 'f', 'w', 'f', 'w'],
 	['w', 'f', 'f', 'w', 'f', 'w'],
-	['w', 'f', 'f', 'w', 'f', 'w'],
+	['w', 'w', 'w', 'w', 'w', 'w'],
 	['w', 'f', 'f', 'w', 'f', 'w'],
 	['w', 'w', 'w', 'w', 'w', 'w'],
 ]
@@ -50,8 +50,5 @@ func set_map(raw_map):
 
 			var cell_mesh := tile.get_mesh(TileOnMap.new(map, x, y, tile_size))
 			cell_mesh.position += start_point + Vector3(tile_pos.x * x, 0, tile_pos.z * y)
-
-			# print(cell_mesh.position, local_offset, start_point, grid_offset)
-
 
 			self.add_child(cell_mesh)

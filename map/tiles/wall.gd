@@ -6,33 +6,50 @@ const WALL_LIKE_TYPES = [Type.Wall, Type.Door, Type.Window]
 
 
 func get_mesh(tile: TileOnMap) -> VisualInstance3D:
-	var is_not_wall = func(x, y):
+	var wall = func(x, y):
 		if x < 0 || x >= tile.map[0].size() || y < 0 || y >= tile.map.size():
-			return true
-		return not tile.map[x][y] in WALL_LIKE_TYPES
+			return false
+		return tile.map[x][y] in WALL_LIKE_TYPES
 
-	var left = is_not_wall.call(tile.x - 1, tile.y)
-	var right = is_not_wall.call(tile.x + 1, tile.y)
-	var down = is_not_wall.call(tile.x, tile.y - 1)
-	var up = is_not_wall.call(tile.x, tile.y + 1)
+	var left = wall.call(tile.x - 1, tile.y)
+	var right = wall.call(tile.x + 1, tile.y)
+	var down = wall.call(tile.x, tile.y - 1)
+	var up = wall.call(tile.x, tile.y + 1)
 
-	if (left or right) and (up or down):
-		var mesh := _get_mesh_for_tile(corner_model, tile)
-		var rotate_to: int = 0
+	var horizontal = left or right
+	var vertical = up or down
 
-		if right and down:
-			rotate_to = 0
-		elif down and left:
-			rotate_to = 90
-		elif left and up:
-			rotate_to = 180
-		elif up and right:
-			rotate_to = 270
+	if not (horizontal and vertical):
+		var result = _get_mesh_for_tile(model, tile)
+		if left or right:
+			result.rotate_y(deg_to_rad(90))
+		return result
 
-		mesh.rotate_y(deg_to_rad(rotate_to))
-		return mesh
-	else:
-		var mesh := _get_mesh_for_tile(model, tile)
-		if up or down:
-			mesh.rotate_y(deg_to_rad(90))
-		return mesh
+	var rotations := []
+
+	if left and up:
+		rotations.append(0)
+	if up and right:
+		rotations.append(90)
+	if right and down:
+		rotations.append(180)
+	if down and left:
+		rotations.append(270)
+
+	var mm := MultiMesh.new()
+
+	mm.mesh = corner_model.mesh
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = rotations.size()
+
+	for i in rotations.size():
+		var transform = Transform3D()
+		transform = transform.rotated(Vector3(0, 1, 0), deg_to_rad(rotations[i]))
+
+		mm.set_instance_transform(i, transform)
+
+	var result = MultiMeshInstance3D.new()
+	result.scale = _get_scale(corner_model, tile)
+	result.multimesh = mm
+
+	return result
