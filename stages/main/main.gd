@@ -12,8 +12,7 @@ func _input(event):
 	if event.is_action_pressed("decrease_strenght"):
 		$Extinguisher.strength -= STEP
 
-func _process(delta: float) -> void:
-
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("zoom_in"):
 		$Map.zoom += STEP
 

@@ -7,6 +7,7 @@ var mesh_grid: Array
 
 var tile_size: float
 
+
 func _init(n: int, m: int, tile_size_: float = 0):
 	tile_size = tile_size_
 
@@ -53,20 +54,9 @@ func get_type(x: int, y: int):
 	return type_grid[x][y]
 
 
-func _transpose(arr: Array):
-	var new_arr = []
-
-	for i in range(len(arr[0])):
-		var row = []
-		for j in range(len(arr)):
-			row.append(arr[len(arr) - j - 1][i])
-		new_arr.append(row)
-
-	return new_arr
-
 func transpose():
-	type_grid = _transpose(type_grid)
-	mesh_grid = _transpose(mesh_grid)
+	type_grid = Utils.transpose(type_grid)
+	mesh_grid = Utils.transpose(mesh_grid)
 
 
 func tile_position(x, y) -> Vector2:
@@ -76,11 +66,18 @@ func tile_position(x, y) -> Vector2:
 		+ Vector2(tile_size, tile_size) / 2
 	)
 
+
+func model_scale(model: VisualInstance3D) -> float:
+	var model_size = model.get_aabb().size
+	return tile_size / max(model_size.x, model_size.z)
+
+
 func set_mesh(x: int, y: int, mesh: VisualInstance3D):
 	mesh.position.x += tile_position(x, y).x
 	mesh.position.z += tile_position(x, y).y
 
 	mesh_grid[x][y] = mesh
+
 
 func get_mesh(x: int, y: int) -> VisualInstance3D:
 	return mesh_grid[x][y]

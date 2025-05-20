@@ -14,3 +14,15 @@ static func get_matrix(n: int, m: int, fill = null):
 
 	return result
 
+static func transpose(arr: Array):
+	var new_arr = []
+
+	for i in range(len(arr[0])):
+		var row = []
+		for j in range(len(arr)):
+			row.append(arr[len(arr) - j - 1][i])
+		new_arr.append(row)
+
+	return new_arr
+
+

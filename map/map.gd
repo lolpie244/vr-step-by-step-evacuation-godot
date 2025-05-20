@@ -14,7 +14,7 @@ var zoom: float:
 	set(new_zoom):
 		if new_zoom <= 0:
 			return
-		items.scale = Vector3(new_zoom, new_zoom, new_zoom)
+		items.scale = Vector3.ONE * new_zoom
 
 var offset: Vector2:
 	get():
@@ -46,7 +46,7 @@ func _ready() -> void:
 	plane_mesh.size = Vector2(
 		self.get_aabb().size.x * self.scale.x, self.get_aabb().size.z * self.scale.z
 	)
-	self.scale = Vector3(1, 1, 1)
+	self.scale = Vector3.ONE
 
 	var plane_pos = global_transform.origin
 	cutoff_material = ShaderMaterial.new()

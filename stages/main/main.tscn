@@ -20,7 +20,7 @@ tonemap_mode = 2
 script = ExtResource("1_60rri")
 
 [node name="Map" parent="." instance=ExtResource("2_5powy")]
-transform = Transform3D(16.0936, 0, 0, 0, 1.00277, 0, 0, 0, 8.01656, 0, 0, 0)
+transform = Transform3D(8.78043, 0, 0, 0, 1.00277, 0, 0, 0, 8.01656, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sugp2")

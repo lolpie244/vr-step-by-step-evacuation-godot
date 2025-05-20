@@ -12,7 +12,7 @@ func get_mesh(tile: TileOnGrid) -> VisualInstance3D:
 	var rotations := [[up, 0], [down, 180], [left, 270], [right, 90]].filter(func(x): return x[0])
 
 	var result = MultiMeshInstance3D.new()
-	result.scale = _get_scale(model, tile)
+	result.scale = Vector3.ONE * tile.grid.model_scale(model)
 
 	var mm := MultiMesh.new()
 
