@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ujao577umlix"]
+[gd_scene load_steps=6 format=3 uid="uid://ujao577umlix"]
 
+[ext_resource type="Shader" uid="uid://beleb7aq1efb7" path="res://map/cutoff.gdshader" id="2_4hjbm"]
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://map/map.gd" id="2_lgq1i"]
 [ext_resource type="PackedScene" uid="uid://c1yttln18hh3e" path="res://map/tiles_manager.tscn" id="3_kffv2"]
 
@@ -13,5 +14,8 @@ albedo_color = Color(1, 1, 1, 0.0980392)
 mesh = SubResource("PlaneMesh_a0dt8")
 surface_material_override/0 = SubResource("StandardMaterial3D_a0dt8")
 script = ExtResource("2_lgq1i")
+cutoff_shader = ExtResource("2_4hjbm")
 
 [node name="TilesManager" parent="." instance=ExtResource("3_kffv2")]
+
+[node name="Tiles" type="Node3D" parent="."]

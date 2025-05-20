@@ -1,7 +1,29 @@
 extends MeshInstance3D
 
 @onready var tile_manager = $TilesManager
+@onready var tiles = $Tiles
 
+@export var cutoff_shader: Shader
+var cutoff_material: ShaderMaterial
+
+
+var zoom: float:
+	get():
+		return tiles.scale.x
+	set(new_zoom):
+		if new_zoom <= 0:
+			return
+		tiles.scale = Vector3(new_zoom, new_zoom, new_zoom)
+
+var offset: Vector2:
+	get():
+		return Vector2(tiles.position.x, tiles.position.z)
+	set(new_offset):
+		tiles.position.x = new_offset.x
+		tiles.position.z = new_offset.y
+
+
+# temp
 var test_map = [
 	["w", "w", "w", "w", "w", "w"],
 	["w", "f", "f", "w", "f", "w"],
@@ -9,6 +31,13 @@ var test_map = [
 	["w", "w", "w", "w", "w", "w"],
 	["w", "f", "f", "w", "f", "w"],
 	["w", "w", "w", "w", "w", "w"],
+	["w", "f", "f", "w", "f", "w"],
+	["w", "f", "f", "w", "f", "w"],
+	["w", "f", "f", "w", "f", "w"],
+	["w", "f", "f", "w", "f", "w"],
+	["w", "f", "f", "w", "f", "w"],
+	["w", "f", "f", "w", "f", "w"],
+	["w", "f", "f", "w", "f", "w"],
 ]
 
 
@@ -38,6 +67,12 @@ func _ready() -> void:
 	)
 	self.scale = Vector3(1, 1, 1)
 
+	var plane_pos = global_transform.origin
+	cutoff_material = ShaderMaterial.new()
+	cutoff_material.shader = cutoff_shader
+	cutoff_material.set_shader_parameter("plane_size", plane_mesh.size * 0.5)
+	cutoff_material.set_shader_parameter("plane_pos", Vector2(plane_pos.x, plane_pos.z))
+
 	set_map(test_map)
 
 
@@ -46,17 +81,22 @@ func set_map(raw_map):
 
 	var tile_size = min(self.get_aabb().size.z / map.size(), self.get_aabb().size.x / map[0].size())
 	var start_point = (
-		-Vector3(map[0].size() * tile_size / 2, 0, map.size() * tile_size / 2)
+		-Vector3(map.size() * tile_size / 2, 0, map[0].size() * tile_size / 2)
 		+ Vector3(tile_size / 2, 0, tile_size / 2)
 	)
 
 	var tile_pos = Vector3(tile_size, self.position.y, tile_size)
 
-	for y in range(map.size()):
-		for x in range(map[y].size()):
+	for x in range(map.size()):
+		for y in range(map[x].size()):
 			var tile: Tile = tile_manager.get_tile(map[x][y])
 
-			var cell_mesh := tile.get_mesh(TileOnMap.new(map, x, y, tile_size))
+			var cell_mesh := tile.get_mesh(TileOnMap.new(map, x, y, tile_size)) as VisualInstance3D
 			cell_mesh.position += start_point + Vector3(tile_pos.x * x, 0, tile_pos.z * y)
 
-			self.add_child(cell_mesh)
+			if cell_mesh is MultiMeshInstance3D:
+				cell_mesh.material_override = self.cutoff_material
+			else:
+				cell_mesh.set_surface_override_material(0, self.cutoff_material)
+
+			tiles.add_child(cell_mesh)
