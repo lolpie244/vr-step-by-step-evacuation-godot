@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dl4tmx46jq22n"]
+[gd_scene load_steps=7 format=3 uid="uid://dl4tmx46jq22n"]
 
 [ext_resource type="Script" uid="uid://cduhit474hdr0" path="res://stages/main/main.gd" id="1_60rri"]
 [ext_resource type="PackedScene" uid="uid://bdbe4rq08675h" path="res://items/fire_extinguisher/fire_extinguisher.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://ujao577umlix" path="res://map/map.tscn" id="2_5powy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o5qli"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -15,22 +16,11 @@ background_mode = 2
 sky = SubResource("Sky_0wfyh")
 tonemap_mode = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_o5qli"]
-size = Vector3(5.51068, 0.588379, 5.45783)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_60rri"]
-specular_color = Color(1, 0, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60rri"]
-metallic = 1.0
-metallic_texture = SubResource("CanvasTexture_60rri")
-
-[sub_resource type="BoxMesh" id="BoxMesh_0wfyh"]
-material = SubResource("StandardMaterial3D_60rri")
-size = Vector3(3.59, 0.535, 4.75)
-
 [node name="Main" type="Node3D"]
 script = ExtResource("1_60rri")
+
+[node name="Map" parent="." instance=ExtResource("2_5powy")]
+transform = Transform3D(8.0062, 0, 0, 0, 1.00277, 0, 0, 0, 8.01656, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sugp2")
@@ -40,19 +30,7 @@ transform = Transform3D(-0.79145, 0.529345, -0.305616, -1.49013e-08, 0.499998, 0
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.00303569, 0.452872, -0.891571, 0.0214583, 0.891399, 0.452711, 0.999765, -0.0177573, -0.0124239, -3.07442, 3.02423, -0.770911)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148791, -0.834135, -0.0676415)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.544009, -0.00619799, -0.139422)
-shape = SubResource("BoxShape3D_o5qli")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0078454, -0.0256461, -0.00823092)
-mesh = SubResource("BoxMesh_0wfyh")
-skeleton = NodePath("../..")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.99897, 14.4007, -0.417276)
 
 [node name="Extinguisher" parent="." instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334852, 1.08649, -2.24326)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334852, 2.94934, -4.14429)

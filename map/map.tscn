@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://ujao577umlix"]
+
+[ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://map/map.gd" id="2_lgq1i"]
+[ext_resource type="PackedScene" uid="uid://c1yttln18hh3e" path="res://map/tiles_manager.tscn" id="3_kffv2"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
+
+[node name="Map" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_a0dt8")
+script = ExtResource("2_lgq1i")
+
+[node name="TilesManager" parent="." instance=ExtResource("3_kffv2")]
