@@ -1,15 +1,13 @@
 extends Node
 
-class_name TileOnMap
+class_name TileOnGrid
 
-var map: Array
+var grid: MapGrid
 var x: int
 var y: int
-var size: float
 
 
-func _init(map_: Array, x_: int, y_: int, size_: float):
-	self.map = map_
+func _init(grid_: MapGrid, x_: int, y_: int):
+	self.grid = grid_
 	self.x = x_
 	self.y = y_
-	self.size = size_

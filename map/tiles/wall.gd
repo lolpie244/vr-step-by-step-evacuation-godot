@@ -3,11 +3,11 @@ extends WallLikeTile
 @export var corner_model: MeshInstance3D
 
 
-func get_mesh(tile: TileOnMap) -> VisualInstance3D:
-	var left = _is_wall(tile.map, tile.x - 1, tile.y)
-	var right = _is_wall(tile.map, tile.x + 1, tile.y)
-	var down = _is_wall(tile.map, tile.x, tile.y - 1)
-	var up = _is_wall(tile.map, tile.x, tile.y + 1)
+func get_mesh(tile: TileOnGrid) -> VisualInstance3D:
+	var left = _is_wall(tile.grid, tile.x - 1, tile.y)
+	var right = _is_wall(tile.grid, tile.x + 1, tile.y)
+	var down = _is_wall(tile.grid, tile.x, tile.y - 1)
+	var up = _is_wall(tile.grid, tile.x, tile.y + 1)
 
 	var rotations := [[up, 0], [down, 180], [left, 270], [right, 90]].filter(func(x): return x[0])
 

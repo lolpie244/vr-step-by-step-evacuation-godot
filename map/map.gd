@@ -1,27 +1,27 @@
 extends MeshInstance3D
 
 @onready var tile_manager = $TilesManager
-@onready var tiles = $Tiles
+@onready var items = $MapItems
 
 @export var cutoff_shader: Shader
 var cutoff_material: ShaderMaterial
 
+var grid: MapGrid
 
 var zoom: float:
 	get():
-		return tiles.scale.x
+		return items.scale.x
 	set(new_zoom):
 		if new_zoom <= 0:
 			return
-		tiles.scale = Vector3(new_zoom, new_zoom, new_zoom)
+		items.scale = Vector3(new_zoom, new_zoom, new_zoom)
 
 var offset: Vector2:
 	get():
-		return Vector2(tiles.position.x, tiles.position.z)
+		return Vector2(items.position.x, items.position.z)
 	set(new_offset):
-		tiles.position.x = new_offset.x
-		tiles.position.z = new_offset.y
-
+		items.position.x = new_offset.x
+		items.position.z = new_offset.y
 
 # temp
 var test_map = [
@@ -37,27 +37,8 @@ var test_map = [
 	["w", "f", "f", "w", "f", "w"],
 	["w", "f", "f", "w", "f", "w"],
 	["w", "f", "f", "w", "f", "w"],
-	["w", "f", "f", "w", "f", "w"],
+	["w", "w", "w", "w", "w", "w"],
 ]
-
-
-func _convert_map(map: Array) -> Array:
-	var result = map.duplicate()
-
-	for i in map.size():
-		for j in map[i].size():
-			match map[i][j]:
-				"w":
-					result[i][j] = Tile.Type.Wall
-				"f":
-					result[i][j] = Tile.Type.Floor
-				"d":
-					result[i][j] = Tile.Type.Door
-				_:
-					push_warning("Unknown tile: on position [%, %]" % i, j)
-					result[i][j] = Tile.Type.None
-
-	return result
 
 
 func _ready() -> void:
@@ -77,26 +58,31 @@ func _ready() -> void:
 
 
 func set_map(raw_map):
-	var map = _convert_map(raw_map)
+	grid = MapGrid.from_str(raw_map)
 
-	var tile_size = min(self.get_aabb().size.z / map.size(), self.get_aabb().size.x / map[0].size())
-	var start_point = (
-		-Vector3(map.size() * tile_size / 2, 0, map[0].size() * tile_size / 2)
-		+ Vector3(tile_size / 2, 0, tile_size / 2)
+	var plane_size = self.get_aabb().size
+	if (
+		plane_size.x > plane_size.z and grid.rows_count() < grid.columns_count()
+		or plane_size.x < plane_size.z and grid.rows_count() > grid.columns_count()
+	):
+		grid.transpose()
+
+	grid.tile_size = min(
+		self.get_aabb().size.x / grid.rows_count(), self.get_aabb().size.z / grid.columns_count()
 	)
 
-	var tile_pos = Vector3(tile_size, self.position.y, tile_size)
+	for x in range(grid.rows_count()):
+		for y in range(grid.columns_count()):
+			var tile: Tile = tile_manager.get_tile(grid.get_type(x, y))
 
-	for x in range(map.size()):
-		for y in range(map[x].size()):
-			var tile: Tile = tile_manager.get_tile(map[x][y])
-
-			var cell_mesh := tile.get_mesh(TileOnMap.new(map, x, y, tile_size)) as VisualInstance3D
-			cell_mesh.position += start_point + Vector3(tile_pos.x * x, 0, tile_pos.z * y)
-
-			if cell_mesh is MultiMeshInstance3D:
-				cell_mesh.material_override = self.cutoff_material
+			var tile_mesh := tile.get_mesh(TileOnGrid.new(grid, x, y)) as VisualInstance3D
+			if tile_mesh is MultiMeshInstance3D:
+				tile_mesh.material_override = self.cutoff_material
 			else:
-				cell_mesh.set_surface_override_material(0, self.cutoff_material)
+				tile_mesh.set_surface_override_material(0, self.cutoff_material)
 
-			tiles.add_child(cell_mesh)
+			grid.set_mesh(x, y, tile_mesh)
+			items.add_child(tile_mesh)
+
+# func place_character(character: Character, x: int, y: int):
+# 	pass

@@ -18,4 +18,4 @@ cutoff_shader = ExtResource("2_4hjbm")
 
 [node name="TilesManager" parent="." instance=ExtResource("3_kffv2")]
 
-[node name="Tiles" type="Node3D" parent="."]
+[node name="MapItems" type="Node3D" parent="."]

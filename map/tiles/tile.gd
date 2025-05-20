@@ -26,16 +26,17 @@ func _get_configuration_warning():
 	return ""
 
 
-func _get_scale(model_arg: MeshInstance3D, tile: TileOnMap) -> Vector3:
-	var scale = tile.size / max(model_arg.get_aabb().size.x, model_arg.get_aabb().size.z)
+func _get_scale(model_arg: MeshInstance3D, tile: TileOnGrid) -> Vector3:
+	var model_size = model_arg.get_aabb().size
+	var scale = tile.grid.tile_size / max(model_size.x, model_size.z)
 	return Vector3(scale, scale, scale)
 
 
-func _get_position(model_arg: MeshInstance3D, tile: TileOnMap) -> Vector3:
+func _get_position(model_arg: MeshInstance3D, tile: TileOnGrid) -> Vector3:
 	return model_arg.position * _get_scale(model_arg, tile)
 
 
-func _get_mesh_for_tile(model_arg: MeshInstance3D, tile: TileOnMap) -> VisualInstance3D:
+func _get_mesh_for_tile(model_arg: MeshInstance3D, tile: TileOnGrid) -> VisualInstance3D:
 	var result := model_arg.duplicate() as MeshInstance3D
 	result.visible = true
 
@@ -45,5 +46,5 @@ func _get_mesh_for_tile(model_arg: MeshInstance3D, tile: TileOnMap) -> VisualIns
 	return result
 
 
-func get_mesh(tile: TileOnMap) -> VisualInstance3D:
+func get_mesh(tile: TileOnGrid) -> VisualInstance3D:
 	return _get_mesh_for_tile(model, tile)
