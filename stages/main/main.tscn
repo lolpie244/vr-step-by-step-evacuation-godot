@@ -20,7 +20,7 @@ tonemap_mode = 2
 script = ExtResource("1_60rri")
 
 [node name="Map" parent="." instance=ExtResource("2_5powy")]
-transform = Transform3D(8.0062, 0, 0, 0, 1.00277, 0, 0, 0, 8.01656, 0, 0, 0)
+transform = Transform3D(32.0936, 0, 0, 0, 1.00277, 0, 0, 0, 43.323, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sugp2")
@@ -30,7 +30,7 @@ transform = Transform3D(-0.79145, 0.529345, -0.305616, -1.49013e-08, 0.499998, 0
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.99897, 14.4007, -0.417276)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.99897, 38.4617, 0.929758)
 
 [node name="Extinguisher" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334852, 2.94934, -4.14429)

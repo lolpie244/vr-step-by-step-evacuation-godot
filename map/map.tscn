@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://ujao577umlix"]
+[gd_scene load_steps=5 format=3 uid="uid://ujao577umlix"]
 
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://map/map.gd" id="2_lgq1i"]
 [ext_resource type="PackedScene" uid="uid://c1yttln18hh3e" path="res://map/tiles_manager.tscn" id="3_kffv2"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0dt8"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.0980392)
+
 [node name="Map" type="MeshInstance3D"]
 mesh = SubResource("PlaneMesh_a0dt8")
+surface_material_override/0 = SubResource("StandardMaterial3D_a0dt8")
 script = ExtResource("2_lgq1i")
 
 [node name="TilesManager" parent="." instance=ExtResource("3_kffv2")]
