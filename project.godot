@@ -14,10 +14,20 @@ config/name="MasterWork"
 run/main_scene="uid://dl4tmx46jq22n"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
+[autoload]
+
+SceneManager="*res://common/stage_manager/scene_manager.gd"
+XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
+XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 [input]
 
@@ -71,3 +81,8 @@ zoom_out={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[xr]
+
+openxr/enabled=true
+shaders/enabled=true

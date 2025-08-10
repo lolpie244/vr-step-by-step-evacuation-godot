@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://flu7j32ifd3y"]
+
+[ext_resource type="Script" uid="uid://dbgvinydau6i6" path="res://stages/strategic/strategic.gd" id="1_dspli"]
+[ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player/PlayerVr.tscn" id="2_dspli"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dspli"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_5y27t"]
+sky_material = SubResource("ProceduralSkyMaterial_dspli")
+
+[sub_resource type="Environment" id="Environment_paqgp"]
+background_mode = 2
+sky = SubResource("Sky_5y27t")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xhnp1"]
+size = Vector3(5, 0.1, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xl3x2"]
+size = Vector3(5, 0.1, 5)
+
+[node name="Strategic" type="Node3D"]
+script = ExtResource("1_dspli")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_paqgp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_xhnp1")
+debug_fill = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_xl3x2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.386325, 0.922363, 0, -0.922363, -0.386325, 0, 4.64962, 0)
+
+[node name="PlayerVr" parent="." instance=ExtResource("2_dspli")]

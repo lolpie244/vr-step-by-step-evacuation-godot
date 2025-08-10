@@ -1,7 +1,5 @@
 extends Node3D
 
-@export var strategic_scene: PackedScene
-
 var xr_interface: XRInterface
 
 func _ready():
@@ -16,5 +14,3 @@ func _ready():
 	get_viewport().use_xr = true
 
 	print("OpenXR is initialized")
-
-	SceneManager.load_scene(strategic_scene)
