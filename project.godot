@@ -85,4 +85,5 @@ renderer/rendering_method.mobile="gl_compatibility"
 [xr]
 
 openxr/enabled=true
+openxr/reference_space=0
 shaders/enabled=true

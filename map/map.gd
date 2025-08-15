@@ -3,6 +3,7 @@ extends MeshInstance3D
 @onready var tile_manager = $TilesManager
 @onready var items = $MapItems
 
+@export var enable_cutoff: bool = true
 @export var cutoff_shader: Shader
 var cutoff_material: ShaderMaterial
 
@@ -79,11 +80,13 @@ func set_map(raw_map):
 			var tile: Tile = tile_manager.get_tile(grid.get_type(x, y))
 
 			var tile_mesh := tile.get_mesh(TileOnGrid.new(grid, x, y)) as VisualInstance3D
-			if tile_mesh is MultiMeshInstance3D:
-				tile_mesh.material_override = self.cutoff_material
-			else:
-				for i in tile_mesh.get_surface_override_material_count():
-					tile_mesh.set_surface_override_material(i, self.cutoff_material)
+
+			if enable_cutoff:
+				if tile_mesh is MultiMeshInstance3D:
+					tile_mesh.material_override = self.cutoff_material
+				else:
+					for i in tile_mesh.get_surface_override_material_count():
+						tile_mesh.set_surface_override_material(i, self.cutoff_material)
 
 			grid.set_mesh(x, y, tile_mesh)
 			items.add_child(tile_mesh)

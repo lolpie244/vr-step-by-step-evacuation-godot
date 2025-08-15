@@ -4,7 +4,23 @@ extends Node3D
 
 var xr_interface: XRInterface
 
+func _set_action_set_priorities():
+	const priorities = {
+		"godot": 0,
+		"strategic": 1
+	}
+
+	var action_map: OpenXRActionMap = load("res://openxr_action_map.tres")
+
+	for action_set: OpenXRActionSet in action_map.action_sets:
+		action_set.priority = priorities[action_set.resource_name]
+
+	ResourceSaver.save(action_map, "res://openxr_action_map.tres")
+
+
 func _ready():
+	_set_action_set_priorities()
+
 	xr_interface = XRServer.find_interface("OpenXR")
 
 	if not xr_interface or not xr_interface.is_initialized():
