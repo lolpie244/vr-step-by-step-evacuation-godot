@@ -1,8 +1,15 @@
 extends Node3D
 
 @export var strategic_scene: PackedScene
+@export var fallback_scene: PackedScene
 
 var xr_interface: XRInterface
+
+func _get_configuration_warning():
+	if not strategic_scene or not fallback_scene:
+		return "Scene's are missing"
+	return ""
+
 
 func _set_action_set_priorities():
 	const priorities = {
@@ -24,7 +31,9 @@ func _ready():
 	xr_interface = XRServer.find_interface("OpenXR")
 
 	if not xr_interface or not xr_interface.is_initialized():
-		print("OpenXR is not initialized")
+		print("OpenXR is not initialized. Use fallback_scene")
+
+		SceneManager.load_scene(fallback_scene)
 		return
 
 
