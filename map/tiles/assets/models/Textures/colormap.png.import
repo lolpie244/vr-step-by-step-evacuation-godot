@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqpdjjpoh51db"
-path.s3tc="res://.godot/imported/wall-corner_colormap.png-a78ac2d09b13926efc076e3d93a21fd1.s3tc.ctex"
+uid="uid://cw2421itoh5li"
+path.s3tc="res://.godot/imported/colormap.png-27675d117fb235872223802a105994c3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "76084aa0c65dc2c593e6532f1f61f968"
-}
 
 [deps]
 
-source_file="res://map/assets/models/wall-corner_colormap.png"
-dest_files=["res://.godot/imported/wall-corner_colormap.png-a78ac2d09b13926efc076e3d93a21fd1.s3tc.ctex"]
+source_file="res://map/tiles/assets/models/Textures/colormap.png"
+dest_files=["res://.godot/imported/colormap.png-27675d117fb235872223802a105994c3.s3tc.ctex"]
 
 [params]
 

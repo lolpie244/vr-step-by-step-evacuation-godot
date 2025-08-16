@@ -3,17 +3,17 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://da4h3uw8wl1xq"
-path="res://.godot/imported/wall-sub.glb-81eda9b00ed50a08f1c4aba8fa2fa815.scn"
+uid="uid://dw3akdt3g0l34"
+path="res://.godot/imported/wall.glb-26b5ef65bb5d3e5810cf51897d1b323d.scn"
 
 [deps]
 
-source_file="res://map/assets/models/wall-sub.glb"
-dest_files=["res://.godot/imported/wall-sub.glb-81eda9b00ed50a08f1c4aba8fa2fa815.scn"]
+source_file="res://map/tiles/assets/models/wall.glb"
+dest_files=["res://.godot/imported/wall.glb-26b5ef65bb5d3e5810cf51897d1b323d.scn"]
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="StaticBody3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -26,7 +26,7 @@ meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
-animation/import=true
+animation/import=false
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
@@ -34,7 +34,7 @@ animation/import_rest_as_RESET=false
 import_script/path="uid://cviptg4r222iw"
 _subresources={
 "nodes": {
-"PATH:wall-low": {
+"PATH:floor-thick": {
 "generate/physics": true
 }
 }

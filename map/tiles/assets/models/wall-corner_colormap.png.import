@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://518ybnojq6fv"
-path.s3tc="res://.godot/imported/doorway_colormap.png-26af9d83edfa37930747a5f9bc7fa5c1.s3tc.ctex"
+uid="uid://bqpdjjpoh51db"
+path.s3tc="res://.godot/imported/wall-corner_colormap.png-af1a396b79633ed36f167a48077451c1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://map/assets/models/doorway_colormap.png"
-dest_files=["res://.godot/imported/doorway_colormap.png-26af9d83edfa37930747a5f9bc7fa5c1.s3tc.ctex"]
+source_file="res://map/tiles/assets/models/wall-corner_colormap.png"
+dest_files=["res://.godot/imported/wall-corner_colormap.png-af1a396b79633ed36f167a48077451c1.s3tc.ctex"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d1m6bfa22uqf2"
-path="res://.godot/imported/wall-corner-sub.glb-d2e3dd38a664b8efd5bc8e9510b935fe.scn"
+uid="uid://da4h3uw8wl1xq"
+path="res://.godot/imported/wall-sub.glb-94052ec1eb2131ff25cbd548bdfc89fc.scn"
 
 [deps]
 
-source_file="res://map/assets/models/wall-corner-sub.glb"
-dest_files=["res://.godot/imported/wall-corner-sub.glb-d2e3dd38a664b8efd5bc8e9510b935fe.scn"]
+source_file="res://map/tiles/assets/models/wall-sub.glb"
+dest_files=["res://.godot/imported/wall-sub.glb-94052ec1eb2131ff25cbd548bdfc89fc.scn"]
 
 [params]
 
@@ -34,7 +34,7 @@ animation/import_rest_as_RESET=false
 import_script/path="uid://cviptg4r222iw"
 _subresources={
 "nodes": {
-"PATH:wall-corner-low": {
+"PATH:wall-low": {
 "generate/physics": true
 }
 }

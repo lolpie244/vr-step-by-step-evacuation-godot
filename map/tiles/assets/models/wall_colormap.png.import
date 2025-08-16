@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dypqtuxjq5xma"
-path.s3tc="res://.godot/imported/wall_colormap.png-787896725550cb000ae270c02043eff7.s3tc.ctex"
+path.s3tc="res://.godot/imported/wall_colormap.png-b28d748b3824a15b87c992d0804a2ef0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://map/assets/models/wall_colormap.png"
-dest_files=["res://.godot/imported/wall_colormap.png-787896725550cb000ae270c02043eff7.s3tc.ctex"]
+source_file="res://map/tiles/assets/models/wall_colormap.png"
+dest_files=["res://.godot/imported/wall_colormap.png-b28d748b3824a15b87c992d0804a2ef0.s3tc.ctex"]
 
 [params]
 

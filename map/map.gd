@@ -1,28 +1,26 @@
 extends MeshInstance3D
 
-@onready var tile_manager = $TilesManager
-@onready var items = $MapItems
+@onready var tile_manager = $TileManager
+@onready var grid = $Grid
 
 @export var enable_cutoff: bool = true
 @export var cutoff_shader: Shader
 var cutoff_material: ShaderMaterial
 
-var grid: MapGrid
-
 var zoom: float:
 	get():
-		return items.scale.x
+		return grid.scale.x
 	set(new_zoom):
 		if new_zoom <= 0:
 			return
-		items.scale = Vector3.ONE * new_zoom
+		grid.scale = Vector3.ONE * new_zoom
 
 var offset: Vector2:
 	get():
-		return Vector2(items.position.x, items.position.z)
+		return Vector2(grid.position.x, grid.position.z)
 	set(new_offset):
-		items.position.x = new_offset.x
-		items.position.z = new_offset.y
+		grid.position.x = new_offset.x
+		grid.position.z = new_offset.y
 
 # temp
 var test_map = [
@@ -40,6 +38,29 @@ var test_map = [
 	["w", "f", "f", "w", "f", "w"],
 	["w", "w", "w", "w", "w", "w"],
 ]
+
+# TODO: only for testing
+static func types_from_str(str_map: Array) -> Array:
+	if str_map.size() < 0:
+		return []
+
+	var result = Utils.get_matrix(str_map.size(), str_map[0].size(), TileFactory.Type.None)
+
+	for i in str_map.size():
+		for j in str_map[i].size():
+			match str_map[i][j]:
+				"w":
+					result[i][j] = TileFactory.Type.Wall
+				"f":
+					result[i][j] = TileFactory.Type.Floor
+				"d":
+					result[i][j] = TileFactory.Type.Door
+				_:
+					push_warning("Unknown tile: on position [%, %]" % i, j)
+					result.type_grid[i][j] = TileFactory.Type.None
+
+	return result
+
 
 
 func _ready() -> void:
@@ -62,34 +83,40 @@ func _ready() -> void:
 
 
 func set_map(raw_map):
-	grid = MapGrid.from_str(raw_map)
+	var tile_types := types_from_str(raw_map)
+
+	grid.resize(tile_types.size(), tile_types[0].size())
 
 	var plane_size = self.get_aabb().size
 	if (
 		plane_size.x > plane_size.z and grid.rows_count() < grid.columns_count()
 		or plane_size.x < plane_size.z and grid.rows_count() > grid.columns_count()
 	):
+		tile_types = Utils.transpose(tile_types)
 		grid.transpose()
 
 	grid.tile_size = min(
 		self.get_aabb().size.x / grid.rows_count(), self.get_aabb().size.z / grid.columns_count()
 	)
 
+	# set flags
 	for x in range(grid.rows_count()):
 		for y in range(grid.columns_count()):
-			var tile: Tile = tile_manager.get_tile(grid.get_type(x, y))
+			var tile_factory: TileFactory = tile_manager.get_tile_factory(tile_types[x][y])
+			grid.set_tile(x, y, tile_factory.create(grid, x, y))
 
-			var tile_mesh := tile.get_mesh(TileOnGrid.new(grid, x, y)) as VisualInstance3D
+		
+	for x in range(grid.rows_count()):
+		for y in range(grid.columns_count()):
+			var tile: Tile = grid.get_tile(x, y)
+			tile.init()
 
 			if enable_cutoff:
-				if tile_mesh is MultiMeshInstance3D:
-					tile_mesh.material_override = self.cutoff_material
+				if tile.model is MultiMeshInstance3D:
+					tile.model.material_override = self.cutoff_material
 				else:
-					for i in tile_mesh.get_surface_override_material_count():
-						tile_mesh.set_surface_override_material(i, self.cutoff_material)
-
-			grid.set_mesh(x, y, tile_mesh)
-			items.add_child(tile_mesh)
+					for i in tile.model.get_surface_override_material_count():
+						tile.model.set_surface_override_material(i, self.cutoff_material)
 
 # func place_character(character: Character, x: int, y: int):
 # 	pass
