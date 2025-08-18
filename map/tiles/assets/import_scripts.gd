@@ -1,9 +1,7 @@
-@tool # Needed so it runs in editor.
+@tool
 
 extends EditorScenePostImport
 
-# This sample changes all node names.
-# Called right after the scene is imported and gets the root node.
 func _post_import(scene):
 	var new_root: Node = scene.get_child(0)
 	new_root.name = scene.name

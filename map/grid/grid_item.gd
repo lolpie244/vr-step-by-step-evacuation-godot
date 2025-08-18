@@ -6,19 +6,15 @@ var x: int
 var y: int
 var grid: MapGrid
 
-var grid_model
 
-
-func set_grid_item_data(grid_: MapGrid, x_: int, y_: int):
+func _init(grid_: MapGrid, x_: int, y_: int):
 	self.x = x_
 	self.y = y_
 	self.grid = grid_
 
-func init():
-	self.grid_model = _generate_model()
-	self.add_child(self.grid_model)
-	self.position = grid.tile_position(x, y)
 
+func init():
+	self.position = grid.tile_position(x, y)
 	self.grid.add_child(self)
 
 
@@ -33,6 +29,7 @@ func _resize_model(model_: Node3D):
 	model_.position *= model_.scale
 
 	return model_
+
 
 func _generate_model():
 	assert(false, "Not implemented")

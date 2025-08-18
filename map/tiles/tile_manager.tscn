@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dnv0inrmtln26" path="res://map/tiles/tile_manager.gd" id="1_1cyyh"]
 [ext_resource type="Script" uid="uid://bjf4i20x1nns" path="res://map/tiles/tile_factory.gd" id="2_1cyyh"]
 [ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://map/tiles/types/wall.gd" id="2_6ssnw"]
-[ext_resource type="PackedScene" uid="uid://da4h3uw8wl1xq" path="res://map/tiles/assets/models/wall-sub.glb" id="3_mh8sd"]
 [ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://map/tiles/assets/models/wall.glb" id="4_6thgy"]
+[ext_resource type="PackedScene" uid="uid://wemhit1bf7ew" path="res://map/characters/character_point.tscn" id="7_1200g"]
 [ext_resource type="Script" uid="uid://d2fucstntnq80" path="res://map/tiles/types/tile.gd" id="7_fs7hf"]
 [ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://map/tiles/assets/models/floor.glb" id="8_64f6k"]
 [ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://map/tiles/types/wall_like.gd" id="9_6xs5c"]
@@ -15,39 +15,41 @@ process_mode = 4
 visible = false
 script = ExtResource("1_1cyyh")
 
-[node name="wall" type="Node3D" parent="." node_paths=PackedStringArray("model", "substitute_model")]
+[node name="wall" type="Node3D" parent="."]
 visible = false
 script = ExtResource("2_1cyyh")
-properties = Array[int]([1])
+properties = Array[int]([1, 0])
 type = 2
-model = NodePath("model")
-substitute_model = NodePath("substitute")
 factory_class = ExtResource("2_6ssnw")
-
-[node name="substitute" parent="wall" instance=ExtResource("3_mh8sd")]
-visible = false
 
 [node name="model" parent="wall" instance=ExtResource("4_6thgy")]
 visible = false
 
-[node name="floor" type="Node3D" parent="." node_paths=PackedStringArray("model")]
+[node name="character_point" parent="wall" instance=ExtResource("7_1200g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="floor" type="Node3D" parent="."]
 visible = false
 script = ExtResource("2_1cyyh")
 properties = Array[int]([2])
 type = 1
-model = NodePath("model")
 factory_class = ExtResource("7_fs7hf")
+
+[node name="character_point" parent="floor" instance=ExtResource("7_1200g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 
 [node name="model" parent="floor" instance=ExtResource("8_64f6k")]
 visible = false
 
-[node name="door" type="Node3D" parent="." node_paths=PackedStringArray("model")]
+[node name="door" type="Node3D" parent="."]
 visible = false
 script = ExtResource("2_1cyyh")
 properties = Array[int]([1, 2])
 type = 3
-model = NodePath("model")
 factory_class = ExtResource("9_6xs5c")
+
+[node name="character_point" parent="door" instance=ExtResource("7_1200g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 
 [node name="model" parent="door" instance=ExtResource("10_1bohw")]
 visible = false

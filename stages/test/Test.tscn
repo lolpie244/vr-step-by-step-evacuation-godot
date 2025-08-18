@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxrf0lnhl7s2f"]
+[gd_scene load_steps=6 format=3 uid="uid://dxrf0lnhl7s2f"]
 
+[ext_resource type="Script" uid="uid://b8avi6cjwyrsf" path="res://stages/test/test.gd" id="1_c6hbk"]
 [ext_resource type="PackedScene" uid="uid://ujao577umlix" path="res://map/map.tscn" id="1_xne4r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xne4r"]
@@ -15,6 +16,7 @@ sky = SubResource("Sky_jwisr")
 tonemap_mode = 2
 
 [node name="Test" type="Node3D"]
+script = ExtResource("1_c6hbk")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c6hbk")

@@ -14,16 +14,20 @@ enum Type {
 @export var properties: Array[Tile.Flags] = []
 @export var type: Type = Type.None
 
-@export var model: MeshInstance3D
-@export var substitute_model: MeshInstance3D
-
 @export var factory_class: Script
+
+var _shared_data: SharedData
+
+
+func _ready() -> void:
+	_shared_data = SharedData.new(self)
 
 
 func _get_configuration_warning():
-	if not model:
-		return "Model is not set"
+	if not factory_class:
+		return "Factory class is not set"
 	return ""
+
 
 func get_flags():
 	var flags = 0
@@ -32,9 +36,17 @@ func get_flags():
 
 	return flags
 
+
 func create(grid_: MapGrid, x_: int, y_: int):
-	var result = factory_class.new()
+	return factory_class.new(_shared_data, grid_, x_, y_)
 
-	result.set_tile_data(grid_, x_, y_, model, get_flags())
 
-	return result
+class SharedData:
+	var flags: int
+	var model: Node3D
+	var character_point: CharacterPoint
+
+	func _init(fabric) -> void:
+		flags = fabric.get_flags()
+		model = fabric.get_node("model")
+		character_point = fabric.get_node("character_point")
