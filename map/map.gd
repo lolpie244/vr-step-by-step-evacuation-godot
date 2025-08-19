@@ -1,6 +1,7 @@
 extends MeshInstance3D
 
-@onready var tile_manager = $TileManager
+@onready var tile_manager: FactoryManager = $TileManager
+@onready var character_manager: FactoryManager = $CharacterManager
 @onready var grid = $Grid
 
 @export var enable_cutoff: bool = true
@@ -39,6 +40,7 @@ var test_map = [
 	["w", "w", "w", "w", "w", "w"],
 ]
 
+
 # TODO: only for testing
 static func types_from_str(str_map: Array) -> Array:
 	if str_map.size() < 0:
@@ -60,7 +62,6 @@ static func types_from_str(str_map: Array) -> Array:
 					result.type_grid[i][j] = TileFactory.Type.None
 
 	return result
-
 
 
 func _ready() -> void:
@@ -102,10 +103,9 @@ func set_map(raw_map):
 	# set flags
 	for x in range(grid.rows_count()):
 		for y in range(grid.columns_count()):
-			var tile_factory: TileFactory = tile_manager.get_tile_factory(tile_types[x][y])
+			var tile_factory: TileFactory = tile_manager.get_factory(tile_types[x][y])
 			grid.set_tile(x, y, tile_factory.create(grid, x, y))
 
-		
 	for x in range(grid.rows_count()):
 		for y in range(grid.columns_count()):
 			var tile: Tile = grid.get_tile(x, y)
@@ -118,5 +118,17 @@ func set_map(raw_map):
 					for i in tile.model.get_surface_override_material_count():
 						tile.model.set_surface_override_material(i, self.cutoff_material)
 
-# func place_character(character: Character, x: int, y: int):
-# 	pass
+
+func add_character(type: CharacterFactory.Type, x: int, y: int) -> Character:
+	var factory: CharacterFactory = character_manager.get_factory(type)
+	var character: Character = factory.create(grid, x, y)
+
+	character.init()
+	return character
+
+func move_character(character: Character, x: int, y: int) -> bool:
+	var tile = grid.get_tile(x, y) as Tile
+	if tile == null || not tile.has_flag(Tile.Flags.WALKABLE):
+		return false
+
+	return tile.add_character(character)

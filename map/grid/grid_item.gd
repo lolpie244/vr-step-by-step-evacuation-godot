@@ -6,6 +6,18 @@ var x: int
 var y: int
 var grid: MapGrid
 
+var _flags: int = 0
+
+func has_flag(f) -> bool:
+	return (_flags & f) != 0
+
+
+func add_flag(f) -> void:
+	_flags |= f
+
+
+func remove_flag(f) -> void:
+	_flags &= ~f
 
 func _init(grid_: MapGrid, x_: int, y_: int):
 	self.x = x_
@@ -14,7 +26,6 @@ func _init(grid_: MapGrid, x_: int, y_: int):
 
 
 func init():
-	self.position = grid.tile_position(x, y)
 	self.grid.add_child(self)
 
 

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://wemhit1bf7ew"]
+
+[ext_resource type="PackedScene" uid="uid://bnvtv0ggbwwin" path="res://map/characters/assets/character_point.glb" id="1_jdslw"]
+[ext_resource type="Script" uid="uid://l1xuvxh1wgp0" path="res://map/characters/character_point.gd" id="1_xe2yc"]
+
+[node name="CharacterPoint" type="Node3D"]
+visible = false
+script = ExtResource("1_xe2yc")
+
+[node name="Point" parent="." instance=ExtResource("1_jdslw")]
+
+[editable path="Point"]

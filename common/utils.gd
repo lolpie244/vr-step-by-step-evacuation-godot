@@ -29,8 +29,9 @@ static func _collect_aabb(node: Node3D, result: AABB) -> AABB:
 	if node.has_method(&'get_aabb'):
 		result = result.merge(node.call('get_aabb'))
 
-	for child: Node3D in node.get_children():
-		result = _collect_aabb(child, result)
+	for child in node.get_children():
+		if is_instance_of(child, Node3D):
+			result = _collect_aabb(child, result)
 
 	return result
 

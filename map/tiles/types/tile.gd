@@ -7,22 +7,8 @@ enum Flags {
 	WALKABLE = 1 << 1,
 }
 
-var _flags: int = 0
 var _model: Node3D
 var _shared_data: TileFactory.SharedData
-
-
-func has_flag(f: Flags) -> bool:
-	return (_flags & f) != 0
-
-
-func add_flag(f: Flags) -> void:
-	_flags |= f
-
-
-func remove_flag(f: Flags) -> void:
-	_flags &= ~f
-
 
 func _init(shared_data, grid_, x_, y_) -> void:
 	self._shared_data = shared_data
@@ -35,12 +21,14 @@ func init():
 	self._model = _generate_model()
 	self.add_child(_model)
 
+	self.position = grid.tile_position(x, y)
+
 	super.init()
 
 
 func add_character(character: Character) -> bool:
-	character.x = self._x
-	character.y = self._y
+	character.x = self.x
+	character.y = self.y
 	character.transform = self.transform
 
 	if _shared_data.character_point != null:

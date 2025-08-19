@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://c1yttln18hh3e"]
 
-[ext_resource type="Script" uid="uid://dnv0inrmtln26" path="res://map/tiles/tile_manager.gd" id="1_1cyyh"]
+[ext_resource type="Script" uid="uid://brm006yhip5jn" path="res://common/factory_manager.gd" id="1_1cyyh"]
 [ext_resource type="Script" uid="uid://bjf4i20x1nns" path="res://map/tiles/tile_factory.gd" id="2_1cyyh"]
-[ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://map/tiles/types/wall.gd" id="2_6ssnw"]
+[ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://map/tiles/types/wall.gd" id="3_1cyyh"]
 [ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://map/tiles/assets/models/wall.glb" id="4_6thgy"]
 [ext_resource type="PackedScene" uid="uid://wemhit1bf7ew" path="res://map/characters/character_point.tscn" id="7_1200g"]
 [ext_resource type="Script" uid="uid://d2fucstntnq80" path="res://map/tiles/types/tile.gd" id="7_fs7hf"]
@@ -20,20 +20,17 @@ visible = false
 script = ExtResource("2_1cyyh")
 properties = Array[int]([1, 0])
 type = 2
-factory_class = ExtResource("2_6ssnw")
+class_type = ExtResource("3_1cyyh")
 
 [node name="model" parent="wall" instance=ExtResource("4_6thgy")]
 visible = false
-
-[node name="character_point" parent="wall" instance=ExtResource("7_1200g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 
 [node name="floor" type="Node3D" parent="."]
 visible = false
 script = ExtResource("2_1cyyh")
 properties = Array[int]([2])
 type = 1
-factory_class = ExtResource("7_fs7hf")
+class_type = ExtResource("7_fs7hf")
 
 [node name="character_point" parent="floor" instance=ExtResource("7_1200g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
@@ -46,10 +43,7 @@ visible = false
 script = ExtResource("2_1cyyh")
 properties = Array[int]([1, 2])
 type = 3
-factory_class = ExtResource("9_6xs5c")
-
-[node name="character_point" parent="door" instance=ExtResource("7_1200g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+class_type = ExtResource("9_6xs5c")
 
 [node name="model" parent="door" instance=ExtResource("10_1bohw")]
 visible = false
