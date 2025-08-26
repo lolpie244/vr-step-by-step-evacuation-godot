@@ -11,6 +11,18 @@ func _ready() -> void:
 
 	character.highlight_tiles(true)
 
+	grid.get_tile(9, 1).ignite()
+	spread_fun_timer()
+
+
+func spread_fun_timer():
+	var t := Timer.new()
+	t.wait_time = 10.0
+	t.one_shot = false
+	t.autostart = true
+	add_child(t)
+	t.timeout.connect(grid.spread_fire)
+
 
 func _input(_event: InputEvent):
 	var x = character._x

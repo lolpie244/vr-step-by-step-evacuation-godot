@@ -5,11 +5,15 @@ class_name Tile
 enum Flags {
 	WALL = 1 << 0,
 	WALKABLE = 1 << 1,
+	BURNING = 1 << 2,
+	BURNED = 1 << 3,
 }
 
 var _model: Node3D
 var _shared_data: TileFactory.SharedData
 var _animation: AnimationPlayer
+var _fire: FirePoint
+
 
 func _init(shared_data, grid_, x_, y_) -> void:
 	self._shared_data = shared_data
@@ -24,10 +28,19 @@ func _init(shared_data, grid_, x_, y_) -> void:
 func init():
 	self._model = _generate_model()
 	self.add_child(_model)
+	if _shared_data.fire_point:
+		_fire = _shared_data.fire_point.duplicate()
+		_fire.visible = false
+		_fire.scale(_model.scale.x)
+		self.add_child(_fire)
 
 	self.position = grid.tile_position(_x, _y)
 
 	super.init()
+
+
+func _generate_model():
+	return _resize_model(_shared_data.model.duplicate())
 
 
 func place_character(character: Character) -> bool:
@@ -43,14 +56,16 @@ func place_character(character: Character) -> bool:
 
 	return true
 
+
 func highlight(value: bool):
 	if value:
 		_animation.play("highlight")
-		# self.position.y += 0.1
 	else:
 		_animation.play_backwards("highlight")
-		# self.position.y -= 0.1
 
-
-func _generate_model():
-	return _resize_model(_shared_data.model.duplicate())
+func ignite():
+	add_flag(Flags.BURNING)
+	print(_x, _y)
+	if _fire != null:
+		# print("FIRE")
+		_fire.visible = true

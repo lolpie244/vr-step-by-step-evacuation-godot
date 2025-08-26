@@ -53,3 +53,20 @@ func set_character(character: Character, x, y) -> bool:
 		return false
 
 	return tiles[x][y].place_character(character)
+
+func spread_fire():
+	for x in range(0, rows_count()):
+		for y in range(0, columns_count()):
+			var tile: Tile = get_tile(x, y)
+
+			if tile == null || !tile.has_flag(Tile.Flags.BURNING):
+				continue
+
+			for i in range(-1, 2):
+				for j in range(-1, 2):
+					var next_tile: Tile = get_tile(x + i, y + j)
+					if next_tile == null || !FireSpreading.can_burn(next_tile):
+						continue
+
+					if FireSpreading.is_spread(tile, next_tile, [i, j]):
+						next_tile.ignite()
