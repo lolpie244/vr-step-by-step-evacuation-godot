@@ -1,25 +1,29 @@
 extends Node3D
 
-@onready var grid = $Map
+@onready var map: Map = $Map
+@onready var grid: MapGrid = $Map/Grid
 
 var character
 
+
 func _ready() -> void:
-	character = grid.add_character(CharacterFactory.Type.Civilian, 1, 1)
+	character = map.add_character(CharacterFactory.Type.Civilian, 1, 1)
+
+	character.highlight_tiles(true)
 
 
 func _input(_event: InputEvent):
-	var x = character.x
-	var y = character.y
+	var x = character._x
+	var y = character._y
 
 	if Input.is_action_just_pressed("right"):
-		grid.move_character(character, x + 1, y)
+		map.move_character(character, x + 1, y)
 
 	if Input.is_action_just_pressed("left"):
-		grid.move_character(character, x - 1, y)
+		map.move_character(character, x - 1, y)
 
 	if Input.is_action_just_pressed("up"):
-		grid.move_character(character, x, y - 1)
+		map.move_character(character, x, y - 1)
 
 	if Input.is_action_just_pressed("down"):
-		grid.move_character(character, x, y + 1)
+		map.move_character(character, x, y + 1)

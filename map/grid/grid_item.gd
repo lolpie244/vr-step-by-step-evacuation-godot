@@ -2,11 +2,12 @@ extends Node3D
 
 class_name GridItem
 
-var x: int
-var y: int
+var _x: int
+var _y: int
 var grid: MapGrid
 
 var _flags: int = 0
+
 
 func has_flag(f) -> bool:
 	return (_flags & f) != 0
@@ -19,9 +20,10 @@ func add_flag(f) -> void:
 func remove_flag(f) -> void:
 	_flags &= ~f
 
+
 func _init(grid_: MapGrid, x_: int, y_: int):
-	self.x = x_
-	self.y = y_
+	self._x = x_
+	self._y = y_
 	self.grid = grid_
 
 
@@ -42,5 +44,8 @@ func _resize_model(model_: Node3D):
 	return model_
 
 
-func _generate_model():
-	assert(false, "Not implemented")
+func get_x():
+	return _x
+
+func get_y():
+	return _y

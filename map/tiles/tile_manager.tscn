@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c1yttln18hh3e"]
+[gd_scene load_steps=13 format=3 uid="uid://c1yttln18hh3e"]
 
 [ext_resource type="Script" uid="uid://brm006yhip5jn" path="res://common/factory_manager.gd" id="1_1cyyh"]
 [ext_resource type="Script" uid="uid://bjf4i20x1nns" path="res://map/tiles/tile_factory.gd" id="2_1cyyh"]
@@ -9,6 +9,40 @@
 [ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://map/tiles/assets/models/floor.glb" id="8_64f6k"]
 [ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://map/tiles/types/wall_like.gd" id="9_6xs5c"]
 [ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://map/tiles/assets/models/doorway.glb" id="10_1bohw"]
+
+[sub_resource type="Animation" id="Animation_1200g"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_1cyyh"]
+resource_name = "highlight"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ssnw"]
+_data = {
+&"RESET": SubResource("Animation_1200g"),
+&"highlight": SubResource("Animation_1cyyh")
+}
 
 [node name="TileManager" type="Node3D"]
 process_mode = 4
@@ -25,8 +59,12 @@ class_type = ExtResource("3_1cyyh")
 [node name="model" parent="wall" instance=ExtResource("4_6thgy")]
 visible = false
 
+[node name="animation" type="AnimationPlayer" parent="wall"]
+libraries = {
+&"": SubResource("AnimationLibrary_6ssnw")
+}
+
 [node name="floor" type="Node3D" parent="."]
-visible = false
 script = ExtResource("2_1cyyh")
 properties = Array[int]([2])
 type = 1
@@ -36,7 +74,11 @@ class_type = ExtResource("7_fs7hf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 
 [node name="model" parent="floor" instance=ExtResource("8_64f6k")]
-visible = false
+
+[node name="animation" type="AnimationPlayer" parent="floor"]
+libraries = {
+&"": SubResource("AnimationLibrary_6ssnw")
+}
 
 [node name="door" type="Node3D" parent="."]
 visible = false
@@ -47,3 +89,8 @@ class_type = ExtResource("9_6xs5c")
 
 [node name="model" parent="door" instance=ExtResource("10_1bohw")]
 visible = false
+
+[node name="animation" type="AnimationPlayer" parent="door"]
+libraries = {
+&"": SubResource("AnimationLibrary_6ssnw")
+}

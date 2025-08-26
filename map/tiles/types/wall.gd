@@ -2,10 +2,10 @@ extends WallLikeTile
 
 
 func _generate_model():
-	var left = _is_wall(x - 1, y)
-	var right = _is_wall(x + 1, y)
-	var down = _is_wall(x, y - 1)
-	var up = _is_wall(x, y + 1)
+	var left = _is_wall(_x - 1, _y)
+	var right = _is_wall(_x + 1, _y)
+	var down = _is_wall(_x, _y - 1)
+	var up = _is_wall(_x, _y + 1)
 
 	var rotations := [[up, 0], [down, 180], [left, 270], [right, 90]].filter(func(v): return v[0])
 

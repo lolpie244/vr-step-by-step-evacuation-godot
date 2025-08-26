@@ -52,4 +52,4 @@ func set_character(character: Character, x, y) -> bool:
 	if not _in_range(x, y) || tiles[x][y] == null || not tiles[x][y].has_flag(Tile.Flags.WALKABLE):
 		return false
 
-	return tiles[x][y].add_character(character)
+	return tiles[x][y].place_character(character)

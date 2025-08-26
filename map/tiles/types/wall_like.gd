@@ -14,8 +14,8 @@ func _is_wall(x_: int, y_: int):
 
 
 func _generate_model() -> VisualInstance3D:
-	var left = _is_wall(x - 1, y)
-	var right = _is_wall(x + 1, y)
+	var left = _is_wall(_x - 1, _y)
+	var right = _is_wall(_x + 1, _y)
 
 	var result = super._generate_model()
 	if left or right:

@@ -4,35 +4,70 @@ class_name Character
 
 var _character_body: CharacterBody3D
 var _shared_data: CharacterFactory.SharedData
-
-var _original_transform: Transform3D
+var _tile: Tile
+var _speed: float
 
 
 func _init(shared_data, grid_, x_, y_) -> void:
 	self._shared_data = shared_data
+	self._speed = shared_data.default_speed
 
 	super._init(grid_, x_, y_)
 
 
 func init():
-	var tile: Tile = grid.get_tile(x, y)
+	_tile = grid.get_tile(_x, _y)
 
-	assert(tile != null, "Tile doesn't exists")
-	assert(tile.has_flag(Tile.Flags.WALKABLE), "Tile is not Walkable")
+	assert(_tile != null, "Tile doesn't exists")
+	assert(_tile.has_flag(Tile.Flags.WALKABLE), "Tile is not Walkable")
 
 	self._character_body = _generate_character_body()
 	self.add_child(_character_body)
 
-	tile.add_character(self)
 	super.init()
-
-	self._original_transform = self.transform
-
-
-func original_transform() -> Transform3D:
-	return _original_transform
+	_tile.place_character(self)
 
 
 func _generate_character_body():
 	var model = _shared_data.character_body.duplicate()
 	return _resize_model(model)
+
+
+func reachable_tiles():
+	var result := []
+
+	var queue := [[_tile, _speed]]
+	var used := {}
+
+	while queue.size() != 0:
+		var info = queue.pop_front()
+		var current_tile: Tile = info[0]
+		var speed: int = info[1]
+
+		used[current_tile.get_instance_id()] = true
+		result.append(current_tile)
+
+		if speed == 0:
+			continue
+
+		for i in range(-1, 2):
+			for j in range(-1, 2):
+				var tile: Tile = grid.get_tile(current_tile.get_x() + i, current_tile.get_y() + j)
+
+				if (
+					tile == null
+					|| !tile.has_flag(Tile.Flags.WALKABLE)
+					|| used.has(tile.get_instance_id())
+				):
+					continue
+
+				used[tile.get_instance_id()] = true
+				queue.append([tile, speed - 1])
+
+	return result
+
+
+func highlight_tiles(highlight: bool):
+	for tile in reachable_tiles():
+		await get_tree().create_timer(0.1).timeout
+		tile.highlight(highlight)

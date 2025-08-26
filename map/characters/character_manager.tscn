@@ -14,6 +14,7 @@ script = ExtResource("1_cmbv4")
 
 [node name="Civilian" type="Node3D" parent="."]
 script = ExtResource("2_f6jte")
+default_speed = 5
 class_type = ExtResource("3_xmf13")
 
 [node name="character_body" parent="Civilian" instance=ExtResource("1_71jxl")]

@@ -21,6 +21,7 @@ class SharedData:
 	var flags: int = 0
 	var model: Node3D
 	var character_point: CharacterPoint
+	var animation: AnimationPlayer
 
 	func _init(fabric) -> void:
 		for property in fabric.properties:
@@ -28,3 +29,4 @@ class SharedData:
 
 		model = fabric.get_node("model")
 		character_point = fabric.get_node_or_null("character_point")
+		animation = fabric.get_node_or_null("animation")

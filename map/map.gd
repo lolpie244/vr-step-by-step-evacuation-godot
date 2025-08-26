@@ -1,4 +1,5 @@
 extends MeshInstance3D
+class_name Map
 
 @onready var tile_manager: FactoryManager = $TileManager
 @onready var character_manager: FactoryManager = $CharacterManager
@@ -131,4 +132,4 @@ func move_character(character: Character, x: int, y: int) -> bool:
 	if tile == null || not tile.has_flag(Tile.Flags.WALKABLE):
 		return false
 
-	return tile.add_character(character)
+	return tile.place_character(character)
