@@ -69,7 +69,6 @@ func highlight(value: bool):
 
 func ignite():
 	add_flag(Flags.BURNING)
-	print(_x, _y)
 	if _fire != null:
 		# print("FIRE")
 		_fire.visible = true

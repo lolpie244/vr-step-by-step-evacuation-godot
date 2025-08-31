@@ -3,17 +3,17 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cd2m4ohb0c7jb"
-path="res://.godot/imported/wall-corner.glb-0520a46701f7412929ef2a64c775205f.scn"
+uid="uid://2fm68kemnq60"
+path="res://.godot/imported/window.glb-8f4da2a7db6f434309da8b2a849f1f62.scn"
 
 [deps]
 
-source_file="res://map/tiles/assets/models/wall-corner.glb"
-dest_files=["res://.godot/imported/wall-corner.glb-0520a46701f7412929ef2a64c775205f.scn"]
+source_file="res://map/tiles/assets/models/window.glb"
+dest_files=["res://.godot/imported/window.glb-8f4da2a7db6f434309da8b2a849f1f62.scn"]
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="StaticBody3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -35,7 +35,8 @@ import_script/path="uid://cviptg4r222iw"
 _subresources={
 "nodes": {
 "PATH:floor-thick": {
-"generate/physics": true
+"generate/physics": true,
+"physics/shape_type": 3
 }
 }
 }

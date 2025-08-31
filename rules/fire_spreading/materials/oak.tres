@@ -4,9 +4,11 @@
 
 [resource]
 script = ExtResource("1_ua72y")
-heat_release_rate = 42.0
+density = 687.0
+heat_release_rate = 87.0
 carbon_monoxide_yield = 0.004
 heat_capacity = 1528.0
+thermal_conductivity = 0.147
 ignition_temp = 755.15
 flammable = true
 metadata/_custom_type_script = "uid://dia4t2q2n027r"

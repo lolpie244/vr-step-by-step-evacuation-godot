@@ -32,10 +32,10 @@ var test_map = [
 	["w", "w", "w", "w", "d", "w"],
 	["w", "f", "f", "w", "f", "w"],
 	["w", "w", "w", "w", "f", "w"],
-	["w", "f", "f", "w", "f", "w"],
-	["w", "f", "f", "w", "f", "w"],
-	["w", "f", "f", "w", "f", "w"],
-	["w", "f", "f", "w", "f", "w"],
+	["w", "f", "f", "d", "f", "w"],
+	["o", "f", "f", "w", "f", "w"],
+	["o", "f", "f", "w", "f", "w"],
+	["o", "f", "f", "w", "f", "w"],
 	["w", "f", "f", "w", "f", "w"],
 	["w", "f", "f", "w", "f", "w"],
 	["w", "w", "w", "w", "w", "w"],
@@ -58,6 +58,8 @@ static func types_from_str(str_map: Array) -> Array:
 					result[i][j] = TileFactory.Type.Floor
 				"d":
 					result[i][j] = TileFactory.Type.Door
+				"o":
+					result[i][j] = TileFactory.Type.Window
 				_:
 					push_warning("Unknown tile: on position [%, %]" % i, j)
 					result.type_grid[i][j] = TileFactory.Type.None

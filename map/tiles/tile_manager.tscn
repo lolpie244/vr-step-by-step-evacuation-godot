@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1yttln18hh3e"]
+[gd_scene load_steps=17 format=3 uid="uid://c1yttln18hh3e"]
 
 [ext_resource type="Script" uid="uid://brm006yhip5jn" path="res://common/factory_manager.gd" id="1_1cyyh"]
 [ext_resource type="Script" uid="uid://bjf4i20x1nns" path="res://map/tiles/tile_factory.gd" id="2_1cyyh"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://uwua3ayr4d07" path="res://rules/fire_spreading/FirePoint.tscn" id="8_1200g"]
 [ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://map/tiles/types/wall_like.gd" id="9_6xs5c"]
 [ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://map/tiles/assets/models/doorway.glb" id="10_1bohw"]
+[ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://map/tiles/assets/models/window.glb" id="13_6thgy"]
 
 [sub_resource type="Animation" id="Animation_1200g"]
 length = 0.001
@@ -49,7 +50,6 @@ _data = {
 
 [node name="TileManager" type="Node3D"]
 process_mode = 4
-visible = false
 script = ExtResource("1_1cyyh")
 
 [node name="wall" type="Node3D" parent="."]
@@ -103,6 +103,22 @@ class_type = ExtResource("9_6xs5c")
 visible = false
 
 [node name="animation" type="AnimationPlayer" parent="door"]
+libraries = {
+&"": SubResource("AnimationLibrary_6ssnw")
+}
+
+[node name="window" type="Node3D" parent="."]
+visible = false
+script = ExtResource("2_1cyyh")
+properties = Array[int]([1, 2])
+type = 4
+material = ExtResource("3_mh8sd")
+class_type = ExtResource("9_6xs5c")
+
+[node name="model" parent="window" instance=ExtResource("13_6thgy")]
+visible = false
+
+[node name="animation" type="AnimationPlayer" parent="window"]
 libraries = {
 &"": SubResource("AnimationLibrary_6ssnw")
 }
