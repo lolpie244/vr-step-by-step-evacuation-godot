@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func spread_fun_timer():
 	var t := Timer.new()
-	t.wait_time = 10.0
+	t.wait_time = 5.0
 	t.one_shot = false
 	t.autostart = true
 	add_child(t)

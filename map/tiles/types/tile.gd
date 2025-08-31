@@ -14,11 +14,14 @@ var _shared_data: TileFactory.SharedData
 var _animation: AnimationPlayer
 var _fire: FirePoint
 
+var material: TileMaterial
+
 
 func _init(shared_data, grid_, x_, y_) -> void:
 	self._shared_data = shared_data
 	self._flags = _shared_data.flags
 	self._animation = _shared_data.animation.duplicate()
+	self.material = _shared_data.material
 
 	self.add_child(_animation)
 
@@ -62,6 +65,7 @@ func highlight(value: bool):
 		_animation.play("highlight")
 	else:
 		_animation.play_backwards("highlight")
+
 
 func ignite():
 	add_flag(Flags.BURNING)

@@ -13,6 +13,7 @@ enum Type {
 
 @export var properties: Array[Tile.Flags] = []
 @export var type: Type = Type.None
+@export var material: TileMaterial
 
 func _create_shared_data():
 	return SharedData.new(self)
@@ -23,6 +24,7 @@ class SharedData:
 	var character_point: CharacterPoint
 	var fire_point: FirePoint
 	var animation: AnimationPlayer
+	var material: TileMaterial
 
 	func _init(fabric) -> void:
 		for property in fabric.properties:
@@ -32,3 +34,4 @@ class SharedData:
 		character_point = fabric.get_node_or_null("character_point")
 		fire_point = fabric.get_node_or_null("fire_point")
 		animation = fabric.get_node_or_null("animation")
+		material = fabric.material

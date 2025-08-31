@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TileMaterial" load_steps=2 format=3 uid="uid://cefo1surrq1n7"]
+
+[ext_resource type="Script" uid="uid://dia4t2q2n027r" path="res://rules/fire_spreading/materials/material.gd" id="1_ua72y"]
+
+[resource]
+script = ExtResource("1_ua72y")
+heat_release_rate = 42.0
+carbon_monoxide_yield = 0.004
+heat_capacity = 1528.0
+ignition_temp = 755.15
+flammable = true
+metadata/_custom_type_script = "uid://dia4t2q2n027r"
