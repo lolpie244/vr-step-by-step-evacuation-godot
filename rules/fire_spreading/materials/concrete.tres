@@ -4,8 +4,11 @@
 
 [resource]
 script = ExtResource("1_d3ujs")
+density = 0.0
 heat_release_rate = 0.0
 carbon_monoxide_yield = 0.0
 heat_capacity = 0.0
+thermal_conductivity = 0.0
+ignition_temp = 0.0
 flammable = false
 metadata/_custom_type_script = "uid://dia4t2q2n027r"

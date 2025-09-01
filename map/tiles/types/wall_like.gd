@@ -3,14 +3,15 @@ extends Tile
 class_name WallLikeTile
 
 
-func _ready() -> void:
-	add_flag(Flags.WALL)
+func _init(shared_data, grid_, x_, y_) -> void:
+	super._init(shared_data, grid_, x_, y_)
 
+	self.add_flag(Tile.Flags.BLOCKING)
 
 func _is_wall(x_: int, y_: int):
 	var tile = grid.get_tile(x_, y_)
 
-	return tile != null and tile.has_flag(Flags.WALL)
+	return tile != null and tile is WallLikeTile
 
 
 func _generate_model() -> VisualInstance3D:

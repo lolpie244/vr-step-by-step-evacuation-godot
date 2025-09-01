@@ -3,8 +3,8 @@ extends GridItem
 class_name Tile
 
 enum Flags {
-	WALL = 1 << 0,
-	WALKABLE = 1 << 1,
+	WALKABLE = 1 << 0,
+	BLOCKING = 1 << 1,
 	BURNING = 1 << 2,
 	BURNED = 1 << 3,
 }
@@ -15,6 +15,7 @@ var _animation: AnimationPlayer
 var _fire: FirePoint
 
 var material: TileMaterial
+var wind: Vector2
 
 
 func _init(shared_data, grid_, x_, y_) -> void:
@@ -72,3 +73,16 @@ func ignite():
 	if _fire != null:
 		# print("FIRE")
 		_fire.visible = true
+
+func neighbor_tiles() -> Array[Tile]:
+	var result: Array[Tile] = []
+
+	for i in range(-1, 2):
+		for j in range(-1, 2):
+			if i == 0 && j == 0:
+				continue
+
+			var tile: Tile = grid.get_tile(_x + i, _y + j)
+			if tile != null:
+				result.append(tile)
+	return result

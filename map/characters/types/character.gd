@@ -19,7 +19,7 @@ func init():
 	_tile = grid.get_tile(_x, _y)
 
 	assert(_tile != null, "Tile doesn't exists")
-	assert(_tile.has_flag(Tile.Flags.WALKABLE), "Tile is not Walkable")
+	assert(_tile.has_flag(Tile.Flags.WALKABLE))
 
 	self._character_body = _generate_character_body()
 	self.add_child(_character_body)
@@ -39,30 +39,21 @@ func reachable_tiles():
 	var queue := [[_tile, _speed]]
 	var used := {}
 
-	while queue.size() != 0:
+	while queue.size():
 		var info = queue.pop_front()
 		var current_tile: Tile = info[0]
 		var speed: int = info[1]
 
-		used[current_tile.get_instance_id()] = true
-		result.append(current_tile)
-
 		if speed == 0:
 			continue
 
-		for i in range(-1, 2):
-			for j in range(-1, 2):
-				var tile: Tile = grid.get_tile(current_tile.get_x() + i, current_tile.get_y() + j)
+		for tile in current_tile.neighbor_tiles():
+			if !tile.has_flag(Tile.Flags.WALKABLE) || used.has(tile.get_instance_id()):
+				continue
+			result.append(tile)
 
-				if (
-					tile == null
-					|| !tile.has_flag(Tile.Flags.WALKABLE)
-					|| used.has(tile.get_instance_id())
-				):
-					continue
-
-				used[tile.get_instance_id()] = true
-				queue.append([tile, speed - 1])
+			used[tile.get_instance_id()] = true
+			queue.append([tile, speed - 1])
 
 	return result
 

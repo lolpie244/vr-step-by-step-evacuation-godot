@@ -10,9 +10,9 @@
 [ext_resource type="Script" uid="uid://d2fucstntnq80" path="res://map/tiles/types/tile.gd" id="7_fs7hf"]
 [ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://map/tiles/assets/models/floor.glb" id="8_64f6k"]
 [ext_resource type="PackedScene" uid="uid://uwua3ayr4d07" path="res://rules/fire_spreading/FirePoint.tscn" id="8_1200g"]
-[ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://map/tiles/types/wall_like.gd" id="9_6xs5c"]
 [ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://map/tiles/assets/models/doorway.glb" id="10_1bohw"]
 [ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://map/tiles/assets/models/window.glb" id="13_6thgy"]
+[ext_resource type="Script" uid="uid://0rnan1ih5tue" path="res://map/tiles/types/wind_source.gd" id="13_tfuab"]
 
 [sub_resource type="Animation" id="Animation_1200g"]
 length = 0.001
@@ -55,7 +55,6 @@ script = ExtResource("1_1cyyh")
 [node name="wall" type="Node3D" parent="."]
 visible = false
 script = ExtResource("2_1cyyh")
-properties = Array[int]([1, 0])
 type = 2
 material = ExtResource("3_mh8sd")
 class_type = ExtResource("3_1cyyh")
@@ -71,7 +70,7 @@ libraries = {
 [node name="floor" type="Node3D" parent="."]
 visible = false
 script = ExtResource("2_1cyyh")
-properties = Array[int]([2])
+properties = Array[int]([1])
 type = 1
 material = ExtResource("6_6thgy")
 class_type = ExtResource("7_fs7hf")
@@ -94,10 +93,10 @@ visible = false
 [node name="door" type="Node3D" parent="."]
 visible = false
 script = ExtResource("2_1cyyh")
-properties = Array[int]([1, 2])
+properties = Array[int]([1])
 type = 3
 material = ExtResource("6_6thgy")
-class_type = ExtResource("9_6xs5c")
+class_type = ExtResource("13_tfuab")
 
 [node name="model" parent="door" instance=ExtResource("10_1bohw")]
 visible = false
@@ -110,10 +109,9 @@ libraries = {
 [node name="window" type="Node3D" parent="."]
 visible = false
 script = ExtResource("2_1cyyh")
-properties = Array[int]([1, 2])
 type = 4
 material = ExtResource("3_mh8sd")
-class_type = ExtResource("9_6xs5c")
+class_type = ExtResource("13_tfuab")
 
 [node name="model" parent="window" instance=ExtResource("13_6thgy")]
 visible = false

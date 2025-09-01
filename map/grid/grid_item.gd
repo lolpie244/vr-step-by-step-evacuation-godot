@@ -4,6 +4,11 @@ class_name GridItem
 
 var _x: int
 var _y: int
+
+var pos: Vector2:
+	get():
+		return Vector2(_x, _y)
+
 var grid: MapGrid
 
 var _flags: int = 0
@@ -44,8 +49,5 @@ func _resize_model(model_: Node3D):
 	return model_
 
 
-func get_x():
-	return _x
-
-func get_y():
-	return _y
+func direction_to(to: GridItem) -> Vector2:
+	return Vector2(to.pos.x - _x, to.pos.y - _y)

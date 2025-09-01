@@ -54,6 +54,7 @@ func set_character(character: Character, x, y) -> bool:
 
 	return tiles[x][y].place_character(character)
 
+
 func spread_fire():
 	var burning_tiles: Array[Tile] = []
 
@@ -67,11 +68,6 @@ func spread_fire():
 			burning_tiles.append(tile)
 
 	for tile in burning_tiles:
-		for i in range(-1, 2):
-			for j in range(-1, 2):
-				var next_tile: Tile = get_tile(tile.get_x() + i, tile.get_y() + j)
-				if next_tile == null || !FireSpreading.can_burn(next_tile):
-					continue
-
-				if FireSpreading.is_spread(tile, next_tile, [i, j]):
-					next_tile.ignite()
+		for next_tile in tile.neighbor_tiles():
+			if FireSpreading.is_spread(tile, next_tile):
+				next_tile.ignite()
