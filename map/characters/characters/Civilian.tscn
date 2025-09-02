@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7p503sqqkf85"]
+
+[ext_resource type="Script" uid="uid://dada404m45lcv" path="res://map/characters/characters/character_factory.gd" id="1_m7tuh"]
+[ext_resource type="Script" uid="uid://cntyx4ovc1ii1" path="res://map/characters/types/character.gd" id="2_usrdy"]
+[ext_resource type="PackedScene" uid="uid://ciya5qu8grvca" path="res://map/characters/assets/character-male-a.glb" id="3_usrdy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fkomq"]
+size = Vector3(0.34, 0.67, 0.33)
+
+[node name="Civilian" type="Node3D"]
+script = ExtResource("1_m7tuh")
+default_speed = 5
+class_type = ExtResource("2_usrdy")
+
+[node name="character_body" parent="." instance=ExtResource("3_usrdy")]
+
+[node name="collision" type="CollisionShape3D" parent="character_body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49012e-08, 0.335, -0.00499997)
+shape = SubResource("BoxShape3D_fkomq")
+
+[editable path="character_body"]

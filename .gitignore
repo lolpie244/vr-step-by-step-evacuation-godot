@@ -20,3 +20,5 @@ mono_crash.*.json
 
 addons
 third-party/
+
+docs.txt

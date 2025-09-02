@@ -2,7 +2,10 @@ extends MeshInstance3D
 class_name Map
 
 @onready var tile_manager: FactoryManager = FactoryManager.new("res://map/tiles/tiles")
-# @onready var character_manager: FactoryManager = $CharacterManager
+@onready
+var character_manager: FactoryManager = FactoryManager.new("res://map/characters/characters")
+@onready var _managers: Array[FactoryManager] = [tile_manager, character_manager]
+
 @onready var grid = $Grid
 
 @export var enable_cutoff: bool = true
@@ -68,8 +71,9 @@ static func types_from_str(str_map: Array) -> Array:
 
 
 func _ready() -> void:
-	self.add_child(tile_manager)
-	tile_manager.hide()
+	for manager in self._managers:
+		self.add_child(manager)
+		manager.hide()
 
 	var plane_mesh := self.mesh as PlaneMesh
 	plane_mesh.size = Vector2(
@@ -124,12 +128,12 @@ func set_map(raw_map):
 
 
 func add_character(type: CharacterFactory.Type, x: int, y: int):
-	pass
-	# var factory: CharacterFactory = character_manager.get_factory(type)
-	# var character: Character = factory.create(grid, x, y)
-	#
-	# character.init()
-	# return character
+	var factory: CharacterFactory = character_manager.get_factory(type)
+	var character: Character = factory.create(grid, x, y)
+
+	character.init()
+	return character
+
 
 func move_character(character: Character, x: int, y: int) -> bool:
 	var tile = grid.get_tile(x, y) as Tile

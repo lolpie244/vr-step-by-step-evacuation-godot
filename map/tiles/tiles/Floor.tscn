@@ -10,6 +10,7 @@
 
 [node name="Floor" type="Node3D"]
 script = ExtResource("1_lofvo")
+properties = Array[int]([1])
 type = 1
 material = ExtResource("2_upovr")
 class_type = ExtResource("3_81oiy")

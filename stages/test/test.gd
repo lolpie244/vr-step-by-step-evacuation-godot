@@ -7,9 +7,9 @@ var character
 
 
 func _ready() -> void:
-	# character = map.add_character(CharacterFactory.Type.Civilian, 1, 1)
-	#
-	# character.highlight_tiles(true)
+	character = map.add_character(CharacterFactory.Type.Civilian, 1, 1)
+
+	character.highlight_tiles(true)
 
 	grid.get_tile(9, 1).ignite()
 	spread_fun_timer()
@@ -25,18 +25,17 @@ func spread_fun_timer():
 
 
 func _input(_event: InputEvent):
-	pass
-	#var x = character._x
-	#var y = character._y
-#
-	#if Input.is_action_just_pressed("right"):
-		#map.move_character(character, x + 1, y)
-#
-	#if Input.is_action_just_pressed("left"):
-		#map.move_character(character, x - 1, y)
-#
-	#if Input.is_action_just_pressed("up"):
-		#map.move_character(character, x, y - 1)
-#
-	#if Input.is_action_just_pressed("down"):
-		#map.move_character(character, x, y + 1)
+	var x = character._x
+	var y = character._y
+
+	if Input.is_action_just_pressed("right"):
+		map.move_character(character, x + 1, y)
+
+	if Input.is_action_just_pressed("left"):
+		map.move_character(character, x - 1, y)
+
+	if Input.is_action_just_pressed("up"):
+		map.move_character(character, x, y - 1)
+
+	if Input.is_action_just_pressed("down"):
+		map.move_character(character, x, y + 1)
