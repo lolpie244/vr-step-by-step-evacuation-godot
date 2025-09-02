@@ -30,8 +30,9 @@ class SharedData:
 		for property in fabric.properties:
 			flags |= property
 
+		material = fabric.material
+
 		model = fabric.get_node("model")
 		character_point = fabric.get_node_or_null("character_point")
 		fire_point = fabric.get_node_or_null("fire_point")
 		animation = fabric.get_node_or_null("animation")
-		material = fabric.material

@@ -1,10 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ujao577umlix"]
+[gd_scene load_steps=6 format=3 uid="uid://ujao577umlix"]
 
 [ext_resource type="Shader" uid="uid://beleb7aq1efb7" path="res://map/cutoff.gdshader" id="2_4hjbm"]
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://map/map.gd" id="2_lgq1i"]
-[ext_resource type="PackedScene" uid="uid://c1yttln18hh3e" path="res://map/tiles/tile_manager.tscn" id="3_kffv2"]
 [ext_resource type="Script" uid="uid://cxsdkamskknfq" path="res://map/grid/grid.gd" id="4_lgq1i"]
-[ext_resource type="PackedScene" uid="uid://408a7tsrrap3" path="res://map/characters/character_manager.tscn" id="5_kffv2"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
 
@@ -20,7 +18,3 @@ cutoff_shader = ExtResource("2_4hjbm")
 
 [node name="Grid" type="Node3D" parent="."]
 script = ExtResource("4_lgq1i")
-
-[node name="TileManager" parent="." instance=ExtResource("3_kffv2")]
-
-[node name="CharacterManager" parent="." instance=ExtResource("5_kffv2")]

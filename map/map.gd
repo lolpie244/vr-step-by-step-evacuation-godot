@@ -1,8 +1,8 @@
 extends MeshInstance3D
 class_name Map
 
-@onready var tile_manager: FactoryManager = $TileManager
-@onready var character_manager: FactoryManager = $CharacterManager
+@onready var tile_manager: FactoryManager = FactoryManager.new("res://map/tiles/tiles")
+# @onready var character_manager: FactoryManager = $CharacterManager
 @onready var grid = $Grid
 
 @export var enable_cutoff: bool = true
@@ -68,7 +68,8 @@ static func types_from_str(str_map: Array) -> Array:
 
 
 func _ready() -> void:
-	tile_manager.visible = false
+	self.add_child(tile_manager)
+	tile_manager.hide()
 
 	var plane_mesh := self.mesh as PlaneMesh
 	plane_mesh.size = Vector2(
@@ -122,12 +123,13 @@ func set_map(raw_map):
 						tile.model.set_surface_override_material(i, self.cutoff_material)
 
 
-func add_character(type: CharacterFactory.Type, x: int, y: int) -> Character:
-	var factory: CharacterFactory = character_manager.get_factory(type)
-	var character: Character = factory.create(grid, x, y)
-
-	character.init()
-	return character
+func add_character(type: CharacterFactory.Type, x: int, y: int):
+	pass
+	# var factory: CharacterFactory = character_manager.get_factory(type)
+	# var character: Character = factory.create(grid, x, y)
+	#
+	# character.init()
+	# return character
 
 func move_character(character: Character, x: int, y: int) -> bool:
 	var tile = grid.get_tile(x, y) as Tile

@@ -1,0 +1,26 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2sf2pa45hwu8"]
+
+[ext_resource type="Script" uid="uid://bjf4i20x1nns" path="res://map/tiles/tiles/tile_factory.gd" id="1_lofvo"]
+[ext_resource type="PackedScene" uid="uid://wemhit1bf7ew" path="res://map/characters/character_point.tscn" id="2_ga134"]
+[ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://rules/fire_spreading/materials/oak.tres" id="2_upovr"]
+[ext_resource type="Script" uid="uid://d2fucstntnq80" path="res://map/tiles/types/tile.gd" id="3_81oiy"]
+[ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://map/tiles/assets/models/floor.glb" id="3_upovr"]
+[ext_resource type="PackedScene" uid="uid://uwua3ayr4d07" path="res://rules/fire_spreading/FirePoint.tscn" id="4_81oiy"]
+[ext_resource type="PackedScene" uid="uid://bfti6oxr5ayom" path="res://map/tiles/tile_animations.tscn" id="7_81oiy"]
+
+[node name="Floor" type="Node3D"]
+script = ExtResource("1_lofvo")
+type = 1
+material = ExtResource("2_upovr")
+class_type = ExtResource("3_81oiy")
+
+[node name="character_point" parent="." instance=ExtResource("2_ga134")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = true
+
+[node name="model" parent="." instance=ExtResource("3_upovr")]
+
+[node name="fire_point" parent="." instance=ExtResource("4_81oiy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="animation" parent="." instance=ExtResource("7_81oiy")]

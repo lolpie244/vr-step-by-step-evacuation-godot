@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://oiayulpk6vol"]
+
+[ext_resource type="Script" uid="uid://bjf4i20x1nns" path="res://map/tiles/tiles/tile_factory.gd" id="1_8y23l"]
+[ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://rules/fire_spreading/materials/oak.tres" id="2_c811b"]
+[ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://map/tiles/types/wall.gd" id="3_nucv2"]
+[ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://map/tiles/assets/models/wall.glb" id="4_nucv2"]
+[ext_resource type="PackedScene" uid="uid://bfti6oxr5ayom" path="res://map/tiles/tile_animations.tscn" id="5_4q3p4"]
+
+[node name="Wall" type="Node3D"]
+script = ExtResource("1_8y23l")
+type = 2
+material = ExtResource("2_c811b")
+class_type = ExtResource("3_nucv2")
+
+[node name="model" parent="." instance=ExtResource("4_nucv2")]
+
+[node name="animation" parent="." instance=ExtResource("5_4q3p4")]
