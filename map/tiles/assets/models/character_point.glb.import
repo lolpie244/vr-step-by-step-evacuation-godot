@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bnvtv0ggbwwin"
-path="res://.godot/imported/character_point.glb-98c933f6dee858d10875480575f87ef3.scn"
+path="res://.godot/imported/character_point.glb-cc37ff7f5bfddffd5f84116de4648ec9.scn"
 
 [deps]
 
-source_file="res://map/characters/assets/character_point.glb"
-dest_files=["res://.godot/imported/character_point.glb-98c933f6dee858d10875480575f87ef3.scn"]
+source_file="res://map/tiles/assets/models/character_point.glb"
+dest_files=["res://.godot/imported/character_point.glb-cc37ff7f5bfddffd5f84116de4648ec9.scn"]
 
 [params]
 

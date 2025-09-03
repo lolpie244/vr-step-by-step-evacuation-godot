@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://ji1axsxk6dr3"]
+
+[ext_resource type="Script" uid="uid://bjf4i20x1nns" path="res://map/tiles/tile_factory.gd" id="1_3nf2j"]
+[ext_resource type="PackedScene" uid="uid://c2t7804hai60u" path="res://map/grid/GridFactory.tscn" id="1_ay0xd"]
+[ext_resource type="PackedScene" uid="uid://bfti6oxr5ayom" path="res://map/tiles/tile_animations.tscn" id="2_r27o2"]
+
+[node name="BaseTile" instance=ExtResource("1_ay0xd")]
+script = ExtResource("1_3nf2j")
+
+[node name="animation" parent="." index="1" instance=ExtResource("2_r27o2")]

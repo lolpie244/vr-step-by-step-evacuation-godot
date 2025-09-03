@@ -14,6 +14,7 @@ static func get_matrix(n: int, m: int, fill = null):
 
 	return result
 
+
 static func transpose(arr: Array):
 	var new_arr = []
 
@@ -25,9 +26,10 @@ static func transpose(arr: Array):
 
 	return new_arr
 
+
 static func _collect_aabb(node: Node3D, result: AABB) -> AABB:
-	if node.has_method(&'get_aabb'):
-		result = result.merge(node.call('get_aabb'))
+	if node.has_method(&"get_aabb"):
+		result = result.merge(node.call("get_aabb"))
 
 	for child in node.get_children():
 		if is_instance_of(child, Node3D):
@@ -35,7 +37,30 @@ static func _collect_aabb(node: Node3D, result: AABB) -> AABB:
 
 	return result
 
+
 static func get_aabb(node: Node3D) -> AABB:
-	if node.has_method(&'get_aabb'):
-		return node.call('get_aabb')
+	if node.has_method(&"get_aabb"):
+		return node.call("get_aabb")
 	return _collect_aabb(node, AABB())
+
+
+static func find_child_with_type(node: Node, type_ref):
+	for child in node.get_children():
+		if is_instance_of(child, type_ref):
+			return child
+		var grandchild = find_child_with_type(child, type_ref)
+		if grandchild != null:
+			return grandchild
+	return null
+
+static func find_parent_with_type(node: Node, type_ref):
+	if is_instance_of(node, type_ref):
+		return node
+
+	if node.get_parent() == null:
+		return null
+
+	return find_parent_with_type(node.get_parent(), type_ref)
+
+
+const DEFAULT_DUPLICATE = DUPLICATE_SCRIPTS | DUPLICATE_GROUPS | DUPLICATE_SIGNALS

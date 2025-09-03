@@ -8,6 +8,7 @@ func _init(shared_data, grid_, x_, y_) -> void:
 
 	self.add_flag(Tile.Flags.BLOCKING)
 
+
 func _is_wall(x_: int, y_: int):
 	var tile = grid.get_tile(x_, y_)
 

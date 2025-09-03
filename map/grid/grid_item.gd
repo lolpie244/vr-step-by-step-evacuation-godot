@@ -5,9 +5,9 @@ class_name GridItem
 var _x: int
 var _y: int
 
-var pos: Vector2:
+var pos: Vector2i:
 	get():
-		return Vector2(_x, _y)
+		return Vector2i(_x, _y)
 
 var grid: MapGrid
 
@@ -35,6 +35,10 @@ func _init(grid_: MapGrid, x_: int, y_: int):
 func init():
 	self.grid.add_child(self)
 
+	for child in get_children():
+		if child.has_method(&"init"):
+			child.init()
+
 
 func _get_model_scale(model_: Node3D) -> float:
 	var model_size = Utils.get_aabb(model_).size
@@ -51,3 +55,7 @@ func _resize_model(model_: Node3D):
 
 func direction_to(to: GridItem) -> Vector2:
 	return Vector2(to.pos.x - _x, to.pos.y - _y)
+
+
+func get_mixin(type):
+	return Utils.find_child_with_type(self, type)

@@ -12,7 +12,7 @@ func _generate_model():
 	var model = _shared_data.model
 
 	var result = MultiMeshInstance3D.new()
-	result.scale = Vector3.ONE * _get_model_scale(model)
+	# result.scale = Vector3.ONE * _get_model_scale(model)
 
 	var mm := MultiMesh.new()
 

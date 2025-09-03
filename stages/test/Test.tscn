@@ -26,7 +26,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.377097, 0.926174, 0, -0.926174, 0.377097, 0, 0.98782, 0.48011)
+transform = Transform3D(1, 0, 0, 0, 0.789662, 0.613542, 0, -0.613542, 0.789662, 0, 0.48782, 0.48011)
 
 [node name="Map" parent="." instance=ExtResource("1_xne4r")]
 enable_cutoff = false

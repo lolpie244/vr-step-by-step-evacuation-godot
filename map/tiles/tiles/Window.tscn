@@ -1,17 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://brwh7xuxf2yp7"]
+[gd_scene load_steps=5 format=3 uid="uid://brwh7xuxf2yp7"]
 
-[ext_resource type="Script" uid="uid://bjf4i20x1nns" path="res://map/tiles/tiles/tile_factory.gd" id="1_5xl2b"]
 [ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://map/tiles/assets/models/window.glb" id="1_rlc0b"]
-[ext_resource type="PackedScene" uid="uid://bfti6oxr5ayom" path="res://map/tiles/tile_animations.tscn" id="2_5xl2b"]
+[ext_resource type="PackedScene" uid="uid://ji1axsxk6dr3" path="res://map/tiles/BaseTile.tscn" id="1_xntyr"]
 [ext_resource type="Resource" uid="uid://767xi8s6p27l" path="res://rules/fire_spreading/materials/concrete.tres" id="2_k4753"]
 [ext_resource type="Script" uid="uid://0rnan1ih5tue" path="res://map/tiles/types/wind_source.gd" id="3_v5655"]
 
-[node name="Window" type="Node3D"]
-script = ExtResource("1_5xl2b")
+[node name="Window" instance=ExtResource("1_xntyr")]
 type = 4
 material = ExtResource("2_k4753")
 class_type = ExtResource("3_v5655")
 
-[node name="model" parent="." instance=ExtResource("1_rlc0b")]
-
-[node name="animation" parent="." instance=ExtResource("2_5xl2b")]
+[node name="model" parent="." index="1" instance=ExtResource("1_rlc0b")]

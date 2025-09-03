@@ -35,6 +35,16 @@ func get_tile(x: int, y: int) -> Tile:
 
 	return tiles[x][y]
 
+func get_tile_mixin(x: int, y: int, type_ref):
+	if not _in_range(x, y):
+		return null
+
+	var tile = tiles[x][y]
+	if tile == null:
+		return null
+
+	return tile.get_mixin(type_ref)
+
 
 func transpose():
 	tiles = Utils.transpose(tiles)
@@ -49,10 +59,11 @@ func tile_position(x, y) -> Vector3:
 
 
 func set_character(character: Character, x, y) -> bool:
-	if not _in_range(x, y) || tiles[x][y] == null || not tiles[x][y].has_flag(Tile.Flags.WALKABLE):
+	var tile: Wallkable = get_tile_mixin(x, y, Wallkable)
+	if tile == null:
 		return false
 
-	return tiles[x][y].place_character(character)
+	return tile.place_character(character)
 
 
 func spread_fire():
@@ -61,8 +72,12 @@ func spread_fire():
 	for x in range(0, rows_count()):
 		for y in range(0, columns_count()):
 			var tile: Tile = get_tile(x, y)
+			if tile == null:
+				continue
 
-			if tile == null || !tile.has_flag(Tile.Flags.BURNING):
+			var mixin: Flammable = tile.get_mixin(Flammable)
+
+			if mixin == null || !mixin.burning:
 				continue
 
 			burning_tiles.append(tile)
@@ -70,4 +85,4 @@ func spread_fire():
 	for tile in burning_tiles:
 		for next_tile in tile.neighbor_tiles():
 			if FireSpreading.is_spread(tile, next_tile):
-				next_tile.ignite()
+				next_tile.get_mixin(Flammable).ignite()

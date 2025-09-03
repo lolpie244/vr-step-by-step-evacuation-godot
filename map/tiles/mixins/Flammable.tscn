@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://biceowelqn2hu"]
+
+[ext_resource type="Script" uid="uid://d3yx2bdgfjocf" path="res://map/tiles/mixins/flammable.gd" id="1_ajcrv"]
+[ext_resource type="Texture2D" uid="uid://dduunhm64jeap" path="res://rules/fire_spreading/assets/smoke.png" id="2_kddjg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11sya"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_kddjg")
+emission_enabled = true
+emission = Color(0.98567, 0.110998, 0, 1)
+emission_energy_multiplier = 2.0
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="Gradient" id="Gradient_l6svc"]
+offsets = PackedFloat32Array(0.617886, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q4lib"]
+gradient = SubResource("Gradient_l6svc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v242u"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+gravity = Vector3(0, 2, 0)
+color_ramp = SubResource("GradientTexture1D_q4lib")
+
+[sub_resource type="QuadMesh" id="QuadMesh_bl0y6"]
+
+[node name="Flammable" type="Node3D"]
+script = ExtResource("1_ajcrv")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_11sya")
+randomness = 0.13
+process_material = SubResource("ParticleProcessMaterial_v242u")
+draw_pass_1 = SubResource("QuadMesh_bl0y6")

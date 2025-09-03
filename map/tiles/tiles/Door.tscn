@@ -1,22 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://drv4hk8i27mp3"]
+[gd_scene load_steps=6 format=3 uid="uid://drv4hk8i27mp3"]
 
 [ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://map/tiles/assets/models/doorway.glb" id="1_8uakc"]
-[ext_resource type="Script" uid="uid://bjf4i20x1nns" path="res://map/tiles/tiles/tile_factory.gd" id="1_ncesm"]
-[ext_resource type="PackedScene" uid="uid://wemhit1bf7ew" path="res://map/characters/character_point.tscn" id="2_br2vh"]
+[ext_resource type="PackedScene" uid="uid://ji1axsxk6dr3" path="res://map/tiles/BaseTile.tscn" id="1_xntyr"]
 [ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://rules/fire_spreading/materials/oak.tres" id="2_bwocw"]
-[ext_resource type="PackedScene" uid="uid://bfti6oxr5ayom" path="res://map/tiles/tile_animations.tscn" id="3_br2vh"]
 [ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://map/tiles/types/wall_like.gd" id="3_p38ud"]
+[ext_resource type="PackedScene" uid="uid://dd60wjjwruxq6" path="res://map/tiles/mixins/Wallkable.tscn" id="4_trgq6"]
 
-[node name="Door" type="Node3D"]
-script = ExtResource("1_ncesm")
+[node name="Door" instance=ExtResource("1_xntyr")]
 type = 3
 material = ExtResource("2_bwocw")
 class_type = ExtResource("3_p38ud")
 
-[node name="model" parent="." instance=ExtResource("1_8uakc")]
-
-[node name="character_point" parent="." instance=ExtResource("2_br2vh")]
+[node name="Wallkable" parent="mixins" index="0" instance=ExtResource("4_trgq6")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.2, 0)
-visible = true
 
-[node name="animation" parent="." instance=ExtResource("3_br2vh")]
+[node name="model" parent="." index="1" instance=ExtResource("1_8uakc")]

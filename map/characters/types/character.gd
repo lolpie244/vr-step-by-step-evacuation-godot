@@ -17,19 +17,17 @@ func _init(shared_data, grid_, x_, y_) -> void:
 
 func init():
 	_tile = grid.get_tile(_x, _y)
-
-	assert(_tile != null, "Tile doesn't exists")
-	assert(_tile.has_flag(Tile.Flags.WALKABLE))
+	assert(_tile != null && _tile.get_mixin(Wallkable) != null, "Tile is not Wallkable")
 
 	self._character_body = _generate_character_body()
 	self.add_child(_character_body)
 
 	super.init()
-	_tile.place_character(self)
+	_tile.get_mixin(Wallkable).place_character(self)
 
 
 func _generate_character_body():
-	var model = _shared_data.character_body.duplicate()
+	var model = _shared_data.character_body.duplicate(Utils.DEFAULT_DUPLICATE)
 	return _resize_model(model)
 
 
@@ -48,7 +46,7 @@ func reachable_tiles():
 			continue
 
 		for tile in current_tile.neighbor_tiles():
-			if !tile.has_flag(Tile.Flags.WALKABLE) || used.has(tile.get_instance_id()):
+			if tile.get_mixin(Wallkable) == null || used.has(tile.get_instance_id()):
 				continue
 			result.append(tile)
 
@@ -61,4 +59,4 @@ func reachable_tiles():
 func highlight_tiles(highlight: bool):
 	for tile in reachable_tiles():
 		await get_tree().create_timer(0.1).timeout
-		tile.highlight(highlight)
+		# tile.highlight(highlight)

@@ -1,24 +1,23 @@
 extends Node
 
 # Constants
-const contact_heat_fraction := 0.2 # fraction of heat that actually reaches the neighbor through direct contact
-const max_strenght := 20 # max wind vector strenght
-const max_strenght_prob := 0.5 # probability that fire will spread with wind with max_strenght
+const contact_heat_fraction := 0.2  # fraction of heat that actually reaches the neighbor through direct contact
+const max_strenght := 20  # max wind vector strength
+const max_strenght_prob := 0.5  # probability that fire will spread with wind with max_strenght
 
-const k1 := 1.5 # wind influence coef
-var k2 := -log(1 - max_strenght_prob) / max_strenght # wind vector length to probability
+const k1 := 1.5  # wind influence coef
+var k2 := -log(1 - max_strenght_prob) / max_strenght  # wind vector length to probability
+
 
 func can_burn(tile: Tile) -> bool:
-	return (
-		!tile.has_flag(Tile.Flags.BURNING)
-		&& !tile.has_flag(Tile.Flags.BURNED)
-		&& tile.material.flammable
-	)
+	var flammable: Flammable = tile.get_mixin(Flammable)
+
+	return flammable != null && flammable.can_burn()
 
 
 func _fixed_prob(from: Tile, to: Tile) -> float:
-	var from_mat = from.material
-	var to_mat = to.material
+	var from_mat = from.get_mixin(Flammable).material
+	var to_mat = to.get_mixin(Flammable).material
 
 	var deltaT = to_mat.ignition_temp - Constants.room_temperature
 	var HRR = contact_heat_fraction * from_mat.heat_release_rate * 1000
@@ -26,6 +25,7 @@ func _fixed_prob(from: Tile, to: Tile) -> float:
 	var flammable_rate = to_mat.density * to_mat.thermal_conductivity * to_mat.heat_capacity
 
 	return 1 - exp(-Constants.time_per_turn / (PI / 4 * flammable_rate * release_rate))
+
 
 func _dynamic_prob(from: Tile, to: Tile) -> float:
 	var vector = from.wind
@@ -45,7 +45,7 @@ func _dynamic_prob(from: Tile, to: Tile) -> float:
 
 
 func is_spread(from: Tile, to: Tile) -> bool:
-	if !can_burn(to):
+	if to.get_mixin(Flammable) == null || !to.get_mixin(Flammable).can_burn():
 		return false
 
 	var fixed_prob = _fixed_prob(from, to)

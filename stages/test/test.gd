@@ -11,7 +11,7 @@ func _ready() -> void:
 
 	character.highlight_tiles(true)
 
-	grid.get_tile(9, 1).ignite()
+	grid.get_tile_mixin(9, 1, Flammable).ignite()
 	spread_fun_timer()
 
 

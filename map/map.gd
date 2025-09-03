@@ -136,8 +136,8 @@ func add_character(type: CharacterFactory.Type, x: int, y: int):
 
 
 func move_character(character: Character, x: int, y: int) -> bool:
-	var tile = grid.get_tile(x, y) as Tile
-	if tile == null || not tile.has_flag(Tile.Flags.WALKABLE):
+	var tile = grid.get_tile_mixin(x, y, Wallkable)
+	if tile == null:
 		return false
 
 	return tile.place_character(character)
