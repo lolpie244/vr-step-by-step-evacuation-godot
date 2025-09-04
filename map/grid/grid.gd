@@ -58,14 +58,6 @@ func tile_position(x, y) -> Vector3:
 	)
 
 
-func set_character(character: Character, x, y) -> bool:
-	var tile: Wallkable = get_tile_mixin(x, y, Wallkable)
-	if tile == null:
-		return false
-
-	return tile.place_character(character)
-
-
 func spread_fire():
 	var burning_tiles: Array[Tile] = []
 

@@ -37,11 +37,20 @@ func _generate_model():
 	return model
 
 
-func highlight(value: bool):
-	if value:
-		_animation.play("highlight")
-	else:
-		_animation.play_backwards("highlight")
+func set_cutoff(material: ShaderMaterial):
+	for i in _model.get_surface_override_material_count():
+		_model.set_surface_override_material(i, material)
+
+
+var highlight: bool:
+	set(val):
+		if highlight == val:
+			return
+		highlight = val
+		if highlight:
+			_animation.play("highlight")
+		else:
+			_animation.play_backwards("highlight")
 
 
 func neighbor_tiles() -> Array[Tile]:

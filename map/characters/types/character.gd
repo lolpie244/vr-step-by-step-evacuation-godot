@@ -4,8 +4,10 @@ class_name Character
 
 var _character_body: CharacterBody3D
 var _shared_data: CharacterFactory.SharedData
-var _tile: Tile
-var _speed: float
+var _wallkable: Wallkable
+var _speed: int
+var _reachable: Array[Wallkable.ReachableResult] = []
+
 
 
 func _init(shared_data, grid_, x_, y_) -> void:
@@ -16,14 +18,15 @@ func _init(shared_data, grid_, x_, y_) -> void:
 
 
 func init():
-	_tile = grid.get_tile(_x, _y)
-	assert(_tile != null && _tile.get_mixin(Wallkable) != null, "Tile is not Wallkable")
+	_wallkable = grid.get_tile_mixin(_x, _y, Wallkable)
+	assert(_wallkable != null, "Tile is not Wallkable")
 
 	self._character_body = _generate_character_body()
 	self.add_child(_character_body)
 
 	super.init()
-	_tile.get_mixin(Wallkable).place_character(self)
+	_wallkable.place_character(self)
+	restore()
 
 
 func _generate_character_body():
@@ -31,32 +34,35 @@ func _generate_character_body():
 	return _resize_model(model)
 
 
-func reachable_tiles():
-	var result := []
+func restore():
+	_speed = _shared_data.default_speed
+	_reachable = _wallkable.reachable_tiles(_speed)
 
-	var queue := [[_tile, _speed]]
-	var used := {}
 
-	while queue.size():
-		var info = queue.pop_front()
-		var current_tile: Tile = info[0]
-		var speed: int = info[1]
-
-		if speed == 0:
+func place(x: int, y: int) -> bool:
+	for next_tile in _reachable:
+		if next_tile.tile.pos != Vector2i(x, y):
 			continue
 
-		for tile in current_tile.neighbor_tiles():
-			if tile.get_mixin(Wallkable) == null || used.has(tile.get_instance_id()):
-				continue
-			result.append(tile)
+		if !next_tile.tile.get_mixin(Wallkable).place_character(self):
+			_wallkable.place_character(self)
+			return false
 
-			used[tile.get_instance_id()] = true
-			queue.append([tile, speed - 1])
+		highlight_reachable(false)
+		_speed -= next_tile.distance
+		_wallkable = next_tile.tile.get_mixin(Wallkable)
+		_reachable = _wallkable.reachable_tiles(_speed)
+		self.rotate_y(
+			Vector2(next_tile.direction.y, next_tile.direction.x).angle() - self.rotation.y
+		)
 
-	return result
+
+		return true
+
+	return false
 
 
-func highlight_tiles(highlight: bool):
-	for tile in reachable_tiles():
+func highlight_reachable(highlight: bool):
+	for info in _reachable:
 		await get_tree().create_timer(0.1).timeout
-		# tile.highlight(highlight)
+		info.tile.highlight = highlight

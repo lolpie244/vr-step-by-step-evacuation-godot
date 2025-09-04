@@ -1,8 +1,6 @@
-extends Node3D
+extends TileMixin
 
 class_name Flammable
-
-@onready var _tile: Tile = Utils.find_parent_with_type(self, Tile)
 
 @export var material: TileMaterial
 

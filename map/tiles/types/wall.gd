@@ -33,3 +33,6 @@ func _generate_model():
 	result.multimesh = mm
 
 	return result
+
+func set_cutoff(material: ShaderMaterial):
+	_model.material_override = material

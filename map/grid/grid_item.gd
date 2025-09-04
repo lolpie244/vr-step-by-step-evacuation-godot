@@ -59,3 +59,7 @@ func direction_to(to: GridItem) -> Vector2:
 
 func get_mixin(type):
 	return Utils.find_child_with_type(self, type)
+
+
+func set_cutoff(_material: ShaderMaterial):
+	assert(false, "Not implemented")

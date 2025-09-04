@@ -9,7 +9,7 @@ var character
 func _ready() -> void:
 	character = map.add_character(CharacterFactory.Type.Civilian, 1, 1)
 
-	character.highlight_tiles(true)
+	character.highlight_reachable(true)
 
 	grid.get_tile_mixin(9, 1, Flammable).ignite()
 	spread_fun_timer()

@@ -14,6 +14,7 @@ albedo_color = Color(1, 1, 1, 0.0980392)
 mesh = SubResource("PlaneMesh_a0dt8")
 surface_material_override/0 = SubResource("StandardMaterial3D_a0dt8")
 script = ExtResource("2_lgq1i")
+enable_cutoff = false
 cutoff_shader = ExtResource("2_4hjbm")
 
 [node name="Grid" type="Node3D" parent="."]

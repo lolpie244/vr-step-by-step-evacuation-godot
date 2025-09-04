@@ -120,11 +120,7 @@ func set_map(raw_map):
 			tile.init()
 
 			if enable_cutoff:
-				if tile.model is MultiMeshInstance3D:
-					tile.model.material_override = self.cutoff_material
-				else:
-					for i in tile.model.get_surface_override_material_count():
-						tile.model.set_surface_override_material(i, self.cutoff_material)
+				tile.set_cutoff(self.cutoff_material)
 
 
 func add_character(type: CharacterFactory.Type, x: int, y: int):
@@ -136,8 +132,4 @@ func add_character(type: CharacterFactory.Type, x: int, y: int):
 
 
 func move_character(character: Character, x: int, y: int) -> bool:
-	var tile = grid.get_tile_mixin(x, y, Wallkable)
-	if tile == null:
-		return false
-
-	return tile.place_character(character)
+	return character.place(x, y)

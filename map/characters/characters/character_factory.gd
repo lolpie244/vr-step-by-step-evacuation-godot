@@ -13,7 +13,7 @@ func _create_shared_data():
 
 class SharedData:
 	var character_body: CharacterBody3D
-	var default_speed: float
+	var default_speed: int
 
 	func _init(factory: CharacterFactory):
 		character_body = factory.get_node("character_body")
