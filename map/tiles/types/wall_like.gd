@@ -5,8 +5,7 @@ class_name WallLikeTile
 
 func _init(shared_data, grid_, x_, y_) -> void:
 	super._init(shared_data, grid_, x_, y_)
-
-	self.add_flag(Tile.Flags.BLOCKING)
+	blocking = true
 
 
 func _is_wall(x_: int, y_: int):

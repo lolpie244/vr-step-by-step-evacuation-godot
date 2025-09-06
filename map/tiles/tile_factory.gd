@@ -11,9 +11,10 @@ enum Type {
 	Staircase,
 }
 
-@export var properties: Array[Tile.Flags] = []
+# @export var properties: Array[Tile.Flags] = []
 @export var type: Type = Type.None
 @export var material: TileMaterial
+@export var blocking: bool
 
 
 func _create_shared_data():
@@ -25,12 +26,11 @@ class SharedData:
 	var model: Node3D
 	var animation: AnimationPlayer
 	var material: TileMaterial
+	var blocking: bool
 
 	func _init(fabric) -> void:
-		for property in fabric.properties:
-			flags |= property
-
 		material = fabric.material
 
 		model = fabric.get_node("model")
 		animation = fabric.get_node_or_null("animation")
+		blocking = fabric.blocking

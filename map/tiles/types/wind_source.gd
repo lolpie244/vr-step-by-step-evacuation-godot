@@ -15,7 +15,7 @@ func init():
 	super.init()
 
 	if _is_outside():
-		self.add_flag(Tile.Flags.BLOCKING)
+		blocking = true
 		self.set_open(true)
 	else:
 		# TODO: wind directed inside doors
@@ -43,7 +43,7 @@ func set_open(state: bool):
 			continue
 
 		for tile in current_tile.neighbor_tiles():
-			if tile.has_flag(Tile.Flags.BLOCKING) || used.has(tile.get_instance_id()):
+			if tile.blocking || used.has(tile.get_instance_id()):
 				continue
 
 			if tile is WindSourceTile && tile._is_outside():

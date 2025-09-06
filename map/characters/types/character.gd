@@ -66,3 +66,9 @@ func highlight_reachable(highlight: bool):
 	for info in _reachable:
 		await get_tree().create_timer(0.1).timeout
 		info.tile.highlight = highlight
+
+func visible_tiles():
+	var tiles := ShadowCasting.visible_tiles(_wallkable.get_tile())
+	for tile in tiles:
+		if tile != null:
+			tile.highlight = true

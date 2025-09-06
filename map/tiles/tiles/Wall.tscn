@@ -8,6 +8,7 @@
 [node name="Wall" instance=ExtResource("1_xntyr")]
 type = 2
 material = ExtResource("2_c811b")
+blocking = true
 class_type = ExtResource("3_nucv2")
 
 [node name="model" parent="." index="1" instance=ExtResource("4_nucv2")]

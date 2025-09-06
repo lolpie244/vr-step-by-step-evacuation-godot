@@ -2,10 +2,6 @@ extends GridItem
 
 class_name Tile
 
-enum Flags {
-	BLOCKING = 1 << 0,
-}
-
 var _model: Node3D
 var _shared_data: TileFactory.SharedData
 var _animation: AnimationPlayer
@@ -52,6 +48,10 @@ var highlight: bool:
 		else:
 			_animation.play_backwards("highlight")
 
+
+var blocking: bool:
+	get():
+		return _shared_data.blocking
 
 func neighbor_tiles() -> Array[Tile]:
 	var result: Array[Tile] = []

@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://biceowelqn2hu" path="res://map/tiles/mixins/Flammable.tscn" id="6_upovr"]
 
 [node name="Floor" instance=ExtResource("1_xntyr")]
-properties = Array[int]([1])
 type = 1
 material = ExtResource("2_upovr")
 class_type = ExtResource("3_81oiy")
