@@ -29,7 +29,7 @@ func _ready() -> void:
 	context.character.show()
 
 
-	# $Camera.position = character_tile.get_mixin(Wallkable).position + 2
+	# $Camera.position = character_tile.get_mixin(Walkable).position + 2
 	$Camera.rotation_degrees = context.character.rotation_degrees
 	$Camera.position = character_tile.position
 	$Camera.position.y += 0.5

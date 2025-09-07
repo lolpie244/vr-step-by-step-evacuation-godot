@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd60wjjwruxq6"]
-
-[ext_resource type="Script" uid="uid://boaye67hpfku2" path="res://map/tiles/mixins/wallkable.gd" id="1_spr4w"]
-[ext_resource type="PackedScene" uid="uid://bnvtv0ggbwwin" path="res://map/tiles/assets/models/character_point.glb" id="2_cbogs"]
-
-[node name="Wallkable" type="Node3D"]
-script = ExtResource("1_spr4w")
-
-[node name="character_point" parent="." instance=ExtResource("2_cbogs")]

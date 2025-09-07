@@ -132,4 +132,7 @@ func add_character(type: CharacterFactory.Type, x: int, y: int):
 
 
 func move_character(character: Character, x: int, y: int) -> bool:
-	return character.place(x, y)
+	var walkable = grid.get_tile_mixin(x, y, Walkable)
+	if walkable == null:
+		return false
+	return character.place(walkable)

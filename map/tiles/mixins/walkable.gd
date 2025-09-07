@@ -58,20 +58,20 @@ func reachable_tiles(_speed: int) -> Array[ReachableResult]:
 
 	while queue.size():
 		var info = queue.pop_front()
-		var current_wallkable: Walkable = info[0].get_mixin(Walkable)
+		var current_walkable: Walkable = info[0].get_mixin(Walkable)
 		var speed: int = info[1]
 
 		if speed <= 0:
 			continue
 
-		for wallkable in current_wallkable.reachable_neighbors():
-			var tile := wallkable.get_tile()
+		for walkable in current_walkable.reachable_neighbors():
+			var tile := walkable.get_tile()
 
 			if used.has(tile.get_instance_id()):
 				continue
 			result.append(
 				ReachableResult.new(
-					tile, _speed - speed + 1, current_wallkable.get_tile().direction_to(tile)
+					tile, _speed - speed + 1, current_walkable.get_tile().direction_to(tile)
 				)
 			)
 
@@ -82,18 +82,23 @@ func reachable_tiles(_speed: int) -> Array[ReachableResult]:
 
 func _character_placed(craracter_rigid: RigidBody3D):
 	var character : Character = craracter_rigid.get_parent()
-	character.place(_tile.pos.x, _tile.pos.y)
+	print("SNAP ZONE")
+	print(character.place(self))
+	# print(character.scale)
+	_tile.highlight = false
 
 
 func _on_snap_zone_body_entered(body_: Node3D) -> void:
 	if not is_instance_of(body_, XRToolsPickable) || !self.enabled:
 		return
-	
-	var body: XRToolsPickable = body_
 
-	if body in _bodies_in_snap_zone_area:
+	var body: XRToolsPickable = body_
+	var character: Character = body.get_parent()
+
+	if !body.is_picked_up() || body in _bodies_in_snap_zone_area || character.is_reachable(self) == null:
 		return
 
+	_tile.highlight = true
 	_bodies_in_snap_zone_area.append(body)
 	body.dropped.connect(_character_placed)
 
@@ -102,3 +107,4 @@ func _on_snap_zone_body_exited(body: Node3D) -> void:
 	if is_instance_of(body, XRToolsPickable) and body in _bodies_in_snap_zone_area:
 		_bodies_in_snap_zone_area.erase(body)
 		body.dropped.disconnect(_character_placed)
+		_tile.highlight = false

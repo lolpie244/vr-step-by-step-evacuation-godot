@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://rules/fire_spreading/materials/oak.tres" id="2_upovr"]
 [ext_resource type="Script" uid="uid://d2fucstntnq80" path="res://map/tiles/types/tile.gd" id="3_81oiy"]
 [ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://map/tiles/assets/models/floor.glb" id="3_upovr"]
-[ext_resource type="PackedScene" uid="uid://dd60wjjwruxq6" path="res://map/tiles/mixins/Wallkable.tscn" id="5_upovr"]
+[ext_resource type="PackedScene" uid="uid://dd60wjjwruxq6" path="res://map/tiles/mixins/Walkable.tscn" id="5_upovr"]
 [ext_resource type="PackedScene" uid="uid://biceowelqn2hu" path="res://map/tiles/mixins/Flammable.tscn" id="6_upovr"]
 
 [node name="Floor" instance=ExtResource("1_xntyr")]
@@ -16,7 +16,7 @@ class_type = ExtResource("3_81oiy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.468385, 0)
 material = ExtResource("2_upovr")
 
-[node name="Wallkable" parent="mixins" index="1" instance=ExtResource("5_upovr")]
+[node name="Walkable" parent="mixins" index="1" instance=ExtResource("5_upovr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 
 [node name="model" parent="." index="1" instance=ExtResource("3_upovr")]
