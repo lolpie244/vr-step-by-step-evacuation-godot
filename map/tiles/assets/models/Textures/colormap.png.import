@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cw2421itoh5li"
-path.s3tc="res://.godot/imported/colormap.png-27675d117fb235872223802a105994c3.s3tc.ctex"
+path.etc2="res://.godot/imported/colormap.png-27675d117fb235872223802a105994c3.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://map/tiles/assets/models/Textures/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-27675d117fb235872223802a105994c3.s3tc.ctex"]
+dest_files=["res://.godot/imported/colormap.png-27675d117fb235872223802a105994c3.etc2.ctex"]
 
 [params]
 

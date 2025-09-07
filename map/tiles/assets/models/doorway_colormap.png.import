@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://518ybnojq6fv"
-path.s3tc="res://.godot/imported/doorway_colormap.png-53ce7abe8220c95cc41a250f53d5cfc6.s3tc.ctex"
+path.etc2="res://.godot/imported/doorway_colormap.png-53ce7abe8220c95cc41a250f53d5cfc6.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://map/tiles/assets/models/doorway_colormap.png"
-dest_files=["res://.godot/imported/doorway_colormap.png-53ce7abe8220c95cc41a250f53d5cfc6.s3tc.ctex"]
+dest_files=["res://.godot/imported/doorway_colormap.png-53ce7abe8220c95cc41a250f53d5cfc6.etc2.ctex"]
 
 [params]
 
