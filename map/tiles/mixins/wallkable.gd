@@ -2,7 +2,6 @@ extends TileMixin
 
 class_name Wallkable
 
-
 func _ready():
 	self.hide()
 

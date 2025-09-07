@@ -3,6 +3,8 @@ extends Node3D
 @onready var map: Map = $Map
 @onready var grid: MapGrid = $Map/Grid
 
+@export var next_scene: PackedScene
+
 var character
 
 
@@ -11,9 +13,14 @@ func _ready() -> void:
 
 	# character.highlight_reachable(true)
 
-	character.visible_tiles()
-
+	# character.visible_tiles()
 	grid.get_tile_mixin(9, 1, Flammable).ignite()
+
+	var context := FirstPerson.Context.new(character)
+
+	SceneManager.load_scene(next_scene, context)
+
+
 	spread_fun_timer()
 
 

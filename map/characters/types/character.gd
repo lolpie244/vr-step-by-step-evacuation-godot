@@ -9,8 +9,10 @@ var _speed: int
 var _reachable: Array[Wallkable.ReachableResult] = []
 
 
+func _init(shared_data = null, grid_ = null, x_ = 0, y_ = 0) -> void:
+	if shared_data == null:
+		return
 
-func _init(shared_data, grid_, x_, y_) -> void:
 	self._shared_data = shared_data
 	self._speed = shared_data.default_speed
 
@@ -27,6 +29,10 @@ func init():
 	super.init()
 	_wallkable.place_character(self)
 	restore()
+
+
+func get_tile() -> Tile:
+	return _wallkable.get_tile()
 
 
 func _generate_character_body():
@@ -56,7 +62,6 @@ func place(x: int, y: int) -> bool:
 			Vector2(next_tile.direction.y, next_tile.direction.x).angle() - self.rotation.y
 		)
 
-
 		return true
 
 	return false
@@ -66,6 +71,7 @@ func highlight_reachable(highlight: bool):
 	for info in _reachable:
 		await get_tree().create_timer(0.1).timeout
 		info.tile.highlight = highlight
+
 
 func visible_tiles():
 	var tiles := ShadowCasting.visible_tiles(_wallkable.get_tile())

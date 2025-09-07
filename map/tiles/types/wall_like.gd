@@ -3,7 +3,7 @@ extends Tile
 class_name WallLikeTile
 
 
-func _init(shared_data, grid_, x_, y_) -> void:
+func _init(shared_data = null, grid_ = null, x_ = 0, y_ = 0) -> void:
 	super._init(shared_data, grid_, x_, y_)
 	blocking = true
 
