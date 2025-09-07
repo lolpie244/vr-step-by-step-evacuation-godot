@@ -19,11 +19,12 @@ func place_character(character: Character) -> bool:
 	character.position = self.position
 	character.rotation = self.rotation
 
+	_tile._animation.animation_finished.connect(character._animation_finished)
+
 	character._x = _tile.pos.x
 	character._y = _tile.pos.y
 
 	return true
-
 
 class ReachableResult:
 	var tile: Tile
@@ -82,8 +83,7 @@ func reachable_tiles(_speed: int) -> Array[ReachableResult]:
 
 func _character_placed(craracter_rigid: RigidBody3D):
 	var character : Character = craracter_rigid.get_parent()
-	print("SNAP ZONE")
-	print(character.place(self))
+	character.place(self)
 	# print(character.scale)
 	_tile.highlight = false
 

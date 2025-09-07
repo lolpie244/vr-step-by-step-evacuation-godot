@@ -58,7 +58,13 @@ func direction_to(to: GridItem) -> Vector2:
 
 
 func get_mixin(type):
-	return Utils.find_child_with_type(self, type)
+	return Utils.find_child_with_type(self, type, false)
+
+func remove_mixin(type):
+	var mixin: Node3D = get_mixin(type)
+	if mixin != null:
+		self.remove_child(mixin)
+
 
 
 func set_cutoff(_material: ShaderMaterial):

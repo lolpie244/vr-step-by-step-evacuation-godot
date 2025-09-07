@@ -30,4 +30,5 @@ func can_burn():
 
 func ignite():
 	burning = true
+	_tile.remove_mixin(Walkable)
 	show()

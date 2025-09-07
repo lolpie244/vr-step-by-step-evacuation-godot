@@ -9,6 +9,7 @@ var _speed: int
 var _reachable: Array[Walkable.ReachableResult] = []
 
 var _tile_changed := false
+var _reachable_highlighted := false
 
 @onready var Pickable: XRToolsPickable = $PickableObject
 
@@ -31,7 +32,6 @@ func init():
 
 	self._character_body = _generate_character_body()
 	self.scale = Vector3.ONE * _get_model_scale(self._character_body)
-	print(self.scale)
 	self.add_child(_character_body)
 
 	Pickable.picked_up.connect(_on_picked_up)
@@ -79,8 +79,12 @@ func is_reachable(walkable: Walkable) -> Walkable.ReachableResult:
 			return next_tile
 	return null
 
+func _animation_finished(_animation):
+	Pickable.global_position = self.global_position
+
 
 func highlight_reachable(highlight: bool):
+	_reachable_highlighted = highlight
 	for info in _reachable:
 		await get_tree().create_timer(0.1).timeout
 		info.tile.highlight = highlight
@@ -99,7 +103,7 @@ func _process(_delta: float) -> void:
 
 var _original_scale : Vector3
 func _on_picked_up(_holder) -> void:
-	print("Picked up")
+	highlight_reachable(false)
 
 func _on_dropped(_pickable) -> void:
 	self.set_deferred("scale", _original_scale)
@@ -110,3 +114,6 @@ func _on_dropped(_pickable) -> void:
 		_tile_changed = false
 		self.scale = _original_scale
 	).call_deferred()
+
+func on_poke():
+	highlight_reachable(!_reachable_highlighted)

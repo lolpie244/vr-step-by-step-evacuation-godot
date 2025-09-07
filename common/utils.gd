@@ -44,11 +44,15 @@ static func get_aabb(node: Node3D) -> AABB:
 	return _collect_aabb(node, AABB())
 
 
-static func find_child_with_type(node: Node, type_ref):
+static func find_child_with_type(node: Node, type_ref, recursive):
 	for child in node.get_children():
 		if is_instance_of(child, type_ref):
 			return child
-		var grandchild = find_child_with_type(child, type_ref)
+
+		if !recursive:
+			continue
+
+		var grandchild = find_child_with_type(child, type_ref, recursive)
 		if grandchild != null:
 			return grandchild
 	return null

@@ -29,4 +29,4 @@ transform = Transform3D(1, 0, 0, 0, -0.386325, 0.922363, 0, -0.922363, -0.386325
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925485, 1.67225)
 
 [node name="Map" parent="." instance=ExtResource("3_5y27t")]
-transform = Transform3D(0.694264, 0, 0, 0, 1, 0, 0, 0, 0.322255, -0.000313282, 0.496542, 1.22156)
+transform = Transform3D(0.405485, 0, 0, 0, 1, 0, 0, 0, 0.322255, -0.000313282, 0.496542, 1.22156)
