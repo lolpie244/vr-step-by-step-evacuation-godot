@@ -41,7 +41,7 @@ func init():
 
 
 func _get_model_scale(model_: Node3D) -> float:
-	var model_size = Utils.get_aabb(model_).size
+	var model_size = Utils.get_aabb(model_).size * model_.scale
 	return grid.tile_size / max(model_size.x, model_size.z)
 
 

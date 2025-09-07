@@ -2,11 +2,13 @@ extends GridItem
 
 class_name Character
 
-var _character_body: CharacterBody3D
+var _character_body: Node3D
 var _shared_data: CharacterFactory.SharedData
 var _wallkable: Wallkable
 var _speed: int
 var _reachable: Array[Wallkable.ReachableResult] = []
+
+@onready var Pickable: XRToolsPickable = $PickableObject
 
 
 func _init(shared_data = null, grid_ = null, x_ = 0, y_ = 0) -> void:
@@ -20,13 +22,19 @@ func _init(shared_data = null, grid_ = null, x_ = 0, y_ = 0) -> void:
 
 
 func init():
+	super.init()
+
 	_wallkable = grid.get_tile_mixin(_x, _y, Wallkable)
 	assert(_wallkable != null, "Tile is not Wallkable")
 
 	self._character_body = _generate_character_body()
+	self.scale = Vector3.ONE * _get_model_scale(self._character_body)
+	print(self.scale)
 	self.add_child(_character_body)
 
-	super.init()
+	Pickable.picked_up.connect(_on_picked_up)
+	Pickable.dropped.connect(_on_dropped)
+
 	_wallkable.place_character(self)
 	restore()
 
@@ -35,9 +43,9 @@ func get_tile() -> Tile:
 	return _wallkable.get_tile()
 
 
+
 func _generate_character_body():
-	var model = _shared_data.character_body.duplicate(Utils.DEFAULT_DUPLICATE)
-	return _resize_model(model)
+	return _shared_data.character_body.duplicate(Utils.DEFAULT_DUPLICATE)
 
 
 func restore():
@@ -78,3 +86,16 @@ func visible_tiles():
 	for tile in tiles:
 		if tile != null:
 			tile.highlight = true
+
+func _process(_delta: float) -> void:
+	if Pickable.is_picked_up():
+		self.global_transform = Pickable.global_transform
+
+
+var _original_scale : Vector3
+func _on_picked_up(_holder) -> void:
+	_original_scale = self.scale
+
+func _on_dropped(_pickable) -> void:
+	_wallkable.place_character(self)
+	self.scale = _original_scale

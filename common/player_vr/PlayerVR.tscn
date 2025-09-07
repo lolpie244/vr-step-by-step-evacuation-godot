@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://71bi5i7varcy"]
+[gd_scene load_steps=6 format=3 uid="uid://71bi5i7varcy"]
 
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="1_16ehr"]
 [ext_resource type="Script" uid="uid://mkrsx4hp57u1" path="res://common/player_vr/player_vr.gd" id="1_qubh3"]
 [ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="2_16ehr"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="2_kim4c"]
+[ext_resource type="Script" uid="uid://bdjohy8hf8kfj" path="res://common/player_vr/function_pickup.gd" id="4_ekmk6"]
 
 [node name="PlayerVr" type="XROrigin3D"]
 script = ExtResource("1_qubh3")
@@ -16,10 +17,14 @@ tracker = &"right_hand"
 [node name="RightHand" parent="RightHand" instance=ExtResource("2_16ehr")]
 
 [node name="FunctionPickup" parent="RightHand" instance=ExtResource("2_kim4c")]
+script = ExtResource("4_ekmk6")
+grab_distance = 0.1
 
 [node name="LeftHand" type="XRController3D" parent="."]
 tracker = &"left_hand"
 
 [node name="FunctionPickup" parent="LeftHand" instance=ExtResource("2_kim4c")]
+script = ExtResource("4_ekmk6")
+grab_distance = 0.1
 
 [node name="LeftHand" parent="LeftHand" instance=ExtResource("1_16ehr")]

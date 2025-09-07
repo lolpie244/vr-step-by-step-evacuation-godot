@@ -31,6 +31,8 @@ func _init(factories_path: String):
 
 			file_name = dir.get_next()
 
+	self.position = Vector3(42, 999, 42)
+
 func _ready():
 	for scene in _factories_scenes:
 		var factory: GridItemFactory = load(scene).instantiate()

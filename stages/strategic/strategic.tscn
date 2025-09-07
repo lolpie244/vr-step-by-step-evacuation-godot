@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://flu7j32ifd3y"]
+[gd_scene load_steps=7 format=3 uid="uid://flu7j32ifd3y"]
 
 [ext_resource type="Script" uid="uid://dbgvinydau6i6" path="res://stages/strategic/strategic.gd" id="1_dspli"]
 [ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/PlayerVR.tscn" id="2_dspli"]
+[ext_resource type="PackedScene" uid="uid://ujao577umlix" path="res://map/map.tscn" id="3_5y27t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dspli"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -15,28 +16,17 @@ background_mode = 2
 sky = SubResource("Sky_5y27t")
 tonemap_mode = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xhnp1"]
-size = Vector3(5, 0.1, 5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_xl3x2"]
-size = Vector3(5, 0.1, 5)
-
 [node name="Strategic" type="Node3D"]
 script = ExtResource("1_dspli")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_paqgp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_xhnp1")
-debug_fill = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
-mesh = SubResource("BoxMesh_xl3x2")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.386325, 0.922363, 0, -0.922363, -0.386325, 0, 4.64962, 0)
 
 [node name="PlayerVr" parent="." instance=ExtResource("2_dspli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925485, 1.67225)
+
+[node name="Map" parent="." instance=ExtResource("3_5y27t")]
+transform = Transform3D(0.694264, 0, 0, 0, 1, 0, 0, 0, 0.322255, -0.000313282, 0.496542, 1.22156)

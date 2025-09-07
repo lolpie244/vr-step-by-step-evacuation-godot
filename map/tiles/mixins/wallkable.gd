@@ -14,6 +14,7 @@ func place_character(character: Character) -> bool:
 		character.reparent(_tile)
 
 	character.position = self.position
+	character.rotation = self.rotation
 
 	character._x = _tile.pos.x
 	character._y = _tile.pos.y
