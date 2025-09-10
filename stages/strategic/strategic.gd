@@ -2,7 +2,8 @@ extends Node3D
 
 @onready var map: Map = $Map
 @onready var grid: MapGrid = $Map/Grid
-@onready var lever: Lever = $Lever
+@onready var scale_lever: Lever = $ScaleLever
+@onready var offset_joystick: Joystick = $OffsetJoystick
 
 @export var next_scene: PackedScene
 
@@ -49,4 +50,8 @@ func _input(_event: InputEvent):
 		map.move_character(character, x, y + 1)
 
 func _on_zoom_lever_moved(_angle: Variant) -> void:
-	map.zoom += -0.02 * $Lever.fill_ratio
+	map.zoom += -0.02 * scale_lever.fill_ratio
+
+
+func _on_offset_joystick_moved(angle: Vector2) -> void:
+	map.offset += 0.003 * offset_joystick.fill_ratio

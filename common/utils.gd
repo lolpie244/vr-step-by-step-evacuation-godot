@@ -80,3 +80,9 @@ static func find_parent_with_type(node: Node, type_ref):
 
 
 const DEFAULT_DUPLICATE = DUPLICATE_SCRIPTS | DUPLICATE_GROUPS | DUPLICATE_SIGNALS
+
+
+static func signed_ratio(min_: float, max_: float, value: float) -> float:
+	var mid := (min_ + max_) / 2.0
+	var half_range := (max_ - min_) / 2.0
+	return (value - mid) / half_range

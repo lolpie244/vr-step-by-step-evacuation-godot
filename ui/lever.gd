@@ -11,9 +11,11 @@ signal released
 
 var fill_ratio: float:
 	get():
-		var mid := (properties.hinge_limit_min + properties.hinge_limit_max) / 2.0
-		var half_range := (properties.hinge_limit_max - properties.hinge_limit_min) / 2.0
-		return (properties.hinge_position - mid) / half_range
+		return Utils.signed_ratio(
+			properties.hinge_limit_min,
+			properties.hinge_limit_max,
+			properties.hinge_position
+		)
 
 
 var _is_picked_up: bool = false

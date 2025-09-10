@@ -34,10 +34,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925485, 1.67225)
 transform = Transform3D(0.405485, 0, 0, 0, 1, 0, 0, 0, 0.322255, -0.000313282, 0.496542, 1.22156)
 enable_cutoff = true
 
-[node name="Lever" parent="." instance=ExtResource("4_paqgp")]
+[node name="ScaleLever" parent="." instance=ExtResource("4_paqgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.579461, 0.458555, 1.35959)
 
-[node name="Joystick" parent="." instance=ExtResource("5_lva8o")]
+[node name="OffsetJoystick" parent="." instance=ExtResource("5_lva8o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.579, 0.459, 1.36)
 
-[connection signal="hinge_moved" from="Lever" to="." method="_on_zoom_lever_moved"]
+[connection signal="hinge_moved" from="ScaleLever" to="." method="_on_zoom_lever_moved"]
+[connection signal="moved" from="OffsetJoystick" to="." method="_on_offset_joystick_moved"]
