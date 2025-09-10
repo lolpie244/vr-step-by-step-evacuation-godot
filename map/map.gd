@@ -120,7 +120,7 @@ func set_map(raw_map):
 			tile.init()
 
 			if enable_cutoff:
-				tile.set_cutoff(self.cutoff_material)
+				tile.set_material(self.cutoff_material)
 
 
 func add_character(type: CharacterFactory.Type, x: int, y: int):
@@ -130,7 +130,7 @@ func add_character(type: CharacterFactory.Type, x: int, y: int):
 	character.init()
 
 	if enable_cutoff:
-		character.set_cutoff(self.cutoff_material)
+		character.set_material(self.cutoff_material)
 
 	return character
 

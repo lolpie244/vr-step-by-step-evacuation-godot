@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbv1hvxufc1al"]
+
+[ext_resource type="PackedScene" uid="uid://bgelr7eu6xbjn" path="res://ui/assets/next_button.glb" id="1_ajy3j"]
+[ext_resource type="Script" uid="uid://cpujidwuqtpur" path="res://ui/button.gd" id="1_e3p3n"]
+[ext_resource type="Script" uid="uid://4xum6vjw17qn" path="res://addons/godot-xr-tools/interactables/interactable_area_button.gd" id="2"]
+[ext_resource type="Script" uid="uid://dm0qe8w1syp6" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="3_kg5ep"]
+[ext_resource type="Resource" uid="uid://brci6umrcd157" path="res://addons/godot-xr-tools/rumble/tap_rumble.tres" id="4_sq4bi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e3p3n"]
+size = Vector3(0.130432, 0.0471535, 0.142334)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ajy3j"]
+size = Vector3(0.170562, 0.022855, 0.170021)
+
+[node name="Button" type="Node3D"]
+script = ExtResource("1_e3p3n")
+
+[node name="next_button" parent="." instance=ExtResource("1_ajy3j")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="base" parent="next_button" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0877734, 0)
+
+[node name="InteractableAreaButton" type="Area3D" parent="next_button"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+collision_layer = 0
+collision_mask = 131072
+script = ExtResource("2")
+button = NodePath("../button")
+displacement = Vector3(0, -0.279, 0)
+duration = 0.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="next_button/InteractableAreaButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000335693, 0.0151105, 0.00134277)
+shape = SubResource("BoxShape3D_e3p3n")
+
+[node name="Rumbler" type="Node" parent="next_button/InteractableAreaButton"]
+script = ExtResource("3_kg5ep")
+event = ExtResource("4_sq4bi")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0427296, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000319824, 0.0219641, 0.000438482)
+shape = SubResource("BoxShape3D_ajy3j")
+
+[connection signal="body_entered" from="next_button/InteractableAreaButton" to="next_button/InteractableAreaButton/Rumbler" method="rumble_hand"]
+[connection signal="body_exited" from="next_button/InteractableAreaButton" to="next_button/InteractableAreaButton/Rumbler" method="cancel_hand"]
+[connection signal="button_pressed" from="next_button/InteractableAreaButton" to="." method="_on_button_pressed"]
+[connection signal="button_released" from="next_button/InteractableAreaButton" to="." method="_on_released"]
+
+[editable path="next_button"]

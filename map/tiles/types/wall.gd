@@ -34,8 +34,17 @@ func _generate_model():
 
 	return result
 
-func set_cutoff(material: ShaderMaterial):
+func set_material(material: ShaderMaterial):
 	var material_ = material.duplicate()
 	var albedo = _shared_data.model.get_active_material(0).albedo_texture
 	material_.set_shader_parameter("_albedo", albedo)
 	_model.material_override = material_
+
+func restore_material():
+	_model.material_override = _shared_data.model.get_active_material(0)
+
+func _duplicate():
+	var result = super._duplicate()
+
+	result._model = Utils.find_child_with_type(result, MultiMeshInstance3D, false)
+	return result

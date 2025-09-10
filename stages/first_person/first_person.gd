@@ -13,23 +13,26 @@ class Context:
 var context: Context
 
 
+func _get_tile(strategic_tile: Tile):
+	var tile = strategic_tile._duplicate()
+	tile.position.y = 0
+	tile.restore_material()
+	tile.remove_mixin(Walkable)
+	tile.tile_scale(2)
+
+	return tile
+
 func _ready() -> void:
 	assert(context != null)
 
-	for tile_ in ShadowCasting.visible_tiles(context.character.get_tile()):
-		var tile = tile_.duplicate()
-		tile.tile_scale(2)
+	for tile in ShadowCasting.visible_tiles(context.character.get_tile()):
+		self.add_child(_get_tile(tile))
 
-		self.add_child(tile)
-
-	context.character.hide()
-	var character_tile = context.character.get_tile().duplicate()
-	character_tile.tile_scale(1)
+	var character_tile = _get_tile(context.character.get_tile())
+	character_tile.remove_mixin(Character)
 	self.add_child(character_tile)
-	context.character.show()
-
 
 	# $Camera.position = character_tile.get_mixin(Walkable).position + 2
-	$Camera.rotation_degrees = context.character.rotation_degrees
-	$Camera.position = character_tile.position
-	$Camera.position.y += 0.5
+	$PlayerVr.rotation_degrees = context.character.rotation_degrees
+	$PlayerVr.position.x = character_tile.position.x
+	$PlayerVr.position.z = character_tile.position.z

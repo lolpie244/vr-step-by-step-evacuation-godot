@@ -55,3 +55,8 @@ func _on_zoom_lever_moved(_angle: Variant) -> void:
 
 func _on_offset_joystick_moved(angle: Vector2) -> void:
 	map.offset += 0.003 * offset_joystick.fill_ratio
+
+
+func _on_button_released(button: Variant) -> void:
+	var context := FirstPerson.Context.new(character)
+	SceneManager.load_scene(next_scene, context)

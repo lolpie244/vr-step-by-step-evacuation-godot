@@ -30,6 +30,12 @@ func init():
 
 	super.init()
 
+func _duplicate():
+	var result = super._duplicate()
+	result._shared_data = _shared_data
+
+	return result
+
 func tile_scale(scale_: int):
 	self.position = self.position / self.scale * scale_
 	self.scale = Vector3.ONE * scale_
