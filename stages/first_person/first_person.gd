@@ -23,6 +23,8 @@ func _get_tile(strategic_tile: Tile):
 	return tile
 
 func _ready() -> void:
+	$PlayerVr.open_eyes()
+
 	assert(context != null)
 
 	for tile in ShadowCasting.visible_tiles(context.character.get_tile()):

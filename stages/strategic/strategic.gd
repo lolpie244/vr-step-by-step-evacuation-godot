@@ -53,10 +53,12 @@ func _on_zoom_lever_moved(_angle: Variant) -> void:
 	map.zoom += -0.02 * scale_lever.fill_ratio
 
 
-func _on_offset_joystick_moved(angle: Vector2) -> void:
+func _on_offset_joystick_moved(_angle: Vector2) -> void:
 	map.offset += 0.003 * offset_joystick.fill_ratio
 
 
-func _on_button_released(button: Variant) -> void:
+func _on_button_released(_button: Variant) -> void:
+	await $PlayerVr.close_eyes()
+	print("Change scene")
 	var context := FirstPerson.Context.new(character)
 	SceneManager.load_scene(next_scene, context)
