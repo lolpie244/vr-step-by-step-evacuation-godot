@@ -79,9 +79,6 @@ func is_reachable(walkable: Walkable) -> Walkable.ReachableResult:
 			return next_tile
 	return null
 
-func _animation_finished(_animation):
-	Pickable.global_position = self.global_position
-
 
 func highlight_reachable(highlight: bool):
 	_reachable_highlighted = highlight

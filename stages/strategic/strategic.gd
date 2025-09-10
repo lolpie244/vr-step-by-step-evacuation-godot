@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var map: Map = $Map
 @onready var grid: MapGrid = $Map/Grid
+@onready var lever: Lever = $Lever
 
 @export var next_scene: PackedScene
 
@@ -46,3 +47,6 @@ func _input(_event: InputEvent):
 
 	if Input.is_action_just_pressed("down"):
 		map.move_character(character, x, y + 1)
+
+func _on_zoom_lever_moved(_angle: Variant) -> void:
+	map.zoom += -0.02 * $Lever.fill_ratio

@@ -19,8 +19,6 @@ func place_character(character: Character) -> bool:
 	character.position = self.position
 	character.rotation = self.rotation
 
-	_tile._animation.animation_finished.connect(character._animation_finished)
-
 	character._x = _tile.pos.x
 	character._y = _tile.pos.y
 

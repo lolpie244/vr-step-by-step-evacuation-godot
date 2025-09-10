@@ -22,7 +22,7 @@ void fragment() {
 	    plane_size.y - vertexDistance.y
 	);
 
-	float border_dist = smoothstep(0.0, 0.5, dist_to_edge);
+	float border_dist = smoothstep(0.0, 0.1, dist_to_edge);
 	vec4 alb_color = texture(_albedo, UV);
 
 	ALBEDO = (mix(border_color, alb_color, border_dist)).rgb;
