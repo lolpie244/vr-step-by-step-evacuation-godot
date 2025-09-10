@@ -66,6 +66,9 @@ func remove_mixin(type):
 		self.remove_child(mixin)
 
 
-
 func set_cutoff(_material: ShaderMaterial):
-	assert(false, "Not implemented")
+	for mesh in Utils.find_children_with_type(self, MeshInstance3D, true):
+		for i in mesh.get_surface_override_material_count():
+			var albedo = mesh.get_active_material(i).albedo_texture
+			_material.set_shader_parameter("_albedo", albedo)
+			mesh.set_surface_override_material(i, _material)

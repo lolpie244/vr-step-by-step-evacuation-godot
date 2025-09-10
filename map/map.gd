@@ -84,7 +84,7 @@ func _ready() -> void:
 	var plane_pos = global_transform.origin
 	cutoff_material = ShaderMaterial.new()
 	cutoff_material.shader = cutoff_shader
-	cutoff_material.set_shader_parameter("plane_size", plane_mesh.size * 0.6)
+	cutoff_material.set_shader_parameter("plane_size", plane_mesh.size * 0.5)
 	cutoff_material.set_shader_parameter("plane_pos", Vector2(plane_pos.x, plane_pos.z))
 	cutoff_material.set_shader_parameter("border_color", Color.RED)
 
@@ -128,6 +128,10 @@ func add_character(type: CharacterFactory.Type, x: int, y: int):
 	var character: Character = factory.create(grid, x, y)
 
 	character.init()
+
+	if enable_cutoff:
+		character.set_cutoff(self.cutoff_material)
+
 	return character
 
 

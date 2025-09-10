@@ -34,6 +34,6 @@ transform = Transform3D(0.405485, 0, 0, 0, 1, 0, 0, 0, 0.322255, -0.000313282, 0
 enable_cutoff = true
 
 [node name="Lever" parent="." instance=ExtResource("4_paqgp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5273, 0.458555, 1.35959)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.579461, 0.458555, 1.35959)
 
 [connection signal="hinge_moved" from="Lever" to="." method="_on_zoom_lever_moved"]

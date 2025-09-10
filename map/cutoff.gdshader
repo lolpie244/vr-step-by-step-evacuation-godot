@@ -17,15 +17,18 @@ void fragment() {
 	vec2 vertexDistance = abs(plane_pos - wvtx);
 	if (vertexDistance.x > plane_size.x || vertexDistance.y > plane_size.y) discard;
 
+    vec2 plane_size_ext = plane_size * 1.2;
+
 	float dist_to_edge = min(
-	    plane_size.x - vertexDistance.x,
-	    plane_size.y - vertexDistance.y
+	    plane_size_ext.x - vertexDistance.x,
+	    plane_size_ext.y - vertexDistance.y
 	);
 
-	float border_dist = smoothstep(0.0, 0.1, dist_to_edge);
+	float border_dist = smoothstep(0.0, 0.12, dist_to_edge);
 	vec4 alb_color = texture(_albedo, UV);
 
-	ALBEDO = (mix(border_color, alb_color, border_dist)).rgb;
+	ALBEDO = alb_color.rgb;
+	// ALBEDO = (mix(border_color, alb_color, border_dist)).rgb;
 	EMISSION = (mix(border_color * 7.0, vec4(0.0), border_dist)).rgb;
 }
 

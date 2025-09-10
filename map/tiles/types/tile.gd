@@ -39,12 +39,6 @@ func _generate_model():
 	var model = _shared_data.model.duplicate()
 	return model
 
-
-func set_cutoff(material: ShaderMaterial):
-	for i in _model.get_surface_override_material_count():
-		_model.set_surface_override_material(i, material)
-
-
 var highlight: bool:
 	set(val):
 		if highlight == val:

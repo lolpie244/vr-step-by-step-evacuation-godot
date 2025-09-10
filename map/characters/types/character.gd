@@ -83,7 +83,7 @@ func is_reachable(walkable: Walkable) -> Walkable.ReachableResult:
 func highlight_reachable(highlight: bool):
 	_reachable_highlighted = highlight
 	for info in _reachable:
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.05).timeout
 		info.tile.highlight = highlight
 
 

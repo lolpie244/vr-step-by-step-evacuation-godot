@@ -35,4 +35,7 @@ func _generate_model():
 	return result
 
 func set_cutoff(material: ShaderMaterial):
-	_model.material_override = material
+	var material_ = material.duplicate()
+	var albedo = _shared_data.model.get_active_material(0).albedo_texture
+	material_.set_shader_parameter("_albedo", albedo)
+	_model.material_override = material_
