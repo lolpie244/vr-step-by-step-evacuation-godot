@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://flu7j32ifd3y"]
+[gd_scene load_steps=9 format=3 uid="uid://flu7j32ifd3y"]
 
 [ext_resource type="Script" uid="uid://dbgvinydau6i6" path="res://stages/strategic/strategic.gd" id="1_dspli"]
 [ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/PlayerVR.tscn" id="2_dspli"]
 [ext_resource type="PackedScene" uid="uid://ujao577umlix" path="res://map/map.tscn" id="3_5y27t"]
 [ext_resource type="PackedScene" uid="uid://cy8bik48abvil" path="res://ui/lever.tscn" id="4_paqgp"]
+[ext_resource type="PackedScene" uid="uid://dkw8t7skkorcm" path="res://ui/Joystick.tscn" id="5_lva8o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dspli"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -35,5 +36,8 @@ enable_cutoff = true
 
 [node name="Lever" parent="." instance=ExtResource("4_paqgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.579461, 0.458555, 1.35959)
+
+[node name="Joystick" parent="." instance=ExtResource("5_lva8o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.579, 0.459, 1.36)
 
 [connection signal="hinge_moved" from="Lever" to="." method="_on_zoom_lever_moved"]
