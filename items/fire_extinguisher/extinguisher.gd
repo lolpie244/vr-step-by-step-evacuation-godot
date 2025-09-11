@@ -1,4 +1,5 @@
-extends RigidBody3D
+@tool
+extends XRToolsPickable
 
 signal strength_changed(strength: float)
 

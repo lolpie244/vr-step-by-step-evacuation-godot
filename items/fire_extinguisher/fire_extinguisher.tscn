@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bdbe4rq08675h"]
+[gd_scene load_steps=26 format=3 uid="uid://bdbe4rq08675h"]
 
 [ext_resource type="Script" uid="uid://jw8x4vh4vdfj" path="res://items/fire_extinguisher/extinguisher.gd" id="1_7qhmc"]
 [ext_resource type="PackedScene" uid="uid://mqnsmnitytdi" path="res://items/fire_extinguisher/assets/models/model.glb" id="2_dmw8m"]
@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dk6f6uvskip7d" path="res://common/rope/rope.tscn" id="4_jpfhn"]
 [ext_resource type="Script" uid="uid://7ol3jmvnfywc" path="res://items/fire_extinguisher/hose_end.gd" id="5_guma5"]
 [ext_resource type="PackedScene" uid="uid://bifqvtth5bjux" path="res://items/fire_extinguisher/assets/models/hose_end.glb" id="5_ybyhl"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="7_gi6ky"]
+[ext_resource type="Animation" uid="uid://dgfeikrugfewi" path="res://addons/godot-xr-tools/hands/animations/left/Cup.res" id="8_htlgl"]
+[ext_resource type="Script" uid="uid://dm0qe8w1syp6" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="9_7yv0i"]
+[ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="9_ej8bl"]
+[ext_resource type="Script" uid="uid://xecwbcqgutmj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="10_e763w"]
 
 [sub_resource type="Animation" id="Animation_6s2gy"]
 length = 0.001
@@ -120,22 +125,21 @@ _data = {
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7qhmc"]
-height = 2.68524
-radius = 0.519531
+height = 0.73106
+radius = 0.112305
 
 [sub_resource type="Curve3D" id="Curve3D_jpfhn"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0357666, 1.81134, 0.228308, 0, 0.0110817, -0.0415566, 0, -0.0110817, 0.0415566, 0.0357666, 1.80953, 0.481718, 0, 0, 0, 0, 0, 0, 0.0357666, 1.71672, 0.64656, 0, 0, 0, 0, 0, 0, 0.0357666, 1.72621, 0.992203, 0, 0, 0, 0, 0, 0, 0.0357666, 1.72621, 1.3622, 0, 0, 0, 0, 0, 0, 0.0357666, 1.73048, 1.82052),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00799024, 0.362893, 0.0606679, 0, 0.0110817, -0.0415566, 0, -0.0110817, 0.0415566, 0.0065734, 0.360137, 0.096754, 0, 0, 0, 0, 0, 0, 0.0115787, 0.340492, 0.208824, 0, 0, 0, 0, 0, 0, 0.0123479, 0.28846, 0.318829, 0, 0, 0, 0, 0, 0, 0.0143751, 0.271816, 0.457658),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
-point_count = 6
+point_count = 5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ybyhl"]
-size = Vector3(0.111206, 0.10849, 0.363281)
+size = Vector3(0.0451355, 0.042614, 0.14563)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_guma5"]
-load_path = "res://.godot/imported/smoke_04.png-cb24f84e65ded9bc6bfbcd384d971749.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_guma5"]
 transparency = 1
@@ -153,8 +157,36 @@ initial_velocity_max = 10.0
 [sub_resource type="QuadMesh" id="QuadMesh_kckw7"]
 size = Vector2(0.5, 0.3)
 
+[sub_resource type="Resource" id="Resource_e763w"]
+script = ExtResource("9_ej8bl")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="Resource" id="Resource_0dcjf"]
+script = ExtResource("10_e763w")
+magnitude = 0.5
+active_during_pause = true
+indefinite = false
+duration_ms = 300
+metadata/_custom_type_script = "uid://xecwbcqgutmj"
+
+[sub_resource type="Resource" id="Resource_7yv0i"]
+script = ExtResource("9_ej8bl")
+closed_pose = ExtResource("8_htlgl")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
 [node name="Extinguisher" type="RigidBody3D"]
+collision_layer = 65536
+collision_mask = 65537
 script = ExtResource("1_7qhmc")
+enabled = null
+press_to_hold = null
+picked_up_layer = null
+release_mode = null
+ranged_grab_method = null
+second_hand_grab = null
+ranged_grab_speed = null
+picked_by_exclude = null
+picked_by_require = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -162,10 +194,11 @@ libraries = {
 }
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0302526, 0.0161166)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0905247, 0)
 shape = SubResource("CylinderShape3D_7qhmc")
 
 [node name="Model" parent="." instance=ExtResource("2_dmw8m")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="Handle" parent="Model/Extinguisher" index="0"]
 transform = Transform3D(0.418084, -0.000227098, -1.81141, -0.0308578, -1.85876, -0.00688913, -1.81115, 0.0316167, -0.418027, -0.189005, -3.43203, -0.0400897)
@@ -174,26 +207,39 @@ script = ExtResource("3_q20kc")
 [node name="Pin" parent="Model/Extinguisher" index="1"]
 transform = Transform3D(0.418083, -0.000228317, -1.81141, -0.0308632, -1.85876, -0.00688912, -1.81115, 0.0316219, -0.418027, 0.10531, -3.64938, 0.256241)
 
+[node name="ExtinguisherHolder" parent="Model" index="1"]
+visible = false
+
 [node name="Rope" parent="." node_paths=PackedStringArray("attached_to_end") instance=ExtResource("4_jpfhn")]
 transform = Transform3D(1.00995, 0, 0, 0, 1.00995, 0, 0, 0, 1.00995, 0, 0, 0)
 curve = SubResource("Curve3D_jpfhn")
-segments_count = 10
-mesh_sides = 12
-thickness = 0.05
+segments_count = 7
+mesh_sides = 5
+thickness = 0.01
 fixed_start = true
 attached_to_end = NodePath("../HoseEnd")
 
 [node name="HoseEnd" type="RigidBody3D" parent="."]
-transform = Transform3D(1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0.0209811, 1.73051, 2.04924)
-collision_layer = 0
+transform = Transform3D(1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0, 0.264, 0.553)
+collision_layer = 65536
+collision_mask = 65537
 freeze = true
 script = ExtResource("5_guma5")
+enabled = null
+press_to_hold = null
+picked_up_layer = null
+release_mode = null
+ranged_grab_method = null
+second_hand_grab = null
+ranged_grab_speed = null
+picked_by_exclude = null
+picked_by_require = null
 
 [node name="Model" parent="HoseEnd" instance=ExtResource("5_ybyhl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0180573, 0.00953925, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0180573, 0.00953928, -0.0113962)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HoseEnd"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0142212, 0.0183868, -0.0664062)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0167694, 0.0117282, -0.042577)
 shape = SubResource("BoxShape3D_ybyhl")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="HoseEnd"]
@@ -206,7 +252,22 @@ draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_guma5")
 draw_pass_1 = SubResource("QuadMesh_kckw7")
 
+[node name="GrabPointHandLeft" parent="HoseEnd" instance=ExtResource("7_gi6ky")]
+transform = Transform3D(-1, 8.74228e-08, 1.16723e-15, 7.53841e-08, 0.862294, 0.50641, 4.42719e-08, 0.50641, -0.862294, 0.00824511, -0.0153745, 0.0433664)
+hand_pose = SubResource("Resource_e763w")
+
+[node name="Rumbler" type="Node" parent="HoseEnd"]
+script = ExtResource("9_7yv0i")
+event = SubResource("Resource_0dcjf")
+metadata/_custom_type_script = "uid://dm0qe8w1syp6"
+
+[node name="GrabPointHandLeft" parent="." instance=ExtResource("7_gi6ky")]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 1.75638e-08, 0.200907, 0.97961, 8.56403e-08, 0.97961, -0.200907, 0, 0.326982, -0.0231179)
+hand_pose = SubResource("Resource_7yv0i")
+
 [connection signal="strength_changed" from="." to="Model/Extinguisher/Handle" method="_on_extinguisher_strength_changed"]
 [connection signal="strength_changed" from="." to="HoseEnd" method="_on_extinguisher_strength_changed"]
+[connection signal="max_extend" from="Rope" to="HoseEnd" method="_on_rope_max_extend"]
+[connection signal="released" from="HoseEnd" to="HoseEnd" method="_on_released"]
 
 [editable path="Model"]

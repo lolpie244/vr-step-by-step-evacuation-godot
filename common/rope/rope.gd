@@ -13,6 +13,8 @@ extends Path3D
 
 @onready var mesh = $CSGPolygon3D
 
+signal max_extend;
+
 var points : Array[Vector3]
 var segments : Array[RigidBody3D]
 var joints : Array[PinJoint3D]
@@ -101,6 +103,7 @@ func _ready() -> void:
 		joints[-1].node_b = attached_to_end.get_path()
 
 
+var _last_attached_to_end_pos := Vector3.ZERO
 func _physics_process(_delta: float) -> void:
 	# update curve positions
 	for p in curve.point_count:
@@ -110,3 +113,14 @@ func _physics_process(_delta: float) -> void:
 		else:
 			# for the last segment we do the opposite - find begin of element == joint position
 			curve.set_point_position(p, to_local(segments[p - 1].position - segments[p - 1].transform.basis.y * segments[p - 1].get_child(0).shape.height / 2))
+
+	if attached_to_end:
+		var start := joints[0].global_position
+		var max_length := curve.get_baked_length()
+
+		var offset := attached_to_end.global_position - start
+		if offset.length() > max_length:
+			attached_to_end.global_position = start + offset.normalized() * max_length
+			emit_signal("max_extend")
+
+		_last_attached_to_end_pos = attached_to_end.global_position
