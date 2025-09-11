@@ -9,15 +9,13 @@ func _ready() -> void:
 
 func load_scene(scene: PackedScene, context = null):
 	assert(scene != null)
-	call_deferred("_deferred_load_scene", scene, context)
-
-func _deferred_load_scene(scene: PackedScene, context):	
 	var scene_instance = scene.instantiate()
+
 	if context != null:
 		scene_instance.context = context
 
-	_add_scene(scene_instance)
 	_scene_stack.push_back(scene_instance)
+	call_deferred("_add_scene", scene_instance)
 
 func _add_scene(scene):
 	get_tree().root.remove_child(current_scene)

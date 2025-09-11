@@ -82,6 +82,6 @@ func restore_material():
 
 
 func _duplicate():
-	var result = duplicate()
+	var result = duplicate(Utils.DEFAULT_DUPLICATE)
 
 	return result

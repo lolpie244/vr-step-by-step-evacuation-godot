@@ -25,8 +25,6 @@ func _get_tile(strategic_tile: Tile):
 func _ready() -> void:
 	$PlayerVr.open_eyes()
 
-	assert(context != null)
-
 	for tile in ShadowCasting.visible_tiles(context.character.get_tile()):
 		self.add_child(_get_tile(tile))
 
@@ -34,7 +32,6 @@ func _ready() -> void:
 	character_tile.remove_mixin(Character)
 	self.add_child(character_tile)
 
-	# $Camera.position = character_tile.get_mixin(Walkable).position + 2
 	$PlayerVr.rotation_degrees = context.character.rotation_degrees
 	$PlayerVr.position.x = character_tile.position.x
 	$PlayerVr.position.z = character_tile.position.z
