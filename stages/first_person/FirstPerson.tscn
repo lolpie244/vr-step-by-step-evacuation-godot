@@ -31,3 +31,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55165, 0)
 
 [node name="Extinguisher" parent="." instance=ExtResource("3_xp1sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85679, 1.79521, -3.503)
+second_hand_grab = 0

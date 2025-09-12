@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bdbe4rq08675h"]
+[gd_scene load_steps=29 format=3 uid="uid://bdbe4rq08675h"]
 
 [ext_resource type="Script" uid="uid://jw8x4vh4vdfj" path="res://items/fire_extinguisher/extinguisher.gd" id="1_7qhmc"]
 [ext_resource type="PackedScene" uid="uid://mqnsmnitytdi" path="res://items/fire_extinguisher/assets/models/model.glb" id="2_dmw8m"]
@@ -8,9 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://bifqvtth5bjux" path="res://items/fire_extinguisher/assets/models/hose_end.glb" id="5_ybyhl"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="7_gi6ky"]
 [ext_resource type="Animation" uid="uid://dgfeikrugfewi" path="res://addons/godot-xr-tools/hands/animations/left/Cup.res" id="8_htlgl"]
-[ext_resource type="Script" uid="uid://dm0qe8w1syp6" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="9_7yv0i"]
 [ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="9_ej8bl"]
-[ext_resource type="Script" uid="uid://xecwbcqgutmj" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="10_e763w"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="11_7yv0i"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="11_ej8bl"]
+[ext_resource type="Animation" uid="uid://do01jton6rk42" path="res://addons/godot-xr-tools/hands/animations/right/Cup.res" id="12_e763w"]
 
 [sub_resource type="Animation" id="Animation_6s2gy"]
 length = 0.001
@@ -125,13 +126,13 @@ _data = {
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7qhmc"]
-height = 0.73106
+height = 0.522609
 radius = 0.112305
 
 [sub_resource type="Curve3D" id="Curve3D_jpfhn"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00799024, 0.362893, 0.0606679, 0, 0.0110817, -0.0415566, 0, -0.0110817, 0.0415566, 0.0065734, 0.360137, 0.096754, 0, 0, 0, 0, 0, 0, 0.0115787, 0.340492, 0.208824, 0, 0, 0, 0, 0, 0, 0.0123479, 0.28846, 0.318829, 0, 0, 0, 0, 0, 0, 0.0143751, 0.271816, 0.457658),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00799024, 0.362893, 0.0606679, 0, 0.0110817, -0.0415566, 0, -0.0110817, 0.0415566, 0.0065734, 0.360137, 0.096754, 0, 0, 0, 0, 0, 0, 0.0115787, 0.270642, 0.161146, 0, 0, 0, 0, 0, 0, 0.0123479, 0.0872205, 0.185829, 0, 0, 0, 0, 0, 0, 0.0143751, -0.0483538, 0.192607),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
@@ -161,32 +162,27 @@ size = Vector2(0.5, 0.3)
 script = ExtResource("9_ej8bl")
 metadata/_custom_type_script = "uid://c4itu8s6yackn"
 
-[sub_resource type="Resource" id="Resource_0dcjf"]
-script = ExtResource("10_e763w")
-magnitude = 0.5
-active_during_pause = true
-indefinite = false
-duration_ms = 300
-metadata/_custom_type_script = "uid://xecwbcqgutmj"
+[sub_resource type="BoxShape3D" id="BoxShape3D_7yv0i"]
+size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="Resource" id="Resource_7yv0i"]
 script = ExtResource("9_ej8bl")
 closed_pose = ExtResource("8_htlgl")
 metadata/_custom_type_script = "uid://c4itu8s6yackn"
 
+[sub_resource type="BoxMesh" id="BoxMesh_7yv0i"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Resource" id="Resource_0dcjf"]
+script = ExtResource("9_ej8bl")
+closed_pose = ExtResource("12_e763w")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
 [node name="Extinguisher" type="RigidBody3D"]
 collision_layer = 65536
 collision_mask = 65537
 script = ExtResource("1_7qhmc")
-enabled = null
-press_to_hold = null
-picked_up_layer = null
-release_mode = null
-ranged_grab_method = null
-second_hand_grab = null
-ranged_grab_speed = null
-picked_by_exclude = null
-picked_by_require = null
+second_hand_grab = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -194,7 +190,7 @@ libraries = {
 }
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0905247, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0137009, 0)
 shape = SubResource("CylinderShape3D_7qhmc")
 
 [node name="Model" parent="." instance=ExtResource("2_dmw8m")]
@@ -217,32 +213,26 @@ segments_count = 7
 mesh_sides = 5
 thickness = 0.01
 fixed_start = true
-attached_to_end = NodePath("../HoseEnd")
+attached_to_end = NodePath("../HoseEndOrigin/HoseEnd")
 
-[node name="HoseEnd" type="RigidBody3D" parent="."]
-transform = Transform3D(1.00013, 0, 0, 0, 1.00013, 0, 0, 0, 1.00013, 0, 0.264, 0.553)
+[node name="HoseEndOrigin" type="Node3D" parent="."]
+transform = Transform3D(1.00013, 0, 0, 0, 0.00375291, -1.00012, 0, 1.00012, 0.00375291, 0, -0.142506, 0.186612)
+
+[node name="HoseEnd" type="RigidBody3D" parent="HoseEndOrigin"]
 collision_layer = 65536
 collision_mask = 65537
 freeze = true
 script = ExtResource("5_guma5")
-enabled = null
-press_to_hold = null
-picked_up_layer = null
-release_mode = null
-ranged_grab_method = null
-second_hand_grab = null
-ranged_grab_speed = null
-picked_by_exclude = null
-picked_by_require = null
+enabled = false
 
-[node name="Model" parent="HoseEnd" instance=ExtResource("5_ybyhl")]
+[node name="Model" parent="HoseEndOrigin/HoseEnd" instance=ExtResource("5_ybyhl")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0180573, 0.00953928, -0.0113962)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HoseEnd"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HoseEndOrigin/HoseEnd"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0167694, 0.0117282, -0.042577)
 shape = SubResource("BoxShape3D_ybyhl")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="HoseEnd"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="HoseEndOrigin/HoseEnd"]
 transform = Transform3D(1.55772, 0, 0, 0, 1.19145, 0, 0, 0, 1.00299, 0, 0, 0.0970305)
 material_override = SubResource("StandardMaterial3D_guma5")
 emitting = false
@@ -252,22 +242,43 @@ draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_guma5")
 draw_pass_1 = SubResource("QuadMesh_kckw7")
 
-[node name="GrabPointHandLeft" parent="HoseEnd" instance=ExtResource("7_gi6ky")]
+[node name="GrabPointHandLeft" parent="HoseEndOrigin/HoseEnd" instance=ExtResource("7_gi6ky")]
 transform = Transform3D(-1, 8.74228e-08, 1.16723e-15, 7.53841e-08, 0.862294, 0.50641, 4.42719e-08, 0.50641, -0.862294, 0.00824511, -0.0153745, 0.0433664)
+snap_hand = false
 hand_pose = SubResource("Resource_e763w")
 
-[node name="Rumbler" type="Node" parent="HoseEnd"]
-script = ExtResource("9_7yv0i")
-event = SubResource("Resource_0dcjf")
-metadata/_custom_type_script = "uid://dm0qe8w1syp6"
+[node name="LeverOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.407055, -0.092151)
 
-[node name="GrabPointHandLeft" parent="." instance=ExtResource("7_gi6ky")]
-transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 1.75638e-08, 0.200907, 0.97961, 8.56403e-08, 0.97961, -0.200907, 0, 0.326982, -0.0231179)
+[node name="LeverPickup" parent="LeverOrigin" instance=ExtResource("11_ej8bl")]
+freeze = true
+freeze_mode = 0
+
+[node name="CollisionShape3D" parent="LeverOrigin/LeverPickup" index="0"]
+shape = SubResource("BoxShape3D_7yv0i")
+
+[node name="GrabPointHandLeft" parent="LeverOrigin/LeverPickup" instance=ExtResource("7_gi6ky")]
+transform = Transform3D(-1, 8.74228e-08, 2.33484e-15, 5.43742e-08, 0.621968, 0.783043, 6.84558e-08, 0.783043, -0.621968, 0, -0.0325837, 0.0837797)
+visible = true
+snap_hand = false
 hand_pose = SubResource("Resource_7yv0i")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeverOrigin/LeverPickup"]
+visible = false
+mesh = SubResource("BoxMesh_7yv0i")
+
+[node name="GrabPointHandRight" parent="LeverOrigin/LeverPickup" instance=ExtResource("11_7yv0i")]
+transform = Transform3D(-1, 6.84178e-08, -5.4422e-08, 0, 0.622515, 0.782608, 8.74228e-08, 0.782608, -0.622515, 0, -0.033, 0.084)
+visible = true
+snap_hand = false
+hand_pose = SubResource("Resource_0dcjf")
+
 [connection signal="strength_changed" from="." to="Model/Extinguisher/Handle" method="_on_extinguisher_strength_changed"]
-[connection signal="strength_changed" from="." to="HoseEnd" method="_on_extinguisher_strength_changed"]
-[connection signal="max_extend" from="Rope" to="HoseEnd" method="_on_rope_max_extend"]
-[connection signal="released" from="HoseEnd" to="HoseEnd" method="_on_released"]
+[connection signal="strength_changed" from="." to="HoseEndOrigin/HoseEnd" method="_on_extinguisher_strength_changed"]
+[connection signal="max_extend" from="Rope" to="HoseEndOrigin/HoseEnd" method="_on_rope_max_extend"]
+[connection signal="released" from="HoseEndOrigin/HoseEnd" to="HoseEndOrigin/HoseEnd" method="_on_released"]
+[connection signal="dropped" from="LeverOrigin/LeverPickup" to="." method="_on_lever_pickup_dropped"]
+[connection signal="picked_up" from="LeverOrigin/LeverPickup" to="." method="_on_lever_pickup_picked_up"]
 
 [editable path="Model"]
+[editable path="LeverOrigin/LeverPickup"]

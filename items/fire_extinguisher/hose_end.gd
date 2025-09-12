@@ -1,5 +1,6 @@
 @tool
 extends XRToolsPickable
+class_name HoseEnd
 
 @onready var particles: GPUParticles3D = $GPUParticles3D
 
