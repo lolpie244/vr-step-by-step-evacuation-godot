@@ -1,5 +1,7 @@
 extends Path3D
 
+signal max_extend(end_position: Vector3)
+
 @export_range(3, 200, 1) var segments_count: int = 3
 @export_range(3, 100, 1) var mesh_sides: int = 4
 @export var thickness: float = 0.1
@@ -13,11 +15,11 @@ extends Path3D
 
 @onready var mesh = $CSGPolygon3D
 
-signal max_extend;
-
 var points : Array[Vector3]
 var segments : Array[RigidBody3D]
 var joints : Array[PinJoint3D]
+
+var max_length: float
 
 func _ready() -> void:
 	var segment_length = curve.get_baked_length() / segments_count
@@ -102,8 +104,10 @@ func _ready() -> void:
 			joints[-1].node_a = segments[-1].get_path()
 		joints[-1].node_b = attached_to_end.get_path()
 
+	for i in range(0, segments.size()):
+		max_length += segments[i].get_child(0).shape.height
 
-var _last_attached_to_end_pos := Vector3.ZERO
+
 func _physics_process(_delta: float) -> void:
 	# update curve positions
 	for p in curve.point_count:
@@ -115,12 +119,12 @@ func _physics_process(_delta: float) -> void:
 			curve.set_point_position(p, to_local(segments[p - 1].position - segments[p - 1].transform.basis.y * segments[p - 1].get_child(0).shape.height / 2))
 
 	if attached_to_end:
-		var start := joints[0].global_position
-		var max_length := curve.get_baked_length()
+		var start := segments[0].global_position
+		var end := attached_to_end.global_position
+		var offset := end - start
 
-		var offset := attached_to_end.global_position - start
+		# DebugDraw3D.draw_line(segments[0].global_position, attached_to_end.global_position, Color.RED)
+		# DebugDraw3D.draw_line(start, start + offset.normalized() * max_length, Color.BLUE)
+
 		if offset.length() > max_length:
-			attached_to_end.global_position = start + offset.normalized() * max_length
-			emit_signal("max_extend")
-
-		_last_attached_to_end_pos = attached_to_end.global_position
+			emit_signal("max_extend", start + offset.normalized() * max_length)

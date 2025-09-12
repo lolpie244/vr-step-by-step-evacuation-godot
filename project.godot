@@ -22,6 +22,10 @@ XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
 FireSpreading="*res://rules/fire_spreading/fire_spreading.gd"
 Constants="*res://common/constants.gd"
 
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"

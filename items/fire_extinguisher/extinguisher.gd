@@ -1,5 +1,5 @@
 @tool
-extends XRToolsPickable
+extends Node3D
 
 signal strength_changed(strength: float)
 
@@ -26,22 +26,3 @@ func release_pin():
 
 	is_pin_released = true
 	$AnimationPlayer.play("release_pin")
-	
-var _offset
-func _process(delta):
-	if lever_pickup.is_picked_up():
-		self.global_transform = lever_pickup.global_transform * _offset
-
-func _on_lever_pickup_picked_up(pickable: Variant) -> void:
-	hose_end.enabled = true
-	_offset = $LeverOrigin.transform.inverse()
-	self.freeze = true
-	lever_pickup.reparent(get_tree().root, true)
-
-
-func _on_lever_pickup_dropped(pickable: Variant) -> void:
-	lever_pickup.reparent(self, false)
-	print("STOP")
-	self.freeze = false
-	lever_pickup.transform = $LeverOrigin.transform
-	hose_end.enabled = false

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b61pr07hqsne1" path="res://stages/first_person/first_person.gd" id="1_ybnn0"]
 [ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/PlayerVR.tscn" id="2_5f22i"]
-[ext_resource type="PackedScene" uid="uid://bdbe4rq08675h" path="res://items/fire_extinguisher/fire_extinguisher.tscn" id="3_xp1sn"]
+[ext_resource type="PackedScene" uid="uid://d3huwvd4mb2mo" path="res://items/fire_extinguisher/fire_extinguisher.tscn" id="4_u3gip"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ybnn0"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -29,6 +29,5 @@ shadow_enabled = true
 [node name="PlayerVr" parent="." instance=ExtResource("2_5f22i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55165, 0)
 
-[node name="Extinguisher" parent="." instance=ExtResource("3_xp1sn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85679, 1.79521, -3.503)
-second_hand_grab = 0
+[node name="Help" parent="." instance=ExtResource("4_u3gip")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.36427, 1.83367, -3.46041)
