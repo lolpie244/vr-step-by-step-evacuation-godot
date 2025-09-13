@@ -20,6 +20,7 @@ var segments : Array[RigidBody3D]
 var joints : Array[PinJoint3D]
 
 var max_length: float
+var _attached_to_end_offset: Vector3
 
 func _ready() -> void:
 	var segment_length = curve.get_baked_length() / segments_count
@@ -103,6 +104,8 @@ func _ready() -> void:
 			joints[-1].node_a = segments[-1].get_path()
 		joints[-1].node_b = attached_to_end.get_path()
 
+		_attached_to_end_offset = attached_to_end.global_position - points[-1]
+
 	for i in range(0, segments.size()):
 		max_length += segments[i].get_child(0).shape.height
 
@@ -119,14 +122,11 @@ func _physics_process(_delta: float) -> void:
 
 	if attached_to_end:
 		var start := segments[0].global_position
-		var end := attached_to_end.global_position
+		var end := attached_to_end.global_position - _attached_to_end_offset
 		var offset := end - start
 
-		# DebugDraw3D.draw_line(segments[0].global_position, attached_to_end.global_position, Color.RED)
-		# DebugDraw3D.draw_line(start, start + offset.normalized() * max_length, Color.BLUE)
-
 		if offset.length() > max_length:
-			emit_signal("max_extend", start + offset.normalized() * max_length)
+			emit_signal("max_extend", start + offset.normalized() * max_length + _attached_to_end_offset)
 
 
 func drop_end() -> bool:
@@ -136,5 +136,4 @@ func drop_end() -> bool:
 	attached_to_end = null
 	self.remove_child(joints.pop_back())
 
-	print("DROPPED")
 	return true

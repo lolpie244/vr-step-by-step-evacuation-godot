@@ -38,3 +38,5 @@ func _ready() -> void:
 
 	$ItemDropper.position = $PlayerVr.position
 	$ItemDropper.position.x += 0.6
+
+	$ItemDropper.spawn()

@@ -23,9 +23,9 @@ func _process(_delta):
 	_last_hand_transform = _grab_driver.primary.hand.global_transform
 
 
-func _on_rope_max_extend(end_position: Vector3):
+func _on_rope_max_extend(limit_position: Vector3):
 	if !is_picked_up():
 		return
 
 	_grab_driver.primary.by.global_transform = _last_hand_transform
-	self.global_position = end_position
+	self.global_position = limit_position
