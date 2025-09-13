@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d3huwvd4mb2mo"]
+[gd_scene load_steps=28 format=3 uid="uid://d3huwvd4mb2mo"]
 
 [ext_resource type="Script" uid="uid://jw8x4vh4vdfj" path="res://items/fire_extinguisher/extinguisher.gd" id="1_e763w"]
 [ext_resource type="Script" uid="uid://7ol3jmvnfywc" path="res://items/fire_extinguisher/hose_end.gd" id="1_gc625"]
@@ -36,6 +36,10 @@ initial_velocity_max = 10.0
 size = Vector2(0.5, 0.3)
 
 [sub_resource type="Resource" id="Resource_vq0gi"]
+script = ExtResource("4_k44sa")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="Resource" id="Resource_e763w"]
 script = ExtResource("4_k44sa")
 metadata/_custom_type_script = "uid://c4itu8s6yackn"
 
@@ -82,6 +86,7 @@ collision_mask = 65536
 mass = 0.001
 freeze = true
 script = ExtResource("1_gc625")
+enabled = false
 
 [node name="Model" parent="HoseEndOrigin/HoseEnd" instance=ExtResource("2_awf77")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0180573, 0.00953928, -0.0113962)
@@ -104,6 +109,11 @@ draw_pass_1 = SubResource("QuadMesh_def5o")
 transform = Transform3D(-1, 8.74228e-08, 1.16723e-15, 7.53841e-08, 0.862294, 0.50641, 4.42719e-08, 0.50641, -0.862294, 0.00824511, -0.0153745, 0.0433664)
 snap_hand = false
 hand_pose = SubResource("Resource_vq0gi")
+
+[node name="GrabPointHandRight" parent="HoseEndOrigin/HoseEnd" instance=ExtResource("7_v4ut5")]
+transform = Transform3D(-1, 4.42389e-08, -7.54033e-08, 0, 0.862514, 0.506034, 8.74228e-08, 0.506034, -0.862514, 0.028754, -0.015, 0.043)
+snap_hand = false
+hand_pose = SubResource("Resource_e763w")
 
 [node name="LeverOrigin" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.407055, -0.092151)
@@ -136,7 +146,7 @@ hand_pose = SubResource("Resource_6is6e")
 [node name="Rope" parent="." node_paths=PackedStringArray("attached_to_start", "attached_to_end") instance=ExtResource("9_8xj8d")]
 transform = Transform3D(1.00995, 0, 0, 0, 1.00995, 0, 0, 0, 1.00995, 0, 0, 0)
 curve = SubResource("Curve3D_henuj")
-segments_count = 7
+segments_count = 10
 mesh_sides = 5
 thickness = 0.01
 fixed_start_points = 2
@@ -144,6 +154,7 @@ attached_to_start = NodePath("../Body/HoseStart")
 attached_to_end = NodePath("../HoseEndOrigin/HoseEnd")
 
 [node name="Body" parent="." instance=ExtResource("5_7po83")]
+freeze_mode = 0
 
 [node name="CollisionShape3D" parent="Body" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0143248, 0)
@@ -176,7 +187,8 @@ body_path = NodePath("../Body")
 lever_path = NodePath("../LeverOrigin/LeverPickup")
 hose_end_path = NodePath("../HoseEndOrigin/HoseEnd")
 
-[connection signal="released" from="HoseEndOrigin/HoseEnd" to="HoseEndOrigin/HoseEnd" method="_on_released"]
+[connection signal="dropped" from="LeverOrigin/LeverPickup" to="." method="_on_lever_pickup_dropped"]
+[connection signal="picked_up" from="LeverOrigin/LeverPickup" to="." method="_on_lever_pickup_picked_up"]
 [connection signal="max_extend" from="Rope" to="HoseEndOrigin/HoseEnd" method="_on_rope_max_extend"]
 
 [editable path="LeverOrigin/LeverPickup"]

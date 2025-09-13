@@ -26,3 +26,11 @@ func release_pin():
 
 	is_pin_released = true
 	$AnimationPlayer.play("release_pin")
+
+
+func _on_lever_pickup_picked_up(pickable: Variant) -> void:
+	hose_end.enabled = true
+
+
+func _on_lever_pickup_dropped(pickable: Variant) -> void:
+	hose_end.enabled = false

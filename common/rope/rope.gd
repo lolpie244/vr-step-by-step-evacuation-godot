@@ -7,7 +7,7 @@ signal max_extend(end_position: Vector3)
 @export var thickness: float = 0.1
 
 @export var fixed_start: bool = false
-@export_range(1, 200) var fixed_start_points: int = 1
+@export_range(0, 200) var fixed_start_points: int = 0
 @export var fixed_end: bool = false
 
 @export var attached_to_start: PhysicsBody3D
@@ -69,7 +69,6 @@ func _ready() -> void:
 			joints[i].node_a = segments[i - 1].get_path()
 			joints[i].node_b = segments[i].get_path()
 
-
 	# setup mesh. Create polygon with "mesh_sides" sides that is stretched along a path
 	var rope_shape : PackedVector2Array
 	for i in mesh_sides:
@@ -128,3 +127,14 @@ func _physics_process(_delta: float) -> void:
 
 		if offset.length() > max_length:
 			emit_signal("max_extend", start + offset.normalized() * max_length)
+
+
+func drop_end() -> bool:
+	if attached_to_end == null:
+		return false
+
+	attached_to_end = null
+	self.remove_child(joints.pop_back())
+
+	print("DROPPED")
+	return true

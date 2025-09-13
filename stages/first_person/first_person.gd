@@ -35,3 +35,6 @@ func _ready() -> void:
 	$PlayerVr.rotation_degrees = context.character.rotation_degrees
 	$PlayerVr.position.x = character_tile.position.x
 	$PlayerVr.position.z = character_tile.position.z
+
+	$ItemDropper.position = $PlayerVr.position
+	$ItemDropper.position.x += 0.6

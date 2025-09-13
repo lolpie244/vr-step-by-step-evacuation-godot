@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg2bybqrb7v14"]
+
+[ext_resource type="Script" uid="uid://ga5c4gvs11wx" path="res://stages/first_person/item_dropper.gd" id="1_44x2l"]
+[ext_resource type="PackedScene" uid="uid://dk6f6uvskip7d" path="res://common/rope/rope.tscn" id="2_u8hi7"]
+[ext_resource type="PackedScene" uid="uid://d3huwvd4mb2mo" path="res://items/fire_extinguisher/fire_extinguisher.tscn" id="3_n8x61"]
+
+[sub_resource type="Curve3D" id="Curve3D_5twks"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.00385593, 1.99677, 0, 0, 0, 0, 0, 0, 0, -0.00738275, 1.71945, 0, 0, 0, 0, 0, 0, 0, -0.00964415, 1.48123, 0, 0, 0, 0, 0, 0, 0, -0.00627887, 1.21102, 0, 0, 0, 0, 0, 0, 0, -0.00684121, 0.932714, 0, 0, 0, 0, 0, 0, 0, -0.00592592, 0.675918, 0, 0, 0, 0, 0, 0, 0, -0.0763564, 0.240898, -0.0150305),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
+[sub_resource type="Curve3D" id="Curve3D_henuj"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00799024, 0.360254, 0.074199, 0, 0.0110817, -0.0415566, 0, -0.0110817, 0.0415566, 0.0065734, 0.360137, 0.11826, 0, 0, 0, 0, 0, 0, 0.0115787, 0.340185, 0.161146, 0, 0, 0, 0, 0, 0, 0.0123479, 0.159094, 0.185829, 0, 0, 0, 0, 0, 0, 0.0143751, -0.0454934, 0.19598),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="ItemDropper" type="Node3D"]
+script = ExtResource("1_44x2l")
+
+[node name="Rope" parent="." node_paths=PackedStringArray("attached_to_end") instance=ExtResource("2_u8hi7")]
+curve = SubResource("Curve3D_5twks")
+segments_count = 20
+mesh_sides = 6
+thickness = 0.01
+fixed_start = true
+attached_to_end = NodePath("../Extinguisher/Body")
+
+[node name="Extinguisher" parent="." instance=ExtResource("3_n8x61")]
+
+[node name="Rope" parent="Extinguisher" index="2"]
+curve = SubResource("Curve3D_henuj")
+
+[connection signal="max_extend" from="Rope" to="." method="_on_rope_max_extend"]
+
+[editable path="Extinguisher"]
+[editable path="Extinguisher/LeverOrigin/LeverPickup"]
+[editable path="Extinguisher/Body"]
+[editable path="Extinguisher/Body/Model"]
