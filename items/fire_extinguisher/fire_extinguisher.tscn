@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="7_v4ut5"]
 [ext_resource type="Animation" uid="uid://do01jton6rk42" path="res://addons/godot-xr-tools/hands/animations/right/Cup.res" id="8_p2dys"]
 [ext_resource type="PackedScene" uid="uid://dk6f6uvskip7d" path="res://common/rope/rope.tscn" id="9_8xj8d"]
+[ext_resource type="ArrayMesh" uid="uid://dc4nb2ciahe14" path="res://items/fire_extinguisher/assets/models/handle.res" id="9_p5at7"]
 [ext_resource type="PackedScene" uid="uid://mqnsmnitytdi" path="res://items/fire_extinguisher/assets/models/model.glb" id="10_iaays"]
 [ext_resource type="Script" uid="uid://cnyxh5ycicg3j" path="res://items/fire_extinguisher/handle.gd" id="11_plkjj"]
 [ext_resource type="Script" uid="uid://t2edgght6lj4" path="res://items/fire_extinguisher/physics_sync.gd" id="12_awf77"]
@@ -53,9 +54,6 @@ size = Vector3(0.1, 0.0683838, 0.0823486)
 script = ExtResource("4_k44sa")
 closed_pose = ExtResource("6_oq70q")
 metadata/_custom_type_script = "uid://c4itu8s6yackn"
-
-[sub_resource type="BoxMesh" id="BoxMesh_xi55b"]
-size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="Resource" id="Resource_6is6e"]
 script = ExtResource("4_k44sa")
@@ -126,30 +124,31 @@ transform = Transform3D(-1, 4.42389e-08, -7.54033e-08, 0, 0.862514, 0.506034, 8.
 snap_hand = false
 hand_pose = SubResource("Resource_e763w")
 
-[node name="LeverOrigin" type="Node3D" parent="."]
+[node name="HandleOrigin" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.407055, -0.092151)
+script = ExtResource("11_plkjj")
 
-[node name="LeverPickup" parent="LeverOrigin" instance=ExtResource("5_7po83")]
+[node name="HandlePickup" parent="HandleOrigin" instance=ExtResource("5_7po83")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98023e-08, -2.98023e-08)
 collision_layer = 65536
 collision_mask = 0
 freeze = true
 freeze_mode = 0
 
-[node name="CollisionShape3D" parent="LeverOrigin/LeverPickup" index="0"]
+[node name="CollisionShape3D" parent="HandleOrigin/HandlePickup" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00789797, -0.00882569)
 shape = SubResource("BoxShape3D_iqesa")
 
-[node name="GrabPointHandLeft" parent="LeverOrigin/LeverPickup" instance=ExtResource("3_td516")]
+[node name="GrabPointHandLeft" parent="HandleOrigin/HandlePickup" instance=ExtResource("3_td516")]
 transform = Transform3D(-1, 8.74228e-08, 2.33484e-15, 5.43742e-08, 0.621968, 0.783043, 6.84558e-08, 0.783043, -0.621968, 0, -0.0325837, 0.0837797)
 snap_hand = false
 hand_pose = SubResource("Resource_aduq4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LeverOrigin/LeverPickup"]
-visible = false
-mesh = SubResource("BoxMesh_xi55b")
+[node name="Mesh" type="MeshInstance3D" parent="HandleOrigin/HandlePickup"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.00551942, -0.0366022, 0.114676)
+mesh = ExtResource("9_p5at7")
 
-[node name="GrabPointHandRight" parent="LeverOrigin/LeverPickup" instance=ExtResource("7_v4ut5")]
+[node name="GrabPointHandRight" parent="HandleOrigin/HandlePickup" instance=ExtResource("7_v4ut5")]
 transform = Transform3D(-1, 6.84178e-08, -5.4422e-08, 0, 0.622515, 0.782608, 8.74228e-08, 0.782608, -0.622515, 0, -0.033, 0.084)
 snap_hand = false
 hand_pose = SubResource("Resource_6is6e")
@@ -174,14 +173,6 @@ shape = SubResource("CylinderShape3D_0tj6o")
 
 [node name="Model" parent="Body" instance=ExtResource("10_iaays")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-
-[node name="Handle" parent="Body/Model/Extinguisher" index="0"]
-transform = Transform3D(0.418084, -0.000227098, -1.81141, -0.0308578, -1.85876, -0.00688913, -1.81115, 0.0316167, -0.418027, -0.189005, -3.43203, -0.0400897)
-script = ExtResource("11_plkjj")
-
-[node name="Pin" parent="Body/Model/Extinguisher" index="1"]
-transform = Transform3D(0.494763, -0.000270195, -2.14364, -0.0365239, -2.19968, -0.00815265, -2.14333, 0.0374218, -0.494696, 0.10531, -3.64938, 0.256241)
-visible = false
 
 [node name="ExtinguisherHolder" parent="Body/Model" index="1"]
 visible = false
@@ -216,21 +207,23 @@ shape = SubResource("BoxShape3D_0gq8e")
 
 [node name="GrabPointHandRight" parent="Body/PinOrigin/PinPickable" instance=ExtResource("7_v4ut5")]
 transform = Transform3D(-0.335337, 0, -0.942098, 0, 1, 0, 0.942098, 0, -0.335337, 0.0144901, 0.00988057, 0.0303817)
-visible = true
 hand_pose = SubResource("Resource_p5at7")
 
 [node name="PhysicsSync" type="Node3D" parent="."]
 script = ExtResource("12_awf77")
 body_path = NodePath("../Body")
-lever_path = NodePath("../LeverOrigin/LeverPickup")
+lever_path = NodePath("../HandleOrigin/HandlePickup")
 hose_end_path = NodePath("../HoseEndOrigin/HoseEnd")
 
-[connection signal="dropped" from="LeverOrigin/LeverPickup" to="." method="_on_lever_pickup_dropped"]
-[connection signal="picked_up" from="LeverOrigin/LeverPickup" to="." method="_on_lever_pickup_picked_up"]
+[connection signal="strength_changed" from="HandleOrigin" to="HoseEndOrigin/HoseEnd" method="_on_strength_changed"]
+[connection signal="dropped" from="HandleOrigin/HandlePickup" to="." method="_on_lever_pickup_dropped"]
+[connection signal="grabbed" from="HandleOrigin/HandlePickup" to="HandleOrigin" method="_on_handle_pickup_grabbed"]
+[connection signal="picked_up" from="HandleOrigin/HandlePickup" to="." method="_on_lever_pickup_picked_up"]
+[connection signal="released" from="HandleOrigin/HandlePickup" to="HandleOrigin" method="_on_handle_pickup_released"]
 [connection signal="max_extend" from="Rope" to="HoseEndOrigin/HoseEnd" method="_on_rope_max_extend"]
 [connection signal="dropped" from="Body/PinOrigin/PinPickable" to="Body/PinOrigin" method="_on_pin_pickable_dropped"]
 
-[editable path="LeverOrigin/LeverPickup"]
+[editable path="HandleOrigin/HandlePickup"]
 [editable path="Body"]
 [editable path="Body/Model"]
 [editable path="Body/PinOrigin/PinPickable"]

@@ -7,7 +7,7 @@ class_name HoseEnd
 var syncer: Sync
 var _last_hand_transform: Transform3D
 
-func _on_extinguisher_strength_changed(strength:float) -> void:
+func _on_strength_changed(strength:float) -> void:
 	if strength == 0:
 		particles.emitting = false
 		return
