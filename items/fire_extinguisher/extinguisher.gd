@@ -2,9 +2,6 @@
 extends Node3D
 class_name Extinguisher
 
-signal pin_released
-
-@onready var lever_pickup: XRToolsPickable = $LeverOrigin/LeverPickup
 @onready var body: XRToolsPickable = $Body
 @onready var hose_end: HoseEnd = $HoseEndOrigin/HoseEnd
 

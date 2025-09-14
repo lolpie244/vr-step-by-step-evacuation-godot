@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d3huwvd4mb2mo"]
+[gd_scene load_steps=32 format=3 uid="uid://d3huwvd4mb2mo"]
 
 [ext_resource type="Script" uid="uid://jw8x4vh4vdfj" path="res://items/fire_extinguisher/extinguisher.gd" id="1_e763w"]
 [ext_resource type="Script" uid="uid://7ol3jmvnfywc" path="res://items/fire_extinguisher/hose_end.gd" id="1_gc625"]
@@ -21,14 +21,12 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_57372"]
 size = Vector3(0.0451355, 0.042614, 0.14563)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_guma5"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw8ad"]
 transparency = 1
-albedo_texture = SubResource("CompressedTexture2D_guma5")
 billboard_mode = 1
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wwohj"]
+emission_shape_scale = Vector3(0.2, 0.2, 0.2)
 emission_shape = 3
 emission_box_extents = Vector3(0.1, 0.1, 0.1)
 direction = Vector3(0, 0, 1)
@@ -37,7 +35,7 @@ initial_velocity_min = 6.0
 initial_velocity_max = 10.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_def5o"]
-size = Vector2(0.5, 0.3)
+size = Vector2(0.05, 0.05)
 
 [sub_resource type="Resource" id="Resource_vq0gi"]
 script = ExtResource("4_k44sa")
@@ -105,7 +103,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0167694, 0.0117282, -0.0425
 shape = SubResource("BoxShape3D_57372")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="HoseEndOrigin/HoseEnd"]
-transform = Transform3D(1.55772, 0, 0, 0, 1.19145, 0, 0, 1.39698e-09, 1.00299, 0, 0.0112318, 0.0367869)
+transform = Transform3D(1, 0, 0, 0, 1, -1.86265e-09, 0, 1.86265e-09, 1, 0.0160577, 0.013169, 0.0367942)
 material_override = SubResource("StandardMaterial3D_xw8ad")
 emitting = false
 amount = 1000
