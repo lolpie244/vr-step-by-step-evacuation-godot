@@ -101,3 +101,4 @@ shape = SubResource("BoxShape3D_gvhcj")
 [editable path="Extinguisher/LeverOrigin/LeverPickup"]
 [editable path="Extinguisher/Body"]
 [editable path="Extinguisher/Body/Model"]
+[editable path="Extinguisher/Body/PinOrigin/PinPickable"]

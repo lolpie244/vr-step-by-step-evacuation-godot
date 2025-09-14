@@ -6,7 +6,7 @@ uniform float feather : hint_range(0.0, 0.2) = 0.02;
 
 void fragment() {
 	ALBEDO = vec3(0.0);
-	
+
     vec2 p = UV - vec2(0.5);
     p.y /= max(blink_percentage, 1e-4);
 
