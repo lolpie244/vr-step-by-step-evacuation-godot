@@ -13,7 +13,7 @@ material = ExtResource("2_upovr")
 class_type = ExtResource("3_81oiy")
 
 [node name="Flammable" parent="mixins" index="0" instance=ExtResource("6_upovr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.468385, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190813, 0)
 material = ExtResource("2_upovr")
 
 [node name="Walkable" parent="mixins" index="1" instance=ExtResource("5_upovr")]
