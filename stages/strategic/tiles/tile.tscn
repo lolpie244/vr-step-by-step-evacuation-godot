@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bayl0mx8j5o7a"]
+
+[ext_resource type="PackedScene" uid="uid://cuoge0yhplmnh" path="res://stages/strategic/tiles/tile_animation.tscn" id="1_hdasf"]
+[ext_resource type="Script" uid="uid://dmd1oeiknl2xq" path="res://stages/strategic/tiles/tile_node.gd" id="1_vdpyv"]
+[ext_resource type="Script" uid="uid://dip5uygjsgj1m" path="res://tiles/tile_impl.gd" id="2_qg7gs"]
+
+[node name="TileStrategic" type="Node3D"]
+script = ExtResource("1_vdpyv")
+
+[node name="Animation" parent="." instance=ExtResource("1_hdasf")]
+
+[node name="Impl" type="Node3D" parent="."]
+script = ExtResource("2_qg7gs")
+
+[connection signal="highlight_changed" from="Impl" to="." method="_on_impl_highlight_changed"]

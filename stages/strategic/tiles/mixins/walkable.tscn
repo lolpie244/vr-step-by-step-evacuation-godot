@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://4if45fr7sjl6"]
+
+[ext_resource type="PackedScene" uid="uid://dt3rh630bnoyb" path="res://tiles/mixin.tscn" id="1_lhnh4"]
+[ext_resource type="Script" uid="uid://xme5vqadoj5k" path="res://tiles/mixins_impl/walkable_impl.gd" id="2_4rwo6"]
+[ext_resource type="Script" uid="uid://g2vqlss3lfx5" path="res://stages/strategic/tiles/mixins/walkable.gd" id="2_o5uc3"]
+[ext_resource type="PackedScene" uid="uid://bnvtv0ggbwwin" path="res://stages/strategic/tiles/assets/character_point.glb" id="4_sly35"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4ybiy"]
+size = Vector3(0.4, 0.637988, 0.4)
+
+[node name="Walkable" instance=ExtResource("1_lhnh4")]
+script = ExtResource("2_o5uc3")
+
+[node name="Impl" parent="." index="0"]
+script = ExtResource("2_4rwo6")
+
+[node name="CharacterPoint" parent="." index="1" instance=ExtResource("4_sly35")]
+
+[node name="SnapZone" type="Area3D" parent="." index="2"]
+collision_layer = 4
+collision_mask = 65540
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnapZone" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.318994, 0)
+shape = SubResource("BoxShape3D_4ybiy")
+
+[connection signal="on_chacter_placed" from="Impl" to="." method="_on_character_placed"]
+[connection signal="body_entered" from="SnapZone" to="." method="_on_snap_zone_body_entered"]
+[connection signal="body_exited" from="SnapZone" to="." method="_on_snap_zone_body_exited"]
