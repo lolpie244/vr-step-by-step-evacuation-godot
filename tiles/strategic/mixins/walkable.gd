@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var Impl: WalkableImpl = $Impl
+@onready var Impl: Walkable = $Impl
 
 var _bodies_in_snap_zone_area: Array[XRToolsPickable] = []
 

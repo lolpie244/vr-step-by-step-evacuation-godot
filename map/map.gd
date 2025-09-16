@@ -1,7 +1,7 @@
 extends MeshInstance3D
 class_name Map
 
-@onready var tile_factory: TileFactory = $TileFactory
+@onready var tile_factory: TileNodeFactory = $TileNodeFactory
 #@onready
 # var character_manager: FactoryManager = FactoryManager.new("res://map/characters/characters")
 #@onready var _factories: Array = [tile_factory]

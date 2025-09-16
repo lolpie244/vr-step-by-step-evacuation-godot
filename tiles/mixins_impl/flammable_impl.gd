@@ -1,5 +1,5 @@
 extends TileMixinImpl
-class_name FlammableImpl
+class_name Flammable
 
 signal state_changed(state: State)
 
@@ -21,7 +21,7 @@ func can_burn():
 
 func ignite():
 	state = State.BURNING
-	_tile.remove_mixin(WalkableImpl)
+	_tile.remove_mixin(Walkable)
 
 	state_changed.emit(state)
 

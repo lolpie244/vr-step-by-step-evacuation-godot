@@ -18,7 +18,7 @@ func _get_tile(strategic_tile: Tile):
 	var tile = strategic_tile._duplicate()
 	tile.position.y = 0
 	tile.restore_material()
-	tile.remove_mixin(WalkableImpl)
+	tile.remove_mixin(Walkable)
 	tile.tile_scale(2)
 
 	return tile

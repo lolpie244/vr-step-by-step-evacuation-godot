@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://4if45fr7sjl6"]
 
-[ext_resource type="PackedScene" uid="uid://dt3rh630bnoyb" path="res://tiles/Mixin.tscn" id="1_lhnh4"]
+[ext_resource type="PackedScene" uid="uid://dt3rh630bnoyb" path="res://tiles/mixin.tscn" id="1_lhnh4"]
 [ext_resource type="Script" uid="uid://xme5vqadoj5k" path="res://tiles/mixins_impl/walkable_impl.gd" id="2_4rwo6"]
 [ext_resource type="Script" uid="uid://g2vqlss3lfx5" path="res://tiles/strategic/mixins/walkable.gd" id="2_o5uc3"]
 [ext_resource type="PackedScene" uid="uid://bnvtv0ggbwwin" path="res://tiles/strategic/assets/character_point.glb" id="4_sly35"]

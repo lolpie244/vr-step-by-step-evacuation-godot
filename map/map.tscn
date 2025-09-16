@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://beleb7aq1efb7" path="res://map/cutoff.gdshader" id="2_4hjbm"]
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://map/map.gd" id="2_lgq1i"]
-[ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://tiles/TileFactory.tscn" id="4_kffv2"]
+[ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://tiles/tile_node_factory.tscn" id="4_kffv2"]
 [ext_resource type="Script" uid="uid://cxsdkamskknfq" path="res://map/grid.gd" id="4_lgq1i"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://uawpg3qjrxph"]
 
-[ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://tiles/strategic/Tile.tscn" id="1_5dbxf"]
+[ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://tiles/strategic/tile.tscn" id="1_5dbxf"]
 [ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://tiles/strategic/types/wall_like.gd" id="2_3t1nx"]
 [ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://tiles/strategic/assets/doorway.glb" id="2_ituet"]
-[ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://tiles/strategic/mixins/Flammable.tscn" id="3_8hksf"]
-[ext_resource type="PackedScene" uid="uid://4if45fr7sjl6" path="res://tiles/strategic/mixins/Walkable.tscn" id="4_wohtg"]
+[ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://tiles/strategic/mixins/flammable.tscn" id="3_8hksf"]
+[ext_resource type="PackedScene" uid="uid://4if45fr7sjl6" path="res://tiles/strategic/mixins/walkable.tscn" id="4_wohtg"]
 
 [node name="Door" instance=ExtResource("1_5dbxf")]
 script = ExtResource("2_3t1nx")

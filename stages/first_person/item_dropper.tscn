@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://7rb21rnqffq6"]
 
-[ext_resource type="PackedScene" uid="uid://0atb45jl1tr" path="res://ui/RopeTrigger.tscn" id="1_a526y"]
+[ext_resource type="PackedScene" uid="uid://0atb45jl1tr" path="res://ui/rope_trigger.tscn" id="1_a526y"]
 [ext_resource type="Script" uid="uid://ga5c4gvs11wx" path="res://stages/first_person/item_dropper.gd" id="2_kuwic"]
 [ext_resource type="PackedScene" uid="uid://d3huwvd4mb2mo" path="res://items/fire_extinguisher/fire_extinguisher.tscn" id="2_xqxqb"]
 

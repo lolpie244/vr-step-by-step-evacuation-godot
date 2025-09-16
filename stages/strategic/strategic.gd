@@ -16,7 +16,7 @@ func _ready() -> void:
 	# character.highlight_reachable(true)
 
 	# character.visible_tiles()
-	grid.get_tile_mixin(9, 1, FlammableImpl).ignite()
+	grid.get_tile_mixin(9, 1, Flammable).ignite()
 
 	# var context := FirstPerson.Context.new(character)
 	# SceneManager.load_scene(next_scene, context)

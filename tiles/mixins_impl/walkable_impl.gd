@@ -1,5 +1,5 @@
 extends TileMixinImpl
-class_name WalkableImpl
+class_name Walkable
 
 
 #func place_character(character: Character) -> bool:
@@ -29,14 +29,14 @@ class ReachableResult:
 		direction = _direction
 
 
-func reachable_neighbors() -> Array[WalkableImpl]:
-	var result: Array[WalkableImpl] = []
+func reachable_neighbors() -> Array[Walkable]:
+	var result: Array[Walkable] = []
 
 	for tile in _tile.neighbor_tiles():
 		if tile.pos.x != _tile.pos.x && tile.pos.y != _tile.pos.y:
 			continue
 
-		var mixin = tile.get_mixin(WalkableImpl)
+		var mixin = tile.get_mixin(Walkable)
 		if mixin != null:
 			result.append(mixin)
 
@@ -51,7 +51,7 @@ func reachable_tiles(_speed: int) -> Array[ReachableResult]:
 
 	while queue.size():
 		var info = queue.pop_front()
-		var current_walkable: WalkableImpl = info[0].get_mixin(WalkableImpl)
+		var current_walkable: Walkable = info[0].get_mixin(Walkable)
 		var speed: int = info[1]
 
 		if speed <= 0:

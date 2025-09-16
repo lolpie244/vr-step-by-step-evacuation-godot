@@ -1,5 +1,5 @@
 extends Node3D
-class_name TileFactory
+class_name TileNodeFactory
 
 @export var tile_types: Array[PackedScene] = []
 
@@ -7,11 +7,10 @@ var _tiles: Dictionary[Tile.Type, Array] = {}
 
 func _ready():
 	hide()
-	
+
 	for tile_scene in tile_types:
 		var tile = tile_scene.instantiate()
 		self.add_child(tile)
-		var impl = tile.get_node("Impl")
 		var type = tile.get_node("Impl").get("type")
 
 		if not _tiles.has(type):
