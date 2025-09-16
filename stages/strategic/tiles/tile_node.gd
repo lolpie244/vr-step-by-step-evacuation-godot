@@ -2,11 +2,11 @@ extends Node3D
 class_name TileNode
 const _implements := "TileNode"
 
-@onready var Impl: Tile = $Impl
+@onready var Impl: Tile = $Impl.instance
 @onready var model = $Model
 
 func _set_impl(impl: Tile) -> void:
-	Impl.set_from(impl)
+	Impl = impl
 
 func _swap_model(new_model):
 	if model == new_model:

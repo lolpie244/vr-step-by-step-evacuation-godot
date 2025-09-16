@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var Impl: Flammable = $Impl
+@onready var Impl: Flammable = $Impl.instance
 
 func _ready():
 	_on_impl_state_changed(Impl.state)

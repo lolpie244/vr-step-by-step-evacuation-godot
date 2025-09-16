@@ -20,6 +20,9 @@ func place(tile: Tile):
 	if walkable == null:
 		return false
 
+	if walkable == _walkable:
+		return true
+
 	var next_tile = is_reachable(walkable)
 	if next_tile == null || !walkable.place_character(self):
 		if _walkable:

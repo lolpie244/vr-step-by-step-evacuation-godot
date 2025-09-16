@@ -15,6 +15,10 @@ enum State {
 }
 
 
+func _ready():
+	_set_type(Flammable)
+
+
 func can_burn():
 	return state == State.NOT_BURNING
 

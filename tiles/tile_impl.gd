@@ -1,4 +1,4 @@
-extends Node3D
+extends BaseImpl
 class_name Tile
 const _implements := "TileImpl"
 
@@ -33,18 +33,10 @@ var highlight: bool:
 		highlight_changed.emit(highlight)
 
 
-func set_data(grid_: MapGrid, x_: int, y_: int):
+func init(grid_: MapGrid, x_: int, y_: int):
 	_x = x_
 	_y = y_
 	grid = grid_
-
-
-func set_from(data: Tile):
-	_x = data._x
-	_y = data._y
-	grid = data._grid
-	mixins = data.mixins
-	type = data.type
 
 
 func get_mixin(impl_type):

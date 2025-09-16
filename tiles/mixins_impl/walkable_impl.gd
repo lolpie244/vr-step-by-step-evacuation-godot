@@ -3,6 +3,9 @@ class_name Walkable
 
 signal on_chacter_placed(character: Character)
 
+func _ready():
+	_set_type(Walkable)
+
 
 func place_character(character: Character) -> bool:
 	on_chacter_placed.emit(character)
