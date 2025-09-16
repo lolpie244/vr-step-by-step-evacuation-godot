@@ -3,7 +3,7 @@ extends WallLikeTile
 @onready var original_mesh = $Model.mesh
 @onready var original_material = $Model.get_active_material(0)
 
-func get_model():
+func _get_model():
 	var left = _is_wall(Impl.pos.x - 1, Impl.pos.y)
 	var right = _is_wall(Impl.pos.x + 1, Impl.pos.y)
 	var down = _is_wall(Impl.pos.x, Impl.pos.y - 1)

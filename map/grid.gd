@@ -27,7 +27,7 @@ func columns_count() -> int:
 
 func set_tile_node(x: int, y: int, tile: TileNode):
 	tiles[x][y] = tile
-	
+
 	if !tile.get_parent():
 		self.add_child(tile)
 
@@ -37,8 +37,8 @@ func get_tile(x: int, y: int) -> Tile:
 		return null
 
 	return tiles[x][y].get_node("Impl")
-	
-	
+
+
 func get_tile_node(x: int, y: int) -> TileNode:
 	if not _in_range(x, y):
 		return null
@@ -66,6 +66,10 @@ func tile_position(x, y) -> Vector3:
 		- (Vector3(rows_count(), 0, columns_count()) * tile_size / 2)
 		+ Vector3(tile_size, 0, tile_size) / 2
 	)
+
+func model_scale(model_) -> float:
+	var model_size = Utils.get_aabb(model_).size * model_.scale
+	return tile_size / max(model_size.x, model_size.z)
 
 
 #func spread_fire():

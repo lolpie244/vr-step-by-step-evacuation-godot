@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbgo00lho5osc"]
+
+[ext_resource type="Script" uid="uid://dada404m45lcv" path="res://characters/character_factory.gd" id="1_yk0s7"]
+[ext_resource type="PackedScene" uid="uid://c7p503sqqkf85" path="res://characters/strategic/civilian.tscn" id="2_2g2a0"]
+
+[node name="CharacterNodeFactory" type="Node3D"]
+script = ExtResource("1_yk0s7")
+scenes = Array[PackedScene]([ExtResource("2_2g2a0")])

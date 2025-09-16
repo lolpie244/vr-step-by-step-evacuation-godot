@@ -11,3 +11,5 @@ script = ExtResource("1_vdpyv")
 
 [node name="Impl" type="Node3D" parent="."]
 script = ExtResource("2_qg7gs")
+
+[connection signal="highlight_changed" from="Impl" to="." method="_on_impl_highlight_changed"]

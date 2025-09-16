@@ -17,22 +17,19 @@ func _swap_model(new_model):
 	model = new_model
 
 func init():
-	_swap_model(get_model())
-	
-	self.scale = Vector3.ONE * _get_model_scale(model)
+	_swap_model(_get_model())
+
+	self.scale = Vector3.ONE * Impl.grid.model_scale(model)
 	self.position = Impl.grid.tile_position(Impl.pos.x, Impl.pos.y)
 
-func get_model():
+
+func _get_model():
 	return model
+
 
 func tile_scale(scale_: int):
 	self.position = self.position / self.scale * scale_
 	self.scale = Vector3.ONE * scale_
-
-
-func _get_model_scale(model_: Node3D) -> float:
-	var model_size = Utils.get_aabb(model_).size * model_.scale
-	return Impl.grid.tile_size / max(model_size.x, model_size.z)
 
 
 func set_material(_material: ShaderMaterial):
@@ -41,3 +38,10 @@ func set_material(_material: ShaderMaterial):
 			var albedo = mesh.get_active_material(i).albedo_texture
 			_material.set_shader_parameter("_albedo", albedo)
 			mesh.set_surface_override_material(i, _material)
+
+
+func _on_impl_highlight_changed(value: bool) -> void:
+	if value:
+		$Animation.play("highlight")
+	else:
+		$Animation.play_backwards("highlight")

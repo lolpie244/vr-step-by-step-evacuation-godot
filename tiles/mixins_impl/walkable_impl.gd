@@ -1,21 +1,12 @@
 extends TileMixinImpl
 class_name Walkable
 
+signal on_chacter_placed(character: Character)
 
-#func place_character(character: Character) -> bool:
-	# if character.get_parent() == null:
-	# 	_tile.add_child(character)
-	#
-	# if character.get_parent() != _tile:
-	# 	character.reparent(_tile)
-	#
-	# character.position = self.position
-	# character.rotation = self.rotation
 
-	#character._x = _tile.pos.x
-	#character._y = _tile.pos.y
-#
-	#return true
+func place_character(character: Character) -> bool:
+	on_chacter_placed.emit(character)
+	return true
 
 
 class ReachableResult:

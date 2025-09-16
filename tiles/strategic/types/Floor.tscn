@@ -12,6 +12,7 @@ type = 1
 
 [node name="Flammable" parent="Impl" index="0" instance=ExtResource("3_y7fv3")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.298921, 0)
+visible = false
 
 [node name="Walkable" parent="Impl" index="1" instance=ExtResource("4_wqcp5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20416, 0)

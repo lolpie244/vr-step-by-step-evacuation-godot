@@ -11,7 +11,7 @@ var character
 
 
 func _ready() -> void:
-	# character = map.add_character(CharacterFactory.Type.Civilian, 8, 1)
+	character = map.add_character(Character.Type.Civilian, 8, 1)
 
 	# character.highlight_reachable(true)
 
@@ -33,29 +33,11 @@ func spread_fun_timer():
 	t.timeout.connect(grid.spread_fire)
 
 
-func _input(_event: InputEvent):
-	var x = character._x
-	var y = character._y
-
-	if Input.is_action_just_pressed("right"):
-		map.move_character(character, x + 1, y)
-
-	if Input.is_action_just_pressed("left"):
-		map.move_character(character, x - 1, y)
-
-	if Input.is_action_just_pressed("up"):
-		map.move_character(character, x, y - 1)
-
-	if Input.is_action_just_pressed("down"):
-		map.move_character(character, x, y + 1)
-
 func _on_zoom_lever_moved(_angle: Variant) -> void:
 	map.zoom += -0.02 * scale_lever.fill_ratio
 
-
 func _on_offset_joystick_moved(_angle: Vector2) -> void:
 	map.offset += 0.003 * offset_joystick.fill_ratio
-
 
 func _on_button_released(_button: Variant) -> void:
 	await $PlayerVr.close_eyes()

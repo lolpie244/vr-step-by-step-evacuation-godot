@@ -24,5 +24,6 @@ collision_mask = 65540
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.318994, 0)
 shape = SubResource("BoxShape3D_4ybiy")
 
+[connection signal="on_chacter_placed" from="Impl" to="." method="_on_character_placed"]
 [connection signal="body_entered" from="SnapZone" to="." method="_on_snap_zone_body_entered"]
 [connection signal="body_exited" from="SnapZone" to="." method="_on_snap_zone_body_exited"]

@@ -52,7 +52,7 @@ func get_mixin(impl_type):
 		if is_instance_of(mixin, impl_type):
 			return mixin
 
-		return null
+	return null
 
 func remove_mixin(impl_type):
 	pass
@@ -78,3 +78,7 @@ func neighbor_tiles() -> Array[Tile]:
 			if tile != null:
 				result.append(tile)
 	return result
+
+
+func node():
+	return get_parent()

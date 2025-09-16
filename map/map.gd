@@ -2,10 +2,7 @@ extends MeshInstance3D
 class_name Map
 
 @onready var tile_factory: TileNodeFactory = $TileNodeFactory
-#@onready
-# var character_manager: FactoryManager = FactoryManager.new("res://map/characters/characters")
-#@onready var _factories: Array = [tile_factory]
-
+@onready var character_factory: CharacterNodeFactory = $CharacterNodeFactory
 @onready var grid = $Grid
 
 @export var enable_cutoff: bool = true
@@ -71,10 +68,6 @@ static func types_from_str(str_map: Array) -> Array:
 
 
 func _ready() -> void:
-	#for factory in self._factories:
-		#self.add_child(factory)
-		#factory.hide()
-
 	var plane_mesh := self.mesh as PlaneMesh
 	plane_mesh.size = Vector2(
 		self.get_aabb().size.x * self.scale.x, self.get_aabb().size.z * self.scale.z
@@ -122,16 +115,15 @@ func set_map(raw_map):
 				tile.set_material(self.cutoff_material)
 
 
-#func add_character(type: CharacterFactory.Type, x: int, y: int):
-	#var factory: CharacterFactory = character_manager.get_factory(type)
-	#var character: Character = factory.create(grid, x, y)
-#
-	#character.init()
-#
+func add_character(type: Character.Type, x: int, y: int):
+	var character: CharacterStrategic = character_factory.create(type)
+	grid.add_child(character)
+	character.Impl.place(grid.get_tile(x, y))
+
 	#if enable_cutoff:
 		#character.set_material(self.cutoff_material)
-#
-	#return character
+
+	return character
 #
 #
 #func move_character(character: Character, x: int, y: int) -> bool:

@@ -10,7 +10,7 @@ func _init() -> void:
 	pass
 	#blocking = true
 	
-func get_model():
+func _get_model():
 	var left = _is_wall(Impl.pos.x - 1, Impl.pos.y)
 	var right = _is_wall(Impl.pos.x + 1, Impl.pos.y)
 
