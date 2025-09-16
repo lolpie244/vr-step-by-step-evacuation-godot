@@ -1,10 +1,10 @@
 extends MeshInstance3D
 class_name Map
 
-@onready var tile_manager: FactoryManager = FactoryManager.new("res://map/tiles/tiles")
-@onready
-var character_manager: FactoryManager = FactoryManager.new("res://map/characters/characters")
-@onready var _managers: Array[FactoryManager] = [tile_manager, character_manager]
+@onready var tile_factory: TileFactory = $TileFactory
+#@onready
+# var character_manager: FactoryManager = FactoryManager.new("res://map/characters/characters")
+#@onready var _factories: Array = [tile_factory]
 
 @onready var grid = $Grid
 
@@ -50,30 +50,30 @@ static func types_from_str(str_map: Array) -> Array:
 	if str_map.size() < 0:
 		return []
 
-	var result = Utils.get_matrix(str_map.size(), str_map[0].size(), TileFactory.Type.None)
+	var result = Utils.get_matrix(str_map.size(), str_map[0].size(), Tile.Type.None)
 
 	for i in str_map.size():
 		for j in str_map[i].size():
 			match str_map[i][j]:
 				"w":
-					result[i][j] = TileFactory.Type.Wall
+					result[i][j] = Tile.Type.Wall
 				"f":
-					result[i][j] = TileFactory.Type.Floor
+					result[i][j] = Tile.Type.Floor
 				"d":
-					result[i][j] = TileFactory.Type.Door
+					result[i][j] = Tile.Type.Door
 				"o":
-					result[i][j] = TileFactory.Type.Window
+					result[i][j] = Tile.Type.Window
 				_:
 					push_warning("Unknown tile: on position [%, %]" % i, j)
-					result.type_grid[i][j] = TileFactory.Type.None
+					result.type_grid[i][j] = Tile.Type.None
 
 	return result
 
 
 func _ready() -> void:
-	for manager in self._managers:
-		self.add_child(manager)
-		manager.hide()
+	#for factory in self._factories:
+		#self.add_child(factory)
+		#factory.hide()
 
 	var plane_mesh := self.mesh as PlaneMesh
 	plane_mesh.size = Vector2(
@@ -111,32 +111,31 @@ func set_map(raw_map):
 	# set flags
 	for x in range(grid.rows_count()):
 		for y in range(grid.columns_count()):
-			var tile_factory: TileFactory = tile_manager.get_factory(tile_types[x][y])
-			grid.set_tile(x, y, tile_factory.create(grid, x, y))
+			grid.set_tile_node(x, y, tile_factory.create(tile_types[x][y], grid, x, y))
 
 	for x in range(grid.rows_count()):
 		for y in range(grid.columns_count()):
-			var tile: Tile = grid.get_tile(x, y)
+			var tile: TileNode = grid.get_tile_node(x, y)
 			tile.init()
 
 			if enable_cutoff:
 				tile.set_material(self.cutoff_material)
 
 
-func add_character(type: CharacterFactory.Type, x: int, y: int):
-	var factory: CharacterFactory = character_manager.get_factory(type)
-	var character: Character = factory.create(grid, x, y)
-
-	character.init()
-
-	if enable_cutoff:
-		character.set_material(self.cutoff_material)
-
-	return character
-
-
-func move_character(character: Character, x: int, y: int) -> bool:
-	var walkable = grid.get_tile_mixin(x, y, Walkable)
-	if walkable == null:
-		return false
-	return character.place(walkable)
+#func add_character(type: CharacterFactory.Type, x: int, y: int):
+	#var factory: CharacterFactory = character_manager.get_factory(type)
+	#var character: Character = factory.create(grid, x, y)
+#
+	#character.init()
+#
+	#if enable_cutoff:
+		#character.set_material(self.cutoff_material)
+#
+	#return character
+#
+#
+#func move_character(character: Character, x: int, y: int) -> bool:
+	#var walkable = grid.get_tile_mixin(x, y, Walkable)
+	#if walkable == null:
+		#return false
+	#return character.place(walkable)

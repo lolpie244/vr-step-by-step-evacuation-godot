@@ -79,6 +79,16 @@ static func find_parent_with_type(node: Node, type_ref):
 	return find_parent_with_type(node.get_parent(), type_ref)
 
 
+static func find_parent_that_implements(node: Node, implements: String):
+	if node.get("_implements") == implements:
+		return node
+
+	if node.get_parent() == null:
+		return null
+
+	return find_parent_that_implements(node.get_parent(), implements)
+
+
 const DEFAULT_DUPLICATE = DUPLICATE_SCRIPTS | DUPLICATE_GROUPS | DUPLICATE_SIGNALS
 
 

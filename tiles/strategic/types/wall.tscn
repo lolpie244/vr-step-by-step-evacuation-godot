@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://drtwa6g0jk2hu"]
+
+[ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://tiles/strategic/Tile.tscn" id="1_y77oi"]
+[ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://tiles/strategic/types/wall.gd" id="2_lgyha"]
+[ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://tiles/strategic/assets/wall.glb" id="2_p3ekw"]
+
+[node name="Wall" instance=ExtResource("1_y77oi")]
+script = ExtResource("2_lgyha")
+
+[node name="Impl" parent="." index="1"]
+type = 2
+
+[node name="Model" parent="." index="2" instance=ExtResource("2_p3ekw")]

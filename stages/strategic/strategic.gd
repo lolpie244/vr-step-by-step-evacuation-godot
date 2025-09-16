@@ -11,12 +11,12 @@ var character
 
 
 func _ready() -> void:
-	character = map.add_character(CharacterFactory.Type.Civilian, 8, 1)
+	# character = map.add_character(CharacterFactory.Type.Civilian, 8, 1)
 
 	# character.highlight_reachable(true)
 
 	# character.visible_tiles()
-	grid.get_tile_mixin(9, 1, Flammable).ignite()
+	grid.get_tile_mixin(9, 1, FlammableImpl).ignite()
 
 	# var context := FirstPerson.Context.new(character)
 	# SceneManager.load_scene(next_scene, context)
@@ -60,5 +60,6 @@ func _on_offset_joystick_moved(_angle: Vector2) -> void:
 func _on_button_released(_button: Variant) -> void:
 	await $PlayerVr.close_eyes()
 	print("Change scene")
-	var context := FirstPerson.Context.new(character)
+	#var context := FirstPerson.Context.new(character)
+	var context = null
 	SceneManager.load_scene(next_scene, context)

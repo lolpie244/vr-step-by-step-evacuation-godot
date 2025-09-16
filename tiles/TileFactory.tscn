@@ -1,0 +1,11 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccurrtskck65e"]
+
+[ext_resource type="Script" uid="uid://bps72navc0rmd" path="res://tiles/tile_factory.gd" id="1_1odjh"]
+[ext_resource type="PackedScene" uid="uid://uawpg3qjrxph" path="res://tiles/strategic/types/Door.tscn" id="2_gwfxd"]
+[ext_resource type="PackedScene" uid="uid://cjmyd6fkw77hy" path="res://tiles/strategic/types/Floor.tscn" id="3_kwi24"]
+[ext_resource type="PackedScene" uid="uid://drtwa6g0jk2hu" path="res://tiles/strategic/types/wall.tscn" id="4_xs1gn"]
+[ext_resource type="PackedScene" uid="uid://bxwf0dqtgsgoi" path="res://tiles/strategic/types/Window.tscn" id="5_7f3g0"]
+
+[node name="TileFactory" type="Node3D"]
+script = ExtResource("1_1odjh")
+tile_types = Array[PackedScene]([ExtResource("2_gwfxd"), ExtResource("3_kwi24"), ExtResource("4_xs1gn"), ExtResource("5_7f3g0")])

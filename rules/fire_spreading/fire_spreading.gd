@@ -10,14 +10,15 @@ var k2 := -log(1 - max_strenght_prob) / max_strenght  # wind vector length to pr
 
 
 func can_burn(tile: Tile) -> bool:
-	var flammable: Flammable = tile.get_mixin(Flammable)
+	return false
+	var flammable: FlammableImpl = tile.get_mixin(FlammableImpl)
 
 	return flammable != null && flammable.can_burn()
 
 
 func _fixed_prob(from: Tile, to: Tile) -> float:
-	var from_mat = from.get_mixin(Flammable).material
-	var to_mat = to.get_mixin(Flammable).material
+	var from_mat = from.get_mixin(FlammableImpl).material
+	var to_mat = to.get_mixin(FlammableImpl).material
 
 	var deltaT = to_mat.ignition_temp - Constants.room_temperature
 	var HRR = contact_heat_fraction * from_mat.heat_release_rate * 1000
@@ -28,12 +29,14 @@ func _fixed_prob(from: Tile, to: Tile) -> float:
 
 
 func _dynamic_prob(from: Tile, to: Tile) -> float:
-	var vector = from.wind
+	#var vector = from.wind
+	return 0
+	var vector = Vector3.ZERO
 
 	var a := k1 * vector.length()
 	var b := (k1 / 2.0) * vector.length()
 
-	var elipse_angle := vector.angle()
+	var elipse_angle: float = vector.angle()
 	var angle_to := from.direction_to(to).angle()
 
 	var point_on_elips := Vector2(
@@ -45,7 +48,7 @@ func _dynamic_prob(from: Tile, to: Tile) -> float:
 
 
 func is_spread(from: Tile, to: Tile) -> bool:
-	if to.get_mixin(Flammable) == null || !to.get_mixin(Flammable).can_burn():
+	if to.get_mixin(FlammableImpl) == null || !to.get_mixin(FlammableImpl).can_burn():
 		return false
 
 	var fixed_prob = _fixed_prob(from, to)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ujao577umlix"]
+[gd_scene load_steps=7 format=3 uid="uid://ujao577umlix"]
 
 [ext_resource type="Shader" uid="uid://beleb7aq1efb7" path="res://map/cutoff.gdshader" id="2_4hjbm"]
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://map/map.gd" id="2_lgq1i"]
-[ext_resource type="Script" uid="uid://cxsdkamskknfq" path="res://map/grid/grid.gd" id="4_lgq1i"]
+[ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://tiles/TileFactory.tscn" id="4_kffv2"]
+[ext_resource type="Script" uid="uid://cxsdkamskknfq" path="res://map/grid.gd" id="4_lgq1i"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
 
@@ -19,3 +20,5 @@ cutoff_shader = ExtResource("2_4hjbm")
 
 [node name="Grid" type="Node3D" parent="."]
 script = ExtResource("4_lgq1i")
+
+[node name="TileFactory" parent="." instance=ExtResource("4_kffv2")]

@@ -35,7 +35,7 @@ func _init(factories_path: String):
 
 func _ready():
 	for scene in _factories_scenes:
-		var factory: GridItemFactory = load(scene).instantiate()
+		var factory = load(scene).instantiate()
 		self.add_child(factory)
 		
 		if not _factories.has(factory.type):
