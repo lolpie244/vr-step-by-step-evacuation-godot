@@ -9,8 +9,7 @@ func _ready():
 	hide()
 	for scene in scenes:
 		var val = scene.instantiate()
-		self.add_child(val)
-		var type = val.get_node("Impl").get("type")
+		var type = val.get("type")
 
 		if not _instances.has(type):
 			_instances.set(type, [val])

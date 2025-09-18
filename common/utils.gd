@@ -66,7 +66,7 @@ static func find_children_with_type(node: Node, type_ref, recursive) -> Array:
 		if !recursive:
 			continue
 
-		result += find_children_with_type(child, type_ref, recursive) 
+		result += find_children_with_type(child, type_ref, recursive)
 	return result
 
 static func find_parent_with_type(node: Node, type_ref):

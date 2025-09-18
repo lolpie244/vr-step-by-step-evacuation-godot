@@ -1,15 +1,21 @@
 extends Node3D
 class_name CharacterStrategic
+var Impl: Character
 
 @onready var Pickable: XRToolsPickable = $PickableObject
-@onready var Impl: Character = $Impl
-
 @onready var model = $Model
+
+@export var type: Character.Type = Character.Type.Civilian
 
 var _tile_changed := false
 
+func init(impl: Character):
+	Impl = impl
+
 func _ready() -> void:
 	hide()
+
+	Impl.tile_changed.connect(_on_impl_tile_changed)
 	Pickable.picked_up.connect(_on_picked_up)
 	Pickable.dropped.connect(_on_dropped)
 
@@ -41,3 +47,11 @@ func _on_impl_tile_changed(_tile: Tile, direction: Vector2) -> void:
 		Vector2(direction.y, direction.x).angle() - self.rotation.y
 	)
 	show()
+
+
+func set_material(_material: ShaderMaterial):
+	for mesh in Utils.find_children_with_type(self, MeshInstance3D, true):
+		for i in mesh.get_surface_override_material_count():
+			var albedo = mesh.get_active_material(i).albedo_texture
+			_material.set_shader_parameter("_albedo", albedo)
+			mesh.set_surface_override_material(i, _material)

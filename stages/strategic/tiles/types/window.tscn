@@ -6,8 +6,6 @@
 
 [node name="Window" instance=ExtResource("1_xpnur")]
 script = ExtResource("2_naif6")
-
-[node name="Impl" parent="." index="1"]
 type = 4
 
-[node name="Model" parent="." index="2" instance=ExtResource("2_ykrxi")]
+[node name="Model" parent="." index="1" instance=ExtResource("2_ykrxi")]

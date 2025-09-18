@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://dt3rh630bnoyb"]
-
-[node name="Mixin" type="Node3D"]
-
-[node name="Impl" type="Node3D" parent="."]

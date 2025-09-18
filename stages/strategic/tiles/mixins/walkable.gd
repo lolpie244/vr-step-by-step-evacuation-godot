@@ -1,10 +1,12 @@
 extends Node3D
 
-@onready var Impl: Walkable = $Impl.instance
+@onready var tile: TileNode = Utils.find_parent_that_implements(self, "TileNode")
+@onready var Impl: Walkable = tile.Impl.get_or_create_mixin(Walkable)
 
 var _bodies_in_snap_zone_area: Array[XRToolsPickable] = []
 
 func _ready() -> void:
+	Impl.on_chacter_placed.connect(_on_character_placed)
 	hide()
 
 func _on_snap_zone_body_entered(body_: Node3D) -> void:
@@ -31,7 +33,7 @@ func _on_snap_zone_body_exited(body: Node3D) -> void:
 
 
 func _on_character_placed(character: Character):
-	var character_node = character.get_parent()
+	var character_node = tile.map.get_character_node(character)
 
 	if character_node.get_parent() == null:
 		get_parent().add_child(character_node)
@@ -43,7 +45,7 @@ func _on_character_placed(character: Character):
 	character_node.rotation = self.rotation
 
 	character_node.scale = Vector3.ONE
-	var character_scale_local = Impl._tile.grid.model_scale(character_node.model)
+	var character_scale_local = tile.map.model_scale(character_node.model)
 	var character_scale_global = character_node.global_basis.get_scale().x
 	character_node.scale = Vector3.ONE * (character_scale_local / character_scale_global)
 	Impl.get_tile().highlight = false

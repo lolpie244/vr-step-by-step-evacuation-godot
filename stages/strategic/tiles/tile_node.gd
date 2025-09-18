@@ -2,8 +2,17 @@ extends Node3D
 class_name TileNode
 const _implements := "TileNode"
 
-@onready var Impl: Tile = $Impl.instance
+var Impl: Tile
+
+@export var type: Tile.Type = Tile.Type.None
+
 @onready var model = $Model
+
+var map: Map
+
+func init(map_: Map, impl_: Tile):
+	map = map_
+	Impl = impl_
 
 func _set_impl(impl: Tile) -> void:
 	Impl = impl
@@ -16,11 +25,13 @@ func _swap_model(new_model):
 	model.free()
 	model = new_model
 
-func init():
+func _ready():
+	Impl.highlight_changed.connect(_on_impl_highlight_changed)
+
 	_swap_model(_get_model())
 
-	self.scale = Vector3.ONE * Impl.grid.model_scale(model)
-	self.position = Impl.grid.tile_position(Impl.pos.x, Impl.pos.y)
+	self.scale = Vector3.ONE * map.model_scale(model)
+	self.position = map.tile_position(Impl.pos.x, Impl.pos.y)
 
 
 func _get_model():

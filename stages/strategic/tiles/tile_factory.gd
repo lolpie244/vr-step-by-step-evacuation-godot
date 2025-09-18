@@ -2,8 +2,8 @@ extends NodeFactory
 class_name TileNodeFactory
 
 
-func create(type: Tile.Type, grid_: MapGrid, x_: int, y_: int) -> TileNode:
+func create(type: Tile.Type, map: Map, tile_impl: Tile) -> TileNode:
 	var result := _instances[type][0].duplicate(Utils.DEFAULT_DUPLICATE) as TileNode
-	result.get_node("Impl").instance.init(grid_, x_, y_)
+	result.init(map, tile_impl)
 
 	return result

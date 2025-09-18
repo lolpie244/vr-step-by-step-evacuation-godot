@@ -1,28 +1,32 @@
 extends MeshInstance3D
 class_name Map
+@onready var Impl: MapGrid = GameCore.grid
 
 @onready var tile_factory: TileNodeFactory = $TileNodeFactory
 @onready var character_factory: CharacterNodeFactory = $CharacterNodeFactory
-@onready var grid = $Grid
+@onready var map_items = $MapItems
 
-@export var enable_cutoff: bool = true
 @export var cutoff_shader: Shader
 var cutoff_material: ShaderMaterial
 
+var _tile_size: float
+var _tile_nodes: Array
+var _characters: Array
+
 var zoom: float:
 	get():
-		return grid.scale.x
+		return map_items.scale.x
 	set(new_zoom):
 		if new_zoom <= 0:
 			return
-		grid.scale = Vector3.ONE * new_zoom
+		map_items.scale = Vector3.ONE * new_zoom
 
 var offset: Vector2:
 	get():
-		return Vector2(grid.position.x, grid.position.z)
+		return Vector2(map_items.position.x, map_items.position.z)
 	set(new_offset):
-		grid.position.x = new_offset.x
-		grid.position.z = new_offset.y
+		map_items.position.x = new_offset.x
+		map_items.position.z = new_offset.y
 
 # temp
 var test_map = [
@@ -87,47 +91,64 @@ func _ready() -> void:
 func set_map(raw_map):
 	var tile_types := types_from_str(raw_map)
 
-	grid.resize(tile_types.size(), tile_types[0].size())
+	Impl.resize(tile_types.size(), tile_types[0].size())
+	_tile_nodes = Utils.get_matrix(tile_types.size(), tile_types[0].size())
 
 	var plane_size = self.get_aabb().size
 	if (
-		plane_size.x > plane_size.z and grid.rows_count() < grid.columns_count()
-		or plane_size.x < plane_size.z and grid.rows_count() > grid.columns_count()
+		plane_size.x > plane_size.z and Impl.rows_count() < Impl.columns_count()
+		or plane_size.x < plane_size.z and Impl.rows_count() > Impl.columns_count()
 	):
 		tile_types = Utils.transpose(tile_types)
-		grid.transpose()
+		Impl.transpose()
 
-	grid.tile_size = min(
-		self.get_aabb().size.x / grid.rows_count(), self.get_aabb().size.z / grid.columns_count()
+	_tile_size = min(
+		self.get_aabb().size.x / Impl.rows_count(), self.get_aabb().size.z / Impl.columns_count()
 	)
 
 	# set flags
-	for x in range(grid.rows_count()):
-		for y in range(grid.columns_count()):
-			grid.set_tile_node(x, y, tile_factory.create(tile_types[x][y], grid, x, y))
+	for x in range(Impl.rows_count()):
+		for y in range(Impl.columns_count()):
+			var tile_impl = Impl.create_tile(x, y)
+			_tile_nodes[x][y] = tile_factory.create(tile_types[x][y], self, tile_impl)
 
-	for x in range(grid.rows_count()):
-		for y in range(grid.columns_count()):
-			var tile: TileNode = grid.get_tile_node(x, y)
-			tile.init()
+	for x in range(Impl.rows_count()):
+		for y in range(Impl.columns_count()):
+			var tile: TileNode = _tile_nodes[x][y]
+			map_items.add_child(tile)
 
-			if enable_cutoff:
-				tile.set_material(self.cutoff_material)
+			tile.set_material(self.cutoff_material)
 
 
 func add_character(type: Character.Type, x: int, y: int):
 	var character: CharacterStrategic = character_factory.create(type)
-	grid.add_child(character)
-	character.Impl.place(grid.get_tile(x, y))
-
-	#if enable_cutoff:
-		#character.set_material(self.cutoff_material)
+	_characters.append(character)
+	character.Impl.place(Impl.get_tile(x, y))
+	character.set_material(self.cutoff_material)
 
 	return character
-#
-#
-#func move_character(character: Character, x: int, y: int) -> bool:
-	#var walkable = grid.get_tile_mixin(x, y, Walkable)
-	#if walkable == null:
-		#return false
-	#return character.place(walkable)
+
+
+func tile_position(x, y) -> Vector3:
+	return (
+		Vector3(_tile_size * x, 0, _tile_size * y)
+		- (Vector3(Impl.rows_count(), 0, Impl.columns_count()) * _tile_size / 2)
+		+ Vector3(_tile_size, 0, _tile_size) / 2
+	)
+
+func model_scale(model_) -> float:
+	var model_size = Utils.get_aabb(model_).size * model_.scale
+	return _tile_size / max(model_size.x, model_size.z)
+
+
+func get_tile_node(pos: Vector2i):
+	if !Impl._in_range(pos.x, pos.y):
+		return null
+	return _tile_nodes[pos.x][pos.y]
+
+
+func get_character_node(character: Character):
+	for node in _characters:
+		if node.Impl == character:
+			return node
+	return null

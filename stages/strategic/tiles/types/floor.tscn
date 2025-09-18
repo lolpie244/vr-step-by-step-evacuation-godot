@@ -6,15 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://4if45fr7sjl6" path="res://stages/strategic/tiles/mixins/walkable.tscn" id="4_wqcp5"]
 
 [node name="Floor" instance=ExtResource("1_a6w75")]
-
-[node name="Impl" parent="." index="1"]
 type = 1
 
-[node name="Flammable" parent="Impl" index="0" instance=ExtResource("3_y7fv3")]
+[node name="Flammable" parent="." index="0" instance=ExtResource("3_y7fv3")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.298921, 0)
 visible = false
 
-[node name="Walkable" parent="Impl" index="1" instance=ExtResource("4_wqcp5")]
+[node name="Walkable" parent="." index="1" instance=ExtResource("4_wqcp5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20416, 0)
 
 [node name="Model" parent="." index="2" instance=ExtResource("2_2muul")]

@@ -1,7 +1,6 @@
 extends Node3D
 
 @onready var map: Map = $Map
-@onready var grid: MapGrid = $Map/Grid
 @onready var scale_lever: Lever = $ScaleLever
 @onready var offset_joystick: Joystick = $OffsetJoystick
 
@@ -12,26 +11,7 @@ var character
 
 func _ready() -> void:
 	character = map.add_character(Character.Type.Civilian, 8, 1)
-
-	# character.highlight_reachable(true)
-
-	# character.visible_tiles()
-	grid.get_tile_mixin(9, 1, Flammable).ignite()
-
-	# var context := FirstPerson.Context.new(character)
-	# SceneManager.load_scene(next_scene, context)
-
-	# spread_fun_timer()
-
-
-func spread_fun_timer():
-	var t := Timer.new()
-	t.wait_time = 5.0
-	t.one_shot = false
-	t.autostart = true
-	add_child(t)
-	t.timeout.connect(grid.spread_fire)
-
+	GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
 
 func _on_zoom_lever_moved(_angle: Variant) -> void:
 	map.zoom += -0.02 * scale_lever.fill_ratio
