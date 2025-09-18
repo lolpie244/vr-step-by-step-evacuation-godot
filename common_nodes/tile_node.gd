@@ -1,21 +1,21 @@
 extends Node3D
 class_name TileNode
 const _implements := "TileNode"
-
 var Impl: Tile
 
 @export var type: Tile.Type = Tile.Type.None
-
 @onready var model = $Model
 
 var map: Map
 
-func init(map_: Map, impl_: Tile):
-	map = map_
+var _tile_size: float
+
+func init(tile_size: float, impl_: Tile):
+	_tile_size = tile_size
 	Impl = impl_
 
-func _set_impl(impl: Tile) -> void:
-	Impl = impl
+func set_map(map_: Map):
+	map = map_
 
 func _swap_model(new_model):
 	if model == new_model:
@@ -30,8 +30,8 @@ func _ready():
 
 	_swap_model(_get_model())
 
-	self.scale = Vector3.ONE * map.model_scale(model)
-	self.position = map.tile_position(Impl.pos.x, Impl.pos.y)
+	self.scale = Vector3.ONE * model_scale(model)
+	self.position = tile_position(Impl.pos.x, Impl.pos.y)
 
 
 func _get_model():
@@ -56,3 +56,15 @@ func _on_impl_highlight_changed(value: bool) -> void:
 		$Animation.play("highlight")
 	else:
 		$Animation.play_backwards("highlight")
+
+
+func tile_position(x, y) -> Vector3:
+	return (
+		Vector3(_tile_size * x, 0, _tile_size * y)
+		- (Vector3(Impl.grid.rows_count(), 0, Impl.grid.columns_count()) * _tile_size / 2)
+		+ Vector3(_tile_size, 0, _tile_size) / 2
+	)
+
+func model_scale(model_) -> float:
+	var model_size = Utils.get_aabb(model_).size * model_.scale
+	return _tile_size / max(model_size.x, model_size.z)

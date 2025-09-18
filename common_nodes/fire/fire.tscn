@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://bypa1gccleaiv"]
 
-[ext_resource type="Script" uid="uid://bcs403rda4m6d" path="res://common/fire/fire.gd" id="1_b8jli"]
-[ext_resource type="Material" uid="uid://cycmxkjmsa8l6" path="res://common/fire/fire.material" id="2_36qlx"]
-[ext_resource type="Material" uid="uid://b1natfkjxenqq" path="res://common/fire/sparks.material" id="3_bol52"]
+[ext_resource type="Script" uid="uid://bcs403rda4m6d" path="res://common_nodes/fire/fire.gd" id="1_b8jli"]
+[ext_resource type="Material" uid="uid://cycmxkjmsa8l6" path="res://common_nodes/fire/fire.material" id="2_36qlx"]
+[ext_resource type="Material" uid="uid://b1natfkjxenqq" path="res://common_nodes/fire/sparks.material" id="3_bol52"]
 
 [sub_resource type="Curve" id="Curve_6eayl"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.921318), 0.0, 0.0, 0, 0]

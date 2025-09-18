@@ -67,3 +67,9 @@ func visible_tiles():
 	for tile in tiles:
 		if tile != null:
 			tile.highlight = true
+
+func get_tile() -> Tile:
+	if !_walkable:
+		return null
+
+	return _walkable.get_tile()

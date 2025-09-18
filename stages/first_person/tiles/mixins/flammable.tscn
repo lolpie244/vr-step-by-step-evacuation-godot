@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo3vblsvejx6g"]
+
+[ext_resource type="Script" uid="uid://cpdug00n5hbd4" path="res://common_nodes/tile_mixins/flammable.gd" id="1_a0ddl"]
+[ext_resource type="PackedScene" uid="uid://bypa1gccleaiv" path="res://common_nodes/fire/fire.tscn" id="2_3n17a"]
+
+[node name="Flammable" type="Node3D"]
+script = ExtResource("1_a0ddl")
+
+[node name="Fire" parent="." instance=ExtResource("2_3n17a")]

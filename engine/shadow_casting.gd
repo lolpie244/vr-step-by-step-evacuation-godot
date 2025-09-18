@@ -80,7 +80,10 @@ static func visible_tiles(origin: Tile) -> Array[Tile]:
 
 		var is_wall := func(row_tile: Pair):
 			var tile = quadrant.get_tile(row_tile)
-			return tile != null && tile.blocking
+			if tile == null:
+				return false
+			var mixin = tile.get_mixin(Blockable)
+			return mixin != null && mixin.blocking
 
 		var is_floor := func(row_tile: Pair):
 			var tile = quadrant.get_tile(row_tile)

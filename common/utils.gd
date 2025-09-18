@@ -44,19 +44,6 @@ static func get_aabb(node: Node3D) -> AABB:
 	return _collect_aabb(node, AABB())
 
 
-static func find_child_with_type(node: Node, type_ref, recursive):
-	for child in node.get_children():
-		if is_instance_of(child, type_ref):
-			return child
-
-		if !recursive:
-			continue
-
-		var grandchild = find_child_with_type(child, type_ref, recursive)
-		if grandchild != null:
-			return grandchild
-	return null
-
 static func find_children_with_type(node: Node, type_ref, recursive) -> Array:
 	var result : Array = []
 	for child in node.get_children():
@@ -68,16 +55,6 @@ static func find_children_with_type(node: Node, type_ref, recursive) -> Array:
 
 		result += find_children_with_type(child, type_ref, recursive)
 	return result
-
-static func find_parent_with_type(node: Node, type_ref):
-	if is_instance_of(node, type_ref):
-		return node
-
-	if node.get_parent() == null:
-		return null
-
-	return find_parent_with_type(node.get_parent(), type_ref)
-
 
 static func find_parent_that_implements(node: Node, implements: String):
 	if node.get("_implements") == implements:

@@ -2,7 +2,7 @@ extends MeshInstance3D
 class_name Map
 @onready var Impl: MapGrid = GameCore.grid
 
-@onready var tile_factory: TileNodeFactory = $TileNodeFactory
+@onready var tile_factory: StrategicTileFactory = $StrategicTileFactory
 @onready var character_factory: CharacterNodeFactory = $CharacterNodeFactory
 @onready var map_items = $MapItems
 
@@ -109,8 +109,8 @@ func set_map(raw_map):
 	# set flags
 	for x in range(Impl.rows_count()):
 		for y in range(Impl.columns_count()):
-			var tile_impl = Impl.create_tile(x, y)
-			_tile_nodes[x][y] = tile_factory.create(tile_types[x][y], self, tile_impl)
+			var tile_impl = Impl.create_tile(tile_types[x][y], x, y)
+			_tile_nodes[x][y] = tile_factory.create(self, tile_impl)
 
 	for x in range(Impl.rows_count()):
 		for y in range(Impl.columns_count()):
@@ -129,16 +129,6 @@ func add_character(type: Character.Type, x: int, y: int):
 	return character
 
 
-func tile_position(x, y) -> Vector3:
-	return (
-		Vector3(_tile_size * x, 0, _tile_size * y)
-		- (Vector3(Impl.rows_count(), 0, Impl.columns_count()) * _tile_size / 2)
-		+ Vector3(_tile_size, 0, _tile_size) / 2
-	)
-
-func model_scale(model_) -> float:
-	var model_size = Utils.get_aabb(model_).size * model_.scale
-	return _tile_size / max(model_size.x, model_size.z)
 
 
 func get_tile_node(pos: Vector2i):

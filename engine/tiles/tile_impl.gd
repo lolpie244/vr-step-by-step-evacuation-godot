@@ -15,9 +15,9 @@ enum Type {
 var _x: int
 var _y: int
 var grid: MapGrid
-@export var type: Type = Type.None
-
+var type: Type = Type.None
 var mixins: Array[TileMixin] = []
+
 
 var pos: Vector2i:
 	get():
@@ -31,7 +31,8 @@ var highlight: bool:
 		highlight_changed.emit(highlight)
 
 
-func _init(grid_: MapGrid, x_: int, y_: int):
+func _init(type_: Type, grid_: MapGrid, x_: int, y_: int):
+	type = type_
 	_x = x_
 	_y = y_
 	grid = grid_
@@ -43,6 +44,7 @@ func get_mixin(mixin_type):
 			return mixin
 
 	return null
+
 
 func get_or_create_mixin(mixin_type):
 	var mixin = get_mixin(mixin_type)

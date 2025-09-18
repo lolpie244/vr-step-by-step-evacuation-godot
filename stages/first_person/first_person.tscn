@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgdwn2epdpwlb"]
+[gd_scene load_steps=12 format=3 uid="uid://cgdwn2epdpwlb"]
 
 [ext_resource type="Script" uid="uid://b61pr07hqsne1" path="res://stages/first_person/first_person.gd" id="1_ybnn0"]
 [ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/player_VR.tscn" id="2_5f22i"]
 [ext_resource type="PackedScene" uid="uid://7rb21rnqffq6" path="res://stages/first_person/item_dropper.tscn" id="3_xp1sn"]
+[ext_resource type="Script" uid="uid://b0f8r732djm5r" path="res://stages/first_person/tiles/tile_factory.gd" id="4_7313h"]
+[ext_resource type="PackedScene" uid="uid://c6gwleccy4yso" path="res://stages/first_person/tiles/types/door.tscn" id="5_0xgnx"]
+[ext_resource type="PackedScene" uid="uid://cswabutocau3i" path="res://stages/first_person/tiles/types/floor.tscn" id="6_rvqsj"]
+[ext_resource type="PackedScene" uid="uid://by5xg0rlj0wnw" path="res://stages/first_person/tiles/types/wall.tscn" id="7_2vkjx"]
+[ext_resource type="PackedScene" uid="uid://ucw376iw8aqd" path="res://stages/first_person/tiles/types/window.tscn" id="8_0x2kq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ybnn0"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -30,3 +35,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55165, 0)
 
 [node name="ItemDropper" parent="." instance=ExtResource("3_xp1sn")]
+
+[node name="Factory" type="Node3D" parent="."]
+script = ExtResource("4_7313h")
+scenes = Array[PackedScene]([ExtResource("5_0xgnx"), ExtResource("6_rvqsj"), ExtResource("7_2vkjx"), ExtResource("8_0x2kq")])

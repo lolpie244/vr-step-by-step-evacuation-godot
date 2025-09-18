@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 
 @onready var tile: TileNode = Utils.find_parent_that_implements(self, "TileNode")
