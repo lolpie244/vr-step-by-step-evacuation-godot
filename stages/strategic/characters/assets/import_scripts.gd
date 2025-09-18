@@ -2,6 +2,7 @@
 
 extends EditorScenePostImport
 
+
 func _post_import(scene):
 	var new_root := CharacterBody3D.new()
 	new_root.name = scene.name
@@ -11,11 +12,13 @@ func _post_import(scene):
 
 	return new_root
 
+
 func _move_children(from, to):
 	for child in from.get_children():
 		child.owner = null
 		from.remove_child(child)
 		to.add_child(child)
+
 
 func _set_new_owner(node: Node, owner: Node):
 	# If we set a node's owner to itself, we'll get an error

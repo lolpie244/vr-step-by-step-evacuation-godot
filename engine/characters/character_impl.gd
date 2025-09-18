@@ -12,8 +12,10 @@ var _speed: int
 var _walkable: Walkable
 var _reachable: Array[Walkable.ReachableResult] = []
 
+
 func _init():
 	_speed = base_speed
+
 
 func place(tile: Tile):
 	var walkable := tile.get_mixin(Walkable) as Walkable
@@ -37,6 +39,7 @@ func place(tile: Tile):
 
 	return true
 
+
 func restore():
 	_walkable.place_character(self)
 
@@ -52,6 +55,8 @@ func is_reachable(walkable: Walkable) -> Walkable.ReachableResult:
 
 
 var _reachable_highlighted := false
+
+
 func highlight_reachable(highlight: bool):
 	if _reachable_highlighted == highlight:
 		return
@@ -67,6 +72,7 @@ func visible_tiles():
 	for tile in tiles:
 		if tile != null:
 			tile.highlight = true
+
 
 func get_tile() -> Tile:
 	if !_walkable:

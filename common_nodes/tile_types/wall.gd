@@ -3,6 +3,7 @@ extends WallLikeTile
 @onready var original_mesh = $Model.mesh
 @onready var original_material = $Model.get_active_material(0)
 
+
 func _get_model():
 	var left = _is_wall(Impl.pos.x - 1, Impl.pos.y)
 	var right = _is_wall(Impl.pos.x + 1, Impl.pos.y)
@@ -30,6 +31,7 @@ func _get_model():
 
 	result.multimesh = mm
 	return result
+
 
 func set_material(material: ShaderMaterial):
 	var material_ = material.duplicate()

@@ -7,11 +7,11 @@ signal strength_changed(strength: float)
 @onready var pickup: XRToolsPickable = $HandlePickup
 @onready var mesh = $HandlePickup/Mesh
 
-const start_rotation: float = 0;
-const end_rotation: float = 27;
-
+const start_rotation: float = 0
+const end_rotation: float = 27
 
 var strength: float
+
 
 func _strength_changed(button: String, value: float) -> void:
 	if button != "trigger" || !pickup.is_picked_up() || !extinguisher.is_pin_released:
@@ -25,7 +25,7 @@ func _strength_changed(button: String, value: float) -> void:
 
 func _on_handle_pickup_grabbed(_pickable: Variant, by: Variant) -> void:
 	var action_signal = by._controller.input_float_changed
-	
+
 	if not action_signal.is_connected(_strength_changed):
 		action_signal.connect(_strength_changed)
 

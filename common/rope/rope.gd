@@ -15,12 +15,13 @@ signal max_extend(end_position: Vector3)
 
 @onready var mesh = $CSGPolygon3D
 
-var points : Array[Vector3]
-var segments : Array[RigidBody3D]
-var joints : Array[PinJoint3D]
+var points: Array[Vector3]
+var segments: Array[RigidBody3D]
+var joints: Array[PinJoint3D]
 
 var max_length: float
 var _attached_to_end_offset: Vector3
+
 
 func _ready() -> void:
 	var segment_length = curve.get_baked_length() / segments_count
@@ -40,9 +41,9 @@ func _ready() -> void:
 		body.add_child(collision)
 
 		body.gravity_scale = 0.5
-		body.linear_damp  = 2.0 # decrease swing
+		body.linear_damp = 2.0  # decrease swing
 		body.angular_damp = 5.0
-		body.collision_layer = 0 # so it will not move other objects
+		body.collision_layer = 0  # so it will not move other objects
 
 		# position rigidbody between the joints
 		body.position = points[i] + (points[i + 1] - points[i]) / 2
@@ -71,9 +72,14 @@ func _ready() -> void:
 			joints[i].node_b = segments[i].get_path()
 
 	# setup mesh. Create polygon with "mesh_sides" sides that is stretched along a path
-	var rope_shape : PackedVector2Array
+	var rope_shape: PackedVector2Array
 	for i in mesh_sides:
-		rope_shape.append(Vector2(sin(2 * PI * (i + 1) / mesh_sides), cos(2 * PI * ( i + 1 ) / mesh_sides)) * thickness)
+		rope_shape.append(
+			(
+				Vector2(sin(2 * PI * (i + 1) / mesh_sides), cos(2 * PI * (i + 1) / mesh_sides))
+				* thickness
+			)
+		)
 	mesh.polygon = rope_shape
 	mesh.depth = segment_length
 
@@ -113,12 +119,32 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	# update curve positions
 	for p in curve.point_count:
-		if  p < (segments_count):
+		if p < (segments_count):
 			# new_origin_position + base_origin + half_size == end of element == joint_position
-			curve.set_point_position(p, to_local(segments[p].position + segments[p].transform.basis.y * segments[p].get_child(0).shape.height / 2))
+			curve.set_point_position(
+				p,
+				to_local(
+					(
+						segments[p].position
+						+ segments[p].transform.basis.y * segments[p].get_child(0).shape.height / 2
+					)
+				)
+			)
 		else:
 			# for the last segment we do the opposite - find begin of element == joint position
-			curve.set_point_position(p, to_local(segments[p - 1].position - segments[p - 1].transform.basis.y * segments[p - 1].get_child(0).shape.height / 2))
+			curve.set_point_position(
+				p,
+				to_local(
+					(
+						segments[p - 1].position
+						- (
+							segments[p - 1].transform.basis.y
+							* segments[p - 1].get_child(0).shape.height
+							/ 2
+						)
+					)
+				)
+			)
 
 	if attached_to_end:
 		var start := segments[0].global_position
@@ -126,7 +152,9 @@ func _physics_process(_delta: float) -> void:
 		var offset := end - start
 
 		if offset.length() > max_length:
-			emit_signal("max_extend", start + offset.normalized() * max_length + _attached_to_end_offset)
+			emit_signal(
+				"max_extend", start + offset.normalized() * max_length + _attached_to_end_offset
+			)
 
 
 func drop_end() -> bool:

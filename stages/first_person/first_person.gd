@@ -4,6 +4,7 @@ class_name FirstPerson
 
 @onready var factory: FirstPersonTileFactory = $Factory
 
+
 class Context:
 	pass
 	var character: Character

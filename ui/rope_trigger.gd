@@ -5,6 +5,7 @@ class_name RopeTrigger
 
 signal triggerred
 
+
 func _on_rope_max_extend(end_position: Vector3) -> void:
 	if !rope_item.is_picked_up():
 		return
@@ -19,6 +20,7 @@ func _on_rope_max_extend(end_position: Vector3) -> void:
 
 func spawn():
 	$AnimationPlayer.play("show")
+
 
 func remove():
 	$AnimationPlayer.play("remove")

@@ -11,8 +11,8 @@ var support_freeze: bool = false
 
 var _previous_do_sync: bool
 
-var _default_condition = func(_target, _source):
-	return true
+var _default_condition = func(_target, _source): return true
+
 
 func _init(target_: Node3D, source_: Node3D, condition_: Callable = _default_condition):
 	target = target_
@@ -22,6 +22,7 @@ func _init(target_: Node3D, source_: Node3D, condition_: Callable = _default_con
 		default_freeze = target.freeze
 		support_freeze = true
 	offset = source.global_transform.affine_inverse() * target.global_transform
+
 
 func sync():
 	var do_sync: bool = condition.call(target, source)

@@ -10,12 +10,15 @@ var map: Map
 
 var _tile_size: float
 
+
 func init(tile_size: float, impl_: Tile):
 	_tile_size = tile_size
 	Impl = impl_
 
+
 func set_map(map_: Map):
 	map = map_
+
 
 func _swap_model(new_model):
 	if model == new_model:
@@ -24,6 +27,7 @@ func _swap_model(new_model):
 	self.add_child(new_model)
 	model.free()
 	model = new_model
+
 
 func _ready():
 	Impl.highlight_changed.connect(_on_impl_highlight_changed)
@@ -64,6 +68,7 @@ func tile_position(x, y) -> Vector3:
 		- (Vector3(Impl.grid.rows_count(), 0, Impl.grid.columns_count()) * _tile_size / 2)
 		+ Vector3(_tile_size, 0, _tile_size) / 2
 	)
+
 
 func model_scale(model_) -> float:
 	var model_size = Utils.get_aabb(model_).size * model_.scale

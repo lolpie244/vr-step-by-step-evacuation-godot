@@ -1,9 +1,11 @@
 extends TileNode
 class_name WallLikeTile
 
+
 func init(tile_size: float, impl_: Tile):
 	super.init(tile_size, impl_)
 	Impl.get_or_create_mixin(Blockable)
+
 
 func _is_wall(x_: int, y_: int):
 	var tile = GameCore.grid.get_tile_mixin(x_, y_, Blockable)

@@ -5,6 +5,7 @@ class_name NodeFactory
 
 var _instances: Dictionary = {}
 
+
 func _ready():
 	hide()
 	for scene in scenes:

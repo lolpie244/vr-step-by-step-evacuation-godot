@@ -9,8 +9,10 @@ var Impl: Character
 
 var _tile_changed := false
 
+
 func init(impl: Character):
 	Impl = impl
+
 
 func _ready() -> void:
 	hide()
@@ -31,11 +33,14 @@ func _on_picked_up(_holder) -> void:
 
 
 func _on_dropped(_pickable) -> void:
-	(func():
-		if !_tile_changed:
-			Impl.restore()
-		_tile_changed = false
-	).call_deferred()
+	(
+		(func():
+			if !_tile_changed:
+				Impl.restore()
+			_tile_changed = false)
+		. call_deferred()
+	)
+
 
 func on_poke():
 	Impl.highlight_reachable(!Impl._reachable_highlighted)
@@ -43,9 +48,7 @@ func on_poke():
 
 func _on_impl_tile_changed(_tile: Tile, direction: Vector2) -> void:
 	_tile_changed = true
-	self.rotate_y(
-		Vector2(direction.y, direction.x).angle() - self.rotation.y
-	)
+	self.rotate_y(Vector2(direction.y, direction.x).angle() - self.rotation.y)
 	show()
 
 

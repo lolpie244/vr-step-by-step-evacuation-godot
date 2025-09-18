@@ -6,6 +6,7 @@ class_name ExtinguisherPin
 
 var is_pin_released: bool = false
 
+
 func _process(_delta):
 	if is_pin_released || !pickup.is_picked_up():
 		return

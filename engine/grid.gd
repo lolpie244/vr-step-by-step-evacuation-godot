@@ -24,6 +24,7 @@ func columns_count() -> int:
 		return tiles[0].size()
 	return 0
 
+
 func create_tile(type: Tile.Type, x: int, y: int) -> Tile:
 	tiles[x][y] = Tile.new(type, self, x, y)
 	return tiles[x][y]

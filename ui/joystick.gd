@@ -23,9 +23,9 @@ var fill_ratio: Vector2:
 			)
 		)
 
-
 var _is_picked_up: bool = false
 var _last_angle: Vector2 = Vector2.ZERO
+
 
 func _process(_delta: float) -> void:
 	if !_is_picked_up:

@@ -5,6 +5,7 @@ extends Node3D
 
 var xr_interface: XRInterface
 
+
 func _get_configuration_warning():
 	if not strategic_scene or not fallback_scene:
 		return "Scene's are missing"
@@ -12,10 +13,7 @@ func _get_configuration_warning():
 
 
 func _set_action_set_priorities():
-	const priorities = {
-		"godot": 0,
-		"strategic": 1
-	}
+	const priorities = {"godot": 0, "strategic": 1}
 
 	var action_map: OpenXRActionMap = load("res://openxr_action_map.tres")
 
@@ -35,7 +33,6 @@ func _ready():
 
 		SceneManager.load_scene(fallback_scene)
 		return
-
 
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	get_viewport().use_xr = true

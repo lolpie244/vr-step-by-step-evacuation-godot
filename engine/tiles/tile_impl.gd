@@ -18,7 +18,6 @@ var grid: MapGrid
 var type: Type = Type.None
 var mixins: Array[TileMixin] = []
 
-
 var pos: Vector2i:
 	get():
 		return Vector2i(_x, _y)

@@ -14,6 +14,7 @@ var cooling_coef:
 		cooling_coef = val
 		fire.material_override.set_shader_parameter("temperature_cooling_rate", val)
 
+
 func _process(_delta: float) -> void:
 	var new_scale = global_basis.get_scale()
 	new_scale = Vector2(new_scale.x, new_scale.z)

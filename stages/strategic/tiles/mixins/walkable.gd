@@ -5,9 +5,11 @@ extends Node3D
 
 var _bodies_in_snap_zone_area: Array[XRToolsPickable] = []
 
+
 func _ready() -> void:
 	Impl.on_chacter_placed.connect(_on_character_placed)
 	hide()
+
 
 func _on_snap_zone_body_entered(body_: Node3D) -> void:
 	if not is_instance_of(body_, XRToolsPickable):
@@ -17,7 +19,11 @@ func _on_snap_zone_body_entered(body_: Node3D) -> void:
 	var character_node: CharacterStrategic = body.get_parent()
 	var character: Character = character_node.Impl
 
-	if !body.is_picked_up() || body in _bodies_in_snap_zone_area || character.is_reachable(Impl) == null:
+	if (
+		!body.is_picked_up()
+		|| body in _bodies_in_snap_zone_area
+		|| character.is_reachable(Impl) == null
+	):
 		return
 
 	Impl.get_tile().highlight = true
@@ -54,7 +60,8 @@ func _on_character_placed(character: Character):
 	while parent:
 		parent = parent.get_parent()
 
+
 func _character_dropped(craracter_rigid: RigidBody3D):
-	var character : Character = craracter_rigid.get_parent().Impl
+	var character: Character = craracter_rigid.get_parent().Impl
 	character.place(Impl.get_tile())
 	Impl.get_tile().highlight = false

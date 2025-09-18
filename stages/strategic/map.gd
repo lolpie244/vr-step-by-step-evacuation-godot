@@ -129,8 +129,6 @@ func add_character(type: Character.Type, x: int, y: int):
 	return character
 
 
-
-
 func get_tile_node(pos: Vector2i):
 	if !Impl._in_range(pos.x, pos.y):
 		return null
