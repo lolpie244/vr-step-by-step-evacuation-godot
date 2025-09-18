@@ -1,11 +1,8 @@
 extends XROrigin3D
 
-@onready var LeftHand = $LeftHand
-@onready var RightHand = $RightHand
+var xr_interface: OpenXRInterface = XRServer.find_interface("OpenXR")
 
 @onready var _blink_length: float = $AnimationPlayer.get_animation("blink").length
-
-var xr_interface: OpenXRInterface = XRServer.find_interface("OpenXR")
 
 
 func _ready() -> void:

@@ -1,16 +1,16 @@
 extends Node3D
 
-@onready var map: Map = $Map
-@onready var grid: MapGrid = $Map/Grid
-
 @export var next_scene: PackedScene
 
 var character
 
+@onready var map: Map = $Map
+@onready var grid: MapGrid = $Map/Grid
+
 
 func _ready() -> void:
 	pass
-	#character = map.add_character(CharacterFactory.Type.Civilian, 8, 1)
+	#character = map.add_character(CharacterFactory.Type.CIVILIAN, 8, 1)
 
 	# character.highlight_reachable(true)
 

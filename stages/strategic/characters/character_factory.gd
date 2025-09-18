@@ -1,5 +1,5 @@
-extends NodeFactory
 class_name CharacterNodeFactory
+extends NodeFactory
 
 
 func create(type) -> CharacterStrategic:

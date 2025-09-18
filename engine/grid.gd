@@ -1,6 +1,5 @@
-extends Node3D
-
 class_name MapGrid
+extends Node3D
 
 var tiles: Array
 var tile_size: float

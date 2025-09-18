@@ -1,17 +1,17 @@
-extends TileMixin
 class_name Flammable
+extends TileMixin
 
 signal state_changed(state: State)
-
-var material: TileMaterial
-var state := State.NOT_BURNING
-var cooling_percentage := 0.1
 
 enum State {
 	NOT_BURNING = 1 << 0,
 	BURNING = 1 << 1,
 	BURNED = 1 << 2,
 }
+
+var material: TileMaterial
+var state := State.NOT_BURNING
+var cooling_percentage := 0.1
 
 
 func can_burn():

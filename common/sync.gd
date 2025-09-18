@@ -1,6 +1,5 @@
-extends Node
-
 class_name Sync
+extends Node
 
 var offset: Transform3D
 var target: Node3D
@@ -14,10 +13,10 @@ var _previous_do_sync: bool
 var _default_condition = func(_target, _source): return true
 
 
-func _init(target_: Node3D, source_: Node3D, condition_: Callable = _default_condition):
-	target = target_
-	source = source_
-	condition = condition_
+func _init(_target: Node3D, _source: Node3D, _condition: Callable = _default_condition):
+	target = _target
+	source = _source
+	condition = _condition
 	if "freeze" in target:
 		default_freeze = target.freeze
 		support_freeze = true

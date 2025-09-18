@@ -1,6 +1,6 @@
+class_name ShadowCasting
 extends Node
 
-class_name ShadowCasting
 
 enum Direction {
 	NORTH,
@@ -15,11 +15,11 @@ class Quadrant:
 	var origin: Vector2i
 	var grid: MapGrid
 
-	func _init(direction_: Direction, origin_: Tile):
-		self.grid = origin_.grid
-		self.origin = origin_.pos
+	func _init(_direction: Direction, _origin: Tile):
+		self.grid = _origin.grid
+		self.origin = _origin.pos
 
-		self.direction = direction_
+		self.direction = _direction
 
 	func get_tile(row_tile: Pair) -> Tile:
 		if row_tile == null:
@@ -43,10 +43,10 @@ class Row:
 	var start: float
 	var end: float
 
-	func _init(depth_: int, start_: float, end_: float):
-		self.depth = depth_
-		self.start = start_
-		self.end = end_
+	func _init(_depth: int, _start: float, _end: float):
+		self.depth = _depth
+		self.start = _start
+		self.end = _end
 
 	func tiles() -> Array[Pair]:
 		var result: Array[Pair] = []

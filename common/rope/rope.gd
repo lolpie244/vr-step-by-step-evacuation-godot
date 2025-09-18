@@ -1,3 +1,4 @@
+class_name Rope
 extends Path3D
 
 signal max_extend(end_position: Vector3)
@@ -13,14 +14,14 @@ signal max_extend(end_position: Vector3)
 @export var attached_to_start: PhysicsBody3D
 @export var attached_to_end: PhysicsBody3D
 
-@onready var mesh = $CSGPolygon3D
-
 var points: Array[Vector3]
 var segments: Array[RigidBody3D]
 var joints: Array[PinJoint3D]
 
 var max_length: float
 var _attached_to_end_offset: Vector3
+
+@onready var mesh = $CSGPolygon3D
 
 
 func _ready() -> void:

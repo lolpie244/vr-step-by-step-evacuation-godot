@@ -1,7 +1,7 @@
 extends Node
 
-var _scene_stack: Array
-var current_scene = null
+var current_scene: Node = null
+var _scene_stack: Array = []
 
 
 func _ready() -> void:

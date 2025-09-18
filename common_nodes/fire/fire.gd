@@ -1,10 +1,6 @@
 @tool
-extends Node3D
 class_name FireEffect
-
-@onready var fire: GPUParticles3D = $Fire
-@onready var sparks: GPUParticles3D = $Fire/Sparks
-@onready var root = get_parent()
+extends Node3D
 
 var enabled := false
 var fire_scale: Vector2
@@ -13,6 +9,10 @@ var cooling_coef:
 	set(val):
 		cooling_coef = val
 		fire.material_override.set_shader_parameter("temperature_cooling_rate", val)
+
+@onready var fire: GPUParticles3D = $Fire
+@onready var sparks: GPUParticles3D = $Fire/Sparks
+@onready var root = get_parent()
 
 
 func _process(_delta: float) -> void:

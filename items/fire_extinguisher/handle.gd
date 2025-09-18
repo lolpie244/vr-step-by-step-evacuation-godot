@@ -1,16 +1,16 @@
-extends Node3D
 class_name ExtinguisherHandle
+extends Node3D
 
 signal strength_changed(strength: float)
+
+const START_ROTATION: float = 0
+const END_ROTATION: float = 27
+
+var strength: float
 
 @onready var extinguisher: Extinguisher = get_owner()
 @onready var pickup: XRToolsPickable = $HandlePickup
 @onready var mesh = $HandlePickup/Mesh
-
-const start_rotation: float = 0
-const end_rotation: float = 27
-
-var strength: float
 
 
 func _strength_changed(button: String, value: float) -> void:
@@ -18,7 +18,7 @@ func _strength_changed(button: String, value: float) -> void:
 		return
 
 	strength = value
-	mesh.rotation_degrees.x = -((end_rotation - start_rotation) * strength + start_rotation)
+	mesh.rotation_degrees.x = -((END_ROTATION - START_ROTATION) * strength + START_ROTATION)
 
 	strength_changed.emit(strength)
 

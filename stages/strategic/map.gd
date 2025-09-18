@@ -1,17 +1,8 @@
-extends MeshInstance3D
 class_name Map
-@onready var Impl: MapGrid = GameCore.grid
-
-@onready var tile_factory: StrategicTileFactory = $StrategicTileFactory
-@onready var character_factory: CharacterNodeFactory = $CharacterNodeFactory
-@onready var map_items = $MapItems
+extends MeshInstance3D
 
 @export var cutoff_shader: Shader
 var cutoff_material: ShaderMaterial
-
-var _tile_size: float
-var _tile_nodes: Array
-var _characters: Array
 
 var zoom: float:
 	get():
@@ -27,6 +18,15 @@ var offset: Vector2:
 	set(new_offset):
 		map_items.position.x = new_offset.x
 		map_items.position.z = new_offset.y
+
+var _tile_size: float
+var _tile_nodes: Array
+var _characters: Array
+
+@onready var impl: MapGrid = GameCore.grid
+@onready var tile_factory: StrategicTileFactory = $StrategicTileFactory
+@onready var character_factory: CharacterNodeFactory = $CharacterNodeFactory
+@onready var map_items = $MapItems
 
 # temp
 var test_map = [
@@ -51,22 +51,22 @@ static func types_from_str(str_map: Array) -> Array:
 	if str_map.size() < 0:
 		return []
 
-	var result = Utils.get_matrix(str_map.size(), str_map[0].size(), Tile.Type.None)
+	var result = Utils.get_matrix(str_map.size(), str_map[0].size(), Tile.Type.NONE)
 
 	for i in str_map.size():
 		for j in str_map[i].size():
 			match str_map[i][j]:
 				"w":
-					result[i][j] = Tile.Type.Wall
+					result[i][j] = Tile.Type.WALL
 				"f":
-					result[i][j] = Tile.Type.Floor
+					result[i][j] = Tile.Type.FLOOR
 				"d":
-					result[i][j] = Tile.Type.Door
+					result[i][j] = Tile.Type.DOOR
 				"o":
-					result[i][j] = Tile.Type.Window
+					result[i][j] = Tile.Type.WINDOW
 				_:
 					push_warning("Unknown tile: on position [%, %]" % i, j)
-					result.type_grid[i][j] = Tile.Type.None
+					result.type_grid[i][j] = Tile.Type.NONE
 
 	return result
 
@@ -91,29 +91,29 @@ func _ready() -> void:
 func set_map(raw_map):
 	var tile_types := types_from_str(raw_map)
 
-	Impl.resize(tile_types.size(), tile_types[0].size())
+	impl.resize(tile_types.size(), tile_types[0].size())
 	_tile_nodes = Utils.get_matrix(tile_types.size(), tile_types[0].size())
 
 	var plane_size = self.get_aabb().size
 	if (
-		plane_size.x > plane_size.z and Impl.rows_count() < Impl.columns_count()
-		or plane_size.x < plane_size.z and Impl.rows_count() > Impl.columns_count()
+		plane_size.x > plane_size.z and impl.rows_count() < impl.columns_count()
+		or plane_size.x < plane_size.z and impl.rows_count() > impl.columns_count()
 	):
 		tile_types = Utils.transpose(tile_types)
-		Impl.transpose()
+		impl.transpose()
 
 	_tile_size = min(
-		self.get_aabb().size.x / Impl.rows_count(), self.get_aabb().size.z / Impl.columns_count()
+		self.get_aabb().size.x / impl.rows_count(), self.get_aabb().size.z / impl.columns_count()
 	)
 
 	# set flags
-	for x in range(Impl.rows_count()):
-		for y in range(Impl.columns_count()):
-			var tile_impl = Impl.create_tile(tile_types[x][y], x, y)
+	for x in range(impl.rows_count()):
+		for y in range(impl.columns_count()):
+			var tile_impl = impl.create_tile(tile_types[x][y], x, y)
 			_tile_nodes[x][y] = tile_factory.create(self, tile_impl)
 
-	for x in range(Impl.rows_count()):
-		for y in range(Impl.columns_count()):
+	for x in range(impl.rows_count()):
+		for y in range(impl.columns_count()):
 			var tile: TileNode = _tile_nodes[x][y]
 			map_items.add_child(tile)
 
@@ -123,20 +123,20 @@ func set_map(raw_map):
 func add_character(type: Character.Type, x: int, y: int):
 	var character: CharacterStrategic = character_factory.create(type)
 	_characters.append(character)
-	character.Impl.place(Impl.get_tile(x, y))
+	character.impl.place(impl.get_tile(x, y))
 	character.set_material(self.cutoff_material)
 
 	return character
 
 
 func get_tile_node(pos: Vector2i):
-	if !Impl._in_range(pos.x, pos.y):
+	if !impl._in_range(pos.x, pos.y):
 		return null
 	return _tile_nodes[pos.x][pos.y]
 
 
 func get_character_node(character: Character):
 	for node in _characters:
-		if node.Impl == character:
+		if node.impl == character:
 			return node
 	return null

@@ -1,21 +1,20 @@
 class_name Tile
-const _implements := "Tile"
 
 signal highlight_changed(value: bool)
 
 enum Type {
-	None,
-	Floor,
-	Wall,
-	Door,
-	Window,
-	Staircase,
+	NONE,
+	FLOOR,
+	WALL,
+	DOOR,
+	WINDOW,
+	STAIRCASE,
 }
 
-var _x: int
-var _y: int
+const IMPLMENTS := "Tile"
+
 var grid: MapGrid
-var type: Type = Type.None
+var type: Type = Type.NONE
 var mixins: Array[TileMixin] = []
 
 var pos: Vector2i:
@@ -29,12 +28,15 @@ var highlight: bool:
 		highlight = val
 		highlight_changed.emit(highlight)
 
+var _x: int
+var _y: int
 
-func _init(type_: Type, grid_: MapGrid, x_: int, y_: int):
-	type = type_
-	_x = x_
-	_y = y_
-	grid = grid_
+
+func _init(_type: Type, _grid: MapGrid, x: int, y: int):
+	type = _type
+	_x = x
+	_y = y
+	grid = _grid
 
 
 func get_mixin(mixin_type):

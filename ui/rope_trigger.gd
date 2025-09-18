@@ -1,9 +1,9 @@
-extends Node3D
 class_name RopeTrigger
-
-@onready var rope_item: XRToolsPickable = $Rope.attached_to_end
+extends Node3D
 
 signal triggerred
+
+@onready var rope_item: XRToolsPickable = $Rope.attached_to_end
 
 
 func _on_rope_max_extend(end_position: Vector3) -> void:

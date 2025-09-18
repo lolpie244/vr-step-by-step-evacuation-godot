@@ -13,12 +13,12 @@ func _get_configuration_warning():
 
 
 func _set_action_set_priorities():
-	const priorities = {"godot": 0, "strategic": 1}
+	const PRIORITIES = {"godot": 0, "strategic": 1}
 
 	var action_map: OpenXRActionMap = load("res://openxr_action_map.tres")
 
 	for action_set: OpenXRActionSet in action_map.action_sets:
-		action_set.priority = priorities[action_set.resource_name]
+		action_set.priority = PRIORITIES[action_set.resource_name]
 
 	ResourceSaver.save(action_map, "res://openxr_action_map.tres")
 

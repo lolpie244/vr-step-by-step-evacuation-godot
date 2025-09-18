@@ -1,16 +1,17 @@
-extends Node3D
 class_name Character
+extends Node3D
 
 signal tile_changed(tile: Tile, direction: Vector2)
 
-enum Type { Civilian }
+enum Type { CIVILIAN }
 
 @export var base_speed: int = 5
-@export var type: Type = Type.Civilian
+@export var type: Type = Type.CIVILIAN
 
 var _speed: int
 var _walkable: Walkable
 var _reachable: Array[Walkable.ReachableResult] = []
+var _reachable_highlighted := false
 
 
 func _init():
@@ -52,9 +53,6 @@ func is_reachable(walkable: Walkable) -> Walkable.ReachableResult:
 		if next_tile.tile == walkable.get_tile():
 			return next_tile
 	return null
-
-
-var _reachable_highlighted := false
 
 
 func highlight_reachable(highlight: bool):

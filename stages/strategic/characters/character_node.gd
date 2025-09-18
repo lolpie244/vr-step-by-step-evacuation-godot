@@ -1,49 +1,50 @@
-extends Node3D
 class_name CharacterStrategic
-var Impl: Character
+extends Node3D
 
-@onready var Pickable: XRToolsPickable = $PickableObject
+
+@export var type: Character.Type = Character.Type.CIVILIAN
+
+var impl: Character = null
+var _tile_changed: bool = false
+
+
+@onready var pickable: XRToolsPickable = $PickableObject
 @onready var model = $Model
 
-@export var type: Character.Type = Character.Type.Civilian
-
-var _tile_changed := false
-
-
-func init(impl: Character):
-	Impl = impl
+func init(_impl: Character):
+	impl = _impl
 
 
 func _ready() -> void:
 	hide()
 
-	Impl.tile_changed.connect(_on_impl_tile_changed)
-	Pickable.picked_up.connect(_on_picked_up)
-	Pickable.dropped.connect(_on_dropped)
+	impl.tile_changed.connect(_on_impl_tile_changed)
+	pickable.picked_up.connect(_on_picked_up)
+	pickable.dropped.connect(_on_dropped)
 
 
 func _process(_delta: float) -> void:
-	if Pickable.is_picked_up():
-		self.global_transform = Pickable.global_transform
+	if pickable.is_picked_up():
+		self.global_transform = pickable.global_transform
 
 
 func _on_picked_up(_holder) -> void:
 	_tile_changed = false
-	Impl.highlight_reachable(false)
+	impl.highlight_reachable(false)
 
 
 func _on_dropped(_pickable) -> void:
 	(
 		(func():
 			if !_tile_changed:
-				Impl.restore()
+				impl.restore()
 			_tile_changed = false)
 		. call_deferred()
 	)
 
 
 func on_poke():
-	Impl.highlight_reachable(!Impl._reachable_highlighted)
+	impl.highlight_reachable(!impl._reachable_highlighted)
 
 
 func _on_impl_tile_changed(_tile: Tile, direction: Vector2) -> void:

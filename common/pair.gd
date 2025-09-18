@@ -4,6 +4,6 @@ var first
 var second
 
 
-func _init(first_, second_):
-	first = first_
-	second = second_
+func _init(_first, _second):
+	first = _first
+	second = _second

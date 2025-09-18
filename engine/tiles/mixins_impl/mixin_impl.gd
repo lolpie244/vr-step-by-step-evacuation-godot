@@ -1,12 +1,13 @@
-extends Node3D
 class_name TileMixin
-const _implements := "TileMixin"
+extends Node3D
+
+const IMPLMENTS := "TileMixin"
 
 var _tile: Tile
 
 
-func _init(tile_: Tile):
-	_tile = tile_
+func _init(tile: Tile):
+	_tile = tile
 
 
 func get_tile() -> Tile:

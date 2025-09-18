@@ -5,10 +5,10 @@ extends WallLikeTile
 
 
 func _get_model():
-	var left = _is_wall(Impl.pos.x - 1, Impl.pos.y)
-	var right = _is_wall(Impl.pos.x + 1, Impl.pos.y)
-	var down = _is_wall(Impl.pos.x, Impl.pos.y - 1)
-	var up = _is_wall(Impl.pos.x, Impl.pos.y + 1)
+	var left = _is_wall(impl.pos.x - 1, impl.pos.y)
+	var right = _is_wall(impl.pos.x + 1, impl.pos.y)
+	var down = _is_wall(impl.pos.x, impl.pos.y - 1)
+	var up = _is_wall(impl.pos.x, impl.pos.y + 1)
 
 	var rotations := [[up, 0], [down, 180], [left, 270], [right, 90]].filter(func(v): return v[0])
 
@@ -33,8 +33,8 @@ func _get_model():
 	return result
 
 
-func set_material(material: ShaderMaterial):
-	var material_ = material.duplicate()
+func set_material(_material: ShaderMaterial):
+	var material = _material.duplicate()
 	var albedo = original_material.albedo_texture
-	material_.set_shader_parameter("_albedo", albedo)
-	model.material_override = material_
+	material.set_shader_parameter("_albedo", albedo)
+	model.material_override = material

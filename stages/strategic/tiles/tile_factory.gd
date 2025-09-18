@@ -1,5 +1,5 @@
-extends NodeFactory
 class_name StrategicTileFactory
+extends NodeFactory
 
 
 func create(map: Map, tile_impl: Tile) -> TileNode:

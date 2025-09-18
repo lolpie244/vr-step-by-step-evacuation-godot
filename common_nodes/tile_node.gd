@@ -1,23 +1,24 @@
-extends Node3D
 class_name TileNode
-const _implements := "TileNode"
-var Impl: Tile
+extends Node3D
+const IMPLMENTS := "TileNode"
 
-@export var type: Tile.Type = Tile.Type.None
-@onready var model = $Model
+@export var type: Tile.Type = Tile.Type.NONE
+
+var impl: Tile
 
 var map: Map
-
 var _tile_size: float
 
+@onready var model = $Model
 
-func init(tile_size: float, impl_: Tile):
+
+func init(tile_size: float, _impl: Tile):
 	_tile_size = tile_size
-	Impl = impl_
+	impl = _impl
 
 
-func set_map(map_: Map):
-	map = map_
+func set_map(_map: Map):
+	map = _map
 
 
 func _swap_model(new_model):
@@ -30,21 +31,21 @@ func _swap_model(new_model):
 
 
 func _ready():
-	Impl.highlight_changed.connect(_on_impl_highlight_changed)
+	impl.highlight_changed.connect(_on_impl_highlight_changed)
 
 	_swap_model(_get_model())
 
 	self.scale = Vector3.ONE * model_scale(model)
-	self.position = tile_position(Impl.pos.x, Impl.pos.y)
+	self.position = tile_position(impl.pos.x, impl.pos.y)
 
 
 func _get_model():
 	return model
 
 
-func tile_scale(scale_: int):
-	self.position = self.position / self.scale * scale_
-	self.scale = Vector3.ONE * scale_
+func tile_scale(_scale: int):
+	self.position = self.position / self.scale * _scale
+	self.scale = Vector3.ONE * _scale
 
 
 func set_material(_material: ShaderMaterial):
@@ -65,11 +66,11 @@ func _on_impl_highlight_changed(value: bool) -> void:
 func tile_position(x, y) -> Vector3:
 	return (
 		Vector3(_tile_size * x, 0, _tile_size * y)
-		- (Vector3(Impl.grid.rows_count(), 0, Impl.grid.columns_count()) * _tile_size / 2)
+		- (Vector3(impl.grid.rows_count(), 0, impl.grid.columns_count()) * _tile_size / 2)
 		+ Vector3(_tile_size, 0, _tile_size) / 2
 	)
 
 
-func model_scale(model_) -> float:
-	var model_size = Utils.get_aabb(model_).size * model_.scale
+func model_scale(_model) -> float:
+	var model_size = Utils.get_aabb(_model).size * _model.scale
 	return _tile_size / max(model_size.x, model_size.z)

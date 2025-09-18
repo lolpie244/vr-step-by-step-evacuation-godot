@@ -1,12 +1,6 @@
 @tool
-extends Node3D
 class_name Extinguisher
-
-@onready var body: XRToolsPickable = $Body
-@onready var hose_end: HoseEnd = $HoseEndOrigin/HoseEnd
-
-@onready var pin: ExtinguisherPin = $Body/PinOrigin
-@onready var handle: ExtinguisherHandle = $HandleOrigin
+extends Node3D
 
 var is_pin_released: bool:
 	get():
@@ -15,6 +9,12 @@ var is_pin_released: bool:
 var strength: float:
 	get():
 		return handle.strength
+
+@onready var body: XRToolsPickable = $Body
+@onready var hose_end: HoseEnd = $HoseEndOrigin/HoseEnd
+
+@onready var pin: ExtinguisherPin = $Body/PinOrigin
+@onready var handle: ExtinguisherHandle = $HandleOrigin
 
 
 func _on_lever_pickup_picked_up(_pickable: Variant) -> void:

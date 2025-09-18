@@ -1,12 +1,10 @@
-extends Node3D
 class_name Lever
-
-@export var emit_only_angle_change: bool = false
+extends Node3D
 
 signal hinge_moved(current_angle)
 signal released
 
-@onready var properties: XRToolsInteractableHinge = $Lever/lever
+@export var emit_only_angle_change: bool = false
 
 var fill_ratio: float:
 	get():
@@ -16,6 +14,8 @@ var fill_ratio: float:
 
 var _is_picked_up: bool = false
 var _last_angle: float = 0
+
+@onready var properties: XRToolsInteractableHinge = $Lever/lever
 
 
 func _process(_delta: float) -> void:
@@ -37,6 +37,3 @@ func _on_lever_released(_interactable: Variant) -> void:
 func _on_lever_grabbed(_interactable: Variant) -> void:
 	_last_angle = 0
 	_is_picked_up = true
-
-
-pass  # Replace with function body.

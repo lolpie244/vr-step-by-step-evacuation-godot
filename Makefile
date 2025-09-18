@@ -13,3 +13,7 @@ setup:
 .PHONY: format
 format:
 	 gdformat `git ls-files "*.gd"`
+
+.PHONY: lint
+lint:
+	 gdlint `git ls-files "*.gd"` 2> lint.log

@@ -1,12 +1,10 @@
-extends Node3D
 class_name Joystick
-
-@export var emit_only_angle_change: bool = false
+extends Node3D
 
 signal moved(angle: Vector2)
 signal released
 
-@onready var properties: XRToolsInteractableJoystick = $Joystick/body
+@export var emit_only_angle_change: bool = false
 
 var fill_ratio: Vector2:
 	get():
@@ -26,18 +24,20 @@ var fill_ratio: Vector2:
 var _is_picked_up: bool = false
 var _last_angle: Vector2 = Vector2.ZERO
 
+@onready var properties: XRToolsInteractableJoystick = $Joystick/body
+
 
 func _process(_delta: float) -> void:
 	if !_is_picked_up:
 		return
 
-	var angle_ := Vector2(properties.joystick_x_position, properties.joystick_y_position)
+	var angle := Vector2(properties.joystick_x_position, properties.joystick_y_position)
 
-	if emit_only_angle_change && angle_ == _last_angle:
+	if emit_only_angle_change && angle == _last_angle:
 		return
 
-	_last_angle = angle_
-	emit_signal("moved", angle_)
+	_last_angle = angle
+	emit_signal("moved", angle)
 
 
 func _on_lever_released(_interactable: Variant) -> void:

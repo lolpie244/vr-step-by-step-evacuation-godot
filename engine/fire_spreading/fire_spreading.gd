@@ -1,12 +1,14 @@
 extends Node
 
 # Constants
-const contact_heat_fraction := 0.2  # fraction of heat that actually reaches the neighbor through direct contact
-const max_strenght := 20  # max wind vector strength
-const max_strenght_prob := 0.5  # probability that fire will spread with wind with max_strenght
 
-const k1 := 1.5  # wind influence coef
-var k2 := -log(1 - max_strenght_prob) / max_strenght  # wind vector length to probability
+# fraction of heat that actually reaches the neighbor through direct contact
+const CONTACT_HEAT_FRACTION := 0.2
+const MAX_STRENGHT := 20  # max wind vector strength
+const MAX_STRENGHT_PROB := 0.5  # probability that fire will spread with wind with MAX_STRENGHT
+
+const K1 := 1.5  # wind influence coef
+var k2 := -log(1 - MAX_STRENGHT_PROB) / MAX_STRENGHT  # wind vector length to probability
 
 
 func can_burn(tile: Tile) -> bool:
@@ -20,12 +22,12 @@ func _fixed_prob(from: Tile, to: Tile) -> float:
 	var from_mat = from.get_mixin(Flammable).material
 	var to_mat = to.get_mixin(Flammable).material
 
-	var deltaT = to_mat.ignition_temp - Constants.room_temperature
-	var HRR = contact_heat_fraction * from_mat.heat_release_rate * 1000
-	var release_rate = pow(deltaT / HRR, 2)
+	var delta_t = to_mat.ignition_temp - Constants.ROOM_TEMPERATURE
+	var hrr = CONTACT_HEAT_FRACTION * from_mat.heat_release_rate * 1000
+	var release_rate = pow(delta_t / hrr, 2)
 	var flammable_rate = to_mat.density * to_mat.thermal_conductivity * to_mat.heat_capacity
 
-	return 1 - exp(-Constants.time_per_turn / (PI / 4 * flammable_rate * release_rate))
+	return 1 - exp(-Constants.TIME_PER_TURN / (PI / 4 * flammable_rate * release_rate))
 
 
 func _dynamic_prob(from: Tile, to: Tile) -> float:
@@ -33,8 +35,8 @@ func _dynamic_prob(from: Tile, to: Tile) -> float:
 	return 0
 	var vector = Vector3.ZERO
 
-	var a := k1 * vector.length()
-	var b := (k1 / 2.0) * vector.length()
+	var a := K1 * vector.length()
+	var b := (K1 / 2.0) * vector.length()
 
 	var elipse_angle: float = vector.angle()
 	var angle_to := from.direction_to(to).angle()

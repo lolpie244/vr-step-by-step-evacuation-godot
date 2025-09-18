@@ -1,5 +1,5 @@
-extends TileMixin
 class_name Walkable
+extends TileMixin
 
 signal on_chacter_placed(character: Character)
 

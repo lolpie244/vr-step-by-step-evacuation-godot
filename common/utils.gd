@@ -1,6 +1,7 @@
+class_name Utils
 extends Node
 
-class_name Utils
+const DEFAULT_DUPLICATE = DUPLICATE_SCRIPTS | DUPLICATE_GROUPS | DUPLICATE_SIGNALS
 
 
 static func get_matrix(n: int, m: int, fill = null):
@@ -58,7 +59,7 @@ static func find_children_with_type(node: Node, type_ref, recursive) -> Array:
 
 
 static func find_parent_that_implements(node: Node, implements: String):
-	if node.get("_implements") == implements:
+	if node.get("IMPLMENTS") == implements:
 		return node
 
 	if node.get_parent() == null:
@@ -67,10 +68,7 @@ static func find_parent_that_implements(node: Node, implements: String):
 	return find_parent_that_implements(node.get_parent(), implements)
 
 
-const DEFAULT_DUPLICATE = DUPLICATE_SCRIPTS | DUPLICATE_GROUPS | DUPLICATE_SIGNALS
-
-
-static func signed_ratio(min_: float, max_: float, value: float) -> float:
-	var mid := (min_ + max_) / 2.0
-	var half_range := (max_ - min_) / 2.0
+static func signed_ratio(_min: float, _max: float, value: float) -> float:
+	var mid := (_min + _max) / 2.0
+	var half_range := (_max - _min) / 2.0
 	return (value - mid) / half_range

@@ -1,18 +1,17 @@
 extends Node3D
 
-@onready var map: Map = $Map
-@onready var scale_lever: Lever = $ScaleLever
-@onready var offset_joystick: Joystick = $OffsetJoystick
-
 @export var next_scene: PackedScene
 
 var character
 
+@onready var map: Map = $Map
+@onready var scale_lever: Lever = $ScaleLever
+@onready var offset_joystick: Joystick = $OffsetJoystick
+
 
 func _ready() -> void:
-	character = map.add_character(Character.Type.Civilian, 8, 1)
+	character = map.add_character(Character.Type.CIVILIAN, 8, 1)
 	GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
-	character.Impl.visible_tiles()
 
 
 func _on_zoom_lever_moved(_angle: Variant) -> void:
@@ -25,5 +24,5 @@ func _on_offset_joystick_moved(_angle: Vector2) -> void:
 
 func _on_button_released(_button: Variant) -> void:
 	await $PlayerVr.close_eyes()
-	var context := FirstPerson.Context.new(character.Impl)
+	var context := FirstPerson.Context.new(character.impl)
 	SceneManager.load_scene(next_scene, context)

@@ -1,10 +1,10 @@
-extends Node3D
 class_name ExtinguisherPin
+extends Node3D
+
+var is_pin_released: bool = false
 
 @onready var pickup: XRToolsPickable = $PinPickable
 @onready var mesh = $PinMesh
-
-var is_pin_released: bool = false
 
 
 func _process(_delta):

@@ -1,5 +1,5 @@
-extends Node3D
 class_name NodeFactory
+extends Node3D
 
 @export var scenes: Array[PackedScene] = []
 

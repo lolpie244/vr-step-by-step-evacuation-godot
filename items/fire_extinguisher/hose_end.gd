@@ -1,11 +1,11 @@
 @tool
-extends XRToolsPickable
 class_name HoseEnd
-
-@onready var particles: GPUParticles3D = $GPUParticles3D
+extends XRToolsPickable
 
 var syncer: Sync
 var _last_hand_transform: Transform3D
+
+@onready var particles: GPUParticles3D = $GPUParticles3D
 
 
 func _on_strength_changed(strength: float) -> void:

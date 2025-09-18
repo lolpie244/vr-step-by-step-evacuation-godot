@@ -1,5 +1,5 @@
-extends Resource
 class_name TileMaterial
+extends Resource
 
 @export var material: StandardMaterial3D
 @export var density: float  # kg/m3

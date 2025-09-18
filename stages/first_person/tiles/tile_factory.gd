@@ -1,5 +1,5 @@
-extends NodeFactory
 class_name FirstPersonTileFactory
+extends NodeFactory
 
 
 func create(tile_impl: Tile) -> TileNode:

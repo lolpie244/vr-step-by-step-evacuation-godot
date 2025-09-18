@@ -1,19 +1,17 @@
-extends Node3D
-
 class_name FirstPerson
-
-@onready var factory: FirstPersonTileFactory = $Factory
+extends Node3D
 
 
 class Context:
-	pass
 	var character: Character
 
-	func _init(character_: Character):
-		self.character = character_
+	func _init(_character: Character):
+		self.character = _character
 
 
 var context: Context
+
+@onready var factory: FirstPersonTileFactory = $Factory
 
 
 func _ready() -> void:
