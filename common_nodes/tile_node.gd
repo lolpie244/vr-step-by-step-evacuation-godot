@@ -57,6 +57,8 @@ func set_material(_material: ShaderMaterial):
 
 
 func _on_impl_highlight_changed(value: bool) -> void:
+	if $Animation.is_playing():
+		await $Animation.animation_finished
 	if value:
 		$Animation.play("highlight")
 	else:

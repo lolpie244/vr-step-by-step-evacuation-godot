@@ -4,17 +4,20 @@ extends XRToolsPickable
 
 var syncer: Sync
 var _last_hand_transform: Transform3D
+var _strenght: float
 
 @onready var particles: GPUParticles3D = $GPUParticles3D
+@onready var emiting_area: Area3D = $Area3D
 
 
 func _on_strength_changed(strength: float) -> void:
-	if strength == 0:
+	_strenght = strength
+	if _strenght == 0:
 		particles.emitting = false
 		return
 
 	particles.emitting = true
-	particles.amount_ratio = strength
+	particles.amount_ratio = _strenght
 
 
 func _process(_delta):
@@ -22,6 +25,11 @@ func _process(_delta):
 		return
 
 	_last_hand_transform = _grab_driver.primary.hand.global_transform
+
+	if _strenght != 0:
+		for area in emiting_area.get_overlapping_areas():
+			if area.has_method("extinguish"):
+				area.extinguish(_strenght)
 
 
 func _on_rope_max_extend(limit_position: Vector3):

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cid6vvynvdwcx"
-path.etc2="res://.godot/imported/flame.png-9f6660af4cbee63ffb0ac3acb39549ed.etc2.ctex"
+path.etc2="res://.godot/imported/flame.png-87bdd56b94fe9efb09bc1b74ecdbd3db.etc2.ctex"
 metadata={
 "imported_formats": ["etc2_astc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://engine/fire_spreading/assets/flame.png"
-dest_files=["res://.godot/imported/flame.png-9f6660af4cbee63ffb0ac3acb39549ed.etc2.ctex"]
+source_file="res://items/fire_extinguisher/assets/flame.png"
+dest_files=["res://.godot/imported/flame.png-87bdd56b94fe9efb09bc1b74ecdbd3db.etc2.ctex"]
 
 [params]
 

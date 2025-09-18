@@ -2,6 +2,7 @@ class_name Flammable
 extends TileMixin
 
 signal state_changed(state: State)
+signal strenght_changed(strenght: float)
 
 enum State {
 	NOT_BURNING = 1 << 0,
@@ -10,8 +11,20 @@ enum State {
 }
 
 var material: TileMaterial
-var state := State.NOT_BURNING
-var cooling_percentage := 0.1
+
+var strenght := 1.0:
+	set(value):
+		if strenght == value:
+			return
+		strenght = value
+		strenght_changed.emit(value)
+
+var state := State.NOT_BURNING:
+	set(value):
+		if state == value:
+			return
+		state = value
+		state_changed.emit(state)
 
 
 func can_burn():
@@ -32,3 +45,13 @@ func spread_fire():
 	for next_tile in _tile.neighbor_tiles():
 		if FireSpreading.is_spread(_tile, next_tile):
 			next_tile.get_mixin(Flammable).ignite()
+
+
+func extinguish(foam_strenght: float):
+	if state != State.BURNING:
+		return
+
+	strenght -= foam_strenght * 0.002
+
+	if strenght < 0:
+		state = State.NOT_BURNING

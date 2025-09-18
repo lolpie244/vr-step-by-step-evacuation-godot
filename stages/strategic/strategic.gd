@@ -10,7 +10,7 @@ var character
 
 
 func _ready() -> void:
-	character = map.add_character(Character.Type.CIVILIAN, 8, 1)
+	character = map.add_character(Character.Type.CIVILIAN, 6, 4)
 	GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
 
 

@@ -65,11 +65,8 @@ func highlight_reachable(highlight: bool):
 		info.tile.highlight = highlight
 
 
-func visible_tiles():
-	var tiles := ShadowCasting.visible_tiles(_walkable.get_tile())
-	for tile in tiles:
-		if tile != null:
-			tile.highlight = true
+func visible_tiles() -> Array[Tile]:
+	return ShadowCasting.visible_tiles(_walkable.get_tile())
 
 
 func get_tile() -> Tile:

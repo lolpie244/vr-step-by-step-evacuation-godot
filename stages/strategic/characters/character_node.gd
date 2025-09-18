@@ -1,15 +1,14 @@
 class_name CharacterStrategic
 extends Node3D
 
-
 @export var type: Character.Type = Character.Type.CIVILIAN
 
 var impl: Character = null
 var _tile_changed: bool = false
 
-
 @onready var pickable: XRToolsPickable = $PickableObject
 @onready var model = $Model
+
 
 func init(_impl: Character):
 	impl = _impl

@@ -23,7 +23,6 @@ func _process(_delta: float) -> void:
 		return
 
 	fire_scale = new_scale
-	# fire_scale = min(fire_scale.x, fire_scale.y, fire_scale.z)
 	var time_scale: float = root.global_basis.get_scale().y
 
 	(fire.draw_pass_1 as BoxMesh).size = Vector3.ONE * fire_scale.y

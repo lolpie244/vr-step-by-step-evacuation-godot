@@ -1,7 +1,6 @@
 class_name ShadowCasting
 extends Node
 
-
 enum Direction {
 	NORTH,
 	EAST,

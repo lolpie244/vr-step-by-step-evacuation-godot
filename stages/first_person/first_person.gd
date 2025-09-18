@@ -17,13 +17,13 @@ var context: Context
 func _ready() -> void:
 	$PlayerVr.open_eyes()
 
-	for tile in ShadowCasting.visible_tiles(context.character.get_tile()):
+	for tile in context.character.visible_tiles():
 		self.add_child(factory.create(tile))
 
 	var character_tile = factory.create(context.character.get_tile())
 	self.add_child(character_tile)
 
-	# $PlayerVr.rotation_degrees = context.character.rotation_degrees
+	$PlayerVr.global_rotation_degrees = context.character.global_rotation_degrees
 	$PlayerVr.position.x = character_tile.position.x
 	$PlayerVr.position.z = character_tile.position.z
 
