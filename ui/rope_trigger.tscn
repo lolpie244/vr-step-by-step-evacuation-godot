@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://0atb45jl1tr"]
+[gd_scene load_steps=11 format=3 uid="uid://0atb45jl1tr"]
 
 [ext_resource type="PackedScene" uid="uid://dk6f6uvskip7d" path="res://common/rope/rope.tscn" id="1_cix7e"]
 [ext_resource type="Script" uid="uid://n42h03yyyoo6" path="res://ui/rope_trigger.gd" id="1_hy086"]
@@ -6,7 +6,7 @@
 [sub_resource type="Curve3D" id="Curve3D_tion3"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 2.22, 0, 0, 0, 0, 0, 0, 0, 0, 1.719, 0, 0, 0, 0, 0, 0, 0, 0, 1.481, 0, 0, 0, 0, 0, 0, 0, -0.00627887, 1.21102, 0, 0, 0, 0, 0, 0, 0, -0.00684121, 0.932714, 0, 0, 0, 0, 0, 0, 0, -0.00592592, 0.675918, 0, 0, 0, 0, 0, 0, 0, -0.00239896, 0.240898, -0.0150305),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 2.22, 0, 0, 0, 0, 0, 0, 0, 0, 1.719, 0, 0, 0, 0, 0, 0, 0, 0, 1.481, 0, 0, 0, 0, 0, 0, 0, 0, 1.211, 0, 0, 0, 0, 0, 0, 0, 0, 0.933, 0, 0, 0, 0, 0, 0, 0, -0.00592592, 0.675918, 0, 0, 0, 0, 0, 0, 0, -0.00239896, 0.240898, -0.0150305),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 7
@@ -68,6 +68,14 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_dquh8"]
 size = Vector3(0.1, 0.1, 0.1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qohsw"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qohsw"]
+material = SubResource("StandardMaterial3D_qohsw")
+radius = 0.01
+height = 0.02
+
 [node name="RopeTrigger" type="Node3D"]
 script = ExtResource("1_hy086")
 
@@ -89,5 +97,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RopeStart"]
 shape = SubResource("BoxShape3D_dquh8")
+
+[node name="End" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00349, -0.0143752)
+mesh = SubResource("SphereMesh_qohsw")
 
 [connection signal="max_extend" from="Rope" to="." method="_on_rope_max_extend"]

@@ -31,6 +31,7 @@ point_count = 3
 curve = SubResource("Curve_0lgrv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_38khp"]
+resource_local_to_scene = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
@@ -57,6 +58,7 @@ turbulence_influence_min = 0.0
 turbulence_influence_max = 0.02
 
 [sub_resource type="BoxMesh" id="BoxMesh_y0hba"]
+resource_local_to_scene = true
 
 [sub_resource type="Curve" id="Curve_li887"]
 _data = [Vector2(0, 0), 0.0, 11.8854, 0, 0, Vector2(0.0752212, 1), 0.0653553, 0.0653553, 0, 0, Vector2(0.687386, 0.584734), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.36526, 0.0, 0, 0]
@@ -66,6 +68,7 @@ point_count = 4
 curve = SubResource("Curve_li887")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sbepq"]
+resource_local_to_scene = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 0.0
@@ -93,6 +96,7 @@ turbulence_influence_min = 0.0
 turbulence_influence_max = 0.02
 
 [sub_resource type="QuadMesh" id="QuadMesh_cucsp"]
+resource_local_to_scene = true
 
 [node name="Fire" type="Node3D"]
 script = ExtResource("1_b8jli")

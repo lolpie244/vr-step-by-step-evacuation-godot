@@ -9,8 +9,23 @@ func _ready() -> void:
 	current_scene = root.get_child(root.get_child_count() - 1)
 
 
+func _open_eyes(scene):
+	var player_vr: PlayerVR = Utils.find_child_with_type(scene, PlayerVR, true)
+	if player_vr != null:
+		player_vr.open_eyes()
+
+
+func _close_eyes(scene):
+	var player_vr: PlayerVR = Utils.find_child_with_type(scene, PlayerVR, true)
+	if player_vr != null:
+		await player_vr.close_eyes()
+
+
 func load_scene(scene: PackedScene, context = null):
 	assert(scene != null)
+	if current_scene:
+		await _close_eyes(current_scene)
+
 	var scene_instance = scene.instantiate()
 
 	if context != null:
@@ -25,9 +40,12 @@ func _add_scene(scene):
 	current_scene = scene
 	get_tree().root.add_child(current_scene)
 	get_tree().current_scene = current_scene
+	_open_eyes(current_scene)
 
 
 func pop_scene():
+	if current_scene:
+		await _close_eyes(current_scene)
 	call_deferred("_deferred_pop_scene")
 
 

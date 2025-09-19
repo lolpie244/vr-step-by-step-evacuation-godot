@@ -71,7 +71,7 @@ static func _is_symmetric(row: Row, tile: Pair):
 
 
 static func visible_tiles(origin: Tile) -> Array[Tile]:
-	var result: Array[Tile] = []
+	var result: Dictionary[Tile, bool] = {}
 
 	for direction in Direction.values():
 		var quadrant := Quadrant.new(direction, origin)
@@ -98,7 +98,7 @@ static func visible_tiles(origin: Tile) -> Array[Tile]:
 				if tile == null:
 					continue
 				if is_wall.call(row_tile) or _is_symmetric(row, row_tile):
-					result.append(quadrant.get_tile(row_tile))
+					result[quadrant.get_tile(row_tile)] = true
 
 				if is_wall.call(prev_tile) && is_floor.call(row_tile):
 					row.start = _slope(row_tile)
@@ -113,4 +113,4 @@ static func visible_tiles(origin: Tile) -> Array[Tile]:
 			if is_floor.call(prev_tile):
 				rows.append(row.duplicate())
 
-	return result
+	return result.keys()

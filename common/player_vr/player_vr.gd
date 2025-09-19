@@ -1,3 +1,4 @@
+class_name PlayerVR
 extends XROrigin3D
 
 var xr_interface: OpenXRInterface = XRServer.find_interface("OpenXR")

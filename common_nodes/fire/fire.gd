@@ -5,7 +5,7 @@ extends Node3D
 var enabled := false
 var fire_scale: Vector2
 
-var cooling_coef:
+var cooling_coef = 0.2:
 	set(val):
 		cooling_coef = val
 		fire.material_override.set_shader_parameter("temperature_cooling_rate", val)
@@ -35,5 +35,8 @@ func _process(_delta: float) -> void:
 
 
 func _ready():
-	cooling_coef = 0.0
-	_process(0)
+	fire.draw_pass_1 = fire.draw_pass_1.duplicate(true)
+	fire.process_material = fire.process_material.duplicate(true)
+	fire.material_override = fire.material_override.duplicate(true)
+	sparks.draw_pass_1 = sparks.draw_pass_1.duplicate(true)
+	sparks.process_material = sparks.process_material.duplicate(true)

@@ -6,6 +6,7 @@ signal strength_changed(strength: float)
 const START_ROTATION: float = 0
 const END_ROTATION: float = 27
 
+var capacity: float = 1.0
 var strength: float
 
 @onready var extinguisher: Extinguisher = get_owner()
