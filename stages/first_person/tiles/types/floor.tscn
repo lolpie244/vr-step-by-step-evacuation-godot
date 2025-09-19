@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cswabutocau3i"]
+[gd_scene load_steps=5 format=3 uid="uid://cswabutocau3i"]
 
 [ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://stages/strategic/tiles/tile.tscn" id="1_a1ge7"]
 [ext_resource type="PackedScene" uid="uid://bo3vblsvejx6g" path="res://stages/first_person/tiles/mixins/flammable.tscn" id="3_1sjtp"]
 [ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://stages/strategic/tiles/assets/floor.glb" id="4_0hc06"]
+[ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="4_a1ge7"]
 
 [node name="Floor" instance=ExtResource("1_a1ge7")]
 type = 1
@@ -11,3 +12,4 @@ type = 1
 
 [node name="Flammable" parent="." index="2" instance=ExtResource("3_1sjtp")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.286574, 0)
+material = ExtResource("4_a1ge7")

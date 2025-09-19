@@ -30,6 +30,7 @@ var highlight: bool:
 
 var _x: int
 var _y: int
+var _initialized: bool = false
 
 
 func _init(_type: Type, _grid: MapGrid, x: int, y: int):
@@ -37,6 +38,16 @@ func _init(_type: Type, _grid: MapGrid, x: int, y: int):
 	_x = x
 	_y = y
 	grid = _grid
+
+
+func init():
+	if _initialized:
+		return
+
+	for mixin in mixins:
+		mixin.init()
+
+	_initialized = true
 
 
 func get_mixin(mixin_type):
@@ -78,3 +89,8 @@ func neighbor_tiles() -> Array[Tile]:
 			if tile != null:
 				result.append(tile)
 	return result
+
+
+func process_turn(_turn_number: int):
+	for mixin in mixins:
+		mixin.process_turn(_turn_number)

@@ -1,7 +1,7 @@
 class_name Character
 extends Node3D
 
-signal tile_changed(tile: Tile, direction: Vector2)
+signal tile_changed(tile: Tile)
 
 enum Type { CIVILIAN }
 
@@ -13,9 +13,17 @@ var _walkable: Walkable
 var _reachable: Array[Walkable.ReachableResult] = []
 var _reachable_highlighted := false
 
+var _look_direction: Vector2 = Vector2.ZERO
 
-func _init():
+
+func _init(_type: Type):
 	_speed = base_speed
+	type = _type
+
+
+func process_turn(_turn_number: int):
+	_speed = base_speed
+	_reachable = _walkable.reachable_tiles(_speed)
 
 
 func place(tile: Tile):
@@ -36,7 +44,8 @@ func place(tile: Tile):
 	_speed -= next_tile.distance
 	_walkable = next_tile.tile.get_mixin(Walkable)
 	_reachable = _walkable.reachable_tiles(_speed)
-	tile_changed.emit(_walkable.get_tile(), next_tile.direction)
+	_look_direction = next_tile.direction
+	tile_changed.emit(_walkable.get_tile())
 
 	return true
 

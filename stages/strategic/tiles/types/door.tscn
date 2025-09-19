@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://uawpg3qjrxph"]
+[gd_scene load_steps=7 format=3 uid="uid://uawpg3qjrxph"]
 
 [ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://stages/strategic/tiles/tile.tscn" id="1_5dbxf"]
 [ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://stages/strategic/tiles/assets/doorway.glb" id="2_ituet"]
 [ext_resource type="Script" uid="uid://h2evvguy80m2" path="res://common_nodes/tile_types/door.gd" id="2_rt6ok"]
 [ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic/tiles/mixins/flammable.tscn" id="3_8hksf"]
+[ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="4_b5dv1"]
 [ext_resource type="PackedScene" uid="uid://4if45fr7sjl6" path="res://stages/strategic/tiles/mixins/walkable.tscn" id="4_wohtg"]
 
 [node name="Door" instance=ExtResource("1_5dbxf")]
@@ -11,7 +12,8 @@ script = ExtResource("2_rt6ok")
 type = 3
 
 [node name="Flammable" parent="." index="0" instance=ExtResource("3_8hksf")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.275623, 0)
+material = ExtResource("4_b5dv1")
 
 [node name="Walkable" parent="." index="1" instance=ExtResource("4_wohtg")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.196563, 0)

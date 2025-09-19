@@ -111,17 +111,18 @@ func set_map(raw_map):
 		for y in range(impl.columns_count()):
 			var tile_impl = impl.create_tile(tile_types[x][y], x, y)
 			_tile_nodes[x][y] = tile_factory.create(self, tile_impl)
+			map_items.add_child(_tile_nodes[x][y])
 
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
 			var tile: TileNode = _tile_nodes[x][y]
-			map_items.add_child(tile)
-
+			tile.init()
 			tile.set_material(self.cutoff_material)
 
 
 func add_character(type: Character.Type, x: int, y: int):
-	var character: CharacterStrategic = character_factory.create(type)
+	var character_impl: Character = impl.create_character(type)
+	var character: CharacterStrategic = character_factory.create(character_impl)
 	_characters.append(character)
 	character.impl.place(impl.get_tile(x, y))
 	character.set_material(self.cutoff_material)

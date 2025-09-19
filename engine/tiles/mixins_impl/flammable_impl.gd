@@ -11,6 +11,7 @@ enum State {
 }
 
 var material: TileMaterial
+var wind := Vector2.ZERO
 
 var strenght := 1.0:
 	set(value):
@@ -26,6 +27,8 @@ var state := State.NOT_BURNING:
 		state = value
 		state_changed.emit(state)
 
+var _ignition_turn: int = -1
+
 
 func can_burn():
 	return state == State.NOT_BURNING
@@ -34,13 +37,14 @@ func can_burn():
 func ignite():
 	state = State.BURNING
 	_tile.remove_mixin(Walkable)
+	_ignition_turn = GameCore.current_turn
 
-	state_changed.emit(state)
 
-
-func spread_fire():
-	if state != State.BURNING:
+func process_turn(_turn_number):
+	if state != State.BURNING || _turn_number == 0 || _ignition_turn == _turn_number:
 		return
+
+	extinguish(0.3)
 
 	for next_tile in _tile.neighbor_tiles():
 		if FireSpreading.is_spread(_tile, next_tile):
@@ -51,7 +55,7 @@ func extinguish(foam_strenght: float):
 	if state != State.BURNING:
 		return
 
-	strenght -= foam_strenght * 0.002
+	strenght -= foam_strenght
 
 	if strenght < 0:
 		state = State.NOT_BURNING

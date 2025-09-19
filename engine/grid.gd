@@ -2,6 +2,7 @@ class_name MapGrid
 extends Node3D
 
 var tiles: Array
+var characters: Array[Character]
 var tile_size: float
 
 
@@ -29,6 +30,12 @@ func create_tile(type: Tile.Type, x: int, y: int) -> Tile:
 	return tiles[x][y]
 
 
+func create_character(type: Character.Type) -> Character:
+	var character := Character.new(type)
+	characters.append(character)
+	return character
+
+
 func set_tile(x: int, y: int, tile: Tile):
 	tiles[x][y] = tile
 
@@ -52,3 +59,13 @@ func get_tile_mixin(x: int, y: int, type_ref):
 
 func transpose():
 	tiles = Utils.transpose(tiles)
+
+
+func process_turn(_turn_number: int):
+	for x in rows_count():
+		for y in columns_count():
+			if tiles[x][y]:
+				tiles[x][y].process_turn(_turn_number)
+
+	for character in characters:
+		character.process_turn(_turn_number)

@@ -14,12 +14,17 @@ var context: Context
 @onready var factory: FirstPersonTileFactory = $Factory
 
 
+func _add_child_node(tile: TileNode):
+	self.add_child(tile)
+	tile.init()
+
+
 func _ready() -> void:
 	for tile in context.character.visible_tiles():
-		self.add_child(factory.create(tile))
+		_add_child_node(factory.create(tile))
 
 	var character_tile = factory.create(context.character.get_tile())
-	self.add_child(character_tile)
+	_add_child_node(character_tile)
 
 	$PlayerVr.position.x = character_tile.position.x
 	$PlayerVr.position.z = character_tile.position.z

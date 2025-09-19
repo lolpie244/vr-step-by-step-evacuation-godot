@@ -12,7 +12,7 @@ var _tile_size: float
 @onready var model = $Model
 
 
-func init(tile_size: float, _impl: Tile):
+func set_data(tile_size: float, _impl: Tile):
 	_tile_size = tile_size
 	impl = _impl
 
@@ -30,7 +30,9 @@ func _swap_model(new_model):
 	model = new_model
 
 
-func _ready():
+func init():
+	impl.init()
+
 	impl.highlight_changed.connect(_on_impl_highlight_changed)
 
 	_swap_model(_get_model())

@@ -46,9 +46,9 @@ func on_poke():
 	impl.highlight_reachable(!impl._reachable_highlighted)
 
 
-func _on_impl_tile_changed(_tile: Tile, direction: Vector2) -> void:
+func _on_impl_tile_changed(_tile: Tile) -> void:
 	_tile_changed = true
-	self.rotate_y(Vector2(direction.y, direction.x).angle() - self.rotation.y)
+	self.rotate_y(Vector2(impl._look_direction.y, impl._look_direction.x).angle() - self.rotation.y)
 	show()
 
 
