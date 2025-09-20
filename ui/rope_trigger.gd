@@ -10,7 +10,6 @@ var enabled := false
 var _was_triggered := false
 var _last_position: Vector3
 
-
 @onready var rope_item: XRToolsPickable = $Rope.attached_to_end
 
 

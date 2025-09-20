@@ -16,9 +16,9 @@ func init(_impl: Character):
 
 func _ready() -> void:
 	hide()
-
 	impl.tile_changed.connect(_on_impl_tile_changed)
 	impl.selected_changed.connect(_on_impl_selected_changed)
+	impl.look_direction_changed.connect(_on_look_direction_changed)
 	pickable.picked_up.connect(_on_picked_up)
 	pickable.dropped.connect(_on_dropped)
 
@@ -49,8 +49,11 @@ func on_poke():
 
 func _on_impl_tile_changed(_tile: Tile) -> void:
 	_tile_changed = true
-	self.rotate_y(Vector2(impl._look_direction.y, impl._look_direction.x).angle() - self.rotation.y)
 	show()
+
+
+func _on_look_direction_changed(direction: Vector2):
+	self.rotate_y(direction.angle() - self.rotation.y)
 
 
 func _on_impl_selected_changed(_is_selected) -> void:

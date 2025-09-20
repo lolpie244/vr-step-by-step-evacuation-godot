@@ -3,6 +3,7 @@ extends Node3D
 
 signal tile_changed(tile: Tile)
 signal selected_changed(is_selected: bool)
+signal look_direction_changed(direction: Vector2)
 
 enum Type { CIVILIAN }
 
@@ -14,7 +15,10 @@ var _walkable: Walkable
 var _reachable: Array[Walkable.ReachableResult] = []
 var _is_selected := false
 
-var _look_direction: Vector2 = Vector2.ZERO
+var _look_direction: Vector2 = Vector2.ZERO:
+	set(value):
+		_look_direction = value
+		look_direction_changed.emit(value)
 
 
 func _init(_type: Type):

@@ -26,7 +26,7 @@ class ReachableResult:
 	func _init(_tile: Tile, _distance: int, _direction: Vector2):
 		tile = _tile
 		distance = _distance
-		direction = _direction
+		direction = Vector2(_direction.y, _direction.x)
 
 
 func reachable_neighbors() -> Array[Walkable]:
@@ -36,10 +36,8 @@ func reachable_neighbors() -> Array[Walkable]:
 		if tile.pos.x != _tile.pos.x && tile.pos.y != _tile.pos.y:
 			continue
 
-		var mixin = tile.get_mixin(Walkable)
-		var blockable = tile.get_mixin(Blockable)
 		if _is_walkable(tile):
-			result.append(mixin)
+			result.append(tile.get_mixin(Walkable))
 
 	return result
 

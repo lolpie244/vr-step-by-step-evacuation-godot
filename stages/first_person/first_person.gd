@@ -12,6 +12,7 @@ class Context:
 var context: Context
 
 @onready var factory: FirstPersonTileFactory = $Factory
+@onready var player: PlayerVR = $PlayerVR
 
 
 func _add_child_node(tile: TileNode):
@@ -26,13 +27,15 @@ func _ready() -> void:
 	var character_tile = factory.create(context.character.get_tile())
 	_add_child_node(character_tile)
 
-	$PlayerVr.position.x = character_tile.position.x
-	$PlayerVr.position.z = character_tile.position.z
+	player.rotate_y(context.character._look_direction.angle() - deg_to_rad(180))
 
-	$ItemDropper.global_position = $PlayerVr.global_position
+	player.position.x = character_tile.position.x
+	player.position.z = character_tile.position.z
+
+	$ItemDropper.global_position = player.global_position
 	$ItemDropper.position.x += 0.6
 
-	$ExitTrigger.global_position = $PlayerVr.global_position
+	$ExitTrigger.global_position = player.global_position
 	$ExitTrigger.position.x -= 0.4
 
 	$ItemDropper.spawn()
@@ -40,4 +43,6 @@ func _ready() -> void:
 
 
 func _on_exit_trigger_triggerred() -> void:
+	var player_rotation = player.get_node("XRCamera3D").rotation.y
+	context.character._look_direction = Vector2(cos(player_rotation), sin(player_rotation))
 	SceneManager.pop_scene()
