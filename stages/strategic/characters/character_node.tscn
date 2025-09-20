@@ -15,6 +15,7 @@ gravity_scale = 0.0
 freeze = true
 freeze_mode = 0
 script = ExtResource("3_p4i5w")
+ranged_grab_method = 2
 
 [node name="GrabPointHandLeft" parent="PickableObject" instance=ExtResource("4_12a1t")]
 

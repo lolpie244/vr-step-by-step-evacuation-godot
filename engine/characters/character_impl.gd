@@ -2,8 +2,8 @@ class_name Character
 extends Node3D
 
 signal tile_changed(tile: Tile)
-signal selected_changed(is_selected: bool)
 signal look_direction_changed(direction: Vector2)
+signal highlihted
 
 enum Type { CIVILIAN }
 
@@ -13,7 +13,8 @@ enum Type { CIVILIAN }
 var _speed: int
 var _walkable: Walkable
 var _reachable: Array[Walkable.ReachableResult] = []
-var _is_selected := false
+var _is_selected: bool = false
+var _is_highlighted: bool = false
 
 var _look_direction: Vector2 = Vector2.ZERO:
 	set(value):
@@ -69,18 +70,6 @@ func is_reachable(walkable: Walkable) -> Walkable.ReachableResult:
 	return null
 
 
-func select(is_selected: bool, animation: bool = true):
-	if is_selected == _is_selected:
-		return
-	_is_selected = is_selected
-	selected_changed.emit(is_selected)
-
-	for info in _reachable:
-		if animation:
-			await Engine.get_main_loop().create_timer(0.04).timeout
-		info.tile.highlight = _is_selected
-
-
 func visible_tiles() -> Array[Tile]:
 	return ShadowCasting.visible_tiles(_walkable.get_tile())
 
@@ -90,3 +79,31 @@ func get_tile() -> Tile:
 		return null
 
 	return _walkable.get_tile()
+
+
+func select(value: bool):
+	if _is_selected == value:
+		return
+	_is_selected = value
+	if _is_selected:
+		GameCore.selected_character = self
+	elif GameCore.selected_character == self:
+		GameCore.selected_character = null
+
+
+func toggle_select():
+	select(!_is_selected)
+
+
+func _highlight(value: bool):
+	if _is_highlighted == value:
+		return
+
+	_is_highlighted = value
+	get_tile().highlight = value
+
+	for info in _reachable:
+		await Engine.get_main_loop().create_timer(0.04).timeout
+		info.tile.highlight = value
+
+	highlihted.emit()

@@ -19,6 +19,10 @@ func _on_snap_zone_body_entered(_body: Node3D) -> void:
 	var character_node: CharacterStrategic = body.get_parent()
 	var character: Character = character_node.impl
 
+	var max_radius := 0.1
+	if body.global_position.distance_to(global_position) > max_radius:
+		return
+
 	if (
 		!body.is_picked_up()
 		|| body in _bodies_in_snap_zone_area

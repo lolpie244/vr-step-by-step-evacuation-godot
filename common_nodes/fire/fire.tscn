@@ -234,7 +234,7 @@ script = ExtResource("1_b8jli")
 
 [node name="Fire" type="GPUParticles3D" parent="."]
 material_override = SubResource("ShaderMaterial_i226c")
-amount = 100
+amount = 50
 fixed_fps = 120
 visibility_aabb = AABB(-15, -1, -15, 30, 27.643, 30)
 process_material = SubResource("ParticleProcessMaterial_lio3t")

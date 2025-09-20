@@ -3,6 +3,7 @@ extends Node3D
 
 @export var _draw_wind := false
 @export var material: TileMaterial
+@export var particles_scale := 1.0
 
 @onready var tile: TileNode = get_parent()
 @onready var impl: Flammable = tile.impl.get_or_create_mixin(Flammable)
@@ -10,6 +11,9 @@ extends Node3D
 
 
 func _ready():
+	if fire:
+		fire.particles_scale = particles_scale
+
 	impl.state_changed.connect(_on_impl_state_changed)
 	impl.strenght_changed.connect(_on_impl_strength_changed)
 	impl.material = material

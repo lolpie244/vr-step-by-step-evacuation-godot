@@ -4,6 +4,7 @@ extends Node3D
 
 var enabled := false
 var fire_scale: Vector2
+var particles_scale: float = 1
 
 var cooling_coef = 0.2:
 	set(val):
@@ -23,10 +24,11 @@ func _process(_delta: float) -> void:
 		return
 
 	fire_scale = new_scale
+
 	var time_scale: float = root.global_basis.get_scale().y
 
-	(fire.draw_pass_1 as BoxMesh).size = Vector3.ONE * fire_scale.y
-	(sparks.draw_pass_1 as QuadMesh).size = Vector2.ONE * fire_scale
+	(fire.draw_pass_1 as BoxMesh).size = Vector3.ONE * fire_scale.x * particles_scale
+	(sparks.draw_pass_1 as QuadMesh).size = fire_scale * particles_scale
 
 	fire.speed_scale = time_scale
 	sparks.speed_scale = time_scale

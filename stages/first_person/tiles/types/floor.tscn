@@ -11,5 +11,5 @@ type = 1
 [node name="Model" parent="." index="0" instance=ExtResource("4_0hc06")]
 
 [node name="Flammable" parent="." index="2" instance=ExtResource("3_1sjtp")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.286574, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.2, 0, 0, 0, 0.4, 0, 0.2, 0)
 material = ExtResource("4_a1ge7")

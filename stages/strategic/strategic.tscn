@@ -50,7 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5729785, 0.5003492, 1.643)
 [node name="RopeTriggerOrigin" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31713516, 0.9533406, 1.402024)
 
-[connection signal="character_selected" from="Map" to="." method="_on_map_character_selected"]
 [connection signal="hinge_moved" from="ScaleLever" to="." method="_on_zoom_lever_moved"]
 [connection signal="moved" from="OffsetJoystick" to="." method="_on_offset_joystick_moved"]
 [connection signal="released" from="ExitButton" to="." method="_on_button_released"]
