@@ -2,6 +2,7 @@ class_name Character
 extends Node3D
 
 signal tile_changed(tile: Tile)
+signal selected_changed(is_selected: bool)
 
 enum Type { CIVILIAN }
 
@@ -11,7 +12,7 @@ enum Type { CIVILIAN }
 var _speed: int
 var _walkable: Walkable
 var _reachable: Array[Walkable.ReachableResult] = []
-var _reachable_highlighted := false
+var _is_selected := false
 
 var _look_direction: Vector2 = Vector2.ZERO
 
@@ -40,7 +41,7 @@ func place(tile: Tile):
 			_walkable.place_character(self)
 		return false
 
-	highlight_reachable(false)
+	select(false)
 	_speed -= next_tile.distance
 	_walkable = next_tile.tile.get_mixin(Walkable)
 	_reachable = _walkable.reachable_tiles(_speed)
@@ -64,14 +65,16 @@ func is_reachable(walkable: Walkable) -> Walkable.ReachableResult:
 	return null
 
 
-func highlight_reachable(highlight: bool):
-	if _reachable_highlighted == highlight:
+func select(is_selected: bool, animation: bool = true):
+	if is_selected == _is_selected:
 		return
+	_is_selected = is_selected
+	selected_changed.emit(is_selected)
 
-	_reachable_highlighted = highlight
 	for info in _reachable:
-		await Engine.get_main_loop().create_timer(0.04).timeout
-		info.tile.highlight = highlight
+		if animation:
+			await Engine.get_main_loop().create_timer(0.04).timeout
+		info.tile.highlight = _is_selected
 
 
 func visible_tiles() -> Array[Tile]:

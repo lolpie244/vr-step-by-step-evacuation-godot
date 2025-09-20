@@ -5,8 +5,11 @@ signal triggerred
 
 @export_range(0, 1) var pull_strenght := 0.1
 
+var enabled := false
+
 var _was_triggered := false
 var _last_position: Vector3
+
 
 @onready var rope_item: XRToolsPickable = $Rope.attached_to_end
 
@@ -32,9 +35,19 @@ func restore_item_position():
 		rope_item.global_position = _last_position
 
 
+func set_state(_enabled: bool):
+	if _enabled == enabled:
+		return
+	enabled = _enabled
+	if _enabled:
+		$AnimationPlayer.play("show")
+	else:
+		$AnimationPlayer.play("remove")
+
+
 func spawn():
-	$AnimationPlayer.play("show")
+	set_state(true)
 
 
 func remove():
-	$AnimationPlayer.play("remove")
+	set_state(false)

@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func _on_snap_zone_body_entered(_body: Node3D) -> void:
-	if not is_instance_of(_body, XRToolsPickable):
+	if not _body is XRToolsPickable || !_body.get_parent() is CharacterStrategic:
 		return
 
 	var body: XRToolsPickable = _body

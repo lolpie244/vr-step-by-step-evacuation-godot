@@ -1,5 +1,7 @@
 extends Node
 
+signal character_selected(character: Character)
+
 var grid := MapGrid.new()
 
 var current_turn: int:

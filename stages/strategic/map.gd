@@ -1,6 +1,8 @@
 class_name Map
 extends MeshInstance3D
 
+signal character_selected(character_node: CharacterStrategic)
+
 @export var cutoff_shader: Shader
 var cutoff_material: ShaderMaterial
 
@@ -18,6 +20,13 @@ var offset: Vector2:
 	set(new_offset):
 		map_items.position.x = new_offset.x
 		map_items.position.z = new_offset.y
+
+var selected_character: CharacterStrategic:
+	set(value):
+		if selected_character:
+			selected_character.impl.select(false, false)
+		selected_character = value
+		character_selected.emit(value)
 
 var _tile_size: float
 var _tile_nodes: Array

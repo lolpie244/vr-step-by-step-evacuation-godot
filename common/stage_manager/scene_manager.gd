@@ -53,7 +53,10 @@ func _deferred_pop_scene():
 	var free_scene = _scene_stack.back()
 	_scene_stack.pop_back()
 	if _scene_stack.size():
-		_add_scene(_scene_stack.back())
+		var scene = _scene_stack.back()
+		_add_scene(scene)
+		if scene.has_method("_enter_scene"):
+			scene._enter_scene()
 
 	if free_scene:
 		free_scene.free()
