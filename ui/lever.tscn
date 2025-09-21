@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy8bik48abvil"]
+
+[ext_resource type="Script" uid="uid://cn510a6ci3rwc" path="res://ui/lever.gd" id="1_m2xtm"]
+[ext_resource type="PackedScene" uid="uid://5ojbidy5e0gt" path="res://ui/assets/lever.glb" id="1_nhhak"]
+[ext_resource type="Script" uid="uid://d0rry8mdgpbmv" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2_u5ank"]
+[ext_resource type="PackedScene" uid="uid://bddj5m7ull6g0" path="res://addons/godot-xr-tools/interactables/interactable_handle.tscn" id="3_m2xtm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_iv8p3"]
+height = 0.751892
+radius = 0.151367
+
+[node name="Lever" type="Node3D"]
+script = ExtResource("1_m2xtm")
+
+[node name="Lever" parent="." instance=ExtResource("1_nhhak")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.0520985, 0)
+
+[node name="base" parent="Lever" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.245205, 0)
+
+[node name="lever" parent="Lever" index="1"]
+script = ExtResource("2_u5ank")
+default_on_release = true
+
+[node name="HandleOrigin" type="Node3D" parent="Lever/lever" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999926, 0.0122171, 0, -0.0122171, 0.999926, -0.001, 0.599, -2.61831e-08)
+
+[node name="InteractableHandle" parent="Lever/lever/HandleOrigin" instance=ExtResource("3_m2xtm")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lever/lever/HandleOrigin/InteractableHandle"]
+transform = Transform3D(-4.37114e-09, -0.1, 0, 0.1, -4.37114e-09, 0, 0, 0, 0.1, 0.00161743, 0, 0)
+shape = SubResource("CylinderShape3D_iv8p3")
+
+[connection signal="grabbed" from="Lever/lever" to="." method="_on_lever_grabbed"]
+[connection signal="released" from="Lever/lever" to="." method="_on_lever_released"]
+
+[editable path="Lever"]

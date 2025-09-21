@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjmyd6fkw77hy"]
+
+[ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://stages/strategic/tiles/tile.tscn" id="1_a6w75"]
+[ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://stages/strategic/tiles/assets/floor.glb" id="2_2muul"]
+[ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="3_1f3so"]
+[ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic/tiles/mixins/flammable.tscn" id="3_y7fv3"]
+[ext_resource type="PackedScene" uid="uid://4if45fr7sjl6" path="res://stages/strategic/tiles/mixins/walkable.tscn" id="4_wqcp5"]
+
+[node name="Floor" instance=ExtResource("1_a6w75")]
+type = 1
+
+[node name="Flammable" parent="." index="0" instance=ExtResource("3_y7fv3")]
+transform = Transform3D(0.3, 0, 0, 0, 1.2, 0, 0, 0, 0.3, 0, 0.298921, 0)
+material = ExtResource("3_1f3so")
+
+[node name="Walkable" parent="." index="1" instance=ExtResource("4_wqcp5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20416, 0)
+
+[node name="Model" parent="." index="2" instance=ExtResource("2_2muul")]

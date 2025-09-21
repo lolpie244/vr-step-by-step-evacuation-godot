@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxrf0lnhl7s2f"]
+
+[ext_resource type="Script" uid="uid://b8avi6cjwyrsf" path="res://stages/test/test.gd" id="1_c6hbk"]
+[ext_resource type="PackedScene" uid="uid://ujao577umlix" path="res://stages/strategic/map.tscn" id="1_xne4r"]
+[ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person/first_person.tscn" id="2_c6hbk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xne4r"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_jwisr"]
+sky_material = SubResource("ProceduralSkyMaterial_xne4r")
+
+[sub_resource type="Environment" id="Environment_c6hbk"]
+background_mode = 2
+sky = SubResource("Sky_jwisr")
+tonemap_mode = 2
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_c6hbk")
+next_scene = ExtResource("2_c6hbk")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c6hbk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.789662, 0.613542, 0, -0.613542, 0.789662, 0, 0.98782, 0.98011)
+
+[node name="Map" parent="." instance=ExtResource("1_xne4r")]
+cutoff_shader = null

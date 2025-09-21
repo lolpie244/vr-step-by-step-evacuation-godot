@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bayl0mx8j5o7a"]
+
+[ext_resource type="PackedScene" uid="uid://cuoge0yhplmnh" path="res://stages/strategic/tiles/tile_animation.tscn" id="1_hdasf"]
+[ext_resource type="Script" uid="uid://dmd1oeiknl2xq" path="res://common_nodes/tile_node.gd" id="1_vdpyv"]
+
+[node name="TileStrategic" type="Node3D"]
+script = ExtResource("1_vdpyv")
+
+[node name="Animation" parent="." instance=ExtResource("1_hdasf")]

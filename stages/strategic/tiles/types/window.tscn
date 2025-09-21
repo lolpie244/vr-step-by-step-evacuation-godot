@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxwf0dqtgsgoi"]
+
+[ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://stages/strategic/tiles/tile.tscn" id="1_xpnur"]
+[ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://common_nodes/tile_types/wall_like.gd" id="2_naif6"]
+[ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://stages/strategic/tiles/assets/window.glb" id="2_ykrxi"]
+[ext_resource type="PackedScene" uid="uid://clkyq3erpihef" path="res://stages/strategic/tiles/mixins/wind_source.tscn" id="4_o556e"]
+
+[node name="Window" instance=ExtResource("1_xpnur")]
+script = ExtResource("2_naif6")
+type = 4
+
+[node name="Model" parent="." index="1" instance=ExtResource("2_ykrxi")]
+
+[node name="WindSource" parent="." index="2" instance=ExtResource("4_o556e")]

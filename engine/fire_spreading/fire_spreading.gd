@@ -1,0 +1,63 @@
+extends Node
+
+# Constants
+
+# fraction of heat that actually reaches the neighbor through direct contact
+const CONTACT_HEAT_FRACTION := 0.1
+const MAX_STRENGHT := 20  # max wind vector strength
+const MAX_STRENGHT_PROB := 0.3  # probability that fire will spread with wind with MAX_STRENGHT
+
+const K1 := 1.5  # wind influence coef
+var k2 := -log(1 - MAX_STRENGHT_PROB) / MAX_STRENGHT  # wind vector length to probability
+
+
+func can_burn(tile: Tile) -> bool:
+	var flammable: Flammable = tile.get_mixin(Flammable)
+
+	return flammable != null && flammable.can_burn()
+
+
+func _fixed_prob(from: Tile, to: Tile) -> float:
+	var from_mat = from.get_mixin(Flammable).material
+	var to_mat = to.get_mixin(Flammable).material
+
+	var delta_t = to_mat.ignition_temp - Constants.ROOM_TEMPERATURE
+	var hrr = CONTACT_HEAT_FRACTION * from_mat.heat_release_rate * 1000
+	var release_rate = pow(delta_t / hrr, 2)
+	var flammable_rate = to_mat.density * to_mat.thermal_conductivity * to_mat.heat_capacity
+
+	return 1 - exp(-Constants.TIME_PER_TURN / (PI / 4 * flammable_rate * release_rate))
+
+
+func _dynamic_prob(from: Tile, to: Tile) -> float:
+	var vector: Vector2 = from.get_mixin(Flammable).wind
+
+	var a := K1 * vector.length()
+	var b := (K1 / 2.0) * vector.length()
+
+	var elipse_angle: float = vector.angle()
+	var angle_to := from.direction_to(to).angle()
+
+	var point_on_elips := Vector2(
+		a * cos(angle_to) * cos(elipse_angle) - b * sin(angle_to) * sin(elipse_angle),
+		a * cos(angle_to) * sin(elipse_angle) + b * sin(angle_to) * cos(elipse_angle)
+	)
+
+	return k2 * point_on_elips.length()
+
+
+func is_spread(from: Tile, to: Tile) -> bool:
+	if to.get_mixin(Flammable) == null || !to.get_mixin(Flammable).can_burn():
+		return false
+
+	var fixed_prob = _fixed_prob(from, to)
+	var dynamic_prob = _dynamic_prob(from, to)
+
+	print("COORD ", from.pos, to.pos)
+	print("DIRECTION ", from.direction_to(to))
+	print("FIXED ", fixed_prob)
+	print("DYNAMIC ", dynamic_prob)
+	print("RESULT ", fixed_prob + dynamic_prob)
+	print("---------")
+
+	return randf_range(0, 1) < fixed_prob + dynamic_prob

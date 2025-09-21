@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=3 uid="uid://ujao577umlix"]
+
+[ext_resource type="Shader" uid="uid://beleb7aq1efb7" path="res://stages/strategic/cutoff.gdshader" id="2_4hjbm"]
+[ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://stages/strategic/map.gd" id="2_lgq1i"]
+[ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_node_factory.tscn" id="4_kffv2"]
+[ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="5_kffv2"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0dt8"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.0980392)
+
+[node name="Map" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_a0dt8")
+surface_material_override/0 = SubResource("StandardMaterial3D_a0dt8")
+script = ExtResource("2_lgq1i")
+cutoff_shader = ExtResource("2_4hjbm")
+
+[node name="StrategicTileFactory" parent="." instance=ExtResource("4_kffv2")]
+
+[node name="CharacterNodeFactory" parent="." instance=ExtResource("5_kffv2")]
+
+[node name="MapItems" type="Node3D" parent="."]

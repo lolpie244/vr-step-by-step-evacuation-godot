@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo3vblsvejx6g"]
+
+[ext_resource type="Script" uid="uid://cpdug00n5hbd4" path="res://common_nodes/tile_mixins/flammable.gd" id="1_a0ddl"]
+[ext_resource type="PackedScene" uid="uid://bypa1gccleaiv" path="res://common_nodes/fire/fire.tscn" id="2_3n17a"]
+[ext_resource type="Script" uid="uid://ddox0tc1rgbmr" path="res://stages/first_person/tiles/mixins/flammable_area.gd" id="3_3n17a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a0ddl"]
+radius = 0.822281
+
+[node name="Flammable" type="Node3D"]
+script = ExtResource("1_a0ddl")
+particles_scale = 0.4
+
+[node name="Fire" parent="." instance=ExtResource("2_3n17a")]
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("3_3n17a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.527823, 0)
+shape = SubResource("SphereShape3D_a0ddl")

@@ -1,0 +1,64 @@
+[gd_scene load_steps=13 format=3 uid="uid://b50lh3ohab6x6"]
+
+[ext_resource type="PackedScene" uid="uid://0atb45jl1tr" path="res://ui/rope_trigger.tscn" id="1_koxd2"]
+[ext_resource type="Script" uid="uid://c1vovqujr6r5b" path="res://addons/godot-xr-tools/objects/pickable.gd" id="2_y5vro"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_vp1xd"]
+[ext_resource type="Animation" uid="uid://dqa0h82y3qn1t" path="res://addons/godot-xr-tools/hands/animations/left/Grip 1.res" id="4_g0mlb"]
+[ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="5_oyg2x"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="6_6i2ae"]
+[ext_resource type="Animation" uid="uid://daqddcrbpam0c" path="res://addons/godot-xr-tools/hands/animations/right/Grip 1.res" id="7_cxw3g"]
+
+[sub_resource type="Curve3D" id="Curve3D_tion3"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 2.22, 0, 0, 0, 0, 0, 0, 0, 0, 1.719, 0, 0, 0, 0, 0, 0, 0, 0, 1.481, 0, 0, 0, 0, 0, 0, 0, 0, 1.211, 0, 0, 0, 0, 0, 0, 0, 0, 0.933, 0, 0, 0, 0, 0, 0, 0, -0.00592592, 0.675918, 0, 0, 0, 0, 0, 0, 0, -0.00239896, 0.240898, -0.0150305),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vildc"]
+radius = 0.0570023
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tjtyk"]
+radius = 0.03
+height = 0.1
+
+[sub_resource type="Resource" id="Resource_8qtiu"]
+script = ExtResource("5_oyg2x")
+closed_pose = ExtResource("4_g0mlb")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="Resource" id="Resource_48cyu"]
+script = ExtResource("5_oyg2x")
+closed_pose = ExtResource("7_cxw3g")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[node name="MeshRopeTrigger" instance=ExtResource("1_koxd2")]
+
+[node name="Rope" parent="." index="0" node_paths=PackedStringArray("attached_to_end")]
+curve = SubResource("Curve3D_tion3")
+attached_to_end = NodePath("../Handle")
+
+[node name="End" parent="." index="3"]
+visible = true
+
+[node name="Handle" type="RigidBody3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0006300807, 1.965863, -0.0144433975)
+collision_layer = 65537
+collision_mask = 65537
+script = ExtResource("2_y5vro")
+metadata/_custom_type_script = "uid://c1vovqujr6r5b"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Handle" index="0"]
+shape = SubResource("SphereShape3D_vildc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Handle" index="1"]
+mesh = SubResource("CapsuleMesh_tjtyk")
+
+[node name="GrabPointHandLeft" parent="Handle" index="2" instance=ExtResource("3_vp1xd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0426786, -0.0891252)
+hand_pose = SubResource("Resource_8qtiu")
+
+[node name="GrabPointHandRight" parent="Handle" index="3" instance=ExtResource("6_6i2ae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.043, -0.089)
+hand_pose = SubResource("Resource_48cyu")
