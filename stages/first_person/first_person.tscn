@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cgdwn2epdpwlb"]
+[gd_scene load_steps=13 format=3 uid="uid://cgdwn2epdpwlb"]
 
 [ext_resource type="Script" uid="uid://b61pr07hqsne1" path="res://stages/first_person/first_person.gd" id="1_ybnn0"]
 [ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/player_VR.tscn" id="2_5f22i"]
@@ -8,13 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cswabutocau3i" path="res://stages/first_person/tiles/types/floor.tscn" id="6_rvqsj"]
 [ext_resource type="PackedScene" uid="uid://by5xg0rlj0wnw" path="res://stages/first_person/tiles/types/wall.tscn" id="7_2vkjx"]
 [ext_resource type="PackedScene" uid="uid://ucw376iw8aqd" path="res://stages/first_person/tiles/types/window.tscn" id="8_0x2kq"]
-[ext_resource type="PackedScene" uid="uid://0atb45jl1tr" path="res://ui/rope_trigger.tscn" id="9_2vkjx"]
-[ext_resource type="Script" uid="uid://c1vovqujr6r5b" path="res://addons/godot-xr-tools/objects/pickable.gd" id="10_0x2kq"]
-[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="10_2p6jq"]
-[ext_resource type="Animation" uid="uid://dqa0h82y3qn1t" path="res://addons/godot-xr-tools/hands/animations/left/Grip 1.res" id="11_2u403"]
-[ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="12_hylgi"]
-[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="13_hylgi"]
-[ext_resource type="Animation" uid="uid://daqddcrbpam0c" path="res://addons/godot-xr-tools/hands/animations/right/Grip 1.res" id="14_rdoow"]
+[ext_resource type="PackedScene" uid="uid://b50lh3ohab6x6" path="res://ui/mesh_rope_trigger.tscn" id="9_rvqsj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ybnn0"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -27,31 +21,6 @@ sky_material = SubResource("ProceduralSkyMaterial_ybnn0")
 background_mode = 2
 sky = SubResource("Sky_5f22i")
 tonemap_mode = 2
-
-[sub_resource type="Curve3D" id="Curve3D_tion3"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 2.22, 0, 0, 0, 0, 0, 0, 0, 0, 1.719, 0, 0, 0, 0, 0, 0, 0, 0, 1.481, 0, 0, 0, 0, 0, 0, 0, -0.00627887, 1.21102, 0, 0, 0, 0, 0, 0, 0, -0.00684121, 0.932714, 0, 0, 0, 0, 0, 0, 0, -0.00592592, 0.675918, 0, 0, 0, 0, 0, 0, 0, -0.00239896, 0.240898, -0.0150305),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 7
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_hylgi"]
-radius = 0.0570023
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xyjs2"]
-radius = 0.03
-height = 0.1
-
-[sub_resource type="Resource" id="Resource_rdoow"]
-script = ExtResource("12_hylgi")
-closed_pose = ExtResource("11_2u403")
-metadata/_custom_type_script = "uid://c4itu8s6yackn"
-
-[sub_resource type="Resource" id="Resource_ouakr"]
-script = ExtResource("12_hylgi")
-closed_pose = ExtResource("14_rdoow")
-metadata/_custom_type_script = "uid://c4itu8s6yackn"
 
 [node name="FirstPerson" type="Node3D"]
 script = ExtResource("1_ybnn0")
@@ -72,35 +41,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55165, 0)
 script = ExtResource("4_7313h")
 scenes = Array[PackedScene]([ExtResource("5_0xgnx"), ExtResource("6_rvqsj"), ExtResource("7_2vkjx"), ExtResource("8_0x2kq")])
 
-[node name="ExitTrigger" parent="." instance=ExtResource("9_2vkjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.824641, 0, 0)
-pull_strenght = 0.15
-
-[node name="Rope" parent="ExitTrigger" index="0" node_paths=PackedStringArray("attached_to_end")]
-curve = SubResource("Curve3D_tion3")
-attached_to_end = NodePath("../Handle")
-
-[node name="Handle" type="RigidBody3D" parent="ExitTrigger"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000630081, 1.96287, -0.0144434)
-collision_layer = 65537
-collision_mask = 65537
-script = ExtResource("10_0x2kq")
-metadata/_custom_type_script = "uid://c1vovqujr6r5b"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ExitTrigger/Handle"]
-shape = SubResource("SphereShape3D_hylgi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ExitTrigger/Handle"]
-mesh = SubResource("CapsuleMesh_xyjs2")
-
-[node name="GrabPointHandLeft" parent="ExitTrigger/Handle" instance=ExtResource("10_2p6jq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0426786, -0.0891252)
-hand_pose = SubResource("Resource_rdoow")
-
-[node name="GrabPointHandRight" parent="ExitTrigger/Handle" instance=ExtResource("13_hylgi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.043, -0.089)
-hand_pose = SubResource("Resource_ouakr")
+[node name="ExitTrigger" parent="." instance=ExtResource("9_rvqsj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.825, 0, 0)
 
 [connection signal="triggerred" from="ExitTrigger" to="." method="_on_exit_trigger_triggerred"]
-
-[editable path="ExitTrigger"]
