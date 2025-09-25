@@ -48,19 +48,6 @@ func _set_map_data():
 		if !anchor.is_initialized:
 			await anchor.initialized
 		anchor._draw = true
-		#if anchor.type == Tile.Type.WALL and !is_drawing:
-			#anchor._draw = true
-			#is_drawing = true
-#
-		#var aabb = anchor.aabb
-#
-		#print(anchor.label)
-		#print("rectangle({0}|{1} {2} {3})".format([
-			#anchor.left_corner.x,
-			#anchor.left_corner.y,
-			#anchor.size.x,
-			#anchor.size.y
-		#]))
 		
 		left_corner = Vector2(
 			min(left_corner.x, anchor.left_corner.x),
@@ -75,24 +62,32 @@ func _set_map_data():
 	for anchor in to_remove:
 		_anchors.erase(anchor)
 #
-	var size: Vector2i = round((right_corner - left_corner) / Constants.TILE_SIZE_IN_REAL_LIFE)
+	var size: Vector2i = round((right_corner - left_corner) / Constants.TILE_SIZE_IN_REAL_LIFE) + Vector2.ONE
 	var map := Utils.get_matrix(size.x, size.y)
 
 	for anchor in _anchors:
 		var left := anchor.left_corner - left_corner
-		var right := anchor.right_corner - left_corner - left
+		var right := left + anchor.size
 
 		var start: Vector2i = round(left / Constants.TILE_SIZE_IN_REAL_LIFE)
-		var end: Vector2i = round(right / Constants.TILE_SIZE_IN_REAL_LIFE)
+		var end: Vector2i = ceil(right / Constants.TILE_SIZE_IN_REAL_LIFE)
 		end = Vector2i(
 			min(size.x, max(end.x, start.x + 1)),
 			min(size.y, max(end.y, start.y + 1)),
 		)
-#
-		for x in range(start.x, min(size.x, end.x)):
-			for y in range(start.y, min(size.y, end.y)):
+		var skip := false
+
+		for x in range(start.x, end.x):
+			if skip:
+				break
+				
+			for y in range(start.y, end.y):
 				if map[x][y] == null || map[x][y] < anchor.type:
 					map[x][y] = anchor.type
+					
+					if not anchor.type in XRAnchor.MULTIPLE_TILES:
+						skip = true
+						break
 
 	end_scene.emit(map)
 
