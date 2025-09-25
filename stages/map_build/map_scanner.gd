@@ -39,42 +39,56 @@ func _set_map_data():
 	var right_corner := Vector2(-1000, -1000)
 
 	var to_remove := []
+	var is_drawing: bool = false
 	for anchor in _anchors:
 		if !anchor.get("valid"):
 			to_remove.append(anchor)
 			continue
-
-		print(anchor.label)
-		print("	size:", anchor.aabb.size)
-		print("	position:", anchor.aabb.position)
-		print("	rotation:", anchor.mesh_instance.global_rotation)
-
+		
+		if !anchor.is_initialized:
+			await anchor.initialized
+		anchor._draw = true
+		#if anchor.type == Tile.Type.WALL and !is_drawing:
+			#anchor._draw = true
+			#is_drawing = true
+#
+		#var aabb = anchor.aabb
+#
+		#print(anchor.label)
+		#print("rectangle({0}|{1} {2} {3})".format([
+			#anchor.left_corner.x,
+			#anchor.left_corner.y,
+			#anchor.size.x,
+			#anchor.size.y
+		#]))
+		
 		left_corner = Vector2(
 			min(left_corner.x, anchor.left_corner.x),
 			min(left_corner.y, anchor.left_corner.y),
 		)
-
+#
 		right_corner = Vector2(
 			max(right_corner.x, anchor.right_corner.x),
 			max(right_corner.y, anchor.right_corner.y),
 		)
-
+#
 	for anchor in to_remove:
 		_anchors.erase(anchor)
-
+#
 	var size: Vector2i = round((right_corner - left_corner) / Constants.TILE_SIZE_IN_REAL_LIFE)
 	var map := Utils.get_matrix(size.x, size.y)
 
 	for anchor in _anchors:
 		var left := anchor.left_corner - left_corner
-		var right := left + Vector2(
-			max(Constants.TILE_SIZE_IN_REAL_LIFE, anchor.size.x),
-			max(Constants.TILE_SIZE_IN_REAL_LIFE, anchor.size.y)
+		var right := anchor.right_corner - left_corner - left
+
+		var start: Vector2i = round(left / Constants.TILE_SIZE_IN_REAL_LIFE)
+		var end: Vector2i = round(right / Constants.TILE_SIZE_IN_REAL_LIFE)
+		end = Vector2i(
+			min(size.x, max(end.x, start.x + 1)),
+			min(size.y, max(end.y, start.y + 1)),
 		)
-
-		var start = round(left / Constants.TILE_SIZE_IN_REAL_LIFE)
-		var end = round(right / Constants.TILE_SIZE_IN_REAL_LIFE)
-
+#
 		for x in range(start.x, min(size.x, end.x)):
 			for y in range(start.y, min(size.y, end.y)):
 				if map[x][y] == null || map[x][y] < anchor.type:

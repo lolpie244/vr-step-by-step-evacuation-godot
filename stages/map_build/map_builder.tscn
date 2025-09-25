@@ -39,6 +39,7 @@ visible = false
 
 [node name="SpatialAnchorManager" type="OpenXRFbSpatialAnchorManager" parent="PlayerVR"]
 scene = ExtResource("3_6sc0j")
+visible = false
 
 [node name="MapScanner" type="Node3D" parent="."]
 script = ExtResource("3_nt64x")

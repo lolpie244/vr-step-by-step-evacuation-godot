@@ -3,6 +3,11 @@ extends Node
 
 const DEFAULT_DUPLICATE = DUPLICATE_SCRIPTS | DUPLICATE_GROUPS | DUPLICATE_SIGNALS
 
+enum Axis {
+	X, Y, Z
+}
+
+
 
 static func get_matrix(n: int, m: int, fill = null) -> Array:
 	var result: Array = Array()
