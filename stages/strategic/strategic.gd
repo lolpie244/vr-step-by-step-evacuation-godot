@@ -25,9 +25,9 @@ func _ready() -> void:
 	_add_first_mode_trigger()
 	GameCore.character_selected.connect(_on_character_selected)
 
-	map.add_character(Character.Type.CIVILIAN, 6, 4)
-	map.add_character(Character.Type.CIVILIAN, 2, 4)
-	GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
+	#map.add_character(Character.Type.CIVILIAN, 6, 4)
+	#map.add_character(Character.Type.CIVILIAN, 2, 4)
+	#GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
 	GameCore.next_turn()
 
 

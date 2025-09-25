@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://xnfqapr2ajxs"]
+
+[ext_resource type="Script" uid="uid://cklvbndqqhyfp" path="res://stages/map_build/map_builder.gd" id="1_og28i"]
+[ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/player_VR.tscn" id="1_y71xb"]
+[ext_resource type="PackedScene" uid="uid://flu7j32ifd3y" path="res://stages/strategic/strategic.tscn" id="2_0uych"]
+[ext_resource type="PackedScene" uid="uid://dxo3bt6kf8q8u" path="res://stages/map_build/anchor_scene.tscn" id="3_6sc0j"]
+[ext_resource type="Script" uid="uid://ca2urkngiqc5i" path="res://stages/map_build/map_scanner.gd" id="3_nt64x"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_og28i"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_nt64x"]
+sky_material = SubResource("ProceduralSkyMaterial_og28i")
+
+[sub_resource type="Environment" id="Environment_6sc0j"]
+background_mode = 2
+sky = SubResource("Sky_nt64x")
+tonemap_mode = 2
+
+[node name="MapBuilder" type="Node3D"]
+script = ExtResource("1_og28i")
+strategic = ExtResource("2_0uych")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 2.3335445, -2.042345)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6sc0j")
+
+[node name="PlayerVR" parent="." instance=ExtResource("1_y71xb")]
+
+[node name="SceneManager" type="OpenXRFbSceneManager" parent="PlayerVR"]
+default_scene = ExtResource("3_6sc0j")
+auto_create = false
+visible = false
+
+[node name="SpatialAnchorManager" type="OpenXRFbSpatialAnchorManager" parent="PlayerVR"]
+scene = ExtResource("3_6sc0j")
+
+[node name="MapScanner" type="Node3D" parent="."]
+script = ExtResource("3_nt64x")
+
+[connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
+[connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]
+[connection signal="openxr_fb_scene_data_missing" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_data_missing"]
+[connection signal="end_scene" from="MapScanner" to="." method="_on_map_scanner_scan_ended"]

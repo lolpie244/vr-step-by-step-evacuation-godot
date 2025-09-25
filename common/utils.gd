@@ -4,8 +4,8 @@ extends Node
 const DEFAULT_DUPLICATE = DUPLICATE_SCRIPTS | DUPLICATE_GROUPS | DUPLICATE_SIGNALS
 
 
-static func get_matrix(n: int, m: int, fill = null):
-	var result = Array()
+static func get_matrix(n: int, m: int, fill = null) -> Array:
+	var result: Array = Array()
 	result.resize(n)
 
 	for i in result.size():
