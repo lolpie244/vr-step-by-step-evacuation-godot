@@ -37,17 +37,13 @@ func init():
 
 	_swap_model(_get_model())
 
-	self.scale = Vector3.ONE * model_scale(model)
-	self.position = tile_position(impl.pos.x, impl.pos.y)
-
 
 func _get_model():
 	return model
 
 
-func tile_scale(_scale: int):
-	self.position = self.position / self.scale * _scale
-	self.scale = Vector3.ONE * _scale
+func get_aabb() -> AABB:
+	return Utils.get_aabb(model) * model.scale
 
 
 func set_material(_material: ShaderMaterial):
@@ -65,16 +61,3 @@ func _on_impl_highlight_changed(value: bool) -> void:
 		$Animation.play("highlight")
 	else:
 		$Animation.play_backwards("highlight")
-
-
-func tile_position(x, y) -> Vector3:
-	return (
-		Vector3(_tile_size * x, 0, _tile_size * y)
-		- (Vector3(impl.grid.rows_count(), 0, impl.grid.columns_count()) * _tile_size / 2)
-		+ Vector3(_tile_size, 0, _tile_size) / 2
-	)
-
-
-func model_scale(_model) -> float:
-	var model_size = Utils.get_aabb(_model).size * _model.scale
-	return _tile_size / max(model_size.x, model_size.z)

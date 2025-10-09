@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://flu7j32ifd3y" path="res://stages/strategic/strategic.tscn" id="2_0uych"]
 [ext_resource type="PackedScene" uid="uid://dxo3bt6kf8q8u" path="res://stages/map_build/anchor_scene.tscn" id="3_6sc0j"]
 [ext_resource type="Script" uid="uid://ca2urkngiqc5i" path="res://stages/map_build/map_scanner.gd" id="3_nt64x"]
+[ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_stages/map_scene/map_scene.tscn" id="1_mavd1"]
+
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_og28i"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,7 +20,7 @@ background_mode = 2
 sky = SubResource("Sky_nt64x")
 tonemap_mode = 2
 
-[node name="MapBuilder" type="Node3D"]
+[node name="MapBuilder" instance=ExtResource("1_mavd1")]
 script = ExtResource("1_og28i")
 strategic = ExtResource("2_0uych")
 

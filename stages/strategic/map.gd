@@ -1,32 +1,11 @@
-class_name Map
-extends MeshInstance3D
+extends Map
 
-@export var cutoff_shader: Shader
-var cutoff_material: ShaderMaterial
 
-var zoom: float:
-	get():
-		return map_items.scale.x
-	set(new_zoom):
-		if new_zoom <= 0:
-			return
-		map_items.scale = Vector3.ONE * new_zoom
-
-var offset: Vector2:
-	get():
-		return Vector2(map_items.position.x, map_items.position.z)
-	set(new_offset):
-		map_items.position.x = new_offset.x
-		map_items.position.z = new_offset.y
-
-var _tile_size: float
 var _tile_nodes: Array
 var _characters: Array
 
-@onready var impl: MapGrid = GameCore.grid
-@onready var tile_factory: StrategicTileFactory = $StrategicTileFactory
-@onready var character_factory: CharacterNodeFactory = $CharacterNodeFactory
-@onready var map_items = $MapItems
+
+
 
 # temp
 var test_map = [
@@ -45,6 +24,8 @@ var test_map = [
 	["w", "w", "w", "w", "w", "w"],
 ]
 
+@onready var tile_factory: StrategicTileFactory = $TileFactory
+@onready var character_factory: CharacterNodeFactory = $CharacterFactory
 
 # TODO: only for testing
 static func types_from_str(str_map: Array) -> Array:
@@ -72,20 +53,7 @@ static func types_from_str(str_map: Array) -> Array:
 
 
 func _ready() -> void:
-	impl.new_grid.connect(reset_map)
-
-	var plane_mesh := self.mesh as PlaneMesh
-	plane_mesh.size = Vector2(
-		self.get_aabb().size.x * self.scale.x, self.get_aabb().size.z * self.scale.z
-	)
-	self.scale = Vector3.ONE
-
-	var plane_pos = global_transform.origin
-	cutoff_material = ShaderMaterial.new()
-	cutoff_material.shader = cutoff_shader
-	cutoff_material.set_shader_parameter("plane_size", plane_mesh.size * 0.5)
-	cutoff_material.set_shader_parameter("plane_pos", Vector2(plane_pos.x, plane_pos.z))
-	cutoff_material.set_shader_parameter("border_color", Color.RED)
+	super._ready()
 
 	if impl.is_empty():
 		impl.set_tiles(types_from_str(test_map))
@@ -96,31 +64,22 @@ func _ready() -> void:
 func reset_map():
 	_tile_nodes = Utils.get_matrix(impl.rows_count(), impl.columns_count())
 
-	#var plane_size = self.get_aabb().size
-	#if (
-	#plane_size.x > plane_size.z and impl.rows_count() < impl.columns_count()
-	#or plane_size.x < plane_size.z and impl.rows_count() > impl.columns_count()
-	#):
-	#tile_types = Utils.transpose(tile_types)
-	#impl.transpose()
-
 	_tile_size = min(
 		self.get_aabb().size.x / impl.rows_count(), self.get_aabb().size.z / impl.columns_count()
 	)
 
-	# set flags
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
 			if impl.get_tile(x, y):
 				_tile_nodes[x][y] = tile_factory.create(self, impl.get_tile(x, y))
-				map_items.add_child(_tile_nodes[x][y])
+				add_item(_tile_nodes[x][y])
 
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
 			var tile: TileNode = _tile_nodes[x][y]
 			if tile:
 				tile.init()
-				tile.set_material(self.cutoff_material)
+				place_item(tile, x, y)
 
 
 func add_character(type: Character.Type, x: int, y: int):
@@ -131,12 +90,6 @@ func add_character(type: Character.Type, x: int, y: int):
 	character.set_material(self.cutoff_material)
 
 	return character
-
-
-func get_tile_node(pos: Vector2i):
-	if !impl._in_range(pos.x, pos.y):
-		return null
-	return _tile_nodes[pos.x][pos.y]
 
 
 func get_character_node(character: Character):

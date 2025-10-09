@@ -2,9 +2,14 @@ class_name MapGrid
 extends Node3D
 
 signal new_grid
+signal resized(Vector2)
 
 var tiles: Array
 var characters: Array[Character]
+
+var size: Vector2:
+	get():
+		return Vector2(rows_count(), columns_count())
 
 
 func set_tiles(tile_types: Array):
@@ -31,6 +36,7 @@ func _in_range(x: int, y: int) -> bool:
 # TODO: Copy content
 func resize(n: int, m: int):
 	tiles = Utils.get_matrix(n, m, null)
+	resized.emit(size)
 
 
 func rows_count() -> int:
