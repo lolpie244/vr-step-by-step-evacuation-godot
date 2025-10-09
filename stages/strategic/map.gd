@@ -72,6 +72,8 @@ static func types_from_str(str_map: Array) -> Array:
 
 
 func _ready() -> void:
+	impl.new_grid.connect(reset_map)
+
 	var plane_mesh := self.mesh as PlaneMesh
 	plane_mesh.size = Vector2(
 		self.get_aabb().size.x * self.scale.x, self.get_aabb().size.z * self.scale.z
@@ -85,22 +87,22 @@ func _ready() -> void:
 	cutoff_material.set_shader_parameter("plane_pos", Vector2(plane_pos.x, plane_pos.z))
 	cutoff_material.set_shader_parameter("border_color", Color.RED)
 
-	set_map(test_map)
+	if impl.is_empty():
+		impl.set_tiles(types_from_str(test_map))
+	else:
+		reset_map()
 
 
-func set_map(raw_map):
-	var tile_types := types_from_str(raw_map)
+func reset_map():
+	_tile_nodes = Utils.get_matrix(impl.rows_count(), impl.columns_count())
 
-	impl.resize(tile_types.size(), tile_types[0].size())
-	_tile_nodes = Utils.get_matrix(tile_types.size(), tile_types[0].size())
-
-	var plane_size = self.get_aabb().size
-	if (
-		plane_size.x > plane_size.z and impl.rows_count() < impl.columns_count()
-		or plane_size.x < plane_size.z and impl.rows_count() > impl.columns_count()
-	):
-		tile_types = Utils.transpose(tile_types)
-		impl.transpose()
+	#var plane_size = self.get_aabb().size
+	#if (
+	#plane_size.x > plane_size.z and impl.rows_count() < impl.columns_count()
+	#or plane_size.x < plane_size.z and impl.rows_count() > impl.columns_count()
+	#):
+	#tile_types = Utils.transpose(tile_types)
+	#impl.transpose()
 
 	_tile_size = min(
 		self.get_aabb().size.x / impl.rows_count(), self.get_aabb().size.z / impl.columns_count()
@@ -109,15 +111,16 @@ func set_map(raw_map):
 	# set flags
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
-			var tile_impl = impl.create_tile(tile_types[x][y], x, y)
-			_tile_nodes[x][y] = tile_factory.create(self, tile_impl)
-			map_items.add_child(_tile_nodes[x][y])
+			if impl.get_tile(x, y):
+				_tile_nodes[x][y] = tile_factory.create(self, impl.get_tile(x, y))
+				map_items.add_child(_tile_nodes[x][y])
 
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
 			var tile: TileNode = _tile_nodes[x][y]
-			tile.init()
-			tile.set_material(self.cutoff_material)
+			if tile:
+				tile.init()
+				tile.set_material(self.cutoff_material)
 
 
 func add_character(type: Character.Type, x: int, y: int):

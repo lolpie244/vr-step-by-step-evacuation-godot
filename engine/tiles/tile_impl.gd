@@ -6,9 +6,8 @@ enum Type {
 	NONE,
 	FLOOR,
 	WALL,
-	DOOR,
 	WINDOW,
-	STAIRCASE,
+	DOOR,
 }
 
 const IMPLMENTS := "Tile"

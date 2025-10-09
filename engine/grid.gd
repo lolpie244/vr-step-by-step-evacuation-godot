@@ -1,9 +1,27 @@
 class_name MapGrid
 extends Node3D
 
+signal new_grid
+
 var tiles: Array
 var characters: Array[Character]
-var tile_size: float
+
+
+func set_tiles(tile_types: Array):
+	if tile_types.is_empty():
+		return
+
+	self.resize(tile_types.size(), tile_types[0].size())
+	for x in range(rows_count()):
+		for y in range(columns_count()):
+			if tile_types[x][y]:
+				create_tile(tile_types[x][y], x, y)
+
+	new_grid.emit()
+
+
+func is_empty():
+	return tiles.is_empty()
 
 
 func _in_range(x: int, y: int) -> bool:

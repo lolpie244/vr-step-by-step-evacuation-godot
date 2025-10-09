@@ -29,7 +29,8 @@ func _init(_type: Type):
 
 func process_turn(_turn_number: int):
 	_speed = base_speed
-	_reachable = _walkable.reachable_tiles(_speed)
+	if _walkable:
+		_reachable = _walkable.reachable_tiles(_speed)
 
 
 func place(tile: Tile):

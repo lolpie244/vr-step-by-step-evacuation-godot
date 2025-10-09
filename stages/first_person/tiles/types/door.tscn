@@ -8,7 +8,7 @@
 
 [node name="Door" instance=ExtResource("1_bwn2s")]
 script = ExtResource("2_q33ex")
-type = 3
+type = 4
 
 [node name="Flammable" parent="." index="0" instance=ExtResource("3_vb5ak")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
