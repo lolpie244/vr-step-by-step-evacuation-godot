@@ -6,10 +6,11 @@ signal new_grid
 var tiles: Array
 var characters: Array[Character]
 
+
 func set_tiles(tile_types: Array):
 	if tile_types.is_empty():
 		return
-		
+
 	self.resize(tile_types.size(), tile_types[0].size())
 	for x in range(rows_count()):
 		for y in range(columns_count()):
@@ -18,8 +19,10 @@ func set_tiles(tile_types: Array):
 
 	new_grid.emit()
 
+
 func is_empty():
 	return tiles.is_empty()
+
 
 func _in_range(x: int, y: int) -> bool:
 	return x >= 0 && x < rows_count() && y >= 0 && y < columns_count()

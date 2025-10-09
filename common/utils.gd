@@ -1,12 +1,9 @@
 class_name Utils
 extends Node
 
+enum Axis { X, Y, Z }
+
 const DEFAULT_DUPLICATE = DUPLICATE_SCRIPTS | DUPLICATE_GROUPS | DUPLICATE_SIGNALS
-
-enum Axis {
-	X, Y, Z
-}
-
 
 
 static func get_matrix(n: int, m: int, fill = null) -> Array:

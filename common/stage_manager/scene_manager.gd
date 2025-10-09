@@ -33,15 +33,13 @@ func load_scene(scene: PackedScene, context = null):
 
 	_scene_stack.push_back(scene_instance)
 
-	scene_instance.ready.connect(func():
-		call_deferred("_open_eyes", scene_instance)
-	)
+	scene_instance.ready.connect(func(): call_deferred("_open_eyes", scene_instance))
 
 	call_deferred("_add_scene", scene_instance)
 
 
 func _add_scene(scene):
-	get_tree().root.remove_child(current_scene)
+	get_tree().root.remove_child.call_deferred(current_scene)
 	current_scene = scene
 	get_tree().root.add_child(current_scene)
 	get_tree().current_scene = current_scene

@@ -47,4 +47,4 @@ script = ExtResource("3_nt64x")
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]
 [connection signal="openxr_fb_scene_data_missing" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_data_missing"]
-[connection signal="end_scene" from="MapScanner" to="." method="_on_map_scanner_scan_ended"]
+[connection signal="map_scanned" from="MapScanner" to="." method="_on_map_scanner_map_scanned"]

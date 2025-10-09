@@ -1,15 +1,12 @@
 class_name MapScanner
 extends Node
 
-signal end_scene(map: Array)
-
+signal map_scanned(map: Array[Array])
 var _anchors: Array[XRAnchor] = []
 
 @onready var scene_manager: OpenXRFbSceneManager = $"../PlayerVR/SceneManager"
-@onready var spartial_anchor_manager: OpenXRFbSpatialAnchorManager = $"../PlayerVR/SpatialAnchorManager"
 
-
-func start_scan():
+func start_scan() -> void:
 	scene_manager.request_scene_capture()
 
 	while not scene_manager.are_scene_anchors_created() or _anchors.size() == 0:
@@ -23,10 +20,6 @@ func _on_scene_capture_completed(success: bool) -> void:
 		printerr("Failed to capture scene")
 		return
 
-	# Recreate scene anchors since the user may have changed them.
-	if scene_manager.are_scene_anchors_created():
-		scene_manager.remove_scene_anchors()
-
 	scene_manager.create_scene_anchors()
 
 
@@ -35,41 +28,38 @@ func _on_scene_anchor_created(scene_node: Object, _spatial_entity: Object) -> vo
 
 
 func _set_map_data():
-	var left_corner := Vector2(1000, 1000)
-	var right_corner := Vector2(-1000, -1000)
+	var left_corner := Vector2(INF, INF)
+	var right_corner := Vector2(-INF, -INF)
 
-	var to_remove := []
-	var is_drawing: bool = false
-	for anchor in _anchors:
-		if !anchor.get("valid"):
-			to_remove.append(anchor)
+	for i in range(_anchors.size() - 1, -1, -1):
+		var anchor := _anchors[i]
+		if not anchor.get("valid"):
+			_anchors.remove_at(i)
 			continue
-		
-		if !anchor.is_initialized:
+
+		if not anchor.is_initialized:
 			await anchor.initialized
-		anchor._draw = true
-		
+
 		left_corner = Vector2(
 			min(left_corner.x, anchor.left_corner.x),
 			min(left_corner.y, anchor.left_corner.y),
 		)
-#
+
 		right_corner = Vector2(
 			max(right_corner.x, anchor.right_corner.x),
 			max(right_corner.y, anchor.right_corner.y),
 		)
-#
-	for anchor in to_remove:
-		_anchors.erase(anchor)
-#
-	var size: Vector2i = round((right_corner - left_corner) / Constants.TILE_SIZE_IN_REAL_LIFE) + Vector2.ONE
+
+	_anchors.sort_custom(func(a: XRAnchor, b:XRAnchor): return a.type > b.type)
+
+	var size: Vector2i = ceil((right_corner - left_corner) / Constants.TILE_SIZE_IN_REAL_LIFE)
 	var map := Utils.get_matrix(size.x, size.y)
 
 	for anchor in _anchors:
 		var left := anchor.left_corner - left_corner
 		var right := left + anchor.size
 
-		var start: Vector2i = round(left / Constants.TILE_SIZE_IN_REAL_LIFE)
+		var start: Vector2i = floor(left / Constants.TILE_SIZE_IN_REAL_LIFE)
 		var end: Vector2i = ceil(right / Constants.TILE_SIZE_IN_REAL_LIFE)
 		end = Vector2i(
 			min(size.x, max(end.x, start.x + 1)),
@@ -80,18 +70,18 @@ func _set_map_data():
 		for x in range(start.x, end.x):
 			if skip:
 				break
-				
+
 			for y in range(start.y, end.y):
-				if map[x][y] == null || map[x][y] < anchor.type:
+				if map[x][y] == null || map[x][y] <= anchor.type:
 					map[x][y] = anchor.type
-					
+
 					if not anchor.type in XRAnchor.MULTIPLE_TILES:
 						skip = true
 						break
 
-	end_scene.emit(map)
+	scene_manager.remove_scene_anchors()
+	map_scanned.emit(map)
 
 
 func _on_scene_data_missing() -> void:
 	print("Missing data")
-	pass # Replace with function body.

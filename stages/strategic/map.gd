@@ -73,7 +73,7 @@ static func types_from_str(str_map: Array) -> Array:
 
 func _ready() -> void:
 	impl.new_grid.connect(reset_map)
-	
+
 	var plane_mesh := self.mesh as PlaneMesh
 	plane_mesh.size = Vector2(
 		self.get_aabb().size.x * self.scale.x, self.get_aabb().size.z * self.scale.z
@@ -98,11 +98,11 @@ func reset_map():
 
 	#var plane_size = self.get_aabb().size
 	#if (
-		#plane_size.x > plane_size.z and impl.rows_count() < impl.columns_count()
-		#or plane_size.x < plane_size.z and impl.rows_count() > impl.columns_count()
+	#plane_size.x > plane_size.z and impl.rows_count() < impl.columns_count()
+	#or plane_size.x < plane_size.z and impl.rows_count() > impl.columns_count()
 	#):
-		#tile_types = Utils.transpose(tile_types)
-		#impl.transpose()
+	#tile_types = Utils.transpose(tile_types)
+	#impl.transpose()
 
 	_tile_size = min(
 		self.get_aabb().size.x / impl.rows_count(), self.get_aabb().size.z / impl.columns_count()
