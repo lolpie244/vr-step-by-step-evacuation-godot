@@ -40,5 +40,5 @@ func _ready():
 
 	print("OpenXR is initialized")
 
-	SceneManager.load_scene(strategic_scene)
-	#SceneManager.load_scene(map_builder_scene)
+	#SceneManager.load_scene(strategic_scene)
+	SceneManager.load_scene(map_builder_scene)

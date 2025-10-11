@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://uawpg3qjrxph"]
 
 [ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://stages/strategic/tiles/tile.tscn" id="1_5dbxf"]
-[ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://stages/strategic/tiles/assets/doorway.glb" id="2_ituet"]
+[ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://assets/tiles_lowres/doorway.glb" id="2_ituet"]
 [ext_resource type="Script" uid="uid://h2evvguy80m2" path="res://common_nodes/tile_types/door.gd" id="2_rt6ok"]
 [ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic/tiles/mixins/flammable.tscn" id="3_8hksf"]
 [ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="4_b5dv1"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ucw376iw8aqd"]
 
 [ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://common_nodes/tile_types/wall_like.gd" id="2_rmj2f"]
-[ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://stages/strategic/tiles/assets/window.glb" id="3_kbhkb"]
+[ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://assets/tiles_lowres/window.glb" id="3_kbhkb"]
 
 [node name="Window" type="Node3D"]
 script = ExtResource("2_rmj2f")

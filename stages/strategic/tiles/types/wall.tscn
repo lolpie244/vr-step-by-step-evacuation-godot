@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://stages/strategic/tiles/tile.tscn" id="1_y77oi"]
 [ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://common_nodes/tile_types/wall.gd" id="2_lgyha"]
-[ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://stages/strategic/tiles/assets/wall.glb" id="2_p3ekw"]
+[ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://assets/tiles_lowres/wall.glb" id="2_p3ekw"]
 
 [node name="Wall" instance=ExtResource("1_y77oi")]
 script = ExtResource("2_lgyha")

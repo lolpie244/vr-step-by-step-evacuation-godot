@@ -4,7 +4,7 @@
 [ext_resource type="Animation" uid="uid://di384xtde8ydf" path="res://addons/godot-xr-tools/hands/animations/left/Grip 2.res" id="2_2bd6c"]
 [ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="3_7gw4s"]
 [ext_resource type="Animation" uid="uid://r8hleealhrqt" path="res://addons/godot-xr-tools/hands/animations/right/Grip 2.res" id="4_1ax6x"]
-[ext_resource type="PackedScene" uid="uid://ciya5qu8grvca" path="res://stages/strategic/characters/assets/character-male-a.glb" id="5_lc6v1"]
+[ext_resource type="PackedScene" uid="uid://ciya5qu8grvca" path="res://assets/characters/character-male-a.glb" id="5_lc6v1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_usrdy"]
 size = Vector3(0.18, 0.67, 0.18)
