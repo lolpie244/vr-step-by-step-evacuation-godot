@@ -2,8 +2,8 @@ class_name WallLikeTile
 extends TileNode
 
 
-func set_data(tile_size: float, _impl: Tile):
-	super.set_data(tile_size, _impl)
+func set_data(_impl: Tile):
+	super.set_data(_impl)
 	impl.get_or_create_mixin(Blockable)
 
 

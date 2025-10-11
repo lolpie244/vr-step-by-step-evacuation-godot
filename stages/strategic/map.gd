@@ -4,11 +4,8 @@ extends Map
 var _tile_nodes: Array
 var _characters: Array
 
-
-
-
 # temp
-var test_map = [
+var _test_map = [
 	["w", "w", "w", "w", "w", "w"],
 	["w", "f", "f", "w", "f", "w"],
 	["w", "f", "f", "d", "f", "w"],
@@ -54,9 +51,10 @@ static func types_from_str(str_map: Array) -> Array:
 
 func _ready() -> void:
 	super._ready()
+	impl.new_grid.connect(reset_map)
 
 	if impl.is_empty():
-		impl.set_tiles(types_from_str(test_map))
+		impl.set_tiles(types_from_str(_test_map))
 	else:
 		reset_map()
 
@@ -72,14 +70,15 @@ func reset_map():
 		for y in range(impl.columns_count()):
 			if impl.get_tile(x, y):
 				_tile_nodes[x][y] = tile_factory.create(self, impl.get_tile(x, y))
-				add_item(_tile_nodes[x][y])
 
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
-			var tile: TileNode = _tile_nodes[x][y]
-			if tile:
-				tile.init()
-				place_item(tile, x, y)
+			if !impl.get_tile(x, y):
+				continue
+
+			var tile: TileNode = tile_factory.create(self, impl.get_tile(x, y))
+			_tile_nodes[x][y] = tile
+			place_item(tile, x, y)
 
 
 func add_character(type: Character.Type, x: int, y: int):

@@ -41,21 +41,17 @@ func _ready() -> void:
 	cutoff_material.set_shader_parameter("plane_pos", Vector2(plane_pos.x, plane_pos.z))
 	cutoff_material.set_shader_parameter("border_color", Color.RED)
 
-
-func add_item(node: Node3D):
+func place_item(node: Node3D, x: int, y: int):
 	map_items.add_child(node)
+	if node.has_method(&"init"):
+		node.init()
+
+	node.position = impl.tile_position(_tile_size, x, y)
+	node.scale = Vector3.ONE * impl.model_scale(_tile_size, node)
 	node.set_material(self.cutoff_material)
 
-
-func place_item(node: Node3D, x: int, y: int):
-	node.position = (
-		Vector3(_tile_size * x, 0, _tile_size * y)
-		- (Vector3(impl.grid.rows_count(), 0, impl.grid.columns_count()) * _tile_size / 2)
-		+ Vector3(_tile_size, 0, _tile_size) / 2
-	)
-
-	node.scale = Vector3.ONE * Utils.get_aabb(node).size
-
+func model_scale(model):
+	return impl.model_scale(_tile_size, model)
 
 func set_size(size: Vector2):
 	_tile_size = min(self.get_aabb().size.x / size.x, self.get_aabb().size.z / size.y)

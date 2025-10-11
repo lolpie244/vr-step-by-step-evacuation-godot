@@ -5,20 +5,14 @@ const IMPLMENTS := "TileNode"
 @export var type: Tile.Type = Tile.Type.NONE
 
 var impl: Tile
-
 var map: Map
-var _tile_size: float
 
 @onready var model = $Model
+@onready var animation: AnimationPlayer = $Animation
 
 
-func set_data(tile_size: float, _impl: Tile):
-	_tile_size = tile_size
+func set_data(_impl: Tile):
 	impl = _impl
-
-
-func set_map(_map: Map):
-	map = _map
 
 
 func _swap_model(new_model):
@@ -41,9 +35,8 @@ func init():
 func _get_model():
 	return model
 
-
-func get_aabb() -> AABB:
-	return Utils.get_aabb(model) * model.scale
+func size() -> Vector3:
+	return Utils.get_aabb(model).size * model.scale.x
 
 
 func set_material(_material: ShaderMaterial):
@@ -55,9 +48,12 @@ func set_material(_material: ShaderMaterial):
 
 
 func _on_impl_highlight_changed(value: bool) -> void:
-	if $Animation.is_playing():
-		await $Animation.animation_finished
+	if !animation:
+		return
+		
+	if animation.is_playing():
+		await animation.animation_finished
 	if value:
-		$Animation.play("highlight")
+		animation.play("highlight")
 	else:
-		$Animation.play_backwards("highlight")
+		animation.play_backwards("highlight")

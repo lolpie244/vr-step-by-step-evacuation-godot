@@ -13,7 +13,7 @@ enum State {
 var material: TileMaterial
 var wind := Vector2.ZERO
 
-var strenght := 1.0:
+var strenght := 0.95:
 	set(value):
 		if strenght == value:
 			return
@@ -44,7 +44,7 @@ func process_turn(_turn_number):
 	if state != State.BURNING || _turn_number == 0 || _ignition_turn == _turn_number:
 		return
 
-	extinguish(0.3)
+	extinguish(0.1)
 
 	for next_tile in _tile.neighbor_tiles():
 		if FireSpreading.is_spread(_tile, next_tile):

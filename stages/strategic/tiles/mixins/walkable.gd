@@ -43,7 +43,7 @@ func _on_snap_zone_body_exited(body: Node3D) -> void:
 
 
 func _on_character_placed(character: Character):
-	var character_node = tile.map.get_character_node(character)
+	var character_node: CharacterStrategic = tile.map.get_character_node(character)
 
 	if character_node.get_parent() == null:
 		get_parent().add_child(character_node)
@@ -55,8 +55,10 @@ func _on_character_placed(character: Character):
 	character_node.rotation = self.rotation
 
 	character_node.scale = Vector3.ONE
-	var character_scale_local = tile.model_scale(character_node.model)
+
+	var character_scale_local = tile.map.model_scale(character_node.model)
 	var character_scale_global = character_node.global_basis.get_scale().x
+	print(character_scale_local, ' ', character_scale_global)
 	character_node.scale = Vector3.ONE * (character_scale_local / character_scale_global)
 	impl.get_tile().highlight = false
 
