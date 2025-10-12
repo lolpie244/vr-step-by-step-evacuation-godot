@@ -12,17 +12,11 @@ var _tile_nodes: Array = [[]]
 
 func _ready() -> void:
 	impl.new_grid.connect(_reset_map)
-	#impl.resize(5, 5)
-	#impl.create_tile(Tile.Type.WALL, 0, 0)
-	#impl.create_tile(Tile.Type.DOOR, 1, 0)
-	#impl.create_tile(Tile.Type.DOOR, 0, 1)
-	#_reset_map()
 	map_scanner.start_scan()
 
 
 func _on_map_scanner_map_scanned(scanned_map: Array) -> void:
 	GameCore.grid.set_tiles(scanned_map)
-	#SceneManager.load_scene(strategic)
 
 
 func _reset_map():
@@ -39,7 +33,7 @@ func _reset_map():
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
 			if !impl.get_tile(x, y):
-				impl.create_tile(Tile.Type.NONE, x, y)
+				impl.create_tile(Tile.Type.FLOOR, x, y)
 			_tile_nodes[x][y] = tile_factory.create(impl.get_tile(x, y))
 			map.place_item(_tile_nodes[x][y], x, y)
 
@@ -63,4 +57,5 @@ func _on_tile_type_changed(type: Tile.Type, pos: Vector2i) -> void:
 
 
 func _on_exit_button_released(_button: Variant) -> void:
+	impl.strip()
 	SceneManager.load_scene(strategic)

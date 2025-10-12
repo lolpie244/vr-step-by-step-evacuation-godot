@@ -8,6 +8,7 @@ signal type_changed(type: Tile.Type, pos: Vector2i)
 @export var color: Color
 
 @onready var pen_body: MeshInstance3D = $Body/Mesh
+@onready var snap_zone: XRToolsSnapZone = $SnapZone
 
 
 func _ready():
@@ -23,3 +24,7 @@ func _on_body_entered(body: Node) -> void:
 	var tile := body as Tile2D
 	if tile.impl.type != type:
 		type_changed.emit(type, tile.impl.pos)
+
+
+func _on_body_dropped(pickable: Variant) -> void:
+	snap_zone.pick_up_object(pickable)

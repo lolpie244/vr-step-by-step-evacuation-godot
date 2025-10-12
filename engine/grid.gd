@@ -106,3 +106,40 @@ func tile_position(tile_size, x, y) -> Vector3:
 func model_scale(tile_size, model) -> float:
 	var model_size = Utils.get_aabb(model).size * model.scale
 	return tile_size / max(model_size.x, model_size.z)
+
+
+func strip():
+	var left_corner := Vector2i(rows_count(), columns_count())
+	var right_corner := Vector2i(0, 0)
+
+	for x in range(rows_count()):
+		for y in range(columns_count()):
+			if !get_tile(x, y) or not get_tile(x, y).is_wall_like:
+				continue
+
+			left_corner = Vector2i(
+				min(x, left_corner.x),
+				min(y, left_corner.y),
+			)
+
+			right_corner = Vector2i(
+				max(x, right_corner.x),
+				max(y, right_corner.y),
+			)
+	right_corner += Vector2i.ONE
+	if left_corner == Vector2i(0, 0) and right_corner == Vector2i(rows_count(), columns_count()):
+		return
+
+	var new_tiles = Utils.get_matrix(right_corner.x - left_corner.x, right_corner.y - left_corner.y)
+
+	for x in range(left_corner.x, right_corner.x):
+		for y in range(left_corner.y, right_corner.y):
+			var tile: Tile = tiles[x][y]
+			if !tile:
+				continue
+			tile._x = x - left_corner.x
+			tile._y = y - left_corner.y
+			new_tiles[tile._x][tile._y] = tile
+
+	tiles = new_tiles
+	new_grid.emit()

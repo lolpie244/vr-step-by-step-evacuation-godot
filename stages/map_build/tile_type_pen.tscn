@@ -27,7 +27,7 @@ size = Vector3(0.02, 0.1, 0.02)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40gja"]
 resource_local_to_scene = true
-albedo_color = Color(1, 0, 1, 1)
+albedo_color = Color(0, 0, 0, 0.99607843)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_40gja"]
 radius = 0.015
@@ -37,6 +37,7 @@ script = ExtResource("2_40gja")
 color = Color(0, 0, 0, 0.99607843)
 
 [node name="Body" parent="." instance=ExtResource("1_bwhc0")]
+ranged_grab_method = 0
 
 [node name="CollisionShape3D" parent="Body" index="0"]
 shape = SubResource("BoxShape3D_cxgj2")
@@ -63,9 +64,10 @@ collision_mask = 268435456
 shape = SubResource("SphereShape3D_40gja")
 
 [node name="SnapZone" parent="." instance=ExtResource("6_0p5nh")]
-grab_distance = 100.0
+grab_distance = 0.04
 initial_object = NodePath("../Body")
 
+[connection signal="dropped" from="Body" to="." method="_on_body_dropped"]
 [connection signal="area_entered" from="Body/End" to="." method="_on_body_entered"]
 
 [editable path="Body"]
