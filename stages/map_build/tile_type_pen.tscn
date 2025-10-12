@@ -1,0 +1,71 @@
+[gd_scene load_steps=15 format=3 uid="uid://4xjuluon04x0"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_bwhc0"]
+[ext_resource type="Script" uid="uid://ug2066pmdrgj" path="res://stages/map_build/tile_type_pen.gd" id="2_40gja"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_eqdww"]
+[ext_resource type="Animation" uid="uid://dqa0h82y3qn1t" path="res://addons/godot-xr-tools/hands/animations/left/Grip 1.res" id="4_0p5nh"]
+[ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="4_cxgj2"]
+[ext_resource type="PackedScene" uid="uid://ce7vysyvondf8" path="res://addons/godot-xr-tools/objects/snap_zone.tscn" id="6_0p5nh"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="6_xs3bm"]
+[ext_resource type="Animation" uid="uid://daqddcrbpam0c" path="res://addons/godot-xr-tools/hands/animations/right/Grip 1.res" id="7_3c1gn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cxgj2"]
+size = Vector3(0.025, 0.105, 0.025)
+
+[sub_resource type="Resource" id="Resource_0p5nh"]
+script = ExtResource("4_cxgj2")
+closed_pose = ExtResource("4_0p5nh")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="Resource" id="Resource_3c1gn"]
+script = ExtResource("4_cxgj2")
+closed_pose = ExtResource("7_3c1gn")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="BoxMesh" id="BoxMesh_40gja"]
+size = Vector3(0.02, 0.1, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40gja"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_40gja"]
+radius = 0.015
+
+[node name="TileTypePen" type="Node3D"]
+script = ExtResource("2_40gja")
+color = Color(0, 0, 0, 0.99607843)
+
+[node name="Body" parent="." instance=ExtResource("1_bwhc0")]
+
+[node name="CollisionShape3D" parent="Body" index="0"]
+shape = SubResource("BoxShape3D_cxgj2")
+
+[node name="GrabPointHandLeft" parent="Body" instance=ExtResource("3_eqdww")]
+transform = Transform3D(1, 0, 0, 0, 0.06380075, -0.99796253, 0, 0.99796253, 0.06380075, 0, 0.03614302, 0.027259544)
+hand_pose = SubResource("Resource_0p5nh")
+
+[node name="GrabPointHandRight" parent="Body" instance=ExtResource("6_xs3bm")]
+transform = Transform3D(1, 0, 0, 0, 0.0645323, -0.9979156, 0, 0.9979156, 0.0645323, 0, 0.036, 0.027)
+hand_pose = SubResource("Resource_3c1gn")
+
+[node name="Mesh" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("BoxMesh_40gja")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_40gja")
+
+[node name="End" type="Area3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04248979, 0)
+collision_layer = 268435456
+collision_mask = 268435456
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/End"]
+shape = SubResource("SphereShape3D_40gja")
+
+[node name="SnapZone" parent="." instance=ExtResource("6_0p5nh")]
+grab_distance = 100.0
+initial_object = NodePath("../Body")
+
+[connection signal="area_entered" from="Body/End" to="." method="_on_body_entered"]
+
+[editable path="Body"]

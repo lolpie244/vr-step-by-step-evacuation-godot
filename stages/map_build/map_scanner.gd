@@ -11,7 +11,7 @@ func start_scan() -> void:
 	scene_manager.request_scene_capture()
 
 	while not scene_manager.are_scene_anchors_created() or _anchors.size() == 0:
-		await Engine.get_main_loop().create_timer(1).timeout
+		await Engine.get_main_loop().create_timer(0.1).timeout
 
 	call_deferred("_set_map_data")
 
