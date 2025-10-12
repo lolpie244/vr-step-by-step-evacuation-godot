@@ -1,15 +1,12 @@
 class_name NodeFactory
 extends Node3D
 
-@export var scenes: Array[PackedScene] = []
-
 var _instances: Dictionary = {}
 
 
 func _ready():
 	hide()
-	for scene in scenes:
-		var val = scene.instantiate()
+	for val in get_children():
 		var type = val.get("type")
 
 		if not _instances.has(type):

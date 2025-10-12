@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://xnfqapr2ajxs"]
+[gd_scene load_steps=10 format=3 uid="uid://xnfqapr2ajxs"]
 
 [ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_stages/map_scene/map_scene.tscn" id="1_mavd1"]
 [ext_resource type="Script" uid="uid://cklvbndqqhyfp" path="res://stages/map_build/map_builder.gd" id="1_og28i"]
 [ext_resource type="PackedScene" uid="uid://flu7j32ifd3y" path="res://stages/strategic/strategic.tscn" id="2_0uych"]
 [ext_resource type="PackedScene" uid="uid://dxo3bt6kf8q8u" path="res://stages/map_build/anchor_scene.tscn" id="3_6sc0j"]
 [ext_resource type="Script" uid="uid://ca2urkngiqc5i" path="res://stages/map_build/map_scanner.gd" id="3_nt64x"]
+[ext_resource type="Shader" uid="uid://c5jht6ph5kyv6" path="res://stages/map_build/cutoff.gdshader" id="5_jfixn"]
+[ext_resource type="PackedScene" uid="uid://cilrgs5jxvr7y" path="res://stages/map_build/tiles/tile_factory.tscn" id="6_n64ml"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0uych"]
 size = Vector3(1.3, 0.1, 0.5)
@@ -28,14 +30,15 @@ visible = false
 [node name="ScaleLever" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5192419, 0.458555, 1.35959)
 
-[node name="MapScanner" type="Node3D" parent="." index="4"]
-script = ExtResource("3_nt64x")
-
-[node name="OffsetJoystick" parent="." index="5"]
+[node name="OffsetJoystick" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5268856, 0.459, 1.36)
 
-[node name="Map" parent="." index="6"]
+[node name="Map" parent="." index="5"]
 transform = Transform3D(0.39911237, 0, 0, 0, -4.3711385e-08, -0.3458585, 0, 0.99999994, -1.5117957e-08, 0, 0.961355, 1.1239377)
+cutoff_shader = ExtResource("5_jfixn")
+
+[node name="MapScanner" type="Node3D" parent="." index="6"]
+script = ExtResource("3_nt64x")
 
 [node name="Table" type="StaticBody3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41178885, 1.3839952)
@@ -46,7 +49,7 @@ mesh = SubResource("BoxMesh_0uych")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Table" index="1"]
 shape = SubResource("BoxShape3D_n64ml")
 
-[node name="TestTile" type="Sprite3D" parent="." index="8"]
+[node name="Factory" parent="." index="8" instance=ExtResource("6_n64ml")]
 
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]

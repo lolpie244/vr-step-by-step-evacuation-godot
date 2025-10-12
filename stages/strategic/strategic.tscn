@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person/first_person.tscn" id="2_tttub"]
 [ext_resource type="PackedScene" uid="uid://b50lh3ohab6x6" path="res://ui/mesh_rope_trigger.tscn" id="3_52wiw"]
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://stages/strategic/map.gd" id="5_v5dbt"]
-[ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_node_factory.tscn" id="6_52wiw"]
+[ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_factory.tscn" id="6_52wiw"]
 [ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/Button.tscn" id="6_v5dbt"]
 [ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="7_vy2ce"]
 

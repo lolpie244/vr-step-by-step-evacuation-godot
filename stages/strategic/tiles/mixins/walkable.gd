@@ -1,12 +1,17 @@
 extends Node3D
 
+var impl: Walkable
+
 var _bodies_in_snap_zone_area: Array[XRToolsPickable] = []
 
-@onready var tile: TileNode = Utils.find_parent_that_implements(self, "TileNode")
-@onready var impl: Walkable = tile.impl.get_or_create_mixin(Walkable)
+@onready var tile: TileNode = get_parent()
 
 
 func _ready() -> void:
+	if !tile.impl:
+		return
+	impl = tile.impl.get_or_create_mixin(Walkable)
+
 	impl.on_chacter_placed.connect(_on_character_placed)
 	hide()
 

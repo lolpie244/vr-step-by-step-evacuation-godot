@@ -8,7 +8,7 @@ var impl: Tile
 var map: Map
 
 @onready var model = $Model
-@onready var animation: AnimationPlayer = $Animation
+@onready var animation: AnimationPlayer = get_node_or_null("Animation")
 
 
 func set_data(_impl: Tile):
@@ -25,6 +25,7 @@ func _swap_model(new_model):
 
 
 func init():
+	visible = true
 	impl.init()
 
 	impl.highlight_changed.connect(_on_impl_highlight_changed)

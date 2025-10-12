@@ -68,17 +68,16 @@ func reset_map():
 
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
-			if impl.get_tile(x, y):
-				_tile_nodes[x][y] = tile_factory.create(self, impl.get_tile(x, y))
-
-	for x in range(impl.rows_count()):
-		for y in range(impl.columns_count()):
 			if !impl.get_tile(x, y):
 				continue
 
 			var tile: TileNode = tile_factory.create(self, impl.get_tile(x, y))
 			_tile_nodes[x][y] = tile
-			place_item(tile, x, y)
+
+	for x in range(impl.rows_count()):
+		for y in range(impl.columns_count()):
+			if _tile_nodes[x][y]:
+				place_item(_tile_nodes[x][y], x, y)
 
 
 func add_character(type: Character.Type, x: int, y: int):
