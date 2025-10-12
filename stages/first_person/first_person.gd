@@ -3,6 +3,7 @@ extends Node3D
 
 const TILE_SIZE := 2.0
 
+
 class Context:
 	var character: Character
 

@@ -102,6 +102,7 @@ func tile_position(tile_size, x, y) -> Vector3:
 		+ Vector3(tile_size, 0, tile_size) / 2
 	)
 
+
 func model_scale(tile_size, model) -> float:
 	var model_size = Utils.get_aabb(model).size * model.scale
 	return tile_size / max(model_size.x, model_size.z)

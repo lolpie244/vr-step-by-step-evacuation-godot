@@ -6,6 +6,7 @@ var _anchors: Array[XRAnchor] = []
 
 @onready var scene_manager: OpenXRFbSceneManager = $"../PlayerVR/SceneManager"
 
+
 func start_scan() -> void:
 	scene_manager.request_scene_capture()
 
@@ -50,7 +51,7 @@ func _set_map_data():
 			max(right_corner.y, anchor.right_corner.y),
 		)
 
-	_anchors.sort_custom(func(a: XRAnchor, b:XRAnchor): return a.type > b.type)
+	_anchors.sort_custom(func(a: XRAnchor, b: XRAnchor): return a.type > b.type)
 
 	var size: Vector2i = ceil((right_corner - left_corner) / Constants.TILE_SIZE_IN_REAL_LIFE)
 	var map := Utils.get_matrix(size.x, size.y)

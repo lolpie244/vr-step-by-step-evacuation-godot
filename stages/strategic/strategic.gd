@@ -5,6 +5,7 @@ extends MapScene
 
 var first_mode_trigger: RopeTrigger
 
+
 func _add_first_mode_trigger():
 	if first_mode_trigger:
 		self.remove_child(first_mode_trigger)
@@ -24,6 +25,7 @@ func _ready() -> void:
 	map.add_character(Character.Type.CIVILIAN, 2, 4)
 	GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
 	GameCore.next_turn()
+
 
 func _on_first_mode_trigger_triggerred() -> void:
 	if !GameCore.selected_character:

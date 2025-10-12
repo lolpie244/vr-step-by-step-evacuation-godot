@@ -9,5 +9,3 @@ var blocking := true:
 			return
 		blocking = value
 		blocking_changed.emit(blocking)
-
-var is_wall_like := true

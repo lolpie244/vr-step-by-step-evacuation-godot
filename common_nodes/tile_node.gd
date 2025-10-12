@@ -36,6 +36,7 @@ func init():
 func _get_model():
 	return model
 
+
 func size() -> Vector3:
 	return Utils.get_aabb(model).size * model.scale.x
 
@@ -51,7 +52,7 @@ func set_material(_material: ShaderMaterial):
 func _on_impl_highlight_changed(value: bool) -> void:
 	if !animation:
 		return
-		
+
 	if animation.is_playing():
 		await animation.animation_finished
 	if value:

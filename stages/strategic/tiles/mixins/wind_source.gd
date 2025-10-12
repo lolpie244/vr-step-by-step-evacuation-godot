@@ -4,6 +4,7 @@ var impl: WindSource
 
 @onready var tile: TileNode = get_parent()
 
+
 func _ready():
 	if !tile.impl:
 		return

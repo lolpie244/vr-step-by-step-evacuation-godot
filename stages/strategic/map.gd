@@ -1,6 +1,5 @@
 extends Map
 
-
 var _tile_nodes: Array
 var _characters: Array
 
@@ -23,6 +22,7 @@ var _test_map = [
 
 @onready var tile_factory: StrategicTileFactory = $TileFactory
 @onready var character_factory: CharacterNodeFactory = $CharacterFactory
+
 
 # TODO: only for testing
 static func types_from_str(str_map: Array) -> Array:

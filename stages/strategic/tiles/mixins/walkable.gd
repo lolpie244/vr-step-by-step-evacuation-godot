@@ -63,7 +63,7 @@ func _on_character_placed(character: Character):
 
 	var character_scale_local = tile.map.model_scale(character_node.model)
 	var character_scale_global = character_node.global_basis.get_scale().x
-	print(character_scale_local, ' ', character_scale_global)
+	print(character_scale_local, " ", character_scale_global)
 	character_node.scale = Vector3.ONE * (character_scale_local / character_scale_global)
 	impl.get_tile().highlight = false
 

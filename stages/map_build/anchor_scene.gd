@@ -29,6 +29,7 @@ var size: Vector2:
 var _points: Array[Vector2] = []
 var _mesh_points: Array[Vector3] = []
 
+
 func setup_scene(entity: OpenXRFbSpatialEntity) -> void:
 	label = entity.get_semantic_labels()[0]
 	type = LABEL_TO_TYPE.get(label, Tile.Type.NONE)
@@ -66,9 +67,7 @@ func _process(_delta: float) -> void:
 	for i in range(_points.size()):
 		_points[i] = _points[i].rotated(angle)
 		left_corner = Vector2(min(left_corner.x, _points[i].x), min(left_corner.y, _points[i].y))
-		right_corner = Vector2(
-			max(right_corner.x, _points[i].x), max(right_corner.y, _points[i].y)
-		)
+		right_corner = Vector2(max(right_corner.x, _points[i].x), max(right_corner.y, _points[i].y))
 
 	is_initialized = true
 	initialized.emit()

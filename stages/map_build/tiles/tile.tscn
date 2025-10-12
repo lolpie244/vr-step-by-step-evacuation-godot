@@ -13,3 +13,4 @@ texture_filter = 0
 texture = ExtResource("1_iqavk")
 
 [node name="Texture" type="Sprite3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
