@@ -10,11 +10,14 @@ enum Type {
 	DOOR,
 }
 
+const WALL_LIKE_TYPES := [Type.WALL, Type.WINDOW, Type.DOOR]
+
 const IMPLMENTS := "Tile"
 
 var grid: MapGrid
 var type: Type = Type.NONE
 var mixins: Array[TileMixin] = []
+var is_wall_like: bool = false
 
 var pos: Vector2i:
 	get():
@@ -37,6 +40,7 @@ func _init(_type: Type, _grid: MapGrid, x: int, y: int):
 	_x = x
 	_y = y
 	grid = _grid
+	is_wall_like = type in WALL_LIKE_TYPES
 
 
 func init():

@@ -15,6 +15,8 @@ func init(_impl: Character):
 
 
 func _ready() -> void:
+	if !impl:
+		return
 	hide()
 	impl.tile_changed.connect(_on_impl_tile_changed)
 	impl.look_direction_changed.connect(_on_look_direction_changed)

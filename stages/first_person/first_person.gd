@@ -1,6 +1,8 @@
 class_name FirstPerson
 extends Node3D
 
+const TILE_SIZE := 2.0
+
 
 class Context:
 	var character: Character
@@ -10,6 +12,7 @@ class Context:
 
 
 var context: Context
+var grid := GameCore.grid
 
 @onready var factory: FirstPersonTileFactory = $Factory
 @onready var player: PlayerVR = $PlayerVR
@@ -18,6 +21,9 @@ var context: Context
 func _add_child_node(tile: TileNode):
 	self.add_child(tile)
 	tile.init()
+	var tile_pos := tile.impl.pos
+	tile.position = grid.tile_position(TILE_SIZE, tile_pos.x, tile_pos.y)
+	tile.scale = Vector3.ONE * grid.model_scale(TILE_SIZE, tile)
 
 
 func _ready() -> void:

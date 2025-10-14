@@ -5,12 +5,18 @@ extends Node3D
 @export var material: TileMaterial
 @export var particles_scale := 1.0
 
+var impl: Flammable
+
 @onready var tile: TileNode = get_parent()
-@onready var impl: Flammable = tile.impl.get_or_create_mixin(Flammable)
 @onready var fire: FireEffect = Utils.find_child_with_type(self, FireEffect, false)
 
 
 func _ready():
+	if !tile.impl:
+		return
+
+	impl = tile.impl.get_or_create_mixin(Flammable)
+
 	if fire:
 		fire.particles_scale = particles_scale
 

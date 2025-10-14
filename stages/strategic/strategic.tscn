@@ -1,55 +1,38 @@
-[gd_scene load_steps=12 format=3 uid="uid://flu7j32ifd3y"]
+[gd_scene load_steps=11 format=3 uid="uid://flu7j32ifd3y"]
 
 [ext_resource type="Script" uid="uid://dbgvinydau6i6" path="res://stages/strategic/strategic.gd" id="1_dspli"]
-[ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/player_VR.tscn" id="2_dspli"]
+[ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_stages/map_scene/map_scene.tscn" id="1_mavd1"]
 [ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person/first_person.tscn" id="2_tttub"]
-[ext_resource type="PackedScene" uid="uid://ujao577umlix" path="res://stages/strategic/map.tscn" id="3_5y27t"]
 [ext_resource type="PackedScene" uid="uid://b50lh3ohab6x6" path="res://ui/mesh_rope_trigger.tscn" id="3_52wiw"]
-[ext_resource type="PackedScene" uid="uid://cy8bik48abvil" path="res://ui/lever.tscn" id="4_paqgp"]
-[ext_resource type="PackedScene" uid="uid://dkw8t7skkorcm" path="res://ui/Joystick.tscn" id="5_lva8o"]
+[ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://stages/strategic/map.gd" id="5_v5dbt"]
+[ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_factory.tscn" id="6_52wiw"]
 [ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/Button.tscn" id="6_v5dbt"]
+[ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="7_vy2ce"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dspli"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
 
-[sub_resource type="Sky" id="Sky_5y27t"]
-sky_material = SubResource("ProceduralSkyMaterial_dspli")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0dt8"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.0980392)
 
-[sub_resource type="Environment" id="Environment_paqgp"]
-background_mode = 2
-sky = SubResource("Sky_5y27t")
-tonemap_mode = 2
-
-[node name="Strategic" type="Node3D"]
+[node name="Strategic" instance=ExtResource("1_mavd1")]
 script = ExtResource("1_dspli")
 next_scene = ExtResource("2_tttub")
 rope_trigger = ExtResource("3_52wiw")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_paqgp")
+[node name="Map" parent="." index="5"]
+mesh = SubResource("PlaneMesh_a0dt8")
+surface_material_override/0 = SubResource("StandardMaterial3D_a0dt8")
+script = ExtResource("5_v5dbt")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.386325, 0.922363, 0, -0.922363, -0.386325, 0, 4.64962, 0)
+[node name="TileFactory" parent="Map" index="1" instance=ExtResource("6_52wiw")]
 
-[node name="PlayerVr" parent="." instance=ExtResource("2_dspli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925485, 1.67225)
+[node name="CharacterFactory" parent="Map" index="2" instance=ExtResource("7_vy2ce")]
 
-[node name="Map" parent="." instance=ExtResource("3_5y27t")]
-transform = Transform3D(0.405485, 0, 0, 0, 1, 0, 0, 0, 0.322255, -0.000313282, 0.496542, 1.22156)
+[node name="ExitButton" parent="." index="6" instance=ExtResource("6_v5dbt")]
+transform = Transform3D(1, 0, 0, 0, -0.34796667, -0.937507, 0, 0.937507, -0.34796667, -0.010482013, 1.1231475, 1.2947037)
 
-[node name="ScaleLever" parent="." instance=ExtResource("4_paqgp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.579461, 0.458555, 1.35959)
-
-[node name="OffsetJoystick" parent="." instance=ExtResource("5_lva8o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.579, 0.459, 1.36)
-
-[node name="ExitButton" parent="." instance=ExtResource("6_v5dbt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5729785, 0.5003492, 1.643)
-
-[node name="RopeTriggerOrigin" type="Node3D" parent="."]
+[node name="RopeTriggerOrigin" type="Node3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31713516, 0.9533406, 1.402024)
 
-[connection signal="hinge_moved" from="ScaleLever" to="." method="_on_zoom_lever_moved"]
-[connection signal="moved" from="OffsetJoystick" to="." method="_on_offset_joystick_moved"]
 [connection signal="released" from="ExitButton" to="." method="_on_button_released"]

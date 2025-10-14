@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://4if45fr7sjl6"]
 
 [ext_resource type="Script" uid="uid://g2vqlss3lfx5" path="res://stages/strategic/tiles/mixins/walkable.gd" id="2_o5uc3"]
-[ext_resource type="PackedScene" uid="uid://bnvtv0ggbwwin" path="res://stages/strategic/tiles/assets/character_point.glb" id="4_sly35"]
+[ext_resource type="PackedScene" uid="uid://bnvtv0ggbwwin" path="res://assets/tiles_lowres/character_point.glb" id="4_sly35"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4ybiy"]
 size = Vector3(0.4, 0.637988, 0.4)

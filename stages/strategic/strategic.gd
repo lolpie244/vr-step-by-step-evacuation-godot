@@ -1,13 +1,9 @@
-extends Node3D
+extends MapScene
 
 @export var next_scene: PackedScene
 @export var rope_trigger: PackedScene
 
 var first_mode_trigger: RopeTrigger
-
-@onready var map: Map = $Map
-@onready var scale_lever: Lever = $ScaleLever
-@onready var offset_joystick: Joystick = $OffsetJoystick
 
 
 func _add_first_mode_trigger():
@@ -25,21 +21,9 @@ func _ready() -> void:
 	_add_first_mode_trigger()
 	GameCore.character_selected.connect(_on_character_selected)
 
-	map.add_character(Character.Type.CIVILIAN, 6, 4)
-	map.add_character(Character.Type.CIVILIAN, 2, 4)
-	GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
-	GameCore.next_turn()
-
-
-func _on_zoom_lever_moved(_angle: Variant) -> void:
-	map.zoom += -0.02 * scale_lever.fill_ratio
-
-
-func _on_offset_joystick_moved(_angle: Vector2) -> void:
-	map.offset += 0.003 * offset_joystick.fill_ratio
-
-
-func _on_button_released(_button: Variant) -> void:
+	#map.add_character(Character.Type.CIVILIAN, 6, 4)
+	#map.add_character(Character.Type.CIVILIAN, 2, 4)
+	#GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
 	GameCore.next_turn()
 
 
