@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bifqvtth5bjux"
-path="res://.godot/imported/hose_end.glb-8f0e5fcb6bd8a81d46bcd20f0002f293.scn"
+path="res://.godot/imported/hose_end.glb-41dda0d51d55030389460ddc6a25a9a5.scn"
 
 [deps]
 
-source_file="res://assets/extinguisher/hose_end.glb"
-dest_files=["res://.godot/imported/hose_end.glb-8f0e5fcb6bd8a81d46bcd20f0002f293.scn"]
+source_file="res://assets/extinguisher/powder/hose_end.glb"
+dest_files=["res://.godot/imported/hose_end.glb-41dda0d51d55030389460ddc6a25a9a5.scn"]
 
 [params]
 

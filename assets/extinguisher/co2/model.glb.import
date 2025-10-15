@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://mqnsmnitytdi"
-path="res://.godot/imported/model.glb-1404ef267986f65dd2dc0d3fbb8e066a.scn"
+uid="uid://bjtw6tj6r0x2v"
+path="res://.godot/imported/model.glb-232fbd9a6715eb9aed92e097cdfc40d5.scn"
 
 [deps]
 
-source_file="res://assets/extinguisher/model.glb"
-dest_files=["res://.godot/imported/model.glb-1404ef267986f65dd2dc0d3fbb8e066a.scn"]
+source_file="res://assets/extinguisher/co2/model.glb"
+dest_files=["res://.godot/imported/model.glb-232fbd9a6715eb9aed92e097cdfc40d5.scn"]
 
 [params]
 
@@ -39,23 +39,23 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "meshes": {
-"model_Cylinder_003": {
+"model_Cube_003": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 60.0,
+"lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://items/fire_extinguisher/assets/models/handle.res",
-"save_to_file/path": "uid://btem1q5u10ghj"
+"save_to_file/fallback_path": "res://assets/extinguisher/co2/handle.res",
+"save_to_file/path": "uid://b83i1v03sxjwn"
 },
 "model_Cylinder_004": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 60.0,
+"lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://items/fire_extinguisher/assets/models/pin.res",
-"save_to_file/path": "uid://cebuyatynnl0g"
+"save_to_file/fallback_path": "res://assets/extinguisher/co2/pin.res",
+"save_to_file/path": "uid://50emcamf1dee"
 }
 },
 "nodes": {
@@ -67,5 +67,5 @@ _subresources={
 }
 }
 }
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=1
