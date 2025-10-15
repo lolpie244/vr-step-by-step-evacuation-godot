@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://be62qfvjpalst"
-path.etc2="res://.godot/imported/wall.svg-3a68954740fa8fe7f02a0fca7816e902.etc2.ctex"
+path.s3tc="res://.godot/imported/wall.svg-3a68954740fa8fe7f02a0fca7816e902.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/tiles_2d/wall.svg"
-dest_files=["res://.godot/imported/wall.svg-3a68954740fa8fe7f02a0fca7816e902.etc2.ctex"]
+dest_files=["res://.godot/imported/wall.svg-3a68954740fa8fe7f02a0fca7816e902.s3tc.ctex"]
 
 [params]
 

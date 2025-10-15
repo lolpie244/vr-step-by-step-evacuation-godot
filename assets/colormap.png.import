@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmsehgjco3b87"
-path.etc2="res://.godot/imported/window_colormap.png-205d36115d7a3d76138aef3006513783.etc2.ctex"
+uid="uid://ci1epb0m0nel5"
+path.s3tc="res://.godot/imported/colormap.png-3b72b771dcdddc8ba8eb3f1a2cd2b152.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "76084aa0c65dc2c593e6532f1f61f968"
 }
 
 [deps]
 
-source_file="res://assets/tiles_lowres/window_colormap.png"
-dest_files=["res://.godot/imported/window_colormap.png-205d36115d7a3d76138aef3006513783.etc2.ctex"]
+source_file="res://assets/colormap.png"
+dest_files=["res://.godot/imported/colormap.png-3b72b771dcdddc8ba8eb3f1a2cd2b152.s3tc.ctex"]
 
 [params]
 
