@@ -22,11 +22,11 @@ enum FireType {
 var material: TileMaterial
 var wind := Vector2.ZERO
 
-var strength := 0.95:
+var strenght := 0.95:
 	set(value):
-		if strength == value:
+		if strenght == value:
 			return
-		strength = value
+		strenght = value
 		strenght_changed.emit(value)
 
 var state := State.NOT_BURNING:
@@ -64,7 +64,7 @@ func extinguish(foam_strenght: float):
 	if state != State.BURNING:
 		return
 
-	strength -= foam_strenght
+	strenght -= foam_strenght
 
-	if strength < 0:
+	if strenght < 0:
 		state = State.NOT_BURNING

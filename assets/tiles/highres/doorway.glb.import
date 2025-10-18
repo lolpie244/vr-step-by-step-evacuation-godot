@@ -33,7 +33,7 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
-import_script/path=""
+import_script/path="uid://cviptg4r222iw"
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
@@ -48,6 +48,11 @@ _subresources={
 "use_external/enabled": true,
 "use_external/fallback_path": "res://assets/tiles/highres/wall.tres",
 "use_external/path": "uid://dg0lvr6fjpc5x"
+}
+},
+"nodes": {
+"PATH:floor": {
+"generate/physics": true
 }
 }
 }

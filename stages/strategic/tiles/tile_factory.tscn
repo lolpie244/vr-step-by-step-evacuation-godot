@@ -23,10 +23,12 @@ type = 1
 
 [node name="Flammable" parent="Floor" instance=ExtResource("8_spxjo")]
 transform = Transform3D(0.3, 0, 0, 0, 1.2, 0, 0, 0, 0.3, 0, 0.298921, 0)
+visible = false
 material = ExtResource("9_xt87q")
 
 [node name="Walkable" parent="Floor" instance=ExtResource("10_45704")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20416, 0)
+visible = false
 
 [node name="Model" parent="Floor" instance=ExtResource("12_hfmqf")]
 

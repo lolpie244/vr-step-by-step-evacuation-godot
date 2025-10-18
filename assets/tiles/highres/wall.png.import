@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wbgbg628je7e"
-path.s3tc="res://.godot/imported/wall.png-16e5b101b50fcbfe637f010cff06d468.s3tc.ctex"
+path.etc2="res://.godot/imported/wall.png-16e5b101b50fcbfe637f010cff06d468.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/tiles/highres/wall.png"
-dest_files=["res://.godot/imported/wall.png-16e5b101b50fcbfe637f010cff06d468.s3tc.ctex"]
+dest_files=["res://.godot/imported/wall.png-16e5b101b50fcbfe637f010cff06d468.etc2.ctex"]
 
 [params]
 

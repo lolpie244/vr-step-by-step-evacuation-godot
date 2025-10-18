@@ -1,7 +1,7 @@
 class_name FirstPerson
 extends Node3D
 
-const TILE_SIZE := 2.0
+const TILE_SIZE := 3.0
 
 
 class Context:

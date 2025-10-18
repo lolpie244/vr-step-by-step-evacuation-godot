@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://hb2dhy83ojai"
-path.s3tc="res://.godot/imported/canvas_ImphenziaPalette01-256-Gradient.png-5fa72f4a2eb219810a480b1754bbeba7.s3tc.ctex"
+path.etc2="res://.godot/imported/canvas_ImphenziaPalette01-256-Gradient.png-5fa72f4a2eb219810a480b1754bbeba7.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/environment_props/canvas_ImphenziaPalette01-256-Gradient.png"
-dest_files=["res://.godot/imported/canvas_ImphenziaPalette01-256-Gradient.png-5fa72f4a2eb219810a480b1754bbeba7.s3tc.ctex"]
+dest_files=["res://.godot/imported/canvas_ImphenziaPalette01-256-Gradient.png-5fa72f4a2eb219810a480b1754bbeba7.etc2.ctex"]
 
 [params]
 

@@ -23,6 +23,7 @@ func _get_model():
 		var mm_transform = Transform3D()
 		mm_transform = mm_transform.rotated(Vector3(0, 1, 0), deg_to_rad(rotations[i][1]))
 
+
 		var body = model.get_child(0).duplicate()
 		body.transform = mm_transform
 		result.add_child(body)
@@ -30,6 +31,7 @@ func _get_model():
 		mm.set_instance_transform(i, mm_transform)
 
 	result.multimesh = mm
+	result.transform = $Model.transform
 	return result
 
 
