@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bgelr7eu6xbjn"
-path="res://.godot/imported/next_button.glb-5c1e787e3e95a98abc21f826bc07303a.scn"
+uid="uid://e1y7abr4iowb"
+path="res://.godot/imported/floor.glb-b94b5e6ff864f6daff1c75877ae4e351.scn"
 
 [deps]
 
-source_file="res://assets/ui/next_button.glb"
-dest_files=["res://.godot/imported/next_button.glb-5c1e787e3e95a98abc21f826bc07303a.scn"]
+source_file="res://assets/tiles/highres/floor.glb"
+dest_files=["res://.godot/imported/floor.glb-b94b5e6ff864f6daff1c75877ae4e351.scn"]
 
 [params]
 
@@ -39,17 +39,12 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"platformer.010": {
+"Plane.002": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/ui/material.tres",
-"use_external/path": "uid://ipftjhoylgke"
-},
-"platformer.011": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/ui/material.tres",
-"use_external/path": "uid://ipftjhoylgke"
+"use_external/fallback_path": "res://assets/tiles/highres/plane.tres",
+"use_external/path": "uid://bsi3kk4xvuoud"
 }
 }
 }
-gltf/naming_version=1
+gltf/naming_version=2
 gltf/embedded_image_handling=0

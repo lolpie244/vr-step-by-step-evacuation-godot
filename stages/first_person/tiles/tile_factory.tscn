@@ -4,14 +4,14 @@
 [ext_resource type="Script" uid="uid://h2evvguy80m2" path="res://common_nodes/tile_types/door.gd" id="2_mf7cg"]
 [ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic/tiles/mixins/flammable.tscn" id="3_jcfbc"]
 [ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="4_cqx0e"]
-[ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://assets/tiles_lowres/doorway.glb" id="5_i52jp"]
+[ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://assets/tiles/lowres/doorway.glb" id="5_i52jp"]
 [ext_resource type="Script" uid="uid://dmd1oeiknl2xq" path="res://common_nodes/tile_node.gd" id="6_25nka"]
-[ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://assets/tiles_lowres/floor.glb" id="7_lnwl4"]
+[ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://assets/tiles/lowres/floor.glb" id="7_lnwl4"]
 [ext_resource type="PackedScene" uid="uid://bo3vblsvejx6g" path="res://stages/first_person/tiles/mixins/flammable.tscn" id="8_r8kke"]
 [ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://common_nodes/tile_types/wall.gd" id="9_2q4nf"]
-[ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://assets/tiles_lowres/wall.glb" id="10_wdm8e"]
+[ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://assets/tiles/lowres/wall.glb" id="10_wdm8e"]
 [ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://common_nodes/tile_types/wall_like.gd" id="11_0ey6x"]
-[ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://assets/tiles_lowres/window.glb" id="12_us06m"]
+[ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://assets/tiles/lowres/window.glb" id="12_us06m"]
 
 [node name="TileNodeFactory" type="Node3D"]
 script = ExtResource("1_fc8km")

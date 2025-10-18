@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dg0lvr6fjpc5x"]
+
+[ext_resource type="Texture2D" uid="uid://wbgbg628je7e" path="res://assets/tiles/highres/wall.png" id="1_ad5ef"]
+[ext_resource type="Texture2D" uid="uid://bgn7owpgcxyit" path="res://assets/tiles/highres/wall_metallic.png" id="2_7twqi"]
+[ext_resource type="Texture2D" uid="uid://b7hcqntfowrpd" path="res://assets/tiles/highres/wall_normal.png" id="2_hkg0a"]
+
+[resource]
+albedo_texture = ExtResource("1_ad5ef")
+metallic = 1.0
+metallic_texture = ExtResource("2_7twqi")
+normal_enabled = true
+normal_texture = ExtResource("2_hkg0a")

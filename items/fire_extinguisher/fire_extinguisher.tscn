@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jw8x4vh4vdfj" path="res://items/fire_extinguisher/extinguisher.gd" id="1_e763w"]
 [ext_resource type="Script" uid="uid://7ol3jmvnfywc" path="res://items/fire_extinguisher/hose_end.gd" id="1_gc625"]
-[ext_resource type="PackedScene" uid="uid://bifqvtth5bjux" path="res://assets/extinguisher/powder/hose_end.glb" id="2_awf77"]
+[ext_resource type="PackedScene" uid="uid://bifqvtth5bjux" path="res://assets/items/extinguisher_powder/hose_end.glb" id="2_awf77"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_td516"]
 [ext_resource type="Script" uid="uid://dwkncdtofp2bq" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="4_k44sa"]
 [ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="5_7po83"]
@@ -10,13 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="7_v4ut5"]
 [ext_resource type="Animation" uid="uid://do01jton6rk42" path="res://addons/godot-xr-tools/hands/animations/right/Cup.res" id="8_p2dys"]
 [ext_resource type="PackedScene" uid="uid://dk6f6uvskip7d" path="res://common/rope/rope.tscn" id="9_8xj8d"]
-[ext_resource type="ArrayMesh" uid="uid://dc4nb2ciahe14" path="res://assets/extinguisher/powder/handle.res" id="9_p5at7"]
-[ext_resource type="PackedScene" uid="uid://mqnsmnitytdi" path="res://assets/extinguisher/powder/model.glb" id="10_iaays"]
+[ext_resource type="ArrayMesh" uid="uid://dc4nb2ciahe14" path="res://assets/items/extinguisher_powder/handle.res" id="9_p5at7"]
+[ext_resource type="PackedScene" uid="uid://mqnsmnitytdi" path="res://assets/items/extinguisher_powder/model.glb" id="10_iaays"]
 [ext_resource type="Script" uid="uid://cnyxh5ycicg3j" path="res://items/fire_extinguisher/handle.gd" id="11_plkjj"]
 [ext_resource type="Script" uid="uid://t2edgght6lj4" path="res://items/fire_extinguisher/physics_sync.gd" id="12_awf77"]
 [ext_resource type="Animation" uid="uid://bv5tuc1kjv0k5" path="res://addons/godot-xr-tools/hands/animations/right/Hold.res" id="13_0dcjf"]
 [ext_resource type="Script" uid="uid://ch6uur2y0pnqt" path="res://items/fire_extinguisher/pin.gd" id="13_p5at7"]
-[ext_resource type="ArrayMesh" uid="uid://cvkq7s1uob7tx" path="res://assets/extinguisher/powder/pin.res" id="14_0gq8e"]
+[ext_resource type="ArrayMesh" uid="uid://cvkq7s1uob7tx" path="res://assets/items/extinguisher_powder/pin.res" id="14_0gq8e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_57372"]
 size = Vector3(0.0451355, 0.042614, 0.14563)

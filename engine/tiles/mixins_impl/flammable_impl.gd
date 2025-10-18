@@ -2,7 +2,7 @@ class_name Flammable
 extends TileMixin
 
 signal state_changed(state: State)
-signal strenght_changed(strenght: float)
+signal strenght_changed(strength: float)
 
 enum State {
 	NOT_BURNING = 1 << 0,
@@ -10,14 +10,23 @@ enum State {
 	BURNED = 1 << 2,
 }
 
+enum FireType {
+	A, # Solids
+	B, # Liquids
+	C, # Gasses
+	D, # Metals
+	E, # Energy
+	F, # Oils 
+}
+
 var material: TileMaterial
 var wind := Vector2.ZERO
 
-var strenght := 0.95:
+var strength := 0.95:
 	set(value):
-		if strenght == value:
+		if strength == value:
 			return
-		strenght = value
+		strength = value
 		strenght_changed.emit(value)
 
 var state := State.NOT_BURNING:
@@ -55,7 +64,7 @@ func extinguish(foam_strenght: float):
 	if state != State.BURNING:
 		return
 
-	strenght -= foam_strenght
+	strength -= foam_strenght
 
-	if strenght < 0:
+	if strength < 0:
 		state = State.NOT_BURNING

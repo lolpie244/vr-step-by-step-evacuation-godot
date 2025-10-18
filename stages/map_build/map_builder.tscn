@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://xnfqapr2ajxs"]
+[gd_scene load_steps=14 format=3 uid="uid://xnfqapr2ajxs"]
 
 [ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_stages/map_scene/map_scene.tscn" id="1_mavd1"]
 [ext_resource type="Script" uid="uid://cklvbndqqhyfp" path="res://stages/map_build/map_builder.gd" id="1_og28i"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cilrgs5jxvr7y" path="res://stages/map_build/tiles/tile_factory.tscn" id="6_n64ml"]
 [ext_resource type="PackedScene" uid="uid://4xjuluon04x0" path="res://stages/map_build/tile_type_pen.tscn" id="8_qwooh"]
 [ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/Button.tscn" id="9_meh3h"]
+[ext_resource type="PackedScene" uid="uid://c50qun606ebvi" path="res://assets/environment_props/easel.glb" id="10_xncoq"]
+[ext_resource type="PackedScene" uid="uid://btcfofdv2pwcs" path="res://assets/environment_props/canvas.glb" id="11_4lc88"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0uych"]
 size = Vector3(1.3, 0.1, 0.5)
@@ -36,24 +38,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5192419, 0.458555, 1.35959
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5268856, 0.459, 1.36)
 
 [node name="Map" parent="." index="5"]
-transform = Transform3D(0.39911237, 0, 0, 0, -4.3711385e-08, -0.3458585, 0, 0.99999994, -1.5117957e-08, 0, 0.961355, 1.1239377)
+transform = Transform3D(0.39911234, 0, 0, 0, 0.27358437, -0.36549762, 0, 0.9252656, 0.10807105, 0, 0.87391305, 1.0162227)
 cutoff_shader = ExtResource("5_jfixn")
 
 [node name="MapScanner" type="Node3D" parent="." index="6"]
 script = ExtResource("3_nt64x")
 
-[node name="Table" type="StaticBody3D" parent="." index="7"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41178885, 1.3839952)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Table" index="0"]
-mesh = SubResource("BoxMesh_0uych")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Table" index="1"]
-shape = SubResource("BoxShape3D_n64ml")
-
-[node name="Factory" parent="." index="8" instance=ExtResource("6_n64ml")]
-
-[node name="Pens" type="Node" parent="." index="9"]
+[node name="Pens" type="Node" parent="." index="7"]
 
 [node name="Floor" parent="Pens" index="0" instance=ExtResource("8_qwooh")]
 transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.29770142, 0.487117, 1.3984342)
@@ -75,8 +66,25 @@ transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.
 type = 4
 color = Color(1, 0, 0, 1)
 
+[node name="Table" type="StaticBody3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41178885, 1.3839952)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Table" index="0"]
+mesh = SubResource("BoxMesh_0uych")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table" index="1"]
+shape = SubResource("BoxShape3D_n64ml")
+
+[node name="Factory" parent="." index="9" instance=ExtResource("6_n64ml")]
+
 [node name="ExitButton" parent="." index="10" instance=ExtResource("9_meh3h")]
 transform = Transform3D(0.9659756, 0, 0.25863364, 0, 1, 0, -0.25863364, 0, 0.9659756, -0.28351954, 0.4685651, 1.2388928)
+
+[node name="Easel" parent="." index="11" instance=ExtResource("10_xncoq")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 1.1232382, 0.8277863)
+
+[node name="Canvas" parent="Easel" index="1" instance=ExtResource("11_4lc88")]
+transform = Transform3D(1.3, -3.3121538e-08, -2.842171e-14, 3.1798645e-08, 1.2480775, -0.36373413, 9.267282e-09, 0.36373413, 1.2480775, 3.2177828e-05, -0.27263528, -0.104536235)
 
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]

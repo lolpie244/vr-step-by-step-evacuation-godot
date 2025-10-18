@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bgelr7eu6xbjn"
-path="res://.godot/imported/next_button.glb-5c1e787e3e95a98abc21f826bc07303a.scn"
+uid="uid://bnvtv0ggbwwin"
+path="res://.godot/imported/character_point.glb-1f505f413f34ea9cd784c802cfe80bfb.scn"
 
 [deps]
 
-source_file="res://assets/ui/next_button.glb"
-dest_files=["res://.godot/imported/next_button.glb-5c1e787e3e95a98abc21f826bc07303a.scn"]
+source_file="res://assets/tiles/lowres/character_point.glb"
+dest_files=["res://.godot/imported/character_point.glb-1f505f413f34ea9cd784c802cfe80bfb.scn"]
 
 [params]
 
@@ -33,21 +33,16 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
-import_script/path=""
+import_script/path="uid://cviptg4r222iw"
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"platformer.010": {
+"colormap": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/ui/material.tres",
-"use_external/path": "uid://ipftjhoylgke"
-},
-"platformer.011": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/ui/material.tres",
-"use_external/path": "uid://ipftjhoylgke"
+"use_external/fallback_path": "res://assets/colormap_material.tres",
+"use_external/path": "uid://bcoursb4mmrdu"
 }
 }
 }

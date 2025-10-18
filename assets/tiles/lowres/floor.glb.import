@@ -3,17 +3,17 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bgelr7eu6xbjn"
-path="res://.godot/imported/next_button.glb-5c1e787e3e95a98abc21f826bc07303a.scn"
+uid="uid://buc13bh6jsim4"
+path="res://.godot/imported/floor.glb-1c7572fdc70fda83f17f6c660501d8bf.scn"
 
 [deps]
 
-source_file="res://assets/ui/next_button.glb"
-dest_files=["res://.godot/imported/next_button.glb-5c1e787e3e95a98abc21f826bc07303a.scn"]
+source_file="res://assets/tiles/lowres/floor.glb"
+dest_files=["res://.godot/imported/floor.glb-1c7572fdc70fda83f17f6c660501d8bf.scn"]
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="Node"
 nodes/root_name=""
 nodes/root_script=null
 nodes/apply_root_scale=true
@@ -33,21 +33,21 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
-import_script/path=""
+import_script/path="uid://cviptg4r222iw"
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"platformer.010": {
+"colormap": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/ui/material.tres",
-"use_external/path": "uid://ipftjhoylgke"
+"use_external/fallback_path": "res://assets/colormap_material.tres",
+"use_external/path": "uid://bcoursb4mmrdu"
+}
 },
-"platformer.011": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/ui/material.tres",
-"use_external/path": "uid://ipftjhoylgke"
+"nodes": {
+"PATH:floor-thick": {
+"generate/physics": true
 }
 }
 }
