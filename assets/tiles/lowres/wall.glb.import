@@ -39,20 +39,15 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"colormap": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/colormap_material.tres",
-"use_external/path": "uid://bcoursb4mmrdu"
+"default": {
+"use_external/enabled": false,
+"use_external/fallback_path": "res://assets/tiles/lowres/default.tres",
+"use_external/path": "uid://cj8gu3uar7gq2"
 },
-"colormap.003": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/colormap_material.tres",
-"use_external/path": "uid://bcoursb4mmrdu"
-}
-},
-"nodes": {
-"PATH:floor-thick": {
-"generate/physics": true
+"wood": {
+"use_external/enabled": false,
+"use_external/fallback_path": "res://assets/tiles/lowres/wood.tres",
+"use_external/path": "uid://dak7280084k7j"
 }
 }
 }

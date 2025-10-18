@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxrf0lnhl7s2f"]
+[gd_scene load_steps=12 format=3 uid="uid://dxrf0lnhl7s2f"]
 
 [ext_resource type="Script" uid="uid://b8avi6cjwyrsf" path="res://stages/test/test.gd" id="1_c6hbk"]
 [ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person/first_person.tscn" id="2_c6hbk"]
+[ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://stages/strategic/map.gd" id="3_8stuw"]
+[ext_resource type="Shader" uid="uid://ds1y664nk12st" path="res://stages/common_stages/map_scene/cutoff.gdshader" id="4_tcst7"]
+[ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="6_0klol"]
+[ext_resource type="PackedScene" uid="uid://bd6jf6p57yppl" path="res://stages/first_person/tiles/tile_factory.tscn" id="6_8stuw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xne4r"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -15,6 +19,12 @@ background_mode = 2
 sky = SubResource("Sky_jwisr")
 tonemap_mode = 2
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_nlh7v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5krfc"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.0980392)
+
 [node name="Test" type="Node3D"]
 script = ExtResource("1_c6hbk")
 next_scene = ExtResource("2_c6hbk")
@@ -23,8 +33,23 @@ next_scene = ExtResource("2_c6hbk")
 environment = SubResource("Environment_c6hbk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.92802143, -0.37250808, 0.0037419077, 0.021859072, -0.044424195, 0.99877363, -0.37188497, 0.9269651, 0.04936929, 0, 2.9000006, 0.3000002)
+light_energy = 0.1
+light_bake_mode = 1
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.789662, 0.613542, 0, -0.613542, 0.789662, 0, 0.98782, 0.98011)
+transform = Transform3D(1, 0, 0, 0, 0.78966206, 0.6135421, 0, -0.6135421, 0.78966206, 0, 0.38782004, 0.48011)
+
+[node name="Map" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.47809935, 0, 0, 0, 1, 0, 0, 0, 0.25787768, 0, -0.033471584, 0.022553228)
+mesh = SubResource("PlaneMesh_nlh7v")
+surface_material_override/0 = SubResource("StandardMaterial3D_5krfc")
+script = ExtResource("3_8stuw")
+cutoff_shader = ExtResource("4_tcst7")
+
+[node name="MapItems" type="Node3D" parent="Map"]
+
+[node name="CharacterFactory" parent="Map" instance=ExtResource("6_0klol")]
+
+[node name="TileFactory" parent="Map" instance=ExtResource("6_8stuw")]

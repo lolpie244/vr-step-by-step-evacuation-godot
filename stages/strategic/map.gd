@@ -20,7 +20,7 @@ var _test_map = [
 	["w", "w", "w", "w", "w", "w"],
 ]
 
-@onready var tile_factory: StrategicTileFactory = $TileFactory
+@onready var tile_factory = $TileFactory
 @onready var character_factory: CharacterNodeFactory = $CharacterFactory
 
 
@@ -71,7 +71,8 @@ func reset_map():
 			if !impl.get_tile(x, y):
 				continue
 
-			var tile: TileNode = tile_factory.create(self, impl.get_tile(x, y))
+			#var tile: TileNode = tile_factory.create(self, impl.get_tile(x, y))
+			var tile: TileNode = tile_factory.create(impl.get_tile(x, y))
 			_tile_nodes[x][y] = tile
 
 	for x in range(impl.rows_count()):

@@ -31,9 +31,6 @@ script = ExtResource("1_ur71p")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_paqgp")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.386325, 0.922363, 0, -0.922363, -0.386325, 0, 4.64962, 0)
-
 [node name="PlayerVR" parent="." instance=ExtResource("2_k51vb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925485, 1.67225)
 
@@ -51,6 +48,12 @@ script = ExtResource("4_k51vb")
 cutoff_shader = ExtResource("6_1dq7g")
 
 [node name="MapItems" type="Node3D" parent="Map"]
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.92802143, -0.37250808, 0.0037419074, 0.021859072, -0.044424195, 0.99877363, -0.37188497, 0.9269651, 0.049369287, 0, 2.9000006, 1.2431409)
+light_energy = 0.1
+light_bake_mode = 1
+shadow_enabled = true
 
 [connection signal="hinge_moved" from="ScaleLever" to="." method="_on_zoom_lever_moved"]
 [connection signal="moved" from="OffsetJoystick" to="." method="_on_offset_joystick_moved"]

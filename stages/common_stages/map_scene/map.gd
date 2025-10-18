@@ -54,7 +54,7 @@ func place_item(node: Node3D, x: int, y: int):
 
 	node.position = impl.tile_position(_tile_size, x, y)
 	node.scale = Vector3.ONE * impl.model_scale(_tile_size, node)
-	node.set_material(self.cutoff_material)
+	#node.set_material(self.cutoff_material)
 
 
 func remove_item(node: Node3D):

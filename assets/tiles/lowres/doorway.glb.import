@@ -36,24 +36,29 @@ animation/import_rest_as_RESET=false
 import_script/path="uid://cviptg4r222iw"
 materials/extract=0
 materials/extract_format=0
-materials/extract_path=""
+materials/extract_path="res://assets/tiles/lowres"
 _subresources={
 "materials": {
-"colormap": {
+"_defaultMat.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/colormap_material.tres",
-"use_external/path": "uid://bcoursb4mmrdu"
+"use_external/fallback_path": "res://assets/tiles/lowres/default.tres",
+"use_external/path": "uid://cj8gu3uar7gq2"
 },
-"colormap.001": {
+"metalDark.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://assets/colormap_material.tres",
-"use_external/path": "uid://bcoursb4mmrdu"
+"use_external/fallback_path": "res://assets/tiles/lowres/metal.tres",
+"use_external/path": "uid://bhrwvx5ir2y4g"
+},
+"wood.004": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/tiles/lowres/wood.tres",
+"use_external/path": "uid://dak7280084k7j"
 }
 },
 "nodes": {
-"PATH:wall-doorway": {
+"PATH:doorway": {
 "generate/physics": true,
-"physics/shape_type": 1
+"physics/shape_type": 3
 }
 }
 }
