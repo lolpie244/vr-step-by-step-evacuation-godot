@@ -1,8 +1,17 @@
-class_name ExtinguisherImpl
+class_name Extinguisher
 extends Item
 
 signal foam_strength_changed(strength: float)
 signal pin_released
+
+enum Type {
+	UNKNOWN,
+	POWDER,
+	CO2,
+	WATER,
+}
+
+var type: Type
 
 var foam_strength: float = 0:
 	set(value):

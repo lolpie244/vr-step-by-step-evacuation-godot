@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://r785x2cppa1g"]
+
+[ext_resource type="Script" uid="uid://dg08tv08ubl7w" path="res://stages/first_person/extinguishers/extinguisher_factory.gd" id="1_aul2r"]
+[ext_resource type="PackedScene" uid="uid://7rb21rnqffq6" path="res://stages/first_person/extinguishers/dropper.tscn" id="2_j34w8"]
+[ext_resource type="PackedScene" uid="uid://doi1d80atmp60" path="res://stages/first_person/extinguishers/types/powder.tscn" id="3_aul2r"]
+[ext_resource type="PackedScene" uid="uid://1ic3ptqr60e3" path="res://stages/first_person/extinguishers/types/co2.tscn" id="4_aul2r"]
+
+[node name="ExtinguisherFactory" type="Node3D"]
+script = ExtResource("1_aul2r")
+metadata/_custom_type_script = "uid://5hidv4t3hoob"
+
+[node name="Powder" parent="." node_paths=PackedStringArray("extinguisher") instance=ExtResource("2_j34w8")]
+visible = false
+extinguisher = NodePath("PowderExtinguisher")
+
+[node name="PowderExtinguisher" parent="Powder" instance=ExtResource("3_aul2r")]
+transform = Transform3D(1, 0, 0, 0, 0.9012132, 0.43337598, 0, -0.43337598, 0.9012132, 0, 1.774725, 0)
+type = 1
+
+[node name="CO2" parent="." node_paths=PackedStringArray("extinguisher") instance=ExtResource("2_j34w8")]
+visible = false
+extinguisher = NodePath("Extinguisher")
+
+[node name="Extinguisher" parent="CO2" instance=ExtResource("4_aul2r")]
+transform = Transform3D(1, 0, 0, 0, 0.9445828, 0.3282732, 0, -0.3282732, 0.9445828, 0, 1.7786107, 0)

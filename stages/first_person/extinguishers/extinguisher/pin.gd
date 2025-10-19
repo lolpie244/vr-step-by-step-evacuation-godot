@@ -1,14 +1,14 @@
 class_name ExtinguisherPin
 extends Node3D
 
-var is_pin_released: bool = false
+@onready var pickup: XRToolsPickable = $Pickup
+@onready var mesh = $Mesh
 
-@onready var pickup: XRToolsPickable = $PinPickable
-@onready var mesh = $PinMesh
+@onready var impl: Extinguisher = get_owner().impl
 
 
 func _process(_delta):
-	if is_pin_released || !pickup.is_picked_up():
+	if impl.pin_released || !pickup.is_picked_up():
 		return
 
 	var pickup_pos_local := global_transform.affine_inverse() * pickup.global_position
@@ -21,13 +21,13 @@ func _process(_delta):
 
 
 func release_pin():
-	is_pin_released = true
+	impl.release_pin()
 	mesh.reparent(pickup, false)
 	mesh.position = Vector3.ZERO
 
 
 func _on_pin_pickable_dropped(_pickable: Variant) -> void:
-	if is_pin_released:
+	if impl.pin_released:
 		self.top_level = true
 		pickup.freeze = false
 		pickup.enabled = false

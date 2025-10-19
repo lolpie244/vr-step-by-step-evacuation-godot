@@ -4,34 +4,24 @@ extends Node3D
 
 var character
 
+var _points: Array[Vector3] = []
+
 @onready var map: Map = $Map
 @onready var grid: MapGrid = $Map/Grid
+@onready var points_spawner: SpawnPointGenerator = $SpawnPointGenerator
 
 
 func _ready() -> void:
-	pass
-	#character = map.add_character(CharacterFactory.Type.CIVILIAN, 8, 1)
+	points_spawner.points_count = 3
+	for i in range(points_spawner.points_count):
+		_points.append(points_spawner.get_point())
 
-	# character.highlight_reachable(true)
 
-	# character.visible_tiles()
-	#grid.get_tile_mixin(9, 1, Flammable).ignite()
+func _process(_delta: float) -> void:
+	DebugDraw3D.draw_points(_points)
 
-	#var context := FirstPerson.Context.new(character)
+	#$Camera3D.rotate_y(deg_to_rad(1))
 
-	#SceneManager.load_scene(next_scene, context)
-
-	#spread_fun_timer()
-
-#func spread_fun_timer():
-#var t := Timer.new()
-#t.wait_time = 5.0
-#t.one_shot = false
-#t.autostart = true
-#add_child(t)
-#t.timeout.connect(grid.spread_fire)
-#
-#
 #func _input(_event: InputEvent):
 #var x = character._x
 #var y = character._y

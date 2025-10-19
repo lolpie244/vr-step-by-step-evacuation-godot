@@ -3,7 +3,7 @@ extends Node3D
 
 signal triggerred
 
-@export_range(0, 1) var pull_strenght := 0.1
+@export_range(0, 1) var pull_strength := 0.1
 
 var enabled := false
 
@@ -19,7 +19,7 @@ func _on_rope_max_extend(end_position: Vector3) -> void:
 		_was_triggered = false
 		return
 
-	if (rope_item.global_position - end_position).length() < pull_strenght:
+	if (rope_item.global_position - end_position).length() < pull_strength:
 		restore_item_position()
 		_was_triggered = false
 		return

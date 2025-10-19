@@ -48,6 +48,15 @@ _subresources={
 "save_to_file/fallback_path": "res://assets/items/extinguisher_co2/handle.res",
 "save_to_file/path": "uid://b83i1v03sxjwn"
 },
+"model_Cylinder_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/items/extinguisher_co2/holder.res",
+"save_to_file/path": "uid://81il2f8leghe"
+},
 "model_Cylinder_004": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
@@ -63,6 +72,9 @@ _subresources={
 "import/skip_import": true
 },
 "PATH:Extinguisher/Pin": {
+"import/skip_import": true
+},
+"PATH:ExtinguisherHolder": {
 "import/skip_import": true
 }
 }

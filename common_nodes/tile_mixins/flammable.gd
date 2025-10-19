@@ -21,10 +21,10 @@ func _ready():
 		fire.particles_scale = particles_scale
 
 	impl.state_changed.connect(_on_impl_state_changed)
-	impl.strenght_changed.connect(_on_impl_strength_changed)
+	impl.strength_changed.connect(_on_impl_strength_changed)
 	impl.material = material
 	_on_impl_state_changed(impl.state)
-	_on_impl_strength_changed(impl.strenght)
+	_on_impl_strength_changed(impl.strength)
 
 
 func _on_impl_state_changed(state: Flammable.State) -> void:
@@ -38,12 +38,12 @@ func _on_impl_state_changed(state: Flammable.State) -> void:
 			fire.enabled = false
 
 
-func _on_impl_strength_changed(strenght: float) -> void:
+func _on_impl_strength_changed(strength: float) -> void:
 	if fire == null:
 		return
 
-	fire.cooling_coef = 1 - strenght
-	fire.scale = Vector3.ONE * strenght
+	fire.cooling_coef = 1 - strength
+	fire.scale = Vector3.ONE * strength
 
 
 func _process(_delta):

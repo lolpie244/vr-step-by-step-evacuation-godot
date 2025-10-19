@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxrf0lnhl7s2f"]
+[gd_scene load_steps=14 format=3 uid="uid://dxrf0lnhl7s2f"]
 
 [ext_resource type="Script" uid="uid://b8avi6cjwyrsf" path="res://stages/test/test.gd" id="1_c6hbk"]
 [ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person/first_person.tscn" id="2_c6hbk"]
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://stages/strategic/map.gd" id="3_8stuw"]
+[ext_resource type="Script" uid="uid://cegu27o26eujn" path="res://stages/first_person/spawn_point_generator.gd" id="3_tcst7"]
 [ext_resource type="Shader" uid="uid://ds1y664nk12st" path="res://stages/common_stages/map_scene/cutoff.gdshader" id="4_tcst7"]
 [ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="6_0klol"]
-[ext_resource type="PackedScene" uid="uid://bd6jf6p57yppl" path="res://stages/first_person/tiles/tile_factory.tscn" id="6_8stuw"]
+[ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_factory.tscn" id="6_8stuw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xne4r"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,6 +19,9 @@ sky_material = SubResource("ProceduralSkyMaterial_xne4r")
 background_mode = 2
 sky = SubResource("Sky_jwisr")
 tonemap_mode = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_tcst7"]
+size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nlh7v"]
 
@@ -38,8 +42,18 @@ light_energy = 0.1
 light_bake_mode = 1
 shadow_enabled = true
 
+[node name="SpawnPointGenerator" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08782002, -0.019889995)
+script = ExtResource("3_tcst7")
+radius = 0.8
+angle_between = 20.0
+
+[node name="Center" type="MeshInstance3D" parent="SpawnPointGenerator"]
+mesh = SubResource("BoxMesh_tcst7")
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.78966206, 0.6135421, 0, -0.6135421, 0.78966206, 0, 0.38782004, 0.48011)
+transform = Transform3D(1, 0, 0, 0, 0.12453562, 0.99221516, 0, -0.99221516, 0.12453562, 0, 0.88782, 0.080109976)
+fov = 110.453415
 
 [node name="Map" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.47809935, 0, 0, 0, 1, 0, 0, 0, 0.25787768, 0, -0.033471584, 0.022553228)
