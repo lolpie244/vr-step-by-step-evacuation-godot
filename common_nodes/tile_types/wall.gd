@@ -13,6 +13,7 @@ func _get_model():
 	var rotations := [[up, 0], [down, 180], [left, 270], [right, 90]].filter(func(v): return v[0])
 
 	var result = MultiMeshInstance3D.new()
+	result.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var mm := MultiMesh.new()
 
 	mm.mesh = original_mesh

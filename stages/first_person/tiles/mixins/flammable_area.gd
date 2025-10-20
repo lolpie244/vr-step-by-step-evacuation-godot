@@ -1,5 +1,5 @@
 extends Area3D
 
 
-func extinguish(strength: float):
-	get_parent().impl.extinguish(strength * 0.002)
+func extinguish(by: Extinguisher):
+	get_parent().impl.extinguish(by.foam_strength * 0.002)

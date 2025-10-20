@@ -78,6 +78,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012, 0.394, -0.016)
 [node name="Mesh" parent="Body/PinOrigin" index="0"]
 mesh = ExtResource("5_r474x")
 
+[node name="GrabPointHandRight" parent="Body/PinOrigin/Pickup" index="1"]
+transform = Transform3D(-0.44604144, 0, -0.895012, 0, 1, 0, 0.895012, 0, -0.44604144, 0.016280122, 0.0077115297, 0.034771547)
+
+[node name="GrabPointHandLeft" parent="Body/PinOrigin/Pickup" index="2"]
+transform = Transform3D(-0.27120528, 0.96252143, -4.2073157e-08, -0.40839234, -0.11507078, 0.9055244, 0.87158674, 0.24558298, 0.42429423, -0.0035944087, -0.03302923, -0.034564152)
+
 [node name="Model" parent="Body" index="2" instance=ExtResource("6_ekdd7")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 

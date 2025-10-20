@@ -52,6 +52,12 @@ mesh = ExtResource("3_y1us0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0039550997, -0.0011279285, 7.450581e-09)
 shape = SubResource("BoxShape3D_oi1al")
 
+[node name="GrabPointHandRight" parent="Body/PinOrigin/Pickup" index="1"]
+transform = Transform3D(-0.44619763, 0, -0.8949342, 0, 1, 0, 0.8949342, 0, -0.44619763, 0.014417455, 0.009877771, 0.031479836)
+
+[node name="GrabPointHandLeft" parent="Body/PinOrigin/Pickup" index="2"]
+transform = Transform3D(-0.2706004, 0.9626918, 0, -0.4083733, -0.11478854, 0.9055688, 0.8717836, 0.24504729, 0.42419943, 0, -0.03691134, -0.033208653)
+
 [node name="Model" parent="Body" index="2" instance=ExtResource("3_oi1al")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 

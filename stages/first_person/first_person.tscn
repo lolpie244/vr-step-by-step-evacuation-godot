@@ -34,7 +34,8 @@ radius = 0.8
 angle_between = 90.0
 
 [node name="ExitTrigger" parent="PlayerVR" instance=ExtResource("9_rvqsj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8976711, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55529743, 0, 0)
+visible = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="PlayerVR"]
 transform = Transform3D(-0.37188494, 0.92696524, 0.04936923, 0.17315114, 0.017019019, 0.9847485, 0.9119871, 0.37476134, -0.16683418, 0, 2.7920198, -0.46465564)

@@ -26,7 +26,6 @@ func _action_triggered(button: String, value: float) -> void:
 
 
 func _on_strength_changed(strength: float):
-	print("Adasd")
 	mesh.rotation_degrees.x = -((end_angle - start_angle) * strength + start_angle)
 
 

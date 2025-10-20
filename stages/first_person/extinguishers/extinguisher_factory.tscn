@@ -10,17 +10,15 @@ script = ExtResource("1_aul2r")
 metadata/_custom_type_script = "uid://5hidv4t3hoob"
 
 [node name="Powder" parent="." node_paths=PackedStringArray("extinguisher") instance=ExtResource("2_j34w8")]
-visible = false
 extinguisher = NodePath("PowderExtinguisher")
 
 [node name="PowderExtinguisher" parent="Powder" instance=ExtResource("3_aul2r")]
-transform = Transform3D(1, 0, 0, 0, 0.9012132, 0.43337598, 0, -0.43337598, 0.9012132, 0, 1.7613833, 0)
+transform = Transform3D(-0.2536567, -0.21759388, 0.9425026, 0, 0.97437006, 0.22495106, -0.96729434, 0.057060346, -0.2471555, 0.013261497, 1.7558242, -0.06203428)
 type = 1
 
 [node name="CO2" parent="." node_paths=PackedStringArray("extinguisher") instance=ExtResource("2_j34w8")]
-visible = false
 extinguisher = NodePath("CO2Extinguisher")
 
 [node name="CO2Extinguisher" parent="CO2" instance=ExtResource("4_aul2r")]
-transform = Transform3D(1, 0, 0, 0, 0.97420096, 0.22568224, 0, -0.22568224, 0.97420096, 0.043176025, 1.7895528, 0)
+transform = Transform3D(-4.371139e-08, -0.22495106, 0.97437006, 0, 0.97437006, 0.22495106, -1, 9.832923e-09, -4.259107e-08, 0.020152256, 1.7273613, -0.050850123)
 type = 2

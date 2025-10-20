@@ -184,6 +184,12 @@ tracker = &"left_hand"
 script = ExtResource("4_f7e5m")
 grab_distance = 0.1
 
+[node name="FunctionPickupTrigger" parent="LeftHand" instance=ExtResource("3_gclq8")]
+pickup_axis_action = "trigger_click"
+action_button_action = ""
+grab_collision_mask = 16777216
+ranged_collision_mask = 0
+
 [node name="LeftHand" parent="LeftHand" instance=ExtResource("7_p0j4x")]
 
 [node name="Skeleton3D" parent="LeftHand/LeftHand/Hand_Nails_low_L/Armature" index="0"]

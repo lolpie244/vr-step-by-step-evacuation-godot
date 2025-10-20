@@ -37,6 +37,15 @@ import_script/path="uid://cviptg4r222iw"
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:Door": {
+"generate/physics": true,
+"mesh_instance/cast_shadow": 0,
+"physics/physics_material_override": null,
+"physics/shape_type": 2
+}
+}
+}
 gltf/naming_version=2
 gltf/embedded_image_handling=2

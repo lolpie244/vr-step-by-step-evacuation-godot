@@ -21,11 +21,11 @@ func get_point() -> Vector3:
 		_current = 0
 
 	var point_position := (position - Vector3(0, 0, radius)).rotated(
-		Vector3(0, 1, 0), deg_to_rad(_start_angle + angle_between * _current)
+		Vector3(0, 1, 0), deg_to_rad(_start_angle + angle_between * _current) 
 	)
 
 	_current += 1
-	return point_position
+	return to_global(point_position)
 
 
 func reset():

@@ -56,9 +56,9 @@ func _ready() -> void:
 	point_generator.points_count = ext_impls.size()
 
 	for ext_impl in ext_impls:
-		var point := point_generator.to_global(point_generator.get_point())
-		var ext := extinguisher_factory.create(ext_impl, point)
+		var ext := extinguisher_factory.create(ext_impl, point_generator.get_point())
 		add_child(ext)
+		ext.look_at(player.global_position)
 		ext.triggerred.connect(func(): extinguisher_selected.emit())
 		extinguisher_selected.connect(ext.remove)
 		ext.spawn()
