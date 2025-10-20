@@ -38,27 +38,10 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path="res://assets/tiles/lowres"
 _subresources={
-"materials": {
-"_defaultMat.001": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/tiles/lowres/default.tres",
-"use_external/path": "uid://cj8gu3uar7gq2"
-},
-"metalDark.001": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/tiles/lowres/metal.tres",
-"use_external/path": "uid://bhrwvx5ir2y4g"
-},
-"wood.004": {
-"use_external/enabled": true,
-"use_external/fallback_path": "res://assets/tiles/lowres/wood.tres",
-"use_external/path": "uid://dak7280084k7j"
-}
-},
 "nodes": {
 "PATH:doorway": {
 "generate/physics": true,
-"physics/shape_type": 3
+"physics/shape_type": 1
 }
 }
 }

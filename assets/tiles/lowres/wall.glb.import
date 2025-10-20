@@ -49,6 +49,12 @@ _subresources={
 "use_external/fallback_path": "res://assets/tiles/lowres/wood.tres",
 "use_external/path": "uid://dak7280084k7j"
 }
+},
+"nodes": {
+"PATH:wall": {
+"generate/physics": true,
+"physics/shape_type": 1
+}
 }
 }
 gltf/naming_version=1

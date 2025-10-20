@@ -20,10 +20,7 @@ script = ExtResource("1_dspli")
 next_scene = ExtResource("2_tttub")
 rope_trigger = ExtResource("3_52wiw")
 
-[node name="DirectionalLight3D" parent="." index="1"]
-light_energy = 0.3
-
-[node name="Map" parent="." index="5"]
+[node name="Map" parent="." index="4"]
 mesh = SubResource("PlaneMesh_a0dt8")
 surface_material_override/0 = SubResource("StandardMaterial3D_a0dt8")
 script = ExtResource("5_v5dbt")

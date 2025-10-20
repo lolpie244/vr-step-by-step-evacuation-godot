@@ -51,15 +51,18 @@ func _ready() -> void:
 	for ext_type in [Extinguisher.Type.POWDER, Extinguisher.Type.CO2]:
 		var ext_impl := Extinguisher.new()
 		ext_impl.type = ext_type
+
 		ext_impls.append(ext_impl)
 
 	point_generator.points_count = ext_impls.size()
 
 	for ext_impl in ext_impls:
-		var ext := extinguisher_factory.create(ext_impl, point_generator.get_point())
+		var point := point_generator.to_global(point_generator.get_point())
+		var ext := extinguisher_factory.create(ext_impl, point)
 		add_child(ext)
 		ext.triggerred.connect(func(): extinguisher_selected.emit())
 		extinguisher_selected.connect(ext.remove)
+		ext.spawn()
 
 
 func _on_exit_trigger_triggerred() -> void:

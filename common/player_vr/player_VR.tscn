@@ -124,6 +124,7 @@ script = ExtResource("1_fjv1m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XRCamera3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.161205)
+cast_shadow = 0
 mesh = SubResource("PlaneMesh_ixvws")
 skeleton = NodePath("../..")
 

@@ -37,7 +37,6 @@ script = ExtResource("1_b71s2")
 [node name="HoseEndOrigin" type="Node3D" parent="."]
 transform = Transform3D(1.00013, 0, 0, 0, 1.0001271, 0, 0, 0, 1.0001271, 0, 0, 0)
 script = ExtResource("2_kwoxy")
-is_pickable = null
 
 [node name="Pickup" parent="HoseEndOrigin" instance=ExtResource("2_b71s2")]
 
@@ -75,6 +74,10 @@ shape = SubResource("BoxShape3D_kwoxy")
 
 [node name="Mesh" type="MeshInstance3D" parent="HandleOrigin/Pickup"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.00551942, -0.0366022, 0.114676)
+
+[node name="GrabPointHandLeft" parent="HandleOrigin/Pickup" instance=ExtResource("5_w4eom")]
+
+[node name="GrabPointHandRight" parent="HandleOrigin/Pickup" instance=ExtResource("4_nn785")]
 
 [node name="Body" parent="." instance=ExtResource("2_b71s2")]
 freeze_mode = 0

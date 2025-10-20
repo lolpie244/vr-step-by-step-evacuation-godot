@@ -8,17 +8,25 @@ extends Node3D
 @onready var pickup: XRToolsPickable = $Pickup
 @onready var mesh = $Pickup/Mesh
 
-@onready var impl: Extinguisher = get_owner().impl
+@onready var impl: Extinguisher = Utils.find_parent_that_implements(self, "ExtinguisherNode").impl
+
+
+func _ready() -> void:
+	if !impl:
+		return
+
+	impl.foam_strength_changed.connect(_on_strength_changed)
 
 
 func _action_triggered(button: String, value: float) -> void:
-	if button != "trigger" || !pickup.is_picked_up() || !extinguisher.is_pin_released:
+	if button != "trigger" || !pickup.is_picked_up() || !impl.is_pin_released:
 		return
 
 	impl.foam_strength = value
 
 
 func _on_strength_changed(strength: float):
+	print("Adasd")
 	mesh.rotation_degrees.x = -((end_angle - start_angle) * strength + start_angle)
 
 

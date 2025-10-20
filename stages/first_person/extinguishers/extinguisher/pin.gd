@@ -4,11 +4,11 @@ extends Node3D
 @onready var pickup: XRToolsPickable = $Pickup
 @onready var mesh = $Mesh
 
-@onready var impl: Extinguisher = get_owner().impl
+@onready var impl: Extinguisher = Utils.find_parent_that_implements(self, "ExtinguisherNode").impl
 
 
 func _process(_delta):
-	if impl.pin_released || !pickup.is_picked_up():
+	if !impl || impl.is_pin_released || !pickup.is_picked_up():
 		return
 
 	var pickup_pos_local := global_transform.affine_inverse() * pickup.global_position

@@ -18,8 +18,12 @@ var foam_strength: float = 0:
 		if !_is_pin_released:
 			return
 
-		foam_strength = clamp(foam_strength, 0, 1)
+		foam_strength = clamp(value, 0, 1)
 		foam_strength_changed.emit(foam_strength)
+
+var is_pin_released: bool:
+	get():
+		return _is_pin_released
 
 var _is_pin_released: bool = false
 var _capacity: float = 1.0
