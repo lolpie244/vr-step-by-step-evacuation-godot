@@ -20,6 +20,7 @@ var grid := GameCore.grid
 @onready var extinguisher_factory: FirstPersonExtinguisherFactory = $ExtinguisherFactory
 @onready var player: PlayerVR = $PlayerVR
 @onready var point_generator: SpawnPointGenerator = $PlayerVR/SpawnPointGenerator
+@onready var exit_trigger: RopeTrigger = $PlayerVR/ExitTrigger
 
 
 func _add_child_node(tile: TileNode):
@@ -42,9 +43,7 @@ func _ready() -> void:
 	player.position.x = character_tile.position.x
 	player.position.z = character_tile.position.z
 
-	$ExitTrigger.global_position = player.global_position
-	$ExitTrigger.position.x -= 0.4
-	$ExitTrigger.spawn()
+	exit_trigger.spawn()
 
 	var ext_impls: Array[Extinguisher] = []
 

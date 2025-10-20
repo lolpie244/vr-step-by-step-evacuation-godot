@@ -14,8 +14,7 @@ repos:
         files: \.gd$
     -   id: gdsctipt-linter
         name: Gdstript linter
-        entry: rm lint.log; gdlint
+        entry: gdlint
         pass_filenames: true
         language: system
         files: \.gd$
-        log_file: lint.log

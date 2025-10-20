@@ -49,11 +49,11 @@ cutoff_shader = ExtResource("6_1dq7g")
 
 [node name="MapItems" type="Node3D" parent="Map"]
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.92802143, -0.37250808, 0.0037419074, 0.021859072, -0.044424195, 0.99877363, -0.37188497, 0.9269651, 0.049369287, 0, 2.9000006, 1.2431409)
-light_energy = 0.1
-light_bake_mode = 1
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.37188494, 0.92696506, 0.049369257, 0.12690175, -0.0019172017, 0.99191344, 0.9195638, 0.37514272, -0.11692051, -0.099999905, 1.7407222, 0.9683424)
+light_energy = 0.4
 shadow_enabled = true
+directional_shadow_max_distance = 7.0
 
 [connection signal="hinge_moved" from="ScaleLever" to="." method="_on_zoom_lever_moved"]
 [connection signal="moved" from="OffsetJoystick" to="." method="_on_offset_joystick_moved"]

@@ -25,13 +25,6 @@ script = ExtResource("1_ybnn0")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xp1sn")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 5.4, -4.3)
-shadow_enabled = true
-
-[node name="ExitTrigger" parent="." instance=ExtResource("9_rvqsj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.825, 0, 0)
-
 [node name="PlayerVR" parent="." instance=ExtResource("2_5f22i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55165, 0)
 
@@ -40,8 +33,17 @@ script = ExtResource("3_86ipt")
 radius = 0.8
 angle_between = 90.0
 
+[node name="ExitTrigger" parent="PlayerVR" instance=ExtResource("9_rvqsj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8976711, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PlayerVR"]
+transform = Transform3D(-0.37188494, 0.92696524, 0.04936923, 0.17315114, 0.017019019, 0.9847485, 0.9119871, 0.37476134, -0.16683418, 0, 2.7920198, -0.46465564)
+light_energy = 0.4
+shadow_enabled = true
+directional_shadow_max_distance = 7.0
+
 [node name="TileFactory" parent="." instance=ExtResource("5_5kc4i")]
 
 [node name="ExtinguisherFactory" parent="." instance=ExtResource("5_86ipt")]
 
-[connection signal="triggerred" from="ExitTrigger" to="." method="_on_exit_trigger_triggerred"]
+[connection signal="triggerred" from="PlayerVR/ExitTrigger" to="." method="_on_exit_trigger_triggerred"]

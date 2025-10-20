@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dxrf0lnhl7s2f"]
+[gd_scene load_steps=12 format=3 uid="uid://dxrf0lnhl7s2f"]
 
 [ext_resource type="Script" uid="uid://b8avi6cjwyrsf" path="res://stages/test/test.gd" id="1_c6hbk"]
 [ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person/first_person.tscn" id="2_c6hbk"]
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://stages/strategic/map.gd" id="3_8stuw"]
-[ext_resource type="Script" uid="uid://cegu27o26eujn" path="res://stages/first_person/spawn_point_generator.gd" id="3_tcst7"]
 [ext_resource type="Shader" uid="uid://ds1y664nk12st" path="res://stages/common_stages/map_scene/cutoff.gdshader" id="4_tcst7"]
 [ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="6_0klol"]
 [ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_factory.tscn" id="6_8stuw"]
@@ -18,10 +17,9 @@ sky_material = SubResource("ProceduralSkyMaterial_xne4r")
 [sub_resource type="Environment" id="Environment_c6hbk"]
 background_mode = 2
 sky = SubResource("Sky_jwisr")
+ambient_light_source = 3
+ambient_light_color = Color(0.24384943, 0.28586537, 0.7435351, 1)
 tonemap_mode = 2
-
-[sub_resource type="BoxMesh" id="BoxMesh_tcst7"]
-size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nlh7v"]
 
@@ -37,23 +35,14 @@ next_scene = ExtResource("2_c6hbk")
 environment = SubResource("Environment_c6hbk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.92802143, -0.37250808, 0.0037419077, 0.021859072, -0.044424195, 0.99877363, -0.37188497, 0.9269651, 0.04936929, 0, 2.9000006, 0.3000002)
-light_energy = 0.1
-light_bake_mode = 1
+transform = Transform3D(-0.37188494, 0.9269652, 0.049369283, 0.021858782, -0.044424266, 0.9987737, 0.9280216, 0.37250802, -0.0037416369, -0.099999905, 1.3000007, -0.3999999)
+light_energy = 0.4
 shadow_enabled = true
-
-[node name="SpawnPointGenerator" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08782002, -0.019889995)
-script = ExtResource("3_tcst7")
-radius = 0.8
-angle_between = 20.0
-
-[node name="Center" type="MeshInstance3D" parent="SpawnPointGenerator"]
-mesh = SubResource("BoxMesh_tcst7")
+directional_shadow_max_distance = 7.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.12453562, 0.99221516, 0, -0.99221516, 0.12453562, 0, 0.88782, 0.080109976)
-fov = 110.453415
+transform = Transform3D(1, 0, 0, 0, 0.6039586, 0.7970157, 0, -0.7970157, 0.6039586, 0, 0.48782, 0.38010994)
+fov = 62.74711
 
 [node name="Map" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.47809935, 0, 0, 0, 1, 0, 0, 0, 0.25787768, 0, -0.033471584, 0.022553228)
