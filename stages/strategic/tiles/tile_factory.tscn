@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccurrtskck65e"]
+[gd_scene load_steps=15 format=3 uid="uid://ccurrtskck65e"]
 
 [ext_resource type="Script" uid="uid://bps72navc0rmd" path="res://stages/strategic/tiles/tile_factory.gd" id="1_1odjh"]
 [ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://stages/strategic/tiles/tile.tscn" id="6_au4fu"]
 [ext_resource type="Script" uid="uid://h2evvguy80m2" path="res://common_nodes/tile_types/door.gd" id="7_7a45o"]
+[ext_resource type="PackedScene" uid="uid://3xa6dgtgeekt" path="res://stages/strategic/tiles/mixins/item_holder.tscn" id="7_j3mp6"]
 [ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic/tiles/mixins/flammable.tscn" id="8_spxjo"]
 [ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://common_nodes/tile_types/wall.gd" id="8_vqkf8"]
 [ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://common_nodes/tile_types/wall_like.gd" id="9_6bq2n"]
@@ -21,6 +22,8 @@ script = ExtResource("1_1odjh")
 visible = false
 type = 1
 
+[node name="Model" parent="Floor" instance=ExtResource("12_hfmqf")]
+
 [node name="Flammable" parent="Floor" instance=ExtResource("8_spxjo")]
 transform = Transform3D(0.3, 0, 0, 0, 1.2, 0, 0, 0, 0.3, 0, 0.05, 0)
 visible = false
@@ -30,7 +33,9 @@ material = ExtResource("9_xt87q")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 visible = false
 
-[node name="Model" parent="Floor" instance=ExtResource("12_hfmqf")]
+[node name="ItemHolder" parent="Floor" instance=ExtResource("7_j3mp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+contact_point = 0
 
 [node name="Wall" parent="." instance=ExtResource("6_au4fu")]
 visible = false
@@ -41,6 +46,10 @@ type = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
 [node name="Floor" parent="Wall" instance=ExtResource("12_hfmqf")]
+
+[node name="ItemHolder" parent="Wall" instance=ExtResource("7_j3mp6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+contact_point = 2
 
 [node name="Window" parent="." instance=ExtResource("6_au4fu")]
 visible = false

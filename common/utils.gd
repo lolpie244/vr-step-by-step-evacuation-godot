@@ -3,6 +3,8 @@ extends Node
 
 enum Axis { X, Y, Z }
 
+enum Direction { UP, RIGHT, DOWN, LEFT }
+
 const DEFAULT_DUPLICATE = DUPLICATE_SCRIPTS | DUPLICATE_GROUPS | DUPLICATE_SIGNALS
 
 
@@ -75,7 +77,7 @@ static func find_child_with_type(node: Node, type_ref, recursive):
 
 
 static func find_parent_that_implements(node: Node, implements: String):
-	if node.get("IMPLMENTS") == implements:
+	if node.get("IMPLEMENTS") == implements:
 		return node
 
 	if node.get_parent() == null:

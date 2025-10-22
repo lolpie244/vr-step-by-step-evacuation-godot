@@ -29,6 +29,10 @@ var _is_pin_released: bool = false
 var _capacity: float = 1.0
 
 
+func get_type():
+	return ".".join([&"Extinguisher", Type.keys()[type]])
+
+
 func release_pin():
 	if _is_pin_released:
 		return

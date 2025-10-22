@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://flu7j32ifd3y"]
+[gd_scene load_steps=12 format=3 uid="uid://flu7j32ifd3y"]
 
 [ext_resource type="Script" uid="uid://dbgvinydau6i6" path="res://stages/strategic/strategic.gd" id="1_dspli"]
 [ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_stages/map_scene/map_scene.tscn" id="1_mavd1"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_factory.tscn" id="6_52wiw"]
 [ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/Button.tscn" id="6_v5dbt"]
 [ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="7_vy2ce"]
+[ext_resource type="PackedScene" uid="uid://cxfojo8jvfcd5" path="res://stages/strategic/items/item_factory.tscn" id="8_vy2ce"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
 
@@ -28,6 +29,8 @@ script = ExtResource("5_v5dbt")
 [node name="TileFactory" parent="Map" index="1" instance=ExtResource("6_52wiw")]
 
 [node name="CharacterFactory" parent="Map" index="2" instance=ExtResource("7_vy2ce")]
+
+[node name="ItemFactory" parent="Map" index="3" instance=ExtResource("8_vy2ce")]
 
 [node name="ExitButton" parent="." index="6" instance=ExtResource("6_v5dbt")]
 transform = Transform3D(1, 0, 0, 0, -0.34796667, -0.937507, 0, 0.937507, -0.34796667, -0.010482013, 1.1231475, 1.2947037)

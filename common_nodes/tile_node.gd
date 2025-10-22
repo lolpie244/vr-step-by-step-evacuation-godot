@@ -1,6 +1,6 @@
 class_name TileNode
 extends Node3D
-const IMPLMENTS := "TileNode"
+const IMPLEMENTS := "TileNode"
 
 @export var type: Tile.Type = Tile.Type.NONE
 

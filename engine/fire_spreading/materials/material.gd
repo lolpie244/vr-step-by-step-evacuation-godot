@@ -1,6 +1,15 @@
 class_name TileMaterial
 extends Resource
 
+enum FireType {
+	A,  # Solids
+	B,  # Liquids
+	C,  # Gasses
+	D,  # Metals
+	E,  # Energy
+	F,  # Oils
+}
+
 @export var material: StandardMaterial3D
 @export var density: float  # kg/m3
 @export var heat_release_rate: float  # W/g
@@ -10,3 +19,4 @@ extends Resource
 @export var ignition_temp: float
 
 @export var flammable: bool = true
+@export var fire_type: FireType

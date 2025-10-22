@@ -7,20 +7,10 @@ var character
 var _points: Array[Vector3] = []
 
 @onready var map: Map = $Map
-@onready var grid: MapGrid = $Map/Grid
-@onready var points_spawner: SpawnPointGenerator = $SpawnPointGenerator
 
 
 func _ready() -> void:
-	points_spawner.points_count = 3
-	for i in range(points_spawner.points_count):
-		_points.append(points_spawner.get_point())
-
-
-func _process(_delta: float) -> void:
-	DebugDraw3D.draw_points(_points)
-
-	#$Camera3D.rotate_y(deg_to_rad(1))
+	map.add_furniture(Furniture.Type.BED, Vector2(1, 2), Utils.Direction.UP, 7, 2)
 
 #func _input(_event: InputEvent):
 #var x = character._x

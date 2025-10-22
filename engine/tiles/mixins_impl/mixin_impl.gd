@@ -1,7 +1,7 @@
 class_name TileMixin
 extends Node3D
 
-const IMPLMENTS := "TileMixin"
+const IMPLEMENTS := "TileMixin"
 
 var _tile: Tile
 

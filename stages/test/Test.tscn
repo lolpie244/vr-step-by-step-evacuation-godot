@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxrf0lnhl7s2f"]
+[gd_scene load_steps=13 format=3 uid="uid://dxrf0lnhl7s2f"]
 
 [ext_resource type="Script" uid="uid://b8avi6cjwyrsf" path="res://stages/test/test.gd" id="1_c6hbk"]
 [ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person/first_person.tscn" id="2_c6hbk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://ds1y664nk12st" path="res://stages/common_stages/map_scene/cutoff.gdshader" id="4_tcst7"]
 [ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="6_0klol"]
 [ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_factory.tscn" id="6_8stuw"]
+[ext_resource type="PackedScene" uid="uid://cxfojo8jvfcd5" path="res://stages/strategic/items/item_factory.tscn" id="7_tcst7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xne4r"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -56,3 +57,5 @@ cutoff_shader = ExtResource("4_tcst7")
 [node name="CharacterFactory" parent="Map" instance=ExtResource("6_0klol")]
 
 [node name="TileFactory" parent="Map" instance=ExtResource("6_8stuw")]
+
+[node name="ItemFactory" parent="Map" instance=ExtResource("7_tcst7")]

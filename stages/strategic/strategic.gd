@@ -25,6 +25,7 @@ func _ready() -> void:
 	map.add_character(Character.Type.CIVILIAN, 2, 4)
 	GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
 	GameCore.next_turn()
+	map.add_furniture(Furniture.Type.BED, Vector2(1, 2), Utils.Direction.UP, 7, 2)
 
 
 func _on_first_mode_trigger_triggerred() -> void:

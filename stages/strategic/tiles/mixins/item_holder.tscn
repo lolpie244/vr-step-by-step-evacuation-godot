@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://3xa6dgtgeekt"]
+
+[ext_resource type="Script" uid="uid://cryvesbpdrhf" path="res://stages/strategic/tiles/mixins/item_holder.gd" id="1_o0n6h"]
+
+[node name="ItemHolder" type="Node3D"]
+script = ExtResource("1_o0n6h")
+contact_point = null

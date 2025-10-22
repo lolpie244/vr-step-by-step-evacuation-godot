@@ -1,7 +1,8 @@
 extends Map
 
 var _tile_nodes: Array
-var _characters: Array
+var _characters: Array[CharacterStrategic]
+var _items: Array[ItemNode]
 
 # temp
 var _test_map = [
@@ -22,6 +23,7 @@ var _test_map = [
 
 @onready var tile_factory = $TileFactory
 @onready var character_factory: CharacterNodeFactory = $CharacterFactory
+@onready var item_factory: StrategicItemFactory = $ItemFactory
 
 
 # TODO: only for testing
@@ -90,8 +92,27 @@ func add_character(type: Character.Type, x: int, y: int):
 	return character
 
 
-func get_character_node(character: Character):
+func add_furniture(type: Furniture.Type, size: Vector2, direction: Utils.Direction, x: int, y: int):
+	var node_impl: Furniture = Furniture.new(size)
+	node_impl.type = type
+
+	var node: ItemNode = item_factory.create(node_impl)
+	_items.append(node)
+	node.impl().place(impl.get_tile(x, y), direction)
+	#character.set_material(self.cutoff_material)
+
+	return node
+
+
+func get_character_node(character: Character) -> CharacterStrategic:
 	for node in _characters:
 		if node.impl == character:
+			return node
+	return null
+
+
+func get_item_node(item: Item) -> ItemNode:
+	for node in _items:
+		if node.impl() == item:
 			return node
 	return null

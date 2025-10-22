@@ -10,15 +10,6 @@ enum State {
 	BURNED = 1 << 2,
 }
 
-enum FireType {
-	A,  # Solids
-	B,  # Liquids
-	C,  # Gasses
-	D,  # Metals
-	E,  # Energy
-	F,  # Oils
-}
-
 var material: TileMaterial
 var wind := Vector2.ZERO
 

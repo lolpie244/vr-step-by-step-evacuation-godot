@@ -3,7 +3,7 @@ extends Node3D
 
 signal initialized
 
-const IMPLMENTS := "ExtinguisherNode"
+const IMPLEMENTS := "ExtinguisherNode"
 
 @export var type: Extinguisher.Type
 

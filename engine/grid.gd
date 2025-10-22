@@ -6,6 +6,7 @@ signal resized(Vector2)
 
 var tiles: Array
 var characters: Array[Character]
+var items: Array
 
 var size: Vector2:
 	get():
@@ -58,6 +59,10 @@ func create_character(type: Character.Type) -> Character:
 	var character := Character.new(type)
 	characters.append(character)
 	return character
+
+
+func add_item(item: Item):
+	items.append(item)
 
 
 func set_tile(x: int, y: int, tile: Tile):
