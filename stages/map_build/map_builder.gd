@@ -12,7 +12,8 @@ var _tile_nodes: Array = [[]]
 
 func _ready() -> void:
 	impl.new_grid.connect(_reset_map)
-	map_scanner.start_scan()
+	#map_scanner.start_scan()
+	GameCore.grid.resize(25, 25)
 
 
 func _on_map_scanner_map_scanned(scanned_map: Array) -> void:

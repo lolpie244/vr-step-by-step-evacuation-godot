@@ -68,6 +68,6 @@ grab_distance = 0.04
 initial_object = NodePath("../Body")
 
 [connection signal="dropped" from="Body" to="." method="_on_body_dropped"]
-[connection signal="area_entered" from="Body/End" to="." method="_on_body_entered"]
+[connection signal="area_entered" from="Body/End" to="." method="_on_area_entered"]
 
 [editable path="Body"]

@@ -26,8 +26,6 @@ var _tile_size: float
 
 
 func _ready() -> void:
-	impl.resized.connect(set_size)
-
 	var plane_mesh := self.mesh as PlaneMesh
 	plane_mesh.size = Vector2(
 		self.get_aabb().size.x * self.scale.x, self.get_aabb().size.z * self.scale.z
