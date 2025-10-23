@@ -28,4 +28,3 @@ func _on_area_entered(body: Area3D) -> void:
 	var tile := body as Tile2D
 	if tile.impl.type != type:
 		type_changed.emit(type, tile.impl.pos)
-	pass # Replace with function body.

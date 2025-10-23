@@ -4,7 +4,6 @@ extends Node
 signal placed(tile: Tile)
 
 var size: Vector2i = Vector2.ONE
-var pos: Vector2
 
 var rotation: float:
 	get():
@@ -33,11 +32,20 @@ func tiles() -> Array[Tile]:
 
 	var result: Array[Tile] = []
 
-	var tiles_offset: Vector2i = (size as Vector2).rotated(rotation)
+	var tiles_offset: Vector2i = round((size as Vector2).rotated(rotation))
 
-	for x in tiles_offset.x:
-		for y in tiles_offset.y:
-			result.append(_tile.grid.get_tile(_tile.pos.x + x, _tile.pos.y + y))
+	var pos := _tile.pos
+	if tiles_offset.x < 0:
+		pos.x += tiles_offset.x + 1
+		tiles_offset.x = abs(tiles_offset.x)
+
+	if tiles_offset.y < 0:
+		pos.y += tiles_offset.y + 1
+		tiles_offset.y = abs(tiles_offset.y)
+
+	for x in range(tiles_offset.x):
+		for y in range(tiles_offset.y):
+			result.append(_tile.grid.get_tile(pos.x + x, pos.y + y))
 
 	return result
 
@@ -52,21 +60,34 @@ func valid() -> bool:
 	return true
 
 
-func place(tile: Tile, direction: Utils.Direction):
+func is_valid_placement(tile: Tile, direction: Utils.Direction) -> bool:
 	if tile == _tile and direction == _direction:
-		return
+		return false
 
 	var old_tile = _tile
 	var old_direction = _direction
 	_tile = tile
 	_direction = direction
 
-	if !valid():
-		_tile = old_tile
-		_direction = old_direction
+	var result := valid()
+	_tile = old_tile
+	_direction = old_direction
+
+	return result
+
+
+func place(tile: Tile, direction: Utils.Direction):
+	if !is_valid_placement(tile, direction):
 		return
 
+	_tile = tile
+	_direction = direction
+
+	restore_position()
+
+
+func restore_position():
 	for placed_tile in tiles():
 		placed_tile.get_mixin(ItemHolder).place_item(self)
 
-	placed.emit(tile)
+	placed.emit(_tile)

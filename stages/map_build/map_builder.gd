@@ -1,8 +1,11 @@
+class_name MapBuilder
 extends MapScene
+const IMPLEMENTS := "MapBuilder"
 
 @export var strategic: PackedScene
 
 var _tile_nodes: Array = [[]]
+var _items: Array[MapBuilderItem] = []
 
 @onready var map_scanner: MapScanner = $MapScanner
 
@@ -12,18 +15,23 @@ var _tile_nodes: Array = [[]]
 
 func _ready() -> void:
 	impl.new_grid.connect(_reset_map)
-	#map_scanner.start_scan()
-	GameCore.grid.resize(25, 25)
+	GameCore.grid.resize(15, 15)
 
 
 func _on_map_scanner_map_scanned(scanned_map: Array) -> void:
 	GameCore.grid.set_tiles(scanned_map)
 
 
-func _reset_map():
+func _clear():
 	for tiles in _tile_nodes:
 		for tile in tiles:
 			map.remove_item(tile)
+	_items = []
+	_tile_nodes = [[]]
+
+
+func _reset_map():
+	_clear()
 
 	_tile_nodes = Utils.get_matrix(impl.rows_count(), impl.columns_count())
 
@@ -35,14 +43,18 @@ func _reset_map():
 		for y in range(impl.columns_count()):
 			if !impl.get_tile(x, y):
 				impl.create_tile(Tile.Type.FLOOR, x, y)
-			_tile_nodes[x][y] = tile_factory.create(impl.get_tile(x, y))
+			_tile_nodes[x][y] = tile_factory.create(self, impl.get_tile(x, y))
 			map.place_item(_tile_nodes[x][y], x, y)
 
 
 func _reacreate_tile(x: int, y: int):
 	map.remove_item(_tile_nodes[x][y])
-	_tile_nodes[x][y] = tile_factory.create(impl.get_tile(x, y))
+	_tile_nodes[x][y] = tile_factory.create(self, impl.get_tile(x, y))
 	map.place_item(_tile_nodes[x][y], x, y)
+
+	var item_holder = _tile_nodes[x][y].impl.get_mixin(ItemHolder)
+	if item_holder and item_holder.get_item():
+		item_holder.get_item().restore_position()
 
 
 func _on_tile_type_changed(type: Tile.Type, pos: Vector2i) -> void:
@@ -58,5 +70,20 @@ func _on_tile_type_changed(type: Tile.Type, pos: Vector2i) -> void:
 
 
 func _on_exit_button_released(_button: Variant) -> void:
+	impl.new_grid.disconnect(_reset_map)
+	for item in _items:
+		impl.add_item(item.impl)
 	impl.strip()
-	SceneManager.load_scene(strategic)
+	_clear()
+	SceneManager.replace_scene(strategic)
+
+
+func add_item_node(item_node: MapBuilderItem):
+	_items.append(item_node)
+
+
+func get_item_node(item: Item) -> MapBuilderItem:
+	for item_node in _items:
+		if item_node.impl == item:
+			return item_node
+	return null

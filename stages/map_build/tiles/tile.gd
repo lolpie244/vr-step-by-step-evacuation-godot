@@ -5,13 +5,15 @@ extends Area3D
 @export var texture: Texture2D
 
 var impl: Tile
+var map_builder: MapBuilder
 
 @onready var background: Sprite3D = $Background
 @onready var sprite: Sprite3D = $Background/Texture
 
 
-func set_data(_impl: Tile):
+func set_data(_map_builder: MapBuilder, _impl: Tile):
 	impl = _impl
+	map_builder = _map_builder
 
 
 func _ready() -> void:

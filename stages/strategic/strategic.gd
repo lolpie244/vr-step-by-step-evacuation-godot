@@ -21,11 +21,20 @@ func _ready() -> void:
 	_add_first_mode_trigger()
 	GameCore.character_selected.connect(_on_character_selected)
 
-	map.add_character(Character.Type.CIVILIAN, 6, 4)
-	map.add_character(Character.Type.CIVILIAN, 2, 4)
-	GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
+	var character_count := 1
+	while character_count:
+		var x = randi_range(0, map.impl.rows_count())
+		var y = randi_range(0, map.impl.columns_count())
+		if map.impl.get_tile_mixin(x, y, Walkable):
+			map.add_character(Character.Type.CIVILIAN, x, y)
+			character_count -= 1
+
+	#map.add_character(Character.Type.CIVILIAN, 6, 4)
+	#map.add_character(Character.Type.CIVILIAN, 2, 4)
+	#GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
+	#map.add_furniture(Furniture.Type.BED, Vector2(1, 2), Utils.Direction.UP, 7, 2)
+
 	GameCore.next_turn()
-	map.add_furniture(Furniture.Type.BED, Vector2(1, 2), Utils.Direction.UP, 7, 2)
 
 
 func _on_first_mode_trigger_triggerred() -> void:

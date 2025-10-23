@@ -29,4 +29,5 @@ func impl() -> Item:
 
 
 func _on_placed(_tile: Tile):
+	print("SHOW")
 	show()

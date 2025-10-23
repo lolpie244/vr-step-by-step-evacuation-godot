@@ -1,47 +1,35 @@
 [gd_scene load_steps=7 format=3 uid="uid://b80h6lkl843dr"]
 
-[ext_resource type="PackedScene" uid="uid://kx1pwc0tgm1k" path="res://stages/map_build/items/item.tscn" id="1_7ps7r"]
+[ext_resource type="PackedScene" uid="uid://kx1pwc0tgm1k" path="res://stages/map_build/items/item_builder.tscn" id="1_7ps7r"]
 [ext_resource type="Texture2D" uid="uid://1ob6eda4aur2" path="res://assets/items/2d/bed_single.png" id="2_bgiau"]
 [ext_resource type="Script" uid="uid://drtdt6ldp8c5e" path="res://stages/map_build/items/types/furniture.gd" id="2_qrrd0"]
 [ext_resource type="PackedScene" uid="uid://bk5imvrho04nk" path="res://assets/items/bed_single.glb" id="3_bgiau"]
 [ext_resource type="Texture2D" uid="uid://bwn675hfdya30" path="res://assets/items/2d/table.png" id="5_riqh8"]
 [ext_resource type="PackedScene" uid="uid://did5xwtowinu4" path="res://assets/items/table.glb" id="6_lf17y"]
 
-[node name="ItemsCatalog" type="Node3D"]
+[node name="ItemsCatalog" type="Node"]
 
 [node name="BedSingle" parent="." instance=ExtResource("1_7ps7r")]
 visible = false
 script = ExtResource("2_qrrd0")
-type = 1
 icon = ExtResource("2_bgiau")
 size = Vector2i(1, 2)
-mesh_instance = ExtResource("3_bgiau")
+type = 1
 
-[node name="Sprite" parent="BedSingle" index="0"]
-visible = false
-texture = ExtResource("2_bgiau")
+[node name="OriginPoint" parent="BedSingle/BodyOrigin/Body" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033779696, -0.012558868, -0.0012854896)
 
-[node name="Area3D" parent="BedSingle/BodyOrigin/Body" index="3"]
-visible = false
-
-[node name="CollisionShape3D" parent="BedSingle/BodyOrigin/Body/Area3D" index="0"]
-visible = false
-
-[node name="Model" parent="BedSingle/BodyOrigin/Body" index="4"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.040738996, -0.032325797, 0.008753061)
+[node name="Model" parent="BedSingle" instance=ExtResource("3_bgiau")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.04783461, -0.020348862, -0.0026803315)
 
 [node name="Table" parent="." instance=ExtResource("1_7ps7r")]
-icon = ExtResource("5_riqh8")
-mesh_instance = ExtResource("6_lf17y")
-
-[node name="Sprite" parent="Table" index="0"]
 visible = false
-texture = ExtResource("5_riqh8")
+script = ExtResource("2_qrrd0")
+icon = ExtResource("5_riqh8")
+type = 2
 
-[node name="Model" parent="Table/BodyOrigin/Body" index="4"]
-transform = Transform3D(-4.371139e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.371139e-09, 0, -0.046450067, 0.0065897927)
+[node name="Model" parent="Table" instance=ExtResource("6_lf17y")]
+transform = Transform3D(-5.2453664e-09, 0, 0.12, 0, 0.12, 0, -0.12, 0, -5.2453664e-09, 0, -0.04829631, -0.003152594)
 
 [editable path="BedSingle"]
 [editable path="BedSingle/BodyOrigin/Body"]
-[editable path="Table"]
-[editable path="Table/BodyOrigin/Body"]

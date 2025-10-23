@@ -1,5 +1,5 @@
 @tool
-extends MapBuilderItem
+extends MapBuilderItemCreator
 
 @export var type: Furniture.Type
 

@@ -81,6 +81,11 @@ func reset_map():
 			if _tile_nodes[x][y]:
 				place_item(_tile_nodes[x][y], x, y)
 
+	for item in impl.items:
+		var node: ItemNode = item_factory.create(item)
+		_items.append(node)
+		item.restore_position()
+
 
 func add_character(type: Character.Type, x: int, y: int):
 	var character_impl: Character = impl.create_character(type)
@@ -90,18 +95,6 @@ func add_character(type: Character.Type, x: int, y: int):
 	character.set_material(self.cutoff_material)
 
 	return character
-
-
-func add_furniture(type: Furniture.Type, size: Vector2, direction: Utils.Direction, x: int, y: int):
-	var node_impl: Furniture = Furniture.new(size)
-	node_impl.type = type
-
-	var node: ItemNode = item_factory.create(node_impl)
-	_items.append(node)
-	node.impl().place(impl.get_tile(x, y), direction)
-	#character.set_material(self.cutoff_material)
-
-	return node
 
 
 func get_character_node(character: Character) -> CharacterStrategic:

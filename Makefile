@@ -1,5 +1,10 @@
 PROJECT_DIR := $(CURDIR)
+
+ifneq ("$(wildcard ${PROJECT_DIR}/.venv)","")
 VENV := source ${PROJECT_DIR}/.venv/bin/activate &&
+else
+VENV :=
+endif
 
 
 .PHONY: setup

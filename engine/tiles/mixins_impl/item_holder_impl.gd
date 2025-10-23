@@ -11,8 +11,8 @@ func init():
 	_tile.highlight_changed.connect(_highlight_tiles)
 
 
-func has_item():
-	return _item != null
+func get_item() -> Item:
+	return _item
 
 
 func can_hold_item(item: Item):
@@ -27,7 +27,6 @@ func can_hold_item(item: Item):
 
 func place_item(item: Item):
 	_is_owner = _tile == item._tile
-	print(_tile.pos, " ==", item._tile.pos)
 	_item = item
 
 	if _is_owner:

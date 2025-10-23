@@ -29,8 +29,8 @@ size = Vector3(0.02, 0.1, 0.02)
 resource_local_to_scene = true
 albedo_color = Color(0, 0, 0, 0.99607843)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_40gja"]
-radius = 0.015
+[sub_resource type="BoxShape3D" id="BoxShape3D_3c1gn"]
+size = Vector3(0.005, 0.10424805, 0.005)
 
 [node name="TileTypePen" type="Node3D"]
 script = ExtResource("2_40gja")
@@ -61,7 +61,8 @@ collision_layer = 268435456
 collision_mask = 268435456
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/End"]
-shape = SubResource("SphereShape3D_40gja")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.041711606, 0)
+shape = SubResource("BoxShape3D_3c1gn")
 
 [node name="SnapZone" parent="." instance=ExtResource("6_0p5nh")]
 grab_distance = 0.04
