@@ -87,11 +87,11 @@ func reset_map():
 		item.restore_position()
 
 
-func add_character(type: Character.Type, x: int, y: int):
+func add_character(type: Character.Type, pos: Vector2i):
 	var character_impl: Character = impl.create_character(type)
 	var character: CharacterStrategic = character_factory.create(character_impl)
 	_characters.append(character)
-	character.impl.place(impl.get_tile(x, y))
+	character.impl.place(impl.get_tile(pos.x, pos.y))
 	character.set_material(self.cutoff_material)
 
 	return character

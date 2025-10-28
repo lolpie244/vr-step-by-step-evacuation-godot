@@ -12,24 +12,23 @@
 [node name="BedSingle" parent="." instance=ExtResource("1_7ps7r")]
 visible = false
 script = ExtResource("2_qrrd0")
+type = 1
 icon = ExtResource("2_bgiau")
 size = Vector2i(1, 2)
-type = 1
 
 [node name="OriginPoint" parent="BedSingle/BodyOrigin/Body" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033779696, -0.012558868, -0.0012854896)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033779696, -0.012558868, -0.0075032115)
 
 [node name="Model" parent="BedSingle" instance=ExtResource("3_bgiau")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.04783461, -0.020348862, -0.0026803315)
+transform = Transform3D(-2.8412401e-09, 0, 0.065, 0, 0.065, 0, -0.065, 0, -2.8412401e-09, -0.036016505, -0.024793543, -0.008346055)
 
 [node name="Table" parent="." instance=ExtResource("1_7ps7r")]
-visible = false
 script = ExtResource("2_qrrd0")
-icon = ExtResource("5_riqh8")
 type = 2
+icon = ExtResource("5_riqh8")
 
 [node name="Model" parent="Table" instance=ExtResource("6_lf17y")]
-transform = Transform3D(-5.2453664e-09, 0, 0.12, 0, 0.12, 0, -0.12, 0, -5.2453664e-09, 0, -0.04829631, -0.003152594)
+transform = Transform3D(-2.6226832e-09, 0, -0.06, 0, 0.06, 0, 0.06, 0, -2.6226832e-09, 0, -0.04339271, -0.009643249)
 
 [editable path="BedSingle"]
 [editable path="BedSingle/BodyOrigin/Body"]

@@ -19,7 +19,6 @@ func _ready() -> void:
 func _get_item_node(item: Item) -> ItemNode:
 	return tile.map.get_item_node(item)
 
-
 func _get_contact_point(node: Node3D) -> Vector3:
 	var aabb := Utils.get_aabb(node)
 
@@ -48,6 +47,5 @@ func _on_item_placed(item: Item):
 		item_node.reparent(tile, false)
 
 	item_node.position = Vector3.ZERO
-	print(self.position, _get_contact_point(item_node), item_node.position)
 	item_node.position = self.position - _get_contact_point(item_node) + item_node.position
-	item_node.rotate_y(item.rotation)
+	item_node.rotate_y(-item.rotation)

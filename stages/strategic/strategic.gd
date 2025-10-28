@@ -22,17 +22,22 @@ func _ready() -> void:
 	GameCore.character_selected.connect(_on_character_selected)
 
 	var character_count := 1
-	while character_count:
-		var x = randi_range(0, map.impl.rows_count())
-		var y = randi_range(0, map.impl.columns_count())
-		if map.impl.get_tile_mixin(x, y, Walkable):
-			map.add_character(Character.Type.CIVILIAN, x, y)
-			character_count -= 1
 
-	#map.add_character(Character.Type.CIVILIAN, 6, 4)
-	#map.add_character(Character.Type.CIVILIAN, 2, 4)
-	#GameCore.grid.get_tile_mixin(9, 1, Flammable).ignite()
-	#map.add_furniture(Furniture.Type.BED, Vector2(1, 2), Utils.Direction.UP, 7, 2)
+	var walkable_tiles: Array[Tile] = []
+
+	for x in range(map.impl.rows_count()):
+		for y in range(map.impl.columns_count()):
+			var tile = map.impl.get_tile(x, y)
+			if Walkable.is_walkable(tile):
+				walkable_tiles.append(tile)
+
+	character_count = min(walkable_tiles.size(), character_count)
+
+	for i in range(character_count):
+		var id = randi_range(0, walkable_tiles.size() - 1)
+		var tile := walkable_tiles[id]
+		map.add_character(Character.Type.CIVILIAN, tile.pos)
+		walkable_tiles.remove_at(id)
 
 	GameCore.next_turn()
 

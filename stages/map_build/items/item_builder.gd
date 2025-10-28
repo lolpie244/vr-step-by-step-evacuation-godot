@@ -45,16 +45,16 @@ func _on_action_pressed(_pickable: Variant) -> void:
 	var impl: Item = _get_impl()
 	var direction: Utils.Direction
 	match snapped(model.global_rotation_degrees.y, 90):
-		-90:
+		0:
 			direction = Utils.Direction.UP
-		-180:
-			direction = Utils.Direction.RIGHT
-		180:
+		-90:
 			direction = Utils.Direction.RIGHT
 		90:
-			direction = Utils.Direction.DOWN
-		0:
 			direction = Utils.Direction.LEFT
+		-180:
+			direction = Utils.Direction.DOWN
+		180:
+			direction = Utils.Direction.DOWN
 
 	if !impl.is_valid_placement(tile.impl, direction):
 		return

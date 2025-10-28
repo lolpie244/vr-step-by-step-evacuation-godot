@@ -3,7 +3,7 @@ extends Node3D
 
 signal extinguisher_selected
 
-const TILE_SIZE := 3.0
+const TILE_SIZE := 2.2
 
 
 class Context:

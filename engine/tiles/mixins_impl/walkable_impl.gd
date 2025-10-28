@@ -36,7 +36,7 @@ func reachable_neighbors() -> Array[Walkable]:
 		if tile.pos.x != _tile.pos.x && tile.pos.y != _tile.pos.y:
 			continue
 
-		if _is_walkable(tile):
+		if is_walkable(tile):
 			result.append(tile.get_mixin(Walkable))
 
 	return result
@@ -73,10 +73,17 @@ func reachable_tiles(_speed: int) -> Array[ReachableResult]:
 	return result
 
 
-func _is_walkable(tile: Tile):
+static func is_walkable(tile: Tile):
+	if !tile:
+		return false
 	var mixin = tile.get_mixin(Walkable)
 	var blockable = tile.get_mixin(Blockable)
-	return mixin != null && (!blockable || !blockable.blocking)
+	var item_holder = tile.get_mixin(ItemHolder)
+	return (
+		mixin != null
+		&& (!blockable || !blockable.blocking)
+		&& (!item_holder || !item_holder.get_item())
+	)
 
 
 func _on_flammable_state_changed(state: Flammable.State):

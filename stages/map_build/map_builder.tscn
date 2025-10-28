@@ -56,7 +56,7 @@ transform = Transform3D(0.9659756, 0, 0.25863364, 0, 1, 0, -0.25863364, 0, 0.965
 [node name="Floor" parent="Pens" index="0" instance=ExtResource("8_qwooh")]
 transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.29770142, 0.47205818, 1.3984342)
 type = 1
-color = Color(0.007843138, 0, 1, 1)
+color = Color(1, 1, 1, 1)
 
 [node name="Wall" parent="Pens" index="1" instance=ExtResource("8_qwooh")]
 transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.17978781, 0.47205818, 1.3984342)
@@ -101,7 +101,6 @@ visible = true
 
 [node name="Table" parent="ItemsCatalog" index="1"]
 transform = Transform3D(0.0062483265, 0, -0.99998045, 0, 1, 0, 0.99998045, 0, 0.0062483265, -0.77256805, 0.6698104, 1.8556006)
-visible = true
 
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]

@@ -42,6 +42,7 @@ script = ExtResource("2_tsmcg")
 
 [node name="Sprite" type="Sprite3D" parent="Item"]
 centered = false
+texture_filter = 0
 
 [node name="BodyOrigin" type="Node3D" parent="."]
 
@@ -69,7 +70,7 @@ shape = SubResource("SphereShape3D_lkrs2")
 debug_color = Color(0.945178, 3.7541986e-06, 0.5959446, 0.41960785)
 
 [node name="OriginPoint" type="MeshInstance3D" parent="BodyOrigin/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04869926, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04869926, -0.008754261)
 mesh = SubResource("SphereMesh_tsmcg")
 
 [node name="SnapZone" parent="BodyOrigin" instance=ExtResource("9_0np08")]
