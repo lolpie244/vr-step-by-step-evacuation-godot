@@ -3,14 +3,12 @@ class_name ItemNode
 extends Node3D
 
 @export var type: String
-@export var mesh_instance: PackedScene
 @export var size: Vector2i = Vector2.ONE
 
 var _impl
 
 
 func _ready() -> void:
-	$Model.add_child(mesh_instance.instantiate())
 	if !Engine.is_editor_hint():
 		hide()
 
@@ -29,5 +27,4 @@ func impl() -> Item:
 
 
 func _on_placed(_tile: Tile):
-	print("SHOW")
 	show()

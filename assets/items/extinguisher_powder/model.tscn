@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3wpeixkcvp70"]
+
+[ext_resource type="PackedScene" uid="uid://mqnsmnitytdi" path="res://assets/items/extinguisher_powder/model.glb" id="1_swk0u"]
+[ext_resource type="ArrayMesh" uid="uid://dc4nb2ciahe14" path="res://assets/items/extinguisher_powder/handle.res" id="2_2amq4"]
+[ext_resource type="ArrayMesh" uid="uid://5pnlsqp6h81v" path="res://assets/items/extinguisher_powder/hose_end.res" id="3_c8nrs"]
+[ext_resource type="ArrayMesh" uid="uid://cvkq7s1uob7tx" path="res://assets/items/extinguisher_powder/pin.res" id="4_8xrhd"]
+[ext_resource type="ArrayMesh" uid="uid://cvj1tefh81k5p" path="res://assets/items/extinguisher_powder/holder.res" id="5_52hh1"]
+
+[node name="Model" type="Node3D"]
+
+[node name="Body" parent="." instance=ExtResource("1_swk0u")]
+
+[node name="Handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03238994, 1.8365324, 0)
+mesh = ExtResource("2_2amq4")
+
+[node name="HoseEnd" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.6977154, 0, 0.716375, 0, 1, 0, -0.716375, 0, 0.6977154, 0.10882956, 0, 0.6091116)
+mesh = ExtResource("3_c8nrs")
+
+[node name="Pin" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.061555922, 1.9112427, -0.14193118)
+mesh = ExtResource("4_8xrhd")
+
+[node name="Holder" type="MeshInstance3D" parent="."]
+mesh = ExtResource("5_52hh1")

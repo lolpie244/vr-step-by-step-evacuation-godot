@@ -1,3 +1,4 @@
+class_name StrategicMap
 extends Map
 
 var _tile_nodes: Array

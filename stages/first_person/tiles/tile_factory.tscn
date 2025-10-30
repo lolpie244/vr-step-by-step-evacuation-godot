@@ -1,16 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://bd6jf6p57yppl"]
+[gd_scene load_steps=14 format=3 uid="uid://bd6jf6p57yppl"]
 
 [ext_resource type="Script" uid="uid://b0f8r732djm5r" path="res://stages/first_person/tiles/tile_factory.gd" id="1_fc8km"]
-[ext_resource type="Script" uid="uid://h2evvguy80m2" path="res://common_nodes/tile_types/door.gd" id="2_mf7cg"]
+[ext_resource type="Script" uid="uid://dlk4i1gpyan73" path="res://common_nodes/tiles/model_adapters/default.gd" id="3_fc8km"]
 [ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic/tiles/mixins/flammable.tscn" id="3_jcfbc"]
 [ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="4_cqx0e"]
 [ext_resource type="PackedScene" uid="uid://e1y7abr4iowb" path="res://assets/tiles/highres/floor.glb" id="5_fc8km"]
-[ext_resource type="Script" uid="uid://dmd1oeiknl2xq" path="res://common_nodes/tile_node.gd" id="6_25nka"]
+[ext_resource type="Script" uid="uid://dmd1oeiknl2xq" path="res://common_nodes/tiles/tile_node.gd" id="6_25nka"]
+[ext_resource type="Script" uid="uid://dnw7qlihelwdy" path="res://stages/first_person/tiles/mixins/item_holder.gd" id="7_cqx0e"]
+[ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://common_nodes/tiles/model_adapters/wall.gd" id="7_jcfbc"]
 [ext_resource type="PackedScene" uid="uid://b1wwedv5gihfr" path="res://assets/tiles/highres/wall.glb" id="7_mf7cg"]
 [ext_resource type="PackedScene" uid="uid://bo3vblsvejx6g" path="res://stages/first_person/tiles/mixins/flammable.tscn" id="8_r8kke"]
-[ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://common_nodes/tile_types/wall.gd" id="9_2q4nf"]
+[ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://common_nodes/tiles/model_adapters/wall_like.gd" id="9_cqx0e"]
 [ext_resource type="PackedScene" uid="uid://dhmdasbpo4tyk" path="res://assets/tiles/highres/window.glb" id="9_jcfbc"]
-[ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://common_nodes/tile_types/wall_like.gd" id="11_0ey6x"]
 [ext_resource type="PackedScene" uid="uid://blgfoi38wvcev" path="res://assets/tiles/highres/doorway.glb" id="12_cqx0e"]
 
 [node name="TileNodeFactory" type="Node3D"]
@@ -21,28 +22,40 @@ metadata/_custom_type_script = "uid://5hidv4t3hoob"
 visible = false
 script = ExtResource("6_25nka")
 type = 1
+model_adapter_class = ExtResource("3_fc8km")
+
+[node name="Model" parent="Floor" instance=ExtResource("5_fc8km")]
 
 [node name="Flammable" parent="Floor" instance=ExtResource("8_r8kke")]
 transform = Transform3D(0.4, 0, 0, 0, 0.2, 0, 0, 0, 0.4, 0, 0.05, 0)
 visible = false
 material = ExtResource("4_cqx0e")
 
-[node name="Model" parent="Floor" instance=ExtResource("5_fc8km")]
+[node name="ItemHolder" type="Node3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049999997, 0)
+script = ExtResource("7_cqx0e")
 
 [node name="Wall" type="Node3D" parent="."]
 visible = false
-script = ExtResource("9_2q4nf")
+script = ExtResource("6_25nka")
 type = 2
+model_adapter_class = ExtResource("7_jcfbc")
 
 [node name="Model" parent="Wall" instance=ExtResource("7_mf7cg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
 [node name="FloorModel" parent="Wall" instance=ExtResource("5_fc8km")]
 
+[node name="ItemHolder" type="Node3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.01000005)
+script = ExtResource("7_cqx0e")
+contact_point = 2
+
 [node name="Window" type="Node3D" parent="."]
 visible = false
-script = ExtResource("11_0ey6x")
+script = ExtResource("6_25nka")
 type = 3
+model_adapter_class = ExtResource("9_cqx0e")
 
 [node name="Model" parent="Window" instance=ExtResource("9_jcfbc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
@@ -51,15 +64,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
 [node name="Door" type="Node3D" parent="."]
 visible = false
-script = ExtResource("2_mf7cg")
+script = ExtResource("6_25nka")
 type = 4
-
-[node name="Flammable" parent="Door" instance=ExtResource("3_jcfbc")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.05, 0)
-visible = false
-material = ExtResource("4_cqx0e")
+model_adapter_class = ExtResource("9_cqx0e")
 
 [node name="Model" parent="Door" instance=ExtResource("12_cqx0e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
 [node name="FloorModel" parent="Door" instance=ExtResource("5_fc8km")]
+
+[node name="Flammable" parent="Door" instance=ExtResource("3_jcfbc")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.05, 0)
+visible = false
+material = ExtResource("4_cqx0e")

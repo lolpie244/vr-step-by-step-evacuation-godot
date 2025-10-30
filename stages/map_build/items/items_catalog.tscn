@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b80h6lkl843dr"]
+[gd_scene load_steps=12 format=3 uid="uid://b80h6lkl843dr"]
 
 [ext_resource type="PackedScene" uid="uid://kx1pwc0tgm1k" path="res://stages/map_build/items/item_builder.tscn" id="1_7ps7r"]
 [ext_resource type="Texture2D" uid="uid://1ob6eda4aur2" path="res://assets/items/2d/bed_single.png" id="2_bgiau"]
@@ -6,6 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://bk5imvrho04nk" path="res://assets/items/bed_single.glb" id="3_bgiau"]
 [ext_resource type="Texture2D" uid="uid://bwn675hfdya30" path="res://assets/items/2d/table.png" id="5_riqh8"]
 [ext_resource type="PackedScene" uid="uid://did5xwtowinu4" path="res://assets/items/table.glb" id="6_lf17y"]
+[ext_resource type="Script" uid="uid://dbgxt7re6vu3i" path="res://stages/map_build/items/types/extinguisher.gd" id="7_lf17y"]
+[ext_resource type="Texture2D" uid="uid://bbqu4p55rknip" path="res://assets/items/2d/extinguisher_co2.png" id="8_hbrfw"]
+[ext_resource type="PackedScene" uid="uid://dmvb1dap8a5x5" path="res://assets/items/extinguisher_co2/model.tscn" id="9_tcrop"]
+[ext_resource type="Texture2D" uid="uid://dv2yt0l3tjhyh" path="res://assets/items/2d/extinguisher_powder.png" id="10_4w82f"]
+[ext_resource type="PackedScene" uid="uid://c3wpeixkcvp70" path="res://assets/items/extinguisher_powder/model.tscn" id="11_05res"]
 
 [node name="ItemsCatalog" type="Node"]
 
@@ -23,12 +28,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033779696, -0.012558868, -
 transform = Transform3D(-2.8412401e-09, 0, 0.065, 0, 0.065, 0, -0.065, 0, -2.8412401e-09, -0.036016505, -0.024793543, -0.008346055)
 
 [node name="Table" parent="." instance=ExtResource("1_7ps7r")]
+visible = false
 script = ExtResource("2_qrrd0")
 type = 2
 icon = ExtResource("5_riqh8")
 
 [node name="Model" parent="Table" instance=ExtResource("6_lf17y")]
 transform = Transform3D(-2.6226832e-09, 0, -0.06, 0, 0.06, 0, 0.06, 0, -2.6226832e-09, 0, -0.04339271, -0.009643249)
+
+[node name="Extinguisher_CO2" parent="." instance=ExtResource("1_7ps7r")]
+visible = false
+script = ExtResource("7_lf17y")
+type = 2
+icon = ExtResource("8_hbrfw")
+
+[node name="Model" parent="Extinguisher_CO2" instance=ExtResource("9_tcrop")]
+transform = Transform3D(0.052, 0, 0, 0, 0.052, 0, 0, 0, 0.052, 0, -0.04806099, -0.0043801665)
+
+[node name="Extinguisher_Powder" parent="." instance=ExtResource("1_7ps7r")]
+script = ExtResource("7_lf17y")
+type = 1
+icon = ExtResource("10_4w82f")
+
+[node name="Model" parent="Extinguisher_Powder" instance=ExtResource("11_05res")]
+transform = Transform3D(0.042, 0, 0, 0, 0.042, 0, 0, 0, 0.042, 0, -0.030301977, -0.0037916154)
 
 [editable path="BedSingle"]
 [editable path="BedSingle/BodyOrigin/Body"]

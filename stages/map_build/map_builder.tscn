@@ -43,15 +43,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5268856, 0.459, 1.36)
 transform = Transform3D(0.39911234, 0, 0, 0, 0.27358437, -0.36549762, 0, 0.9252656, 0.10807105, 0, 0.87391305, 1.0162227)
 cutoff_shader = ExtResource("5_jfixn")
 
+[node name="TileFactory" parent="Map" index="1" instance=ExtResource("6_n64ml")]
+transform = Transform3D(2.5055602, 0, 0, 0, 0.29387182, 0.993878, 0, -2.516025, 0.7439433, 0, -1.2668198, 1.4427751)
+
 [node name="MapScanner" type="Node3D" parent="." index="6"]
 script = ExtResource("3_nt64x")
 
-[node name="Factory" parent="." index="7" instance=ExtResource("6_n64ml")]
-
-[node name="ExitButton" parent="." index="8" instance=ExtResource("9_meh3h")]
+[node name="ExitButton" parent="." index="7" instance=ExtResource("9_meh3h")]
 transform = Transform3D(0.9659756, 0, 0.25863364, 0, 1, 0, -0.25863364, 0, 0.9659756, -0.28351954, 0.4685651, 1.2388928)
 
-[node name="Pens" type="Node" parent="." index="9"]
+[node name="Pens" type="Node" parent="." index="8"]
 
 [node name="Floor" parent="Pens" index="0" instance=ExtResource("8_qwooh")]
 transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.29770142, 0.47205818, 1.3984342)
@@ -73,7 +74,7 @@ transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.
 type = 4
 color = Color(1, 0, 0, 1)
 
-[node name="Environment" type="Node" parent="." index="10"]
+[node name="Environment" type="Node" parent="." index="9"]
 
 [node name="Shelf" parent="Environment" index="0" instance=ExtResource("12_4lc88")]
 transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, -0.7661468, 0, 1.9650824)
@@ -93,14 +94,22 @@ mesh = SubResource("BoxMesh_0uych")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Table" index="1"]
 shape = SubResource("BoxShape3D_n64ml")
 
-[node name="ItemsCatalog" parent="." index="11" instance=ExtResource("13_cb5rl")]
+[node name="ItemsCatalog" parent="." index="10" instance=ExtResource("13_cb5rl")]
 
 [node name="BedSingle" parent="ItemsCatalog" index="0"]
-transform = Transform3D(0.95461535, 0, -0.29784143, 0, 1, 0, 0.29784143, 0, 0.95461535, -0.7579842, 0.6575936, 1.7329466)
+transform = Transform3D(0.95461535, 0, -0.29784143, 0, 1, 0, 0.29784143, 0, 0.95461535, -0.7579842, 0.6511028, 1.7329466)
 visible = true
 
 [node name="Table" parent="ItemsCatalog" index="1"]
 transform = Transform3D(0.0062483265, 0, -0.99998045, 0, 1, 0, 0.99998045, 0, 0.0062483265, -0.77256805, 0.6698104, 1.8556006)
+visible = true
+
+[node name="Extinguisher_CO2" parent="ItemsCatalog" index="2"]
+transform = Transform3D(0.9986295, 0, -0.05233596, 0, 1, 0, 0.05233596, 0, 0.9986295, -0.7502705, 0.90923333, 1.7231119)
+visible = true
+
+[node name="Extinguisher_Powder" parent="ItemsCatalog" index="3"]
+transform = Transform3D(0.95147634, 0, 0.30772197, 0, 1, 0, -0.30772197, 0, 0.95147634, -0.7454768, 0.92243624, 1.8219397)
 
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]

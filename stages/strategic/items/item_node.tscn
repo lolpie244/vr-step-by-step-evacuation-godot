@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7pd31hh1bhsg"]
-
-[ext_resource type="Script" uid="uid://bki20d72c3opp" path="res://stages/strategic/items/item_node.gd" id="1_sca0p"]
-
-[node name="Item" type="Node3D"]
-script = ExtResource("1_sca0p")
-
-[node name="Model" type="Node3D" parent="."]

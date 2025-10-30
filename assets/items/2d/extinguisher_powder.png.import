@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://etlig53im84g"
-path.etc2="res://.godot/imported/exit.svg-c5686ab09c40897e07d3bc8798269d14.etc2.ctex"
+uid="uid://dv2yt0l3tjhyh"
+path="res://.godot/imported/extinguisher_powder.png-f8eefffdb06949011c4bf47ebe2c80bc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/items/2d/exit.svg"
-dest_files=["res://.godot/imported/exit.svg-c5686ab09c40897e07d3bc8798269d14.etc2.ctex"]
+source_file="res://assets/items/2d/extinguisher_powder.png"
+dest_files=["res://.godot/imported/extinguisher_powder.png-f8eefffdb06949011c4bf47ebe2c80bc.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,7 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
+detect_3d/compress_to=1

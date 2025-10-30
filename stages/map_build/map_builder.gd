@@ -10,7 +10,7 @@ var _items: Array[MapBuilderItem] = []
 @onready var map_scanner: MapScanner = $MapScanner
 
 @onready var impl: MapGrid = GameCore.grid
-@onready var tile_factory: MapBuildTileFactory = $Factory
+@onready var tile_factory: MapBuildTileFactory = $Map/TileFactory
 
 
 func _ready() -> void:

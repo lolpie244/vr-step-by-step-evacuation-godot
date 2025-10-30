@@ -3,12 +3,13 @@ extends Node3D
 const IMPLEMENTS := "TileNode"
 
 @export var type: Tile.Type = Tile.Type.NONE
+@export var model_adapter_class: Script
 
 var impl: Tile
-var map: Map
 
 @onready var model = $Model
 @onready var animation: AnimationPlayer = get_node_or_null("Animation")
+@onready var model_adapter: TileModelAdapter = self.model_adapter_class.new()
 
 
 func set_data(_impl: Tile):
@@ -30,7 +31,7 @@ func init():
 
 	impl.highlight_changed.connect(_on_impl_highlight_changed)
 
-	_swap_model(_get_model())
+	_swap_model(model_adapter.get_model(impl, model))
 
 
 func _get_model():
@@ -42,11 +43,7 @@ func size() -> Vector3:
 
 
 func set_material(_material: ShaderMaterial):
-	for mesh in Utils.find_children_with_type(self, MeshInstance3D, true):
-		for i in mesh.get_surface_override_material_count():
-			var albedo = mesh.get_active_material(i).albedo_texture
-			_material.set_shader_parameter("_albedo", albedo)
-			mesh.set_surface_override_material(i, _material)
+	model_adapter.set_material(model, _material)
 
 
 func _on_impl_highlight_changed(value: bool) -> void:

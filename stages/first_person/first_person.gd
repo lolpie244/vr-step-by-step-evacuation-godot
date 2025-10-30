@@ -1,9 +1,10 @@
-class_name FirstPerson
+class_name FirstPersonScene
 extends Node3D
 
 signal extinguisher_selected
 
 const TILE_SIZE := 2.2
+const IMPLEMENTS := "FirstPersonScene"
 
 
 class Context:
@@ -15,8 +16,10 @@ class Context:
 
 var context: Context
 var grid := GameCore.grid
+var items: Dictionary[Item, ItemNode] = {}
 
 @onready var tile_factory: FirstPersonTileFactory = $TileFactory
+@onready var item_factory: FirstPersonItemFactory = $ItemFactory
 @onready var extinguisher_factory: FirstPersonExtinguisherFactory = $ExtinguisherFactory
 @onready var player: PlayerVR = $PlayerVR
 @onready var point_generator: SpawnPointGenerator = $PlayerVR/SpawnPointGenerator
@@ -30,6 +33,10 @@ func _add_child_node(tile: TileNode):
 	tile.position = grid.tile_position(TILE_SIZE, tile_pos.x, tile_pos.y)
 	tile.scale = Vector3.ONE * grid.model_scale(TILE_SIZE, tile)
 
+	var item_holder: ItemHolder = tile.impl.get_mixin(ItemHolder)
+	if item_holder and item_holder.get_item() and not items.has(item_holder.get_item()):
+		items[item_holder.get_item()] = null
+
 
 func _ready() -> void:
 	for tile in context.character.visible_tiles():
@@ -37,6 +44,10 @@ func _ready() -> void:
 
 	var character_tile = tile_factory.create(context.character.get_tile())
 	_add_child_node(character_tile)
+
+	for item in items.keys():
+		items[item] = item_factory.create(item)
+		item.restore()
 
 	player.rotate_y(context.character._look_direction.angle() - deg_to_rad(180))
 

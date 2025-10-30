@@ -5,6 +5,7 @@ var impl: Walkable
 var _bodies_in_snap_zone_area: Array[XRToolsPickable] = []
 
 @onready var tile: TileNode = get_parent()
+@onready var map: StrategicMap = Utils.find_parent_that_implements(tile, "Map")
 
 
 func _ready() -> void:
@@ -48,7 +49,7 @@ func _on_snap_zone_body_exited(body: Node3D) -> void:
 
 
 func _on_character_placed(character: Character):
-	var character_node: CharacterStrategic = tile.map.get_character_node(character)
+	var character_node: CharacterStrategic = map.get_character_node(character)
 
 	if character_node.get_parent() == null:
 		get_parent().add_child(character_node)

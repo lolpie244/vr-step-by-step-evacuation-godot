@@ -1,6 +1,8 @@
 class_name Map
 extends MeshInstance3D
 
+const IMPLEMENTS := "Map"
+
 @export var cutoff_shader: Shader
 var cutoff_material: ShaderMaterial
 

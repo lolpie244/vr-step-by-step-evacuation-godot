@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgdwn2epdpwlb"]
+[gd_scene load_steps=11 format=3 uid="uid://cgdwn2epdpwlb"]
 
 [ext_resource type="Script" uid="uid://b61pr07hqsne1" path="res://stages/first_person/first_person.gd" id="1_ybnn0"]
 [ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/player_VR.tscn" id="2_5f22i"]
 [ext_resource type="Script" uid="uid://cegu27o26eujn" path="res://stages/first_person/spawn_point_generator.gd" id="3_86ipt"]
 [ext_resource type="PackedScene" uid="uid://bd6jf6p57yppl" path="res://stages/first_person/tiles/tile_factory.tscn" id="5_5kc4i"]
 [ext_resource type="PackedScene" uid="uid://r785x2cppa1g" path="res://stages/first_person/extinguishers/extinguisher_factory.tscn" id="5_86ipt"]
+[ext_resource type="PackedScene" uid="uid://daywd25eg72y1" path="res://stages/first_person/items/item_factory.tscn" id="7_bh2mi"]
 [ext_resource type="PackedScene" uid="uid://b50lh3ohab6x6" path="res://ui/mesh_rope_trigger.tscn" id="9_rvqsj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ybnn0"]
@@ -46,5 +47,7 @@ directional_shadow_max_distance = 7.0
 [node name="TileFactory" parent="." instance=ExtResource("5_5kc4i")]
 
 [node name="ExtinguisherFactory" parent="." instance=ExtResource("5_86ipt")]
+
+[node name="ItemFactory" parent="." instance=ExtResource("7_bh2mi")]
 
 [connection signal="triggerred" from="PlayerVR/ExitTrigger" to="." method="_on_exit_trigger_triggerred"]

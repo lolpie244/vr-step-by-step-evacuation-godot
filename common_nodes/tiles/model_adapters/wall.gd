@@ -1,14 +1,12 @@
-extends WallLikeTile
-
-@onready var original_mesh = $Model.mesh
-@onready var original_material = $Model.get_active_material(0)
+class_name WallModelAdapter
+extends WallLikeModelAdapter
 
 
-func _get_model():
-	var left = _is_wall(impl.pos.x - 1, impl.pos.y)
-	var right = _is_wall(impl.pos.x + 1, impl.pos.y)
-	var down = _is_wall(impl.pos.x, impl.pos.y - 1)
-	var up = _is_wall(impl.pos.x, impl.pos.y + 1)
+func get_model(tile: Tile, model):
+	var left = _is_wall(tile.grid, tile.pos.x - 1, tile.pos.y)
+	var right = _is_wall(tile.grid, tile.pos.x + 1, tile.pos.y)
+	var down = _is_wall(tile.grid, tile.pos.x, tile.pos.y - 1)
+	var up = _is_wall(tile.grid, tile.pos.x, tile.pos.y + 1)
 
 	var rotations := [[up, 0], [down, 180], [left, 270], [right, 90]].filter(func(v): return v[0])
 
@@ -16,7 +14,7 @@ func _get_model():
 	result.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var mm := MultiMesh.new()
 
-	mm.mesh = original_mesh
+	mm.mesh = model.mesh
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.instance_count = rotations.size()
 
@@ -36,8 +34,8 @@ func _get_model():
 	return result
 
 
-func set_material(_material: ShaderMaterial):
+func set_material(model, _material: ShaderMaterial):
 	var material = _material.duplicate()
-	var albedo = original_material.albedo_texture
-	material.set_shader_parameter("_albedo", albedo)
+	#var albedo = original_material.albedo_texture
+	#material.set_shader_parameter("_albedo", albedo)
 	model.material_override = material

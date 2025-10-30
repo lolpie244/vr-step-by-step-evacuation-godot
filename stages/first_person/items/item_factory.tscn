@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://daywd25eg72y1"]
+
+[ext_resource type="Script" uid="uid://cu5av7864ajnn" path="res://stages/first_person/items/item_factory.gd" id="1_i17s5"]
+[ext_resource type="Script" uid="uid://bki20d72c3opp" path="res://common_nodes/items/item_node.gd" id="2_ha47m"]
+[ext_resource type="PackedScene" uid="uid://bk5imvrho04nk" path="res://assets/items/bed_single.glb" id="3_rua83"]
+[ext_resource type="PackedScene" uid="uid://did5xwtowinu4" path="res://assets/items/table.glb" id="4_7ull0"]
+[ext_resource type="PackedScene" uid="uid://c3wpeixkcvp70" path="res://assets/items/extinguisher_powder/model.tscn" id="5_beaqf"]
+[ext_resource type="PackedScene" uid="uid://dmvb1dap8a5x5" path="res://assets/items/extinguisher_co2/model.tscn" id="6_hd7v5"]
+
+[node name="FirstPersonItemFactory" type="Node3D"]
+script = ExtResource("1_i17s5")
+metadata/_custom_type_script = "uid://5hidv4t3hoob"
+
+[node name="BedSingle" type="Node3D" parent="."]
+visible = false
+script = ExtResource("2_ha47m")
+type = "Furniture.BED"
+size = Vector2i(1, 2)
+
+[node name="Model" parent="BedSingle" instance=ExtResource("3_rua83")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="Table" type="Node3D" parent="."]
+visible = false
+script = ExtResource("2_ha47m")
+type = "Furniture.TABLE"
+
+[node name="Model" parent="Table" instance=ExtResource("4_7ull0")]
+
+[node name="ExtinguisherPowder" type="Node3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+script = ExtResource("2_ha47m")
+type = "Extinguisher.POWDER"
+
+[node name="Model" parent="ExtinguisherPowder" instance=ExtResource("5_beaqf")]
+transform = Transform3D(0.023990605, 0, -0.09707959, 0, 0.099999994, 0, 0.09707959, 0, 0.023990605, 0, 0.14, 0)
+visible = false
+
+[node name="ExtinguisherCO2" type="Node3D" parent="."]
+transform = Transform3D(-4.3711385e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -4.3711385e-08, 0, 0, 0)
+visible = false
+script = ExtResource("2_ha47m")
+type = "Extinguisher.CO2"
+
+[node name="Model" parent="ExtinguisherCO2" instance=ExtResource("6_hd7v5")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.05, 0)
