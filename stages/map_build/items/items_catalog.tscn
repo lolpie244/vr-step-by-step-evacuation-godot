@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://b80h6lkl843dr"]
+[gd_scene load_steps=13 format=3 uid="uid://b80h6lkl843dr"]
 
+[ext_resource type="Script" uid="uid://criypdphkofqa" path="res://stages/map_build/items/items_catalog.gd" id="1_05res"]
 [ext_resource type="PackedScene" uid="uid://kx1pwc0tgm1k" path="res://stages/map_build/items/item_builder.tscn" id="1_7ps7r"]
 [ext_resource type="Texture2D" uid="uid://1ob6eda4aur2" path="res://assets/items/2d/bed_single.png" id="2_bgiau"]
 [ext_resource type="Script" uid="uid://drtdt6ldp8c5e" path="res://stages/map_build/items/types/furniture.gd" id="2_qrrd0"]
@@ -13,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c3wpeixkcvp70" path="res://assets/items/extinguisher_powder/model.tscn" id="11_05res"]
 
 [node name="ItemsCatalog" type="Node"]
+script = ExtResource("1_05res")
 
 [node name="BedSingle" parent="." instance=ExtResource("1_7ps7r")]
 visible = false
@@ -43,15 +45,16 @@ type = 2
 icon = ExtResource("8_hbrfw")
 
 [node name="Model" parent="Extinguisher_CO2" instance=ExtResource("9_tcrop")]
-transform = Transform3D(0.052, 0, 0, 0, 0.052, 0, 0, 0, 0.052, 0, -0.04806099, -0.0043801665)
+transform = Transform3D(-2.2729922e-09, 0, -0.052, 0, 0.052, 0, 0.052, 0, -2.2729922e-09, -0.0041047186, -0.04806099, -0.007342972)
 
 [node name="Extinguisher_Powder" parent="." instance=ExtResource("1_7ps7r")]
+visible = false
 script = ExtResource("7_lf17y")
 type = 1
 icon = ExtResource("10_4w82f")
 
 [node name="Model" parent="Extinguisher_Powder" instance=ExtResource("11_05res")]
-transform = Transform3D(0.042, 0, 0, 0, 0.042, 0, 0, 0, 0.042, 0, -0.030301977, -0.0037916154)
+transform = Transform3D(-1.8358783e-09, 0, -0.042, 0, 0.042, 0, 0.042, 0, -1.8358783e-09, 0, -0.030301977, -0.008459911)
 
 [editable path="BedSingle"]
 [editable path="BedSingle/BodyOrigin/Body"]

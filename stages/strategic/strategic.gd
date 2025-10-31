@@ -49,7 +49,7 @@ func _on_first_mode_trigger_triggerred() -> void:
 	first_mode_trigger.rope_item.drop()
 
 	var character := GameCore.selected_character
-	var context := FirstPerson.Context.new(character)
+	var context := FirstPersonScene.Context.new(character)
 	SceneManager.load_scene(next_scene, context)
 
 

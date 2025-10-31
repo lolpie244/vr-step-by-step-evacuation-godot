@@ -35,7 +35,7 @@ animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path="uid://cviptg4r222iw"
 materials/extract=0
-materials/extract_format=0
+materials/extract_format=2
 materials/extract_path=""
 _subresources={
 "nodes": {

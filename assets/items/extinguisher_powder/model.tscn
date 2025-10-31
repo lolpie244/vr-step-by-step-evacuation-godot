@@ -9,18 +9,20 @@
 [node name="Model" type="Node3D"]
 
 [node name="Body" parent="." instance=ExtResource("1_swk0u")]
+transform = Transform3D(0.2457134, 0, -0.9693425, 0, 1, 0, 0.9693425, 0, 0.2457134, -0.002104655, 0, -0.03444364)
 
 [node name="Handle" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03238994, 1.8365324, 0)
+transform = Transform3D(0.2457134, 0, -0.9693425, 0, 1, 0, 0.9693425, 0, 0.2457134, 0.029292285, 1.8365324, -0.042402282)
 mesh = ExtResource("2_2amq4")
 
 [node name="HoseEnd" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.6977154, 0, 0.716375, 0, 1, 0, -0.716375, 0, 0.6977154, 0.10882956, 0, 0.6091116)
+transform = Transform3D(0.8678694, 0, -0.4967922, 0, 1, 0, 0.4967922, 0, 0.8678694, -0.55205786, -0.45214945, 0.22425002)
 mesh = ExtResource("3_c8nrs")
 
 [node name="Pin" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.061555922, 1.9112427, -0.14193118)
+transform = Transform3D(0.3194274, 0, -1.2601452, 0, 1.3, 0, 1.2601452, 0, 0.3194274, 0.07921949, 1.9112427, -0.15689844)
 mesh = ExtResource("4_8xrhd")
 
 [node name="Holder" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2457134, 0, -0.9693425, 0, 1, 0, 0.9693425, 0, 0.2457134, -0.002104655, 0, -0.03444364)
 mesh = ExtResource("5_52hh1")

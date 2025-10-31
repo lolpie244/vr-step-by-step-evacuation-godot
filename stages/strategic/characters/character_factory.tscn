@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbgo00lho5osc"]
+[gd_scene load_steps=11 format=3 uid="uid://bbgo00lho5osc"]
 
 [ext_resource type="Script" uid="uid://dada404m45lcv" path="res://stages/strategic/characters/character_factory.gd" id="1_yk0s7"]
 [ext_resource type="Animation" uid="uid://di384xtde8ydf" path="res://addons/godot-xr-tools/hands/animations/left/Grip 2.res" id="2_2bd6c"]
 [ext_resource type="PackedScene" uid="uid://bt0c2knjayatq" path="res://stages/strategic/characters/character_node.tscn" id="2_lgus5"]
-[ext_resource type="Script" uid="uid://dwkncdtofp2bq" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="3_7gw4s"]
+[ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="3_7gw4s"]
 [ext_resource type="Animation" uid="uid://r8hleealhrqt" path="res://addons/godot-xr-tools/hands/animations/right/Grip 2.res" id="4_1ax6x"]
 [ext_resource type="PackedScene" uid="uid://ciya5qu8grvca" path="res://assets/characters/character-male-a.glb" id="5_lc6v1"]
+[ext_resource type="Script" uid="uid://dkfkpnb2ubu0l" path="res://common/mesh_with_material.gd" id="7_gdiiv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mh3q7"]
 size = Vector3(0.18, 0.67, 0.18)
@@ -40,6 +41,7 @@ hand_pose = SubResource("Resource_w0uka")
 
 [node name="Model" parent="Civilian" instance=ExtResource("5_lc6v1")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("7_gdiiv")
 
 [editable path="Civilian"]
 [editable path="Civilian/PickableObject"]

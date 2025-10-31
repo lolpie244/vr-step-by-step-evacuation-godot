@@ -47,7 +47,7 @@ func _ready() -> void:
 
 	for item in items.keys():
 		items[item] = item_factory.create(item)
-		item.restore()
+		item.restore_position()
 
 	player.rotate_y(context.character._look_direction.angle() - deg_to_rad(180))
 

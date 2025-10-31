@@ -55,11 +55,3 @@ func _on_impl_tile_changed(_tile: Tile) -> void:
 
 func _on_look_direction_changed(direction: Vector2):
 	self.rotate_y(direction.angle() - self.rotation.y)
-
-
-func set_material(_material: ShaderMaterial):
-	for mesh in Utils.find_children_with_type(self, MeshInstance3D, true):
-		for i in mesh.get_surface_override_material_count():
-			var albedo = mesh.get_active_material(i).albedo_texture
-			_material.set_shader_parameter("_albedo", albedo)
-			mesh.set_surface_override_material(i, _material)

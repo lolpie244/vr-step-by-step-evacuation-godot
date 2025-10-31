@@ -1,9 +1,12 @@
 class_name Map
 extends MeshInstance3D
 
+enum ShaderAxis { XZ, XY }
+
 const IMPLEMENTS := "Map"
 
 @export var cutoff_shader: Shader
+@export var shader_axis: ShaderAxis
 var cutoff_material: ShaderMaterial
 
 var zoom: float:
@@ -38,7 +41,10 @@ func _ready() -> void:
 	cutoff_material = ShaderMaterial.new()
 	cutoff_material.shader = cutoff_shader
 	cutoff_material.set_shader_parameter("plane_size", plane_mesh.size * 0.5)
-	cutoff_material.set_shader_parameter("plane_pos", Vector2(plane_pos.x, plane_pos.z))
+	if shader_axis == ShaderAxis.XZ:
+		cutoff_material.set_shader_parameter("plane_pos", Vector2(plane_pos.x, plane_pos.z))
+	if shader_axis == ShaderAxis.XY:
+		cutoff_material.set_shader_parameter("plane_pos", Vector2(plane_pos.x, plane_pos.y))
 	cutoff_material.set_shader_parameter("border_color", Color.RED)
 
 

@@ -56,6 +56,10 @@ func _ready() -> void:
 	super._ready()
 	impl.new_grid.connect(reset_map)
 
+	tile_factory.set_material(cutoff_material)
+	item_factory.set_material(cutoff_material)
+	character_factory.set_material(cutoff_material)
+
 	if impl.is_empty():
 		impl.set_tiles(types_from_str(_test_map))
 	else:
@@ -74,7 +78,7 @@ func reset_map():
 			if !impl.get_tile(x, y):
 				continue
 
-			var tile: TileNode = tile_factory.create(self, impl.get_tile(x, y))
+			var tile: TileNode = tile_factory.create(impl.get_tile(x, y))
 			_tile_nodes[x][y] = tile
 
 	for x in range(impl.rows_count()):
@@ -93,7 +97,6 @@ func add_character(type: Character.Type, pos: Vector2i):
 	var character: CharacterStrategic = character_factory.create(character_impl)
 	_characters.append(character)
 	character.impl.place(impl.get_tile(pos.x, pos.y))
-	character.set_material(self.cutoff_material)
 
 	return character
 

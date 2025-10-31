@@ -11,9 +11,13 @@ var _items: Array[MapBuilderItem] = []
 
 @onready var impl: MapGrid = GameCore.grid
 @onready var tile_factory: MapBuildTileFactory = $Map/TileFactory
+@onready var item_catalog: ItemsCatalog = $ItemsCatalog
 
 
 func _ready() -> void:
+	tile_factory.set_material(map.cutoff_material)
+	item_catalog.set_material(map.cutoff_material)
+
 	impl.new_grid.connect(_reset_map)
 	GameCore.grid.resize(15, 15)
 

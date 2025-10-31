@@ -23,7 +23,7 @@ tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0dt8"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.0980392)
+albedo_color = Color(1, 1, 1, 0.09803922)
 
 [node name="MapScene" type="Node3D"]
 script = ExtResource("1_ur71p")

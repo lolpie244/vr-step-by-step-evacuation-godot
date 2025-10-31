@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_stages/map_scene/map_scene.tscn" id="1_mavd1"]
 [ext_resource type="Script" uid="uid://cklvbndqqhyfp" path="res://stages/map_build/map_builder.gd" id="1_og28i"]
 [ext_resource type="PackedScene" uid="uid://flu7j32ifd3y" path="res://stages/strategic/strategic.tscn" id="2_0uych"]
-[ext_resource type="PackedScene" uid="uid://dxo3bt6kf8q8u" path="res://stages/map_build/anchor_scene.tscn" id="3_6sc0j"]
-[ext_resource type="Script" uid="uid://ca2urkngiqc5i" path="res://stages/map_build/map_scanner.gd" id="3_nt64x"]
-[ext_resource type="Shader" uid="uid://c5jht6ph5kyv6" path="res://stages/map_build/cutoff.gdshader" id="5_jfixn"]
+[ext_resource type="PackedScene" uid="uid://dxo3bt6kf8q8u" path="res://stages/map_build/scanner/anchor_scene.tscn" id="3_6sc0j"]
+[ext_resource type="Script" uid="uid://ca2urkngiqc5i" path="res://stages/map_build/scanner/map_scanner.gd" id="3_nt64x"]
+[ext_resource type="Shader" uid="uid://b36ybr0m8b7m" path="res://stages/map_build/cutoff.gdshader" id="5_jfixn"]
 [ext_resource type="PackedScene" uid="uid://cilrgs5jxvr7y" path="res://stages/map_build/tiles/tile_factory.tscn" id="6_n64ml"]
 [ext_resource type="PackedScene" uid="uid://4xjuluon04x0" path="res://stages/map_build/tile_type_pen.tscn" id="8_qwooh"]
 [ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/Button.tscn" id="9_meh3h"]
@@ -40,11 +40,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5192419, 0.458555, 1.35959
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5268856, 0.459, 1.36)
 
 [node name="Map" parent="." index="4"]
-transform = Transform3D(0.39911234, 0, 0, 0, 0.27358437, -0.36549762, 0, 0.9252656, 0.10807105, 0, 0.87391305, 1.0162227)
+transform = Transform3D(0.3989233, 0, 0, 0, 0.2768486, -0.35045773, 0, 0.9363054, 0.10362402, 0, 0.87870705, 1.0165468)
 cutoff_shader = ExtResource("5_jfixn")
+shader_axis = 1
 
-[node name="TileFactory" parent="Map" index="1" instance=ExtResource("6_n64ml")]
-transform = Transform3D(2.5055602, 0, 0, 0, 0.29387182, 0.993878, 0, -2.516025, 0.7439433, 0, -1.2668198, 1.4427751)
+[node name="TileFactory" parent="Map" index="0" instance=ExtResource("6_n64ml")]
+transform = Transform3D(2.453425, 0, 0, 0, 0.29185784, 0.98706675, 0, -2.5761464, 0.76172006, 0, -1.257102, 1.4780504)
 
 [node name="MapScanner" type="Node3D" parent="." index="6"]
 script = ExtResource("3_nt64x")
@@ -105,11 +106,12 @@ transform = Transform3D(0.0062483265, 0, -0.99998045, 0, 1, 0, 0.99998045, 0, 0.
 visible = true
 
 [node name="Extinguisher_CO2" parent="ItemsCatalog" index="2"]
-transform = Transform3D(0.9986295, 0, -0.05233596, 0, 1, 0, 0.05233596, 0, 0.9986295, -0.7502705, 0.90923333, 1.7231119)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.7502705, 0.90923333, 1.7082081)
 visible = true
 
 [node name="Extinguisher_Powder" parent="ItemsCatalog" index="3"]
-transform = Transform3D(0.95147634, 0, 0.30772197, 0, 1, 0, -0.30772197, 0, 0.95147634, -0.7454768, 0.92243624, 1.8219397)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.7454768, 0.92243624, 1.8219397)
+visible = true
 
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]

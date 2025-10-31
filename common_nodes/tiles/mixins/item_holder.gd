@@ -51,4 +51,4 @@ func _on_item_placed(item: Item):
 
 	item_node.position = Vector3.ZERO
 	item_node.position = self.position - _get_contact_point(item_node) + item_node.position
-	item_node.rotate_y(-item.rotation)
+	item_node.rotation.y = -item.rotation
