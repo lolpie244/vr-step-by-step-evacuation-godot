@@ -9,3 +9,7 @@ var blocking := true:
 			return
 		blocking = value
 		blocking_changed.emit(blocking)
+
+		var walkable: Walkable = _tile.get_mixin(Walkable)
+		if walkable:
+			walkable.set_blocker(self, blocking)

@@ -3,14 +3,11 @@ extends TileMixin
 
 signal on_chacter_placed(character: Character)
 
-var enabled: bool = true
+var enabled: bool:
+	get():
+		return _blockers.size() == 0
 
-
-func init():
-	var flammable: Flammable = _tile.get_mixin(Flammable)
-	if flammable:
-		flammable.state_changed.connect(_on_flammable_state_changed)
-		_on_flammable_state_changed(flammable.state)
+var _blockers: Array
 
 
 func place_character(character: Character) -> bool:
@@ -74,17 +71,12 @@ func reachable_tiles(_speed: int) -> Array[ReachableResult]:
 
 
 static func is_walkable(tile: Tile):
-	if !tile:
-		return false
-	var mixin = tile.get_mixin(Walkable)
-	var blockable = tile.get_mixin(Blockable)
-	var item_holder = tile.get_mixin(ItemHolder)
-	return (
-		mixin != null
-		&& (!blockable || !blockable.blocking)
-		&& (!item_holder || !item_holder.get_item())
-	)
+	return tile and tile.get_mixin(Walkable) and tile.get_mixin(Walkable).enabled
 
 
-func _on_flammable_state_changed(state: Flammable.State):
-	enabled = (state == Flammable.State.NOT_BURNING)
+func set_blocker(blocker, is_blocking: bool):
+	if is_blocking:
+		if not blocker in _blockers:
+			_blockers.append(blocker)
+	else:
+		_blockers.erase(blocker)

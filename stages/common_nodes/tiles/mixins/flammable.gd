@@ -27,7 +27,7 @@ func _ready():
 	_on_impl_strength_changed(impl.strength)
 
 
-func _on_impl_state_changed(state: Flammable.State) -> void:
+func _on_impl_state_changed(_impl: Flammable, state: Flammable.State) -> void:
 	if impl.state == Flammable.State.BURNING:
 		show()
 		if fire:

@@ -1,13 +1,13 @@
 class_name Flammable
 extends TileMixin
 
-signal state_changed(state: State)
+signal state_changed(flammable: Flammable, state: State)
 signal strength_changed(strength: float)
 
 enum State {
-	NOT_BURNING = 1 << 0,
-	BURNING = 1 << 1,
-	BURNED = 1 << 2,
+	NOT_BURNING,
+	BURNING,
+	BURNED,
 }
 
 var material: TileMaterial
@@ -25,7 +25,11 @@ var state := State.NOT_BURNING:
 		if state == value:
 			return
 		state = value
-		state_changed.emit(state)
+		state_changed.emit(self, state)
+
+		var walkable: Walkable = _tile.get_mixin(Walkable)
+		if walkable:
+			walkable.set_blocker(self, state != State.NOT_BURNING)
 
 var _ignition_turn: int = -1
 
@@ -36,7 +40,6 @@ func can_burn():
 
 func ignite():
 	state = State.BURNING
-	_tile.remove_mixin(Walkable)
 	_ignition_turn = GameCore.current_turn
 
 

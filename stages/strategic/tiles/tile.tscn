@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bayl0mx8j5o7a"]
 
-[ext_resource type="Script" uid="uid://dmd1oeiknl2xq" path="res://common_nodes/tiles/tile_node.gd" id="1_5fwm8"]
+[ext_resource type="Script" uid="uid://dmd1oeiknl2xq" path="res://stages/common_nodes/tiles/tile_node.gd" id="1_5fwm8"]
 
 [sub_resource type="Animation" id="Animation_1200g"]
 length = 0.001

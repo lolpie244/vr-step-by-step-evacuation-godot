@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cxfojo8jvfcd5"]
 
 [ext_resource type="Script" uid="uid://d05akj26kgt5g" path="res://stages/strategic/items/item_factory.gd" id="1_60hsf"]
-[ext_resource type="Script" uid="uid://bki20d72c3opp" path="res://common_nodes/items/item_node.gd" id="2_65n1v"]
+[ext_resource type="Script" uid="uid://bki20d72c3opp" path="res://stages/common_nodes/items/item_node.gd" id="2_65n1v"]
 [ext_resource type="PackedScene" uid="uid://bk5imvrho04nk" path="res://assets/items/bed_single.glb" id="3_dws7h"]
 [ext_resource type="PackedScene" uid="uid://did5xwtowinu4" path="res://assets/items/table.glb" id="4_bweog"]
 [ext_resource type="Script" uid="uid://dkfkpnb2ubu0l" path="res://common/mesh_with_material.gd" id="4_fxm5s"]

@@ -25,7 +25,7 @@ func _ready() -> void:
 	hose_end_pickup.enabled = false
 
 
-func set_data(_impl: Extinguisher):
+func set_impl(_impl: Extinguisher):
 	impl = _impl
 	initialized.emit()
 

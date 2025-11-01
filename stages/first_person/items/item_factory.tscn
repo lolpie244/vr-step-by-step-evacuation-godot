@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://daywd25eg72y1"]
 
 [ext_resource type="Script" uid="uid://cu5av7864ajnn" path="res://stages/first_person/items/item_factory.gd" id="1_i17s5"]
-[ext_resource type="Script" uid="uid://bki20d72c3opp" path="res://common_nodes/items/item_node.gd" id="2_ha47m"]
+[ext_resource type="Script" uid="uid://bki20d72c3opp" path="res://stages/common_nodes/items/item_node.gd" id="2_ha47m"]
 [ext_resource type="PackedScene" uid="uid://bk5imvrho04nk" path="res://assets/items/bed_single.glb" id="3_rua83"]
 [ext_resource type="PackedScene" uid="uid://did5xwtowinu4" path="res://assets/items/table.glb" id="4_7ull0"]
 [ext_resource type="PackedScene" uid="uid://c3wpeixkcvp70" path="res://assets/items/extinguisher_powder/model.tscn" id="5_beaqf"]

@@ -9,7 +9,7 @@ var impl: Tile
 @onready var animation: AnimationPlayer = get_node_or_null("Animation")
 
 
-func set_data(_impl: Tile):
+func set_impl(_impl: Tile):
 	impl = _impl
 
 

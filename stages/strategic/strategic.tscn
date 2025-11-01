@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://flu7j32ifd3y"]
 
 [ext_resource type="Script" uid="uid://dbgvinydau6i6" path="res://stages/strategic/strategic.gd" id="1_dspli"]
-[ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_stages/map_scene/map_scene.tscn" id="1_mavd1"]
+[ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_scenes/map_scene/map_scene.tscn" id="1_mavd1"]
 [ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person/first_person.tscn" id="2_tttub"]
 [ext_resource type="PackedScene" uid="uid://b50lh3ohab6x6" path="res://ui/mesh_rope_trigger.tscn" id="3_52wiw"]
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://stages/strategic/map.gd" id="5_v5dbt"]
 [ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_factory.tscn" id="6_52wiw"]
-[ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/Button.tscn" id="6_v5dbt"]
+[ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/button.tscn" id="6_v5dbt"]
 [ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="7_vy2ce"]
 [ext_resource type="PackedScene" uid="uid://cxfojo8jvfcd5" path="res://stages/strategic/items/item_factory.tscn" id="8_vy2ce"]
 

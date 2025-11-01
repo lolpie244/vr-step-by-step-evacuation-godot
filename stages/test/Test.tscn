@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b8avi6cjwyrsf" path="res://stages/test/test.gd" id="1_c6hbk"]
 [ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person/first_person.tscn" id="2_c6hbk"]
 [ext_resource type="Script" uid="uid://c8pqvt45tfphd" path="res://stages/strategic/map.gd" id="3_8stuw"]
-[ext_resource type="Shader" uid="uid://ds1y664nk12st" path="res://stages/common_stages/map_scene/cutoff.gdshader" id="4_tcst7"]
+[ext_resource type="Shader" uid="uid://ds1y664nk12st" path="res://stages/common_scenes/map_scene/cutoff.gdshader" id="4_tcst7"]
 [ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic/characters/character_factory.tscn" id="6_0klol"]
 [ext_resource type="PackedScene" uid="uid://ccurrtskck65e" path="res://stages/strategic/tiles/tile_factory.tscn" id="6_8stuw"]
 [ext_resource type="PackedScene" uid="uid://cxfojo8jvfcd5" path="res://stages/strategic/items/item_factory.tscn" id="7_tcst7"]

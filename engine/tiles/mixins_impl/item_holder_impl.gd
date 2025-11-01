@@ -9,6 +9,7 @@ var _is_owner: bool
 
 func init():
 	_tile.highlight_changed.connect(_highlight_tiles)
+	item_placed.connect(func(_i: Item): _update_walkable())
 
 
 func get_item() -> Item:
@@ -40,3 +41,9 @@ func _highlight_tiles(val: bool):
 	for tile in _item.tiles():
 		if tile.highlight != val:
 			tile.highlight = val
+
+
+func _update_walkable():
+	var walkable: Walkable = _tile.get_mixin(Walkable)
+	if walkable:
+		walkable.set_blocker(self, self._item != null)

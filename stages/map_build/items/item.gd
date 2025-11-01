@@ -22,7 +22,7 @@ func set_texture(texture):
 	sprite.position = Vector3(sprite_pos.x, sprite_pos.y, 0)
 
 
-func set_data(_impl):
+func set_impl(_impl):
 	impl = _impl
 	impl.placed.connect(_on_placed)
 

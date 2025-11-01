@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://bypa1gccleaiv"]
 
-[ext_resource type="Script" uid="uid://bcs403rda4m6d" path="res://common_nodes/fire/fire.gd" id="1_b8jli"]
-[ext_resource type="Material" uid="uid://b1natfkjxenqq" path="res://common_nodes/fire/sparks.material" id="3_bol52"]
+[ext_resource type="Script" uid="uid://bcs403rda4m6d" path="res://stages/common_nodes/fire/fire.gd" id="1_b8jli"]
+[ext_resource type="Material" uid="uid://b1natfkjxenqq" path="res://stages/common_nodes/fire/sparks.material" id="3_bol52"]
 
 [sub_resource type="Shader" id="Shader_34f42"]
 code = "

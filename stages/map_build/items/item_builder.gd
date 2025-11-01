@@ -62,7 +62,7 @@ func _on_action_pressed(_pickable: Variant) -> void:
 		return
 
 	var new_item := item.duplicate(Utils.DEFAULT_DUPLICATE)
-	new_item.set_data(impl)
+	new_item.set_impl(impl)
 	map_builder.add_item_node(new_item)
 
 	impl.place(tile.impl, direction)

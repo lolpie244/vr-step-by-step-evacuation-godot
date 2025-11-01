@@ -1,6 +1,6 @@
-class_name MapBuilder
+class_name MapBuilderScene
 extends MapScene
-const IMPLEMENTS := "MapBuilder"
+const IMPLEMENTS := "MapBuilderScene"
 
 @export var strategic: PackedScene
 
@@ -47,13 +47,13 @@ func _reset_map():
 		for y in range(impl.columns_count()):
 			if !impl.get_tile(x, y):
 				impl.create_tile(Tile.Type.FLOOR, x, y)
-			_tile_nodes[x][y] = tile_factory.create(self, impl.get_tile(x, y))
+			_tile_nodes[x][y] = tile_factory.create(impl.get_tile(x, y))
 			map.place_item(_tile_nodes[x][y], x, y)
 
 
 func _reacreate_tile(x: int, y: int):
 	map.remove_item(_tile_nodes[x][y])
-	_tile_nodes[x][y] = tile_factory.create(self, impl.get_tile(x, y))
+	_tile_nodes[x][y] = tile_factory.create(impl.get_tile(x, y))
 	map.place_item(_tile_nodes[x][y], x, y)
 
 	var item_holder = _tile_nodes[x][y].impl.get_mixin(ItemHolder)

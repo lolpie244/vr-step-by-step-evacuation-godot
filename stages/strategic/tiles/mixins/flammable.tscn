@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://bqtxj2so0sfad"]
 
-[ext_resource type="PackedScene" uid="uid://bypa1gccleaiv" path="res://common_nodes/fire/fire.tscn" id="1_i5gey"]
-[ext_resource type="Script" uid="uid://cpdug00n5hbd4" path="res://common_nodes/tiles/mixins/flammable.gd" id="2_8jsc0"]
+[ext_resource type="PackedScene" uid="uid://bypa1gccleaiv" path="res://stages/common_nodes/fire/fire.tscn" id="1_i5gey"]
+[ext_resource type="Script" uid="uid://cpdug00n5hbd4" path="res://stages/common_nodes/tiles/mixins/flammable.gd" id="2_8jsc0"]
 
 [sub_resource type="Shader" id="Shader_oiq3u"]
 code = "

@@ -1,5 +1,5 @@
 class_name TileMixin
-extends Node3D
+extends RefCounted
 
 const IMPLEMENTS := "TileMixin"
 

@@ -1,5 +1,5 @@
 class_name MapGrid
-extends Node3D
+extends RefCounted
 
 signal new_grid
 

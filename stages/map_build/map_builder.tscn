@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://xnfqapr2ajxs"]
 
-[ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_stages/map_scene/map_scene.tscn" id="1_mavd1"]
+[ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_scenes/map_scene/map_scene.tscn" id="1_mavd1"]
 [ext_resource type="Script" uid="uid://cklvbndqqhyfp" path="res://stages/map_build/map_builder.gd" id="1_og28i"]
 [ext_resource type="PackedScene" uid="uid://flu7j32ifd3y" path="res://stages/strategic/strategic.tscn" id="2_0uych"]
 [ext_resource type="PackedScene" uid="uid://dxo3bt6kf8q8u" path="res://stages/map_build/scanner/anchor_scene.tscn" id="3_6sc0j"]
@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://b36ybr0m8b7m" path="res://stages/map_build/cutoff.gdshader" id="5_jfixn"]
 [ext_resource type="PackedScene" uid="uid://cilrgs5jxvr7y" path="res://stages/map_build/tiles/tile_factory.tscn" id="6_n64ml"]
 [ext_resource type="PackedScene" uid="uid://4xjuluon04x0" path="res://stages/map_build/tile_type_pen.tscn" id="8_qwooh"]
-[ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/Button.tscn" id="9_meh3h"]
+[ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/button.tscn" id="9_meh3h"]
 [ext_resource type="PackedScene" uid="uid://c50qun606ebvi" path="res://assets/environment_props/easel.glb" id="10_xncoq"]
 [ext_resource type="PackedScene" uid="uid://btcfofdv2pwcs" path="res://assets/environment_props/canvas.glb" id="11_4lc88"]
 [ext_resource type="PackedScene" uid="uid://bvra5d3gdimpq" path="res://assets/environment_props/shelf.glb" id="12_4lc88"]

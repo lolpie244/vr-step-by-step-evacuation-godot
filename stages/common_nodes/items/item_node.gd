@@ -18,7 +18,7 @@ func _ready() -> void:
 	impl().placed.connect(_on_placed)
 
 
-func set_data(new_impl):
+func set_impl(new_impl):
 	_impl = new_impl
 
 
