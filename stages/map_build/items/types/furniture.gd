@@ -5,7 +5,6 @@ extends MapBuilderItemCreator
 
 
 func _get_impl():
-	var impl := Furniture.new(size)
-	impl.type = type
+	var impl := Furniture.new(type, size)
 
 	return impl

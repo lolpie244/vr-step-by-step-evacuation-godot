@@ -43,10 +43,10 @@ func _set_tile(map: Array, anchor: TileXRAnchor, start: Vector2, end: Vector2):
 
 
 func _set_furniture(
-	_items: Array[Item], _anchor: FurnitureXRAnchor, _start: Vector2, _end: Vector2
-):
-	#var item :=
-	pass
+	_map: Array, _anchor: FurnitureXRAnchor, _start: Vector2, _end: Vector2
+) -> Item:
+	var item: Item = _anchor.item
+	return item
 
 
 func _set_map_data():
@@ -55,7 +55,7 @@ func _set_map_data():
 
 	for i in range(_anchors.size() - 1, -1, -1):
 		var anchor := _anchors[i]
-		if not anchor.get("valid"):
+		if not anchor.has_method("is_valid") or not anchor.is_valid():
 			_anchors.remove_at(i)
 			continue
 

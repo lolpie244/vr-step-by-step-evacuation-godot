@@ -18,7 +18,7 @@ func get_type() -> String:
 	return ""
 
 
-func _init(_size: Vector2 = Vector2.ONE):
+func _init(_size: Vector2i = Vector2i.ONE):
 	size = _size
 
 

@@ -7,6 +7,7 @@ const LABEL_TO_TYPE := {
 	"door_frame": Tile.Type.DOOR,
 	"window_frame": Tile.Type.WINDOW,
 }
+
 const MULTIPLE_TILES: Array[Tile.Type] = [Tile.Type.FLOOR, Tile.Type.WALL]
 
 

@@ -29,6 +29,11 @@ var _is_pin_released: bool = false
 var _capacity: float = 1.0
 
 
+func _init(_type: Type):
+	super._init(Vector2i.ONE)
+	type = _type
+
+
 func get_type():
 	return ".".join([&"Extinguisher", Type.keys()[type]])
 

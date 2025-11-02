@@ -5,7 +5,6 @@ extends MapBuilderItemCreator
 
 
 func _get_impl():
-	var impl := Extinguisher.new(size)
-	impl.type = type
+	var impl := Extinguisher.new(type)
 
 	return impl

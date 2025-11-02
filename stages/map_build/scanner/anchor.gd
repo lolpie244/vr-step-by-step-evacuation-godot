@@ -8,10 +8,6 @@ var is_initialized: bool = false
 var left_corner := Vector2(1000, 1000)
 var right_corner := Vector2(-1000, -1000)
 
-var valid: bool:
-	get():
-		return _type != null
-
 var size: Vector2:
 	get():
 		return right_corner - left_corner
@@ -20,6 +16,10 @@ var _type
 var _label := ""
 var _points: Array[Vector2] = []
 var _mesh_points: Array[Vector3] = []
+
+
+func is_valid():
+	return _type != null
 
 
 func get_type():
@@ -33,7 +33,7 @@ func set_label(label: String):
 func setup_scene(entity: OpenXRFbSpatialEntity) -> void:
 	set_label(_label)
 
-	if !valid:
+	if !is_valid():
 		return
 
 	var mesh_instance = entity.create_mesh_instance()
@@ -48,7 +48,7 @@ func setup_scene(entity: OpenXRFbSpatialEntity) -> void:
 
 
 func _process(_delta: float) -> void:
-	if !valid || is_initialized:
+	if !is_valid() || is_initialized:
 		return
 
 	_points = []
@@ -68,6 +68,7 @@ func _process(_delta: float) -> void:
 		left_corner = Vector2(min(left_corner.x, _points[i].x), min(left_corner.y, _points[i].y))
 		right_corner = Vector2(max(right_corner.x, _points[i].x), max(right_corner.y, _points[i].y))
 
+	init()
 	is_initialized = true
 	initialized.emit()
 
@@ -94,3 +95,7 @@ func _get_rotation(points: Array[Vector2], axis: Utils.Axis) -> float:
 			return res2
 
 	return 0
+
+
+func init():
+	pass
