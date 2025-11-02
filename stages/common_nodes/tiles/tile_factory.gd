@@ -1,4 +1,4 @@
-class_name FirstPersonTileFactory
+class_name TileFactory
 extends NodeFactory
 
 

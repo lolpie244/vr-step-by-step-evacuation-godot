@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ccurrtskck65e"]
+[gd_scene load_steps=15 format=3 uid="uid://ccurrtskck65e"]
 
-[ext_resource type="Script" uid="uid://bps72navc0rmd" path="res://stages/strategic/tiles/tile_factory.gd" id="1_1odjh"]
+[ext_resource type="PackedScene" uid="uid://tojpii1rkq2c" path="res://stages/common_nodes/tiles/tile_factory.tscn" id="1_lnyr2"]
 [ext_resource type="Script" uid="uid://bh8wiw1xq5mtt" path="res://stages/common_nodes/tiles/meshes/tile.gd" id="4_iqaq3"]
-[ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://stages/strategic/tiles/tile.tscn" id="6_au4fu"]
 [ext_resource type="Script" uid="uid://rp42a1e0us78" path="res://stages/strategic/tiles/mixins/item_holder.gd" id="8_iqaq3"]
 [ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic/tiles/mixins/flammable.tscn" id="8_spxjo"]
 [ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="9_xt87q"]
@@ -16,84 +15,67 @@
 [ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://assets/tiles/lowres/wall.glb" id="14_yswa7"]
 [ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://assets/tiles/lowres/window.glb" id="16_clihy"]
 
-[node name="TileFactory" type="Node3D"]
-script = ExtResource("1_1odjh")
+[node name="TileFactory" instance=ExtResource("1_lnyr2")]
 
-[node name="Floor" parent="." instance=ExtResource("6_au4fu")]
-visible = false
-type = 1
-
-[node name="Model" parent="Floor" instance=ExtResource("12_hfmqf")]
+[node name="Model" parent="Floor" index="1" instance=ExtResource("12_hfmqf")]
 script = ExtResource("4_iqaq3")
 
-[node name="Flammable" parent="Floor" instance=ExtResource("8_spxjo")]
+[node name="Flammable" parent="Floor" index="2" instance=ExtResource("8_spxjo")]
 transform = Transform3D(0.3, 0, 0, 0, 1.2, 0, 0, 0, 0.3, 0, 0.05, 0)
 visible = false
 material = ExtResource("9_xt87q")
 
-[node name="Walkable" parent="Floor" instance=ExtResource("10_45704")]
+[node name="Walkable" parent="Floor" index="3" instance=ExtResource("10_45704")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 visible = false
 
-[node name="ItemHolder" type="Node3D" parent="Floor"]
+[node name="ItemHolder" type="Node3D" parent="Floor" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 script = ExtResource("8_iqaq3")
 
-[node name="Wall" parent="." instance=ExtResource("6_au4fu")]
-visible = false
-type = 2
-
-[node name="Model" parent="Wall" instance=ExtResource("14_yswa7")]
+[node name="Model" parent="Wall" index="1" instance=ExtResource("14_yswa7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 script = ExtResource("10_rgv0y")
 
-[node name="Floor" parent="Wall" instance=ExtResource("12_hfmqf")]
+[node name="Floor" parent="Wall" index="2" instance=ExtResource("12_hfmqf")]
 script = ExtResource("4_iqaq3")
 
-[node name="ItemHolder" type="Node3D" parent="Wall"]
+[node name="ItemHolder" type="Node3D" parent="Wall" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 script = ExtResource("8_iqaq3")
 contact_point = 2
 
-[node name="Blockable" type="Node3D" parent="Wall"]
+[node name="Blockable" type="Node3D" parent="Wall" index="4"]
 script = ExtResource("10_iqaq3")
 
-[node name="Window" parent="." instance=ExtResource("6_au4fu")]
-visible = false
-type = 3
-
-[node name="Model" parent="Window" instance=ExtResource("16_clihy")]
+[node name="Model" parent="Window" index="1" instance=ExtResource("16_clihy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 script = ExtResource("13_rgv0y")
 
-[node name="Floor" parent="Window" instance=ExtResource("12_hfmqf")]
+[node name="Floor" parent="Window" index="2" instance=ExtResource("12_hfmqf")]
 script = ExtResource("4_iqaq3")
 
-[node name="WindSource" type="Node3D" parent="Window"]
+[node name="WindSource" type="Node3D" parent="Window" index="3"]
 script = ExtResource("12_iqaq3")
 
-[node name="Blockable" type="Node3D" parent="Window"]
+[node name="Blockable" type="Node3D" parent="Window" index="4"]
 script = ExtResource("10_iqaq3")
 
-[node name="Door" parent="." instance=ExtResource("6_au4fu")]
-visible = false
-type = 4
-
-[node name="Model" parent="Door" instance=ExtResource("11_h3phj")]
+[node name="Model" parent="Door" index="1" instance=ExtResource("11_h3phj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 script = ExtResource("13_rgv0y")
 
-[node name="Floor" parent="Door" instance=ExtResource("12_hfmqf")]
+[node name="Floor" parent="Door" index="2" instance=ExtResource("12_hfmqf")]
 script = ExtResource("4_iqaq3")
 
-[node name="Flammable" parent="Door" instance=ExtResource("8_spxjo")]
+[node name="Flammable" parent="Door" index="3" instance=ExtResource("8_spxjo")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.06, 0)
 visible = false
 material = ExtResource("9_xt87q")
 
-[node name="Walkable" parent="Door" instance=ExtResource("10_45704")]
+[node name="Walkable" parent="Door" index="4" instance=ExtResource("10_45704")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.06, 0)
 visible = false
 
-[node name="Blockable" type="Node3D" parent="Door"]
+[node name="Blockable" type="Node3D" parent="Door" index="5"]
 script = ExtResource("10_iqaq3")

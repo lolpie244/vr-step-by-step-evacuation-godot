@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://tojpii1rkq2c"]
+
+[ext_resource type="Script" uid="uid://xxx4au7nd1" path="res://stages/common_nodes/tiles/tile_factory.gd" id="1_cvn7d"]
+[ext_resource type="PackedScene" uid="uid://bayl0mx8j5o7a" path="res://stages/strategic/tiles/tile.tscn" id="2_iucur"]
+
+[node name="TileFactory" type="Node3D"]
+script = ExtResource("1_cvn7d")
+
+[node name="Floor" parent="." instance=ExtResource("2_iucur")]
+visible = false
+type = 1
+
+[node name="Wall" parent="." instance=ExtResource("2_iucur")]
+visible = false
+type = 2
+
+[node name="Window" parent="." instance=ExtResource("2_iucur")]
+visible = false
+type = 3
+
+[node name="Door" parent="." instance=ExtResource("2_iucur")]
+visible = false
+type = 4

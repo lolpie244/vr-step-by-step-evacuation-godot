@@ -1,4 +1,4 @@
-class_name FirstPersonItemFactory
+class_name ItemFactory
 extends NodeFactory
 
 
@@ -9,5 +9,6 @@ func create(impl: Item) -> ItemNode:
 		if variation.size == impl.size:
 			var result := get_duplicate(variation) as ItemNode
 			result.set_impl(impl)
+
 			return result
 	return null

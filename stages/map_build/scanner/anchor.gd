@@ -3,16 +3,6 @@ extends Node3D
 
 signal initialized
 
-const LABEL_TO_TYPE := {
-	"floor": Tile.Type.FLOOR,
-	"wall_face": Tile.Type.WALL,
-	"door_frame": Tile.Type.DOOR,
-	"window_frame": Tile.Type.WINDOW,
-}
-const MULTIPLE_TILES: Array[Tile.Type] = [Tile.Type.FLOOR, Tile.Type.WALL]
-
-var type: Tile.Type = Tile.Type.NONE
-var label := ""
 var is_initialized: bool = false
 
 var left_corner := Vector2(1000, 1000)
@@ -20,19 +10,28 @@ var right_corner := Vector2(-1000, -1000)
 
 var valid: bool:
 	get():
-		return type != Tile.Type.NONE
+		return _type != null
 
 var size: Vector2:
 	get():
 		return right_corner - left_corner
 
+var _type
+var _label := ""
 var _points: Array[Vector2] = []
 var _mesh_points: Array[Vector3] = []
 
 
+func get_type():
+	return _type
+
+
+func set_label(label: String):
+	_label = label
+
+
 func setup_scene(entity: OpenXRFbSpatialEntity) -> void:
-	label = entity.get_semantic_labels()[0]
-	type = LABEL_TO_TYPE.get(label, Tile.Type.NONE)
+	set_label(_label)
 
 	if !valid:
 		return

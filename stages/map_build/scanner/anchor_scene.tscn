@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxo3bt6kf8q8u"]
-
-[ext_resource type="Script" uid="uid://bkvotj832jg0y" path="res://stages/map_build/scanner/anchor_scene.gd" id="1_dtmxl"]
-
-[node name="AnchorScene" type="Node3D"]
-script = ExtResource("1_dtmxl")

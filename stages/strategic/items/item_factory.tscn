@@ -1,49 +1,27 @@
 [gd_scene load_steps=8 format=3 uid="uid://cxfojo8jvfcd5"]
 
-[ext_resource type="Script" uid="uid://d05akj26kgt5g" path="res://stages/strategic/items/item_factory.gd" id="1_60hsf"]
-[ext_resource type="Script" uid="uid://bki20d72c3opp" path="res://stages/common_nodes/items/item_node.gd" id="2_65n1v"]
+[ext_resource type="PackedScene" uid="uid://cxrxfl7pkartx" path="res://stages/common_nodes/items/item_factory.tscn" id="1_lnyr2"]
+[ext_resource type="Script" uid="uid://d4ejfb1nmyp08" path="res://stages/common_nodes/items/item_factory.gd" id="2_fxm5s"]
 [ext_resource type="PackedScene" uid="uid://bk5imvrho04nk" path="res://assets/items/bed_single.glb" id="3_dws7h"]
 [ext_resource type="PackedScene" uid="uid://did5xwtowinu4" path="res://assets/items/table.glb" id="4_bweog"]
 [ext_resource type="Script" uid="uid://dkfkpnb2ubu0l" path="res://common/mesh_with_material.gd" id="4_fxm5s"]
 [ext_resource type="PackedScene" uid="uid://c3wpeixkcvp70" path="res://assets/items/extinguisher_powder/model.tscn" id="5_g0mgb"]
 [ext_resource type="PackedScene" uid="uid://dmvb1dap8a5x5" path="res://assets/items/extinguisher_co2/model.tscn" id="6_fxm5s"]
 
-[node name="StrategicItemFactory" type="Node3D"]
-script = ExtResource("1_60hsf")
-metadata/_custom_type_script = "uid://5hidv4t3hoob"
+[node name="StrategicItemFactory" instance=ExtResource("1_lnyr2")]
+script = ExtResource("2_fxm5s")
 
-[node name="BedSingle" type="Node3D" parent="."]
-visible = false
-script = ExtResource("2_65n1v")
-type = "Furniture.BED"
-size = Vector2i(1, 2)
-
-[node name="Model" parent="BedSingle" instance=ExtResource("3_dws7h")]
+[node name="Model" parent="BedSingle" index="0" instance=ExtResource("3_dws7h")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 script = ExtResource("4_fxm5s")
 
-[node name="Table" type="Node3D" parent="."]
-visible = false
-script = ExtResource("2_65n1v")
-type = "Furniture.TABLE"
-
-[node name="Model" parent="Table" instance=ExtResource("4_bweog")]
+[node name="Model" parent="Table" index="0" instance=ExtResource("4_bweog")]
 script = ExtResource("4_fxm5s")
 
-[node name="ExtinguisherPowder" type="Node3D" parent="."]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-script = ExtResource("2_65n1v")
-type = "Extinguisher.POWDER"
-
-[node name="Model" parent="ExtinguisherPowder" instance=ExtResource("5_g0mgb")]
+[node name="Model" parent="ExtinguisherPowder" index="0" instance=ExtResource("5_g0mgb")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.14, 0)
 script = ExtResource("4_fxm5s")
 
-[node name="ExtinguisherCO2" type="Node3D" parent="."]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
-script = ExtResource("2_65n1v")
-type = "Extinguisher.CO2"
-
-[node name="Model" parent="ExtinguisherCO2" instance=ExtResource("6_fxm5s")]
+[node name="Model" parent="ExtinguisherCO2" index="0" instance=ExtResource("6_fxm5s")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.05, 0)
 script = ExtResource("4_fxm5s")
