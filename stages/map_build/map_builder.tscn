@@ -101,15 +101,35 @@ shape = SubResource("BoxShape3D_n64ml")
 transform = Transform3D(0.95461535, 0, -0.29784143, 0, 1, 0, 0.29784143, 0, 0.95461535, -0.7579842, 0.6511028, 1.7329466)
 visible = true
 
-[node name="Table" parent="ItemsCatalog" index="1"]
-transform = Transform3D(0.0062483265, 0, -0.99998045, 0, 1, 0, 0.99998045, 0, 0.0062483265, -0.77256805, 0.6698104, 1.8556006)
+[node name="BedDouble" parent="ItemsCatalog" index="1"]
+transform = Transform3D(0.97375005, 0, -0.22762015, 0, 1, 0, 0.22762015, 0, 0.97375005, -0.7682738, 0.63978535, 1.858898)
 visible = true
 
-[node name="Extinguisher_CO2" parent="ItemsCatalog" index="2"]
+[node name="Storage" parent="ItemsCatalog" index="2"]
+transform = Transform3D(0.8060935, 0, -0.5917881, 0, 1, 0, 0.5917881, 0, 0.8060935, -0.7592204, 0.68902516, 2.2013001)
+visible = true
+
+[node name="Couch" parent="ItemsCatalog" index="3"]
+transform = Transform3D(0.73305357, 0, -0.6801709, 0, 1, 0, 0.6801709, 0, 0.73305357, -0.7521368, 0.6650084, 2.0905342)
+visible = true
+
+[node name="Table" parent="ItemsCatalog" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7490471, 0.6698104, 1.9714763)
+visible = true
+
+[node name="Lamp" parent="ItemsCatalog" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7359634, 0.46119964, 1.7990285)
+visible = true
+
+[node name="Plant" parent="ItemsCatalog" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75564086, 0.41141456, 1.727977)
+visible = true
+
+[node name="Extinguisher_CO2" parent="ItemsCatalog" index="7"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.7502705, 0.90923333, 1.7082081)
 visible = true
 
-[node name="Extinguisher_Powder" parent="ItemsCatalog" index="3"]
+[node name="Extinguisher_Powder" parent="ItemsCatalog" index="8"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.7454768, 0.92243624, 1.8219397)
 visible = true
 
@@ -126,5 +146,15 @@ visible = true
 [editable path="ItemsCatalog"]
 [editable path="ItemsCatalog/BedSingle"]
 [editable path="ItemsCatalog/BedSingle/BodyOrigin/Body"]
+[editable path="ItemsCatalog/BedDouble"]
+[editable path="ItemsCatalog/BedDouble/BodyOrigin/Body"]
+[editable path="ItemsCatalog/Storage"]
+[editable path="ItemsCatalog/Storage/BodyOrigin/Body"]
+[editable path="ItemsCatalog/Couch"]
+[editable path="ItemsCatalog/Couch/BodyOrigin/Body"]
 [editable path="ItemsCatalog/Table"]
 [editable path="ItemsCatalog/Table/BodyOrigin/Body"]
+[editable path="ItemsCatalog/Lamp"]
+[editable path="ItemsCatalog/Lamp/BodyOrigin/Body"]
+[editable path="ItemsCatalog/Plant"]
+[editable path="ItemsCatalog/Plant/BodyOrigin/Body"]

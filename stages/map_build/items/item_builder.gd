@@ -11,7 +11,8 @@ extends Node3D
 @onready var snap_zone: XRToolsSnapZone = $BodyOrigin/SnapZone
 @onready var area: Area3D = $BodyOrigin/Body/Area3D
 @onready var origin_point: Node3D = $BodyOrigin/Body/OriginPoint
-@onready var map_builder: MapBuilder = Utils.find_parent_that_implements(self, "MapBuilder")
+@onready
+var map_builder: MapBuilderScene = Utils.find_parent_that_implements(self, "MapBuilderScene")
 
 
 func _ready():

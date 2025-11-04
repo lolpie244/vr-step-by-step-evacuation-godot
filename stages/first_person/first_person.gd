@@ -18,8 +18,8 @@ var context: Context
 var grid := GameCore.grid
 var items: Dictionary[Item, ItemNode] = {}
 
-@onready var tile_factory: FirstPersonTileFactory = $TileFactory
-@onready var item_factory: FirstPersonItemFactory = $ItemFactory
+@onready var tile_factory: TileFactory = $TileFactory
+@onready var item_factory: ItemFactory = $ItemFactory
 @onready var extinguisher_factory: FirstPersonExtinguisherFactory = $ExtinguisherFactory
 @onready var player: PlayerVR = $PlayerVR
 @onready var point_generator: SpawnPointGenerator = $PlayerVR/SpawnPointGenerator
@@ -59,9 +59,7 @@ func _ready() -> void:
 	var ext_impls: Array[Extinguisher] = []
 
 	for ext_type in [Extinguisher.Type.POWDER, Extinguisher.Type.CO2]:
-		var ext_impl := Extinguisher.new()
-		ext_impl.type = ext_type
-
+		var ext_impl := Extinguisher.new(ext_type)
 		ext_impls.append(ext_impl)
 
 	point_generator.points_count = ext_impls.size()

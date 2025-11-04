@@ -23,7 +23,7 @@ func _ready():
 	impl.state_changed.connect(_on_impl_state_changed)
 	impl.strength_changed.connect(_on_impl_strength_changed)
 	impl.material = material
-	_on_impl_state_changed(impl.state)
+	_on_impl_state_changed(impl, impl.state)
 	_on_impl_strength_changed(impl.strength)
 
 

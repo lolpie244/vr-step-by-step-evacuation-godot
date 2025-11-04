@@ -9,7 +9,9 @@ func _ready():
 		Extinguisher.new(Extinguisher.Type.CO2),
 		Extinguisher.new(Extinguisher.Type.WATER),
 		Furniture.new(Furniture.Type.BED, Vector2i(1, 2)),
-		Furniture.new(Furniture.Type.TABLE, Vector2i.ONE),
+		Furniture.new(Furniture.Type.TABLE),
+		Furniture.new(Furniture.Type.LAMP),
+		Furniture.new(Furniture.Type.PLANT),
 	]
 
 	for item in list_of_items:

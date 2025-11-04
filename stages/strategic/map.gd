@@ -24,7 +24,7 @@ var _test_map = [
 
 @onready var tile_factory = $TileFactory
 @onready var character_factory: CharacterNodeFactory = $CharacterFactory
-@onready var item_factory: StrategicItemFactory = $ItemFactory
+@onready var item_factory: ItemFactory = $ItemFactory
 
 
 # TODO: only for testing
