@@ -27,7 +27,6 @@ visible = false
 
 [node name="Model" parent="BedDouble" index="0" instance=ExtResource("4_r7xmi")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
-visible = false
 script = ExtResource("4_fxm5s")
 
 [node name="Table" parent="." index="2"]

@@ -45,7 +45,6 @@ func _on_action_pressed(_pickable: Variant) -> void:
 
 	var impl: Item = _get_impl()
 	var direction: Utils.Direction
-	print(model.global_rotation_degrees.y)
 
 	match snapped(model.global_rotation_degrees.y, 90):
 		0:

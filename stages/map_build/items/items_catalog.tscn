@@ -39,11 +39,13 @@ metadata/_custom_type_script = "uid://dwkncdtofp2bq"
 
 [sub_resource type="Resource" id="Resource_5ixe5"]
 script = ExtResource("7_0jw6i")
+open_pose = ExtResource("18_5ixe5")
 closed_pose = ExtResource("18_5ixe5")
 metadata/_custom_type_script = "uid://dwkncdtofp2bq"
 
 [sub_resource type="Resource" id="Resource_fnwg3"]
 script = ExtResource("7_0jw6i")
+open_pose = ExtResource("18_5ixe5")
 closed_pose = ExtResource("19_fnwg3")
 metadata/_custom_type_script = "uid://dwkncdtofp2bq"
 
@@ -79,7 +81,7 @@ transform = Transform3D(-4.371139e-08, -1, 0, 0.90630776, -3.961597e-08, 0.42261
 hand_pose = SubResource("Resource_0jw6i")
 
 [node name="OriginPoint" parent="BedDouble/BodyOrigin/Body" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033779696, -0.012558868, -0.04954593)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033779696, -0.012558868, -0.0014586374)
 
 [node name="Model" parent="BedDouble" instance=ExtResource("7_3x5ot")]
 transform = Transform3D(-2.8412401e-09, 0, 0.065, 0, 0.065, 0, -0.065, 0, -2.8412401e-09, -0.036608472, -0.01356183, 0.007199757)

@@ -15,6 +15,7 @@ func set_impl(_impl: Tile):
 
 
 func _ready() -> void:
+	sprite.texture = texture
 	background.custom_aabb = AABB()
 	var size := background.texture.get_size() * background.pixel_size
 	background.custom_aabb.size = Vector3(size.x, 0.01, size.y)
@@ -25,7 +26,6 @@ func init():
 
 
 func tile2d_init():
-	sprite.texture = texture
 	visible = true
 
 

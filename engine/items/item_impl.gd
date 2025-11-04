@@ -9,6 +9,10 @@ var rotation: float:
 	get():
 		return deg_to_rad(90 * _direction)
 
+var direction: Utils.Direction:
+	get():
+		return _direction
+
 var _tile: Tile
 var _direction: Utils.Direction = Utils.Direction.UP
 
