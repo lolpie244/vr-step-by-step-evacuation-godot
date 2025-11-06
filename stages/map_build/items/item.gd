@@ -2,7 +2,6 @@ class_name MapBuilderItem
 extends Node3D
 
 var impl: Item
-var _direction: Utils.Direction = Utils.Direction.UP
 
 @onready var sprite: Sprite3D = $Sprite
 
@@ -21,7 +20,7 @@ func set_texture(texture):
 		Vector2.ONE * Constants.TILE_SIZE_IN_PX / 2.0 * sprite.pixel_size - sprite_size()
 	)
 
-	sprite.position = Vector3(sprite_pos.x, sprite_pos.y, 0)
+	sprite.position = Vector3(-1.5, sprite_pos.y, 0)
 
 
 func set_impl(_impl):
@@ -43,15 +42,3 @@ func _get_offset_for_direction(direction: Utils.Direction) -> Vector3:
 func _on_placed(_tile: Tile):
 	show()
 	self.rotation.y = -impl.rotation
-
-	if (
-		impl.get_direction() == _direction
-		or impl.size.x == 1
-		or (impl.get_direction() in [Utils.Direction.LEFT, Utils.Direction.RIGHT] and impl.size.y == 1)
-	):
-		return
-
-	self.position = (
-		-_get_offset_for_direction(_direction) + _get_offset_for_direction(impl.get_direction())
-	)
-	_direction = impl.get_direction()

@@ -5,51 +5,10 @@ var _tile_nodes: Array
 var _characters: Array[CharacterStrategic]
 var _items: Array[ItemNode]
 
-# temp
-var _test_map = [
-	["w", "w", "w", "w", "w", "w"],
-	["w", "f", "f", "w", "f", "w"],
-	["w", "f", "f", "d", "f", "w"],
-	["w", "w", "w", "w", "d", "w"],
-	["w", "f", "f", "w", "f", "w"],
-	["w", "w", "w", "w", "f", "w"],
-	["w", "f", "f", "d", "f", "w"],
-	["o", "f", "f", "w", "f", "w"],
-	["o", "f", "f", "w", "f", "w"],
-	["o", "f", "f", "w", "f", "w"],
-	["w", "f", "f", "w", "f", "w"],
-	["w", "f", "f", "w", "f", "w"],
-	["w", "w", "w", "w", "w", "w"],
-]
 
 @onready var tile_factory = $TileFactory
 @onready var character_factory: CharacterNodeFactory = $CharacterFactory
 @onready var item_factory: ItemFactory = $ItemFactory
-
-
-# TODO: only for testing
-static func types_from_str(str_map: Array) -> Array:
-	if str_map.size() < 0:
-		return []
-
-	var result = Utils.get_matrix(str_map.size(), str_map[0].size(), Tile.Type.NONE)
-
-	for i in str_map.size():
-		for j in str_map[i].size():
-			match str_map[i][j]:
-				"w":
-					result[i][j] = Tile.Type.WALL
-				"f":
-					result[i][j] = Tile.Type.FLOOR
-				"d":
-					result[i][j] = Tile.Type.DOOR
-				"o":
-					result[i][j] = Tile.Type.WINDOW
-				_:
-					push_warning("Unknown tile: on position [%, %]" % i, j)
-					result.type_grid[i][j] = Tile.Type.NONE
-
-	return result
 
 
 func _ready() -> void:
@@ -60,10 +19,7 @@ func _ready() -> void:
 	item_factory.set_material(cutoff_material)
 	character_factory.set_material(cutoff_material)
 
-	if impl.is_empty():
-		impl.set_tiles(types_from_str(_test_map))
-	else:
-		reset_map()
+	reset_map()
 
 
 func reset_map():

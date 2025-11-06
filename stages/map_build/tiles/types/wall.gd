@@ -16,6 +16,6 @@ func init():
 		new_sprite.rotate_z(deg_to_rad(rotations[i][1]))
 		background.add_child(new_sprite)
 
-	if background.get_child_count() > 1:
+	if background.get_child_count() > 2:
 		background.remove_child(sprite)
 		sprite = background.get_child(background.get_child_count() - 1)

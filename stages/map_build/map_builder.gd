@@ -18,7 +18,7 @@ func _ready() -> void:
 	tile_factory.set_material(map.cutoff_material)
 	item_catalog.set_material(map.cutoff_material)
 	_set_map(impl)
-	map_scanner.start_scan()
+	#map_scanner.start_scan()
 
 func _set_map(grid: MapGrid):
 	impl = grid
@@ -87,8 +87,6 @@ func _on_tile_type_changed(type: Tile.Type, pos: Vector2i) -> void:
 
 
 func _on_exit_button_released(_button: Variant) -> void:
-	for item in _items:
-		impl.add_item(item.impl)
 	impl.strip()
 	_clear()
 	GameCore.set_grid(impl)
@@ -109,3 +107,7 @@ func get_item_node(item: Item) -> MapBuilderItem:
 		if item_node.impl == item:
 			return item_node
 	return null
+
+
+func _on_scan_room_button_released(_button: Variant) -> void:
+	map_scanner.start_scan()

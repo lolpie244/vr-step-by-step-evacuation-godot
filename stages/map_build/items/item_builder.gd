@@ -60,6 +60,7 @@ func _on_action_pressed(_pickable: Variant) -> void:
 	if impl.is_valid_placement(tile.impl, direction):
 		create_node(impl)
 		impl.place(tile.impl, direction)
+		tile.impl.grid.add_item(impl)
 
 
 func create_node(impl: Item):

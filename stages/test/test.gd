@@ -4,8 +4,6 @@ extends Node3D
 
 var character
 
-var _points: Array[Vector3] = []
-
 @onready var map: Map = $Map
 
 

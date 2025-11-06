@@ -25,3 +25,8 @@ script = ExtResource("3_cjbwy")
 
 [node name="Texture" type="Sprite3D" parent="Background"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+
+[node name="DebugText" type="Label3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742277e-08, 0, -8.742277e-08, -1, 0, 0, 0)
+visible = false
+modulate = Color(0, 0, 0, 1)

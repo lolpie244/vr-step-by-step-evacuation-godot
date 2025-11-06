@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b80h6lkl843dr"]
+[gd_scene load_steps=34 format=3 uid="uid://b80h6lkl843dr"]
 
 [ext_resource type="Script" uid="uid://criypdphkofqa" path="res://stages/map_build/items/items_catalog.gd" id="1_05res"]
 [ext_resource type="PackedScene" uid="uid://kx1pwc0tgm1k" path="res://stages/map_build/items/item_builder.tscn" id="1_7ps7r"]
@@ -37,6 +37,16 @@ metadata/_custom_type_script = "uid://dwkncdtofp2bq"
 script = ExtResource("7_0jw6i")
 closed_pose = ExtResource("9_m8e2c")
 metadata/_custom_type_script = "uid://dwkncdtofp2bq"
+
+[sub_resource type="Resource" id="Resource_inisk"]
+script = ExtResource("7_0jw6i")
+closed_pose = ExtResource("7_m8e2c")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="Resource" id="Resource_jendd"]
+script = ExtResource("7_0jw6i")
+closed_pose = ExtResource("9_m8e2c")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
 
 [sub_resource type="Resource" id="Resource_5ixe5"]
 script = ExtResource("7_0jw6i")
@@ -94,21 +104,28 @@ furniture_type = 5
 icon = ExtResource("11_dvbgd")
 size = Vector2i(2, 1)
 
+[node name="GrabPointHandLeft" parent="Storage/BodyOrigin/Body" index="1"]
+transform = Transform3D(6.764924e-09, -1, -7.923193e-08, -0.9063077, -3.961597e-08, 0.42261824, -0.42261824, 6.894955e-08, -0.9063077, -0.041899953, -0.02105803, 0.044254344)
+hand_pose = SubResource("Resource_inisk")
+
+[node name="GrabPointHandRight" parent="Storage/BodyOrigin/Body" index="2"]
+transform = Transform3D(-4.371139e-08, -1, 0, 0.90630776, -3.961597e-08, 0.42261827, -0.42261827, 1.8473232e-08, 0.90630776, -0.043515343, -0.023683444, -0.05668977)
+hand_pose = SubResource("Resource_jendd")
+
 [node name="OriginPoint" parent="Storage/BodyOrigin/Body" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033779696, -0.04880844, -0.0075032115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02791569, -0.04880844, -0.0075032115)
 
 [node name="Model" parent="Storage" instance=ExtResource("12_l66r4")]
-transform = Transform3D(-0.08, 0, -1.20796635e-08, 0, 0.08, 0, 1.20796635e-08, 0, -0.08, 0.033269063, -0.062536865, -0.0072824657)
+transform = Transform3D(-0.06, 0, -9.059748e-09, 0, 0.06, 0, 9.059748e-09, 0, -0.06, 0.033269063, -0.062536865, -0.0072824657)
 
 [node name="Couch" parent="." instance=ExtResource("1_7ps7r")]
-visible = false
 script = ExtResource("2_qrrd0")
 furniture_type = 3
 icon = ExtResource("13_l66r4")
 size = Vector2i(2, 1)
 
 [node name="OriginPoint" parent="Couch/BodyOrigin/Body" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033785515, -0.032777466, -0.0075032115)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.034811698, -0.032777466, -0.0075032115)
 
 [node name="Model" parent="Couch" instance=ExtResource("14_2w5cx")]
 transform = Transform3D(-0.07, 0, -1.0569706e-08, 0, 0.07, 0, 1.0569706e-08, 0, -0.07, 0.033543892, -0.037130825, -0.0058781207)

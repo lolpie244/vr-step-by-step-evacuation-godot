@@ -8,10 +8,12 @@ var impl: Tile
 
 @onready var background: Sprite3D = $Background
 @onready var sprite: Sprite3D = $Background/Texture
+@onready var debug_text: Label3D = $Background/DebugText
 
 
 func set_impl(_impl: Tile):
 	impl = _impl
+
 
 
 func _ready() -> void:
@@ -27,6 +29,10 @@ func init():
 
 func tile2d_init():
 	visible = true
+
+	if Constants.DEBUG_MODE:
+		debug_text.show()
+		debug_text.text = "{0}".format([impl.pos])
 
 
 func get_aabb():
