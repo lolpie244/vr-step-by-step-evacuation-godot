@@ -9,10 +9,19 @@ const LABEL_TO_TYPE := {
 }
 
 const MULTIPLE_TILES: Array[Tile.Type] = [Tile.Type.FLOOR, Tile.Type.WALL]
+const ITEM_HOLDER_TILES: Array[Tile.Type] = [Tile.Type.FLOOR]
 
 
 func get_type() -> Tile.Type:
 	return _type
+
+
+func is_item_holder() -> bool:
+	return _type in ITEM_HOLDER_TILES
+
+
+func is_multiple_tiles() -> bool:
+	return _type in MULTIPLE_TILES
 
 
 func set_label(label: String):

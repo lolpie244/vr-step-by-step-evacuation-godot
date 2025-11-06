@@ -75,7 +75,7 @@ func reset_map():
 
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
-			if !impl.get_tile(x, y):
+			if !impl.get_tile(x, y) || impl.get_tile(x, y).type == Tile.Type.NONE:
 				continue
 
 			var tile: TileNode = tile_factory.create(impl.get_tile(x, y))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://xnfqapr2ajxs"]
+[gd_scene load_steps=17 format=3 uid="uid://xnfqapr2ajxs"]
 
 [ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/common_scenes/map_scene/map_scene.tscn" id="1_mavd1"]
 [ext_resource type="Script" uid="uid://cklvbndqqhyfp" path="res://stages/map_build/map_builder.gd" id="1_og28i"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dxo3bt6kf8q8u" path="res://stages/map_build/scanner/tile_anchor.tscn" id="3_6sc0j"]
 [ext_resource type="Script" uid="uid://ca2urkngiqc5i" path="res://stages/map_build/scanner/map_scanner.gd" id="3_nt64x"]
 [ext_resource type="Shader" uid="uid://b36ybr0m8b7m" path="res://stages/map_build/cutoff.gdshader" id="5_jfixn"]
+[ext_resource type="PackedScene" uid="uid://cub7v4mtm41il" path="res://stages/map_build/scanner/furniture_anchor.tscn" id="5_ltwy7"]
 [ext_resource type="PackedScene" uid="uid://cilrgs5jxvr7y" path="res://stages/map_build/tiles/tile_factory.tscn" id="6_n64ml"]
 [ext_resource type="PackedScene" uid="uid://4xjuluon04x0" path="res://stages/map_build/tile_type_pen.tscn" id="8_qwooh"]
 [ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/button.tscn" id="9_meh3h"]
@@ -28,6 +29,14 @@ strategic = ExtResource("2_0uych")
 default_scene = ExtResource("3_6sc0j")
 auto_create = false
 visible = false
+scenes/wall_art = ExtResource("5_ltwy7")
+scenes/couch = ExtResource("5_ltwy7")
+scenes/table = ExtResource("5_ltwy7")
+scenes/bed = ExtResource("5_ltwy7")
+scenes/lamp = ExtResource("5_ltwy7")
+scenes/plant = ExtResource("5_ltwy7")
+scenes/screen = ExtResource("5_ltwy7")
+scenes/storage = ExtResource("5_ltwy7")
 
 [node name="SpatialAnchorManager" type="OpenXRFbSpatialAnchorManager" parent="PlayerVR" index="5"]
 scene = ExtResource("3_6sc0j")

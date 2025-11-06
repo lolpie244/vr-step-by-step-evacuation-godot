@@ -1,10 +1,10 @@
 @tool
 extends MapBuilderItemCreator
 
-@export var type: Furniture.Type
+@export var furniture_type: Furniture.Type
 
 
 func _get_impl():
-	var impl := Furniture.new(type, size)
+	var impl := Furniture.new(furniture_type, size)
 
 	return impl

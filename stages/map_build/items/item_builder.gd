@@ -4,6 +4,14 @@ extends Node3D
 
 @export var icon: Texture2D
 @export var size: Vector2i = Vector2i.ONE
+@export var rotateable: bool = true
+
+var type: String:
+	get():
+		var impl = _get_impl()
+		if impl:
+			return impl.get_type()
+		return ""
 
 @onready var item: MapBuilderItem = $Item
 @onready var model: Node3D = $Model
@@ -27,7 +35,7 @@ func _ready():
 
 
 func _get_impl():
-	assert(false, "Not implemented")
+	return null
 
 
 func _distance_to_tile(tile: Tile2D):
@@ -44,28 +52,20 @@ func _on_action_pressed(_pickable: Variant) -> void:
 		return
 
 	var impl: Item = _get_impl()
-	var direction: Utils.Direction
+	var direction: Utils.Direction = Utils.Direction.UP
 
-	match snapped(model.global_rotation_degrees.y, 90):
-		0:
-			direction = Utils.Direction.UP
-		-90:
-			direction = Utils.Direction.RIGHT
-		90:
-			direction = Utils.Direction.LEFT
-		-180:
-			direction = Utils.Direction.DOWN
-		180:
-			direction = Utils.Direction.DOWN
+	if rotateable:
+		direction = Utils.direction_from_angle(model.global_rotation_degrees)
 
-	if !impl.is_valid_placement(tile.impl, direction):
-		return
+	if impl.is_valid_placement(tile.impl, direction):
+		create_node(impl)
+		impl.place(tile.impl, direction)
 
+
+func create_node(impl: Item):
 	var new_item := item.duplicate(Utils.DEFAULT_DUPLICATE)
 	new_item.set_impl(impl)
 	map_builder.add_item_node(new_item)
-
-	impl.place(tile.impl, direction)
 
 
 func _on_model_dropped(pickable: Variant) -> void:

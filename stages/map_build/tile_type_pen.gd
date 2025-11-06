@@ -26,5 +26,6 @@ func _on_area_entered(body: Area3D) -> void:
 	if not body is Tile2D:
 		return
 	var tile := body as Tile2D
-	if tile.impl.type != type:
+	var item_holder: ItemHolder = tile.impl.get_mixin(ItemHolder)
+	if tile.impl.type != type or (item_holder and item_holder.has_item()):
 		type_changed.emit(type, tile.impl.pos)

@@ -1,17 +1,14 @@
 class_name Item
-extends Node
+extends RefCounted
 
 signal placed(tile: Tile)
+signal removed(item: Item)
 
 var size: Vector2i = Vector2.ONE
 
 var rotation: float:
 	get():
 		return deg_to_rad(90 * _direction)
-
-var direction: Utils.Direction:
-	get():
-		return _direction
 
 var _tile: Tile
 var _direction: Utils.Direction = Utils.Direction.UP
@@ -27,7 +24,11 @@ func _init(_size: Vector2i = Vector2i.ONE):
 
 
 func _is_valid_tile(tile: Tile) -> bool:
-	return _tile and tile.get_mixin(ItemHolder) and tile.get_mixin(ItemHolder).can_hold_item(self)
+	return tile and tile.get_mixin(ItemHolder) and tile.get_mixin(ItemHolder).can_hold_item(self)
+
+
+func get_direction() -> Utils.Direction:
+	return _direction
 
 
 func tiles() -> Array[Tile]:
@@ -59,7 +60,7 @@ func valid() -> bool:
 		return false
 
 	for tile in tiles():
-		if !_is_valid_tile(_tile):
+		if !_is_valid_tile(tile):
 			return false
 	return true
 
@@ -82,7 +83,7 @@ func is_valid_placement(tile: Tile, direction: Utils.Direction) -> bool:
 
 func place(tile: Tile, direction: Utils.Direction):
 	if !is_valid_placement(tile, direction):
-		return
+		return false
 
 	_tile = tile
 	_direction = direction
@@ -95,3 +96,8 @@ func restore_position():
 		placed_tile.get_mixin(ItemHolder).place_item(self)
 
 	placed.emit(_tile)
+
+
+func remove():
+	self._tile = null
+	removed.emit(self)

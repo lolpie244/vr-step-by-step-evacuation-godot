@@ -44,9 +44,14 @@ func _on_placed(_tile: Tile):
 	show()
 	self.rotation.y = -impl.rotation
 
-	if impl.size.x == 1 or impl.size.y == 1 or impl.direction == _direction:
+	if (
+		impl.get_direction() == _direction
+		or impl.size.x == 1
+		or (impl.get_direction() in [Utils.Direction.LEFT, Utils.Direction.RIGHT] and impl.size.y == 1)
+	):
 		return
+
 	self.position = (
-		-_get_offset_for_direction(_direction) + _get_offset_for_direction(impl.direction)
+		-_get_offset_for_direction(_direction) + _get_offset_for_direction(impl.get_direction())
 	)
-	_direction = impl.direction
+	_direction = impl.get_direction()

@@ -1,11 +1,10 @@
 class_name MapScanner
 extends Node
 
-signal map_scanned(map: Array[Array])
+signal map_scanned(map: MapGrid)
 var _anchors: Array[XRAnchor] = []
 
 @onready var scene_manager: OpenXRFbSceneManager = $"../PlayerVR/SceneManager"
-@onready var items_catalog: ItemsCatalog = $"../ItemsCatalog"
 
 
 func start_scan() -> void:
@@ -29,24 +28,28 @@ func _on_scene_anchor_created(scene_node: Object, _spatial_entity: Object) -> vo
 	_anchors.append(scene_node)
 
 
-func _set_tile(map: Array, anchor: TileXRAnchor, start: Vector2, end: Vector2):
+func _set_tile(map: MapGrid, anchor: TileXRAnchor, start: Vector2, end: Vector2):
 	var skip := false
 	for x in range(start.x, end.x):
 		if skip:
 			break
 		for y in range(start.y, end.y):
-			if map[x][y] == null || map[x][y] <= anchor.get_type():
-				map[x][y] = anchor.get_type()
-				if not anchor.get_type() in TileXRAnchor.MULTIPLE_TILES:
+			if map.get_tile(x, y) == null:
+				map.create_tile(anchor.get_type(), x, y)
+				if anchor.is_item_holder():
+					map.get_tile(x, y).get_or_create_mixin(ItemHolder)
+				if not anchor.is_multiple_tiles():
 					skip = true
 					break
 
 
-func _set_furniture(
-	_map: Array, _anchor: FurnitureXRAnchor, _start: Vector2, _end: Vector2
-) -> Item:
-	var item: Item = _anchor.item
-	return item
+func _set_furniture(map: MapGrid, anchor: FurnitureXRAnchor, start: Vector2, end: Vector2):
+	for x in range(start.x, end.x):
+		for y in range(end.y - 1, start.y - 1, -1):
+			if anchor.item.is_valid_placement(map.get_tile(x, y), anchor.item.get_direction()):
+				map.add_item(anchor.item)
+				anchor.item.place(map.get_tile(x, y), anchor.item.get_direction())
+				return
 
 
 func _set_map_data():
@@ -72,11 +75,17 @@ func _set_map_data():
 			max(right_corner.y, anchor.right_corner.y),
 		)
 
-	_anchors.sort_custom(func(a: XRAnchor, b: XRAnchor): return a.type > b.type)
+	_anchors.sort_custom(
+		func(a: XRAnchor, b: XRAnchor):
+			if a is TileXRAnchor and b is FurnitureXRAnchor:
+				return true
+			if a is FurnitureXRAnchor and b is TileXRAnchor:
+				return false
+			return a.get_type() > b.get_type()
+	)
 
 	var size: Vector2i = ceil((right_corner - left_corner) / Constants.TILE_SIZE_IN_REAL_LIFE)
-	var map := Utils.get_matrix(size.x, size.y)
-	var items: Array[Item] = []
+	var map := MapGrid.new(size)
 
 	for anchor in _anchors:
 		var left := anchor.left_corner - left_corner
@@ -92,7 +101,7 @@ func _set_map_data():
 		if anchor is TileXRAnchor:
 			_set_tile(map, anchor, start, end)
 		if anchor is FurnitureXRAnchor:
-			_set_furniture(items, anchor, start, end)
+			_set_furniture(map, anchor, start, end)
 
 	scene_manager.remove_scene_anchors()
 	map_scanned.emit(map)

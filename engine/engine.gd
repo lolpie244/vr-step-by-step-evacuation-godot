@@ -31,3 +31,13 @@ var _current_turn: int = -1
 func next_turn():
 	_current_turn += 1
 	grid.process_turn(_current_turn)
+
+func set_grid(new_grid: MapGrid):
+	#self.grid = new_grid
+	
+	for signal_info in grid.get_signal_list():
+		for connection in grid.get_signal_connection_list(signal_info["name"]):
+			new_grid.connect(signal_info["name"], connection["callable"])
+			grid.disconnect(signal_info["name"], connection["callable"])
+
+	grid = new_grid

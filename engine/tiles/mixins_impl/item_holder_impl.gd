@@ -2,6 +2,7 @@ class_name ItemHolder
 extends TileMixin
 
 signal item_placed(item: Item)
+signal item_removed(item: Item)
 
 var _item: Item
 var _is_owner: bool
@@ -9,11 +10,14 @@ var _is_owner: bool
 
 func init():
 	_tile.highlight_changed.connect(_highlight_tiles)
-	item_placed.connect(func(_i: Item): _update_walkable())
 
 
 func get_item() -> Item:
 	return _item
+
+
+func has_item() -> bool:
+	return _item != null
 
 
 func can_hold_item(item: Item):
@@ -27,11 +31,27 @@ func can_hold_item(item: Item):
 
 
 func place_item(item: Item):
-	_is_owner = _tile == item._tile
-	_item = item
+	_update_walkable()
+	if item != _item:
+		_is_owner = _tile == item._tile
+		_item = item
+		_item.removed.connect(_on_item_removed)
 
 	if _is_owner:
 		item_placed.emit(item)
+
+
+func remove_item():
+	if !has_item():
+		return
+	_item.remove()
+	_update_walkable()
+
+
+func _on_item_removed(item: Item):
+	_item = null
+	if _is_owner:
+		item_removed.emit(item)
 
 
 func _highlight_tiles(val: bool):
@@ -46,4 +66,4 @@ func _highlight_tiles(val: bool):
 func _update_walkable():
 	var walkable: Walkable = _tile.get_mixin(Walkable)
 	if walkable:
-		walkable.set_blocker(self, self._item != null)
+		walkable.set_blocker(self, self.has_item())
