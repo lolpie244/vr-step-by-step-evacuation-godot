@@ -11,6 +11,10 @@ var _is_owner: bool
 func init():
 	_tile.highlight_changed.connect(_highlight_tiles)
 
+	var flammable: Flammable = _tile.get_mixin(Flammable)
+	if flammable:
+		flammable.state_changed.connect(_on_flammable_state_changed)
+
 
 func get_item() -> Item:
 	return _item
@@ -21,13 +25,7 @@ func has_item() -> bool:
 
 
 func can_hold_item(item: Item):
-	return (
-		(!_item or _item == item)
-		and (
-			!_tile.get_mixin(Flammable)
-			or _tile.get_mixin(Flammable).state == Flammable.State.NOT_BURNING
-		)
-	)
+	return !_item or _item == item
 
 
 func place_item(item: Item):
@@ -67,3 +65,14 @@ func _update_walkable():
 	var walkable: Walkable = _tile.get_mixin(Walkable)
 	if walkable:
 		walkable.set_blocker(self, self.has_item())
+
+
+func _on_flammable_state_changed(_flammable: Flammable, state: Flammable.State):
+	if state == Flammable.State.BURNING:
+		for tile in _item.tiles():
+			var flammable: Flammable = tile.get_mixin(Flammable)
+			if flammable and flammable.state == Flammable.State.NOT_BURNING:
+				flammable.ignite()
+
+	if state == Flammable.State.BURNED:
+		remove_item()

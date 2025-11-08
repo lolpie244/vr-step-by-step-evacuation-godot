@@ -1,4 +1,4 @@
-class_name TileMaterial
+class_name FlammableMaterial
 extends Resource
 
 enum FireType {
@@ -9,8 +9,12 @@ enum FireType {
 	E,  # Energy
 	F,  # Oils
 }
+# polyurethane_foam.tres - couch
+# engineered_wood - table; storage
+# g
 
-@export var material: StandardMaterial3D
+const CONTACT_HEAT_FRACTION := 0.1
+
 @export var density: float  # kg/m3
 @export var heat_release_rate: float  # W/g
 @export var carbon_monoxide_yield: float
@@ -20,3 +24,11 @@ enum FireType {
 
 @export var flammable: bool = true
 @export var fire_type: FireType
+
+var hrr: float:
+	get():
+		return CONTACT_HEAT_FRACTION * heat_release_rate * 1000
+
+var flammable_rate: float:
+	get():
+		return density * thermal_conductivity * heat_capacity

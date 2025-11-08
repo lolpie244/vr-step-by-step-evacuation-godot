@@ -5,6 +5,7 @@ signal placed(tile: Tile)
 signal removed(item: Item)
 
 var size: Vector2i = Vector2.ONE
+var materail: FlammableMaterial
 
 var rotation: float:
 	get():

@@ -10,7 +10,6 @@ enum State {
 	BURNED,
 }
 
-var material: TileMaterial
 var wind := Vector2.ZERO
 
 var strength := 0.95:
@@ -31,7 +30,22 @@ var state := State.NOT_BURNING:
 		if walkable:
 			walkable.set_blocker(self, state != State.NOT_BURNING)
 
+var material: FlammableMaterial:
+	get():
+		if !_item_material:
+			return _tile_material
+		return _item_material
+
+var _tile_material: FlammableMaterial
+var _item_material: FlammableMaterial
 var _ignition_turn: int = -1
+
+
+func init():
+	var item_holder: ItemHolder = _tile.get_mixin(ItemHolder)
+	if item_holder:
+		item_holder.item_placed.connect(_on_item_placed)
+		item_holder.item_removed.connect(_on_item_removed)
 
 
 func can_burn():
@@ -62,3 +76,13 @@ func extinguish(foam_strength: float):
 
 	if strength < 0:
 		state = State.NOT_BURNING
+
+
+func _on_item_placed(item: Item):
+	if item.material:
+		_item_material = item.material.duplicate()
+		_item_material.wind = _tile_material.wind
+
+
+func _on_item_removed(_item: Item):
+	_item_material = null

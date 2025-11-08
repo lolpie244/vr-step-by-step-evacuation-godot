@@ -2,7 +2,7 @@
 extends Node3D
 
 @export var _draw_wind := false
-@export var material: TileMaterial
+@export var material: FlammableMaterial
 @export var particles_scale := 1.0
 
 var impl: Flammable
@@ -22,7 +22,7 @@ func _ready():
 
 	impl.state_changed.connect(_on_impl_state_changed)
 	impl.strength_changed.connect(_on_impl_strength_changed)
-	impl.material = material
+	impl._tile_material = material
 	_on_impl_state_changed(impl, impl.state)
 	_on_impl_strength_changed(impl.strength)
 

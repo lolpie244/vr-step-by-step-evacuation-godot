@@ -13,6 +13,8 @@ enum Type {
 
 var type: Type
 
+var fire_types: Array[FlammableMaterial.FireType] = []
+
 var foam_strength: float = 0:
 	set(value):
 		if !_is_pin_released:
@@ -44,6 +46,16 @@ func release_pin():
 
 	_is_pin_released = true
 	pin_released.emit()
+
+
+func extinguish(flammable: Flammable):
+	if flammable.state != Flammable.State.BURNING:
+		return
+
+	if flammable.material.fire_type in fire_types:
+		flammable.extinguish(foam_strength * 0.002)
+	else:
+		flammable.extinguish(-foam_strength * 0.002)
 
 
 func _process(delta):
