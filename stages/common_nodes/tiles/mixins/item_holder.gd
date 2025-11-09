@@ -6,6 +6,7 @@ enum ContactPoint { BOTTOM, TOP, BACK, FRONT, LEFT, RIGHT }
 @export var contact_point: ContactPoint = ContactPoint.BOTTOM
 
 var impl: ItemHolder
+var item_node: ItemNode
 
 @onready var tile: TileNode = get_parent()
 
@@ -15,6 +16,7 @@ func _ready() -> void:
 		return
 	impl = tile.impl.get_or_create_mixin(ItemHolder)
 	impl.item_placed.connect(_on_item_placed)
+	impl.item_removed.connect(_on_item_removed)
 
 
 func _get_item_node(_item: Item) -> ItemNode:
@@ -41,7 +43,7 @@ func _get_contact_point(node: Node3D) -> Vector3:
 
 
 func _on_item_placed(item: Item):
-	var item_node: ItemNode = _get_item_node(item)
+	item_node = _get_item_node(item)
 
 	if !item_node.get_parent():
 		tile.add_child(item_node)
@@ -52,3 +54,11 @@ func _on_item_placed(item: Item):
 	item_node.position = Vector3.ZERO
 	item_node.position = self.position - _get_contact_point(item_node) + item_node.position
 	item_node.rotation.y = -item.rotation
+
+
+func _on_item_removed(_item: Item):
+	if !item_node:
+		return
+
+	tile.remove_child(item_node)
+	item_node = null

@@ -30,7 +30,6 @@ func set_label(label: String):
 	_label = label
 
 
-
 func setup_scene(entity: OpenXRFbSpatialEntity) -> void:
 	set_label(entity.get_semantic_labels()[0])
 

@@ -58,8 +58,9 @@ script = ExtResource("2_kwoxy")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="HoseEndOrigin/Pickup"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.8626451e-09, 0, 1.8626451e-09, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_n367t")
+cast_shadow = 0
 emitting = false
-amount = 1000
+amount = 500
 lifetime = 0.95
 draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_4mlp5")

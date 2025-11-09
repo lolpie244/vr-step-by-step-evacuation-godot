@@ -2,16 +2,29 @@ class_name Walkable
 extends TileMixin
 
 signal on_chacter_placed(character: Character)
+signal chacter_removed(character: Character)
 
 var enabled: bool:
 	get():
 		return _blockers.size() == 0
 
+var _character: Character
 var _blockers: Array
 
 
+func init():
+	var flammable: Flammable = _tile.get_mixin(Flammable)
+	if flammable:
+		flammable.state_changed.connect(_on_flammable_state_changed)
+
+
 func place_character(character: Character) -> bool:
-	on_chacter_placed.emit(character)
+	_character = character
+
+	on_chacter_placed.emit(_character)
+	_character.tile_changed.connect(_on_character_tile_changed)
+	_character.death.connect(_on_character_death)
+	set_blocker(self, true)
 	return true
 
 
@@ -80,3 +93,34 @@ func set_blocker(blocker, is_blocking: bool):
 			_blockers.append(blocker)
 	else:
 		_blockers.erase(blocker)
+
+
+func remove_character():
+	if !_character:
+		return
+	_character.death.disconnect(_on_character_death)
+
+	set_blocker(self, false)
+	chacter_removed.emit(_character)
+
+	_character = null
+
+
+func _on_character_tile_changed(tile: Tile):
+	if tile == _tile:
+		return
+
+	remove_character()
+
+
+func _on_character_death(character: Character):
+	if character == _character:
+		remove_character()
+
+
+func _on_flammable_state_changed(_flammable: Flammable, state: Flammable.State):
+	if !_character:
+		return
+
+	if state == Flammable.State.BURNING:
+		_character.kill()

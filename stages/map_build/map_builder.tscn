@@ -123,6 +123,7 @@ visible = true
 
 [node name="Couch" parent="ItemsCatalog" index="3"]
 transform = Transform3D(0.73305357, 0, -0.6801709, 0, 1, 0, 0.6801709, 0, 0.73305357, -0.7521368, 0.6650084, 2.0905342)
+visible = true
 
 [node name="Table" parent="ItemsCatalog" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7490471, 0.6698104, 1.9714763)

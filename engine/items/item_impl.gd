@@ -5,7 +5,8 @@ signal placed(tile: Tile)
 signal removed(item: Item)
 
 var size: Vector2i = Vector2.ONE
-var materail: FlammableMaterial
+var material: FlammableMaterial
+var is_walkable: bool = false
 
 var rotation: float:
 	get():

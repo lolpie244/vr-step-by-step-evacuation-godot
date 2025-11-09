@@ -20,6 +20,7 @@ func _ready() -> void:
 	_set_map(impl)
 	#map_scanner.start_scan()
 
+
 func _set_map(grid: MapGrid):
 	impl = grid
 	map.impl = impl

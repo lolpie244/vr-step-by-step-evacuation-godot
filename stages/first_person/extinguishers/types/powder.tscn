@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://doi1d80atmp60"]
+[gd_scene load_steps=19 format=3 uid="uid://doi1d80atmp60"]
 
 [ext_resource type="PackedScene" uid="uid://bhk1lv5gkewif" path="res://stages/first_person/extinguishers/extinguisher/extinguisher.tscn" id="1_ts6p0"]
 [ext_resource type="Script" uid="uid://bn3cd3iea35mh" path="res://stages/first_person/extinguishers/types/powder_hose_end.gd" id="2_ev8eh"]
@@ -28,6 +28,9 @@ metadata/_custom_type_script = "uid://c4itu8s6yackn"
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_d0ce0"]
 height = 0.523
 radius = 0.109
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r474x"]
+size = Vector3(0.023742676, 0.020629883, 0.013687134)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d0ce0"]
 size = Vector3(0.0312347, 0.0326538, 0.0518799)
@@ -77,6 +80,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012, 0.394, -0.016)
 
 [node name="Mesh" parent="Body/PinOrigin" index="0"]
 mesh = ExtResource("5_r474x")
+
+[node name="CollisionShape3D" parent="Body/PinOrigin/Pickup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013348385, 0.001862824, 0.0020523053)
+shape = SubResource("BoxShape3D_r474x")
 
 [node name="GrabPointHandRight" parent="Body/PinOrigin/Pickup" index="1"]
 transform = Transform3D(-0.44604144, 0, -0.895012, 0, 1, 0, 0.895012, 0, -0.44604144, 0.016280122, 0.0077115297, 0.034771547)

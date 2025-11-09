@@ -50,11 +50,13 @@ func is_spread(from: Tile, to: Tile) -> bool:
 	var fixed_prob = _fixed_prob(from, to)
 	var dynamic_prob = _dynamic_prob(from, to)
 
-	print("COORD ", from.pos, to.pos)
-	print("DIRECTION ", from.direction_to(to))
-	print("FIXED ", fixed_prob)
-	print("DYNAMIC ", dynamic_prob)
-	print("RESULT ", fixed_prob + dynamic_prob)
-	print("---------")
+	if Constants.DEBUG_MODE:
+		print("Fire spreading:")
+		print("	COORD ", from.pos, to.pos)
+		print("	DIRECTION ", from.direction_to(to))
+		print("	FIXED ", fixed_prob)
+		print("	DYNAMIC ", dynamic_prob)
+		print("	RESULT ", fixed_prob + dynamic_prob)
+		print("")
 
 	return randf_range(0, 1) < fixed_prob + dynamic_prob

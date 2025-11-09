@@ -2,7 +2,6 @@
 class_name FireEffect
 extends Node3D
 
-var enabled := false
 var fire_scale: Vector2
 var particles_scale: float = 1
 
@@ -10,6 +9,12 @@ var cooling_coef = 0.2:
 	set(val):
 		cooling_coef = val
 		fire.material_override.set_shader_parameter("temperature_cooling_rate", val)
+
+var enabled := false:
+	set(val):
+		enabled = val
+		fire.emitting = val
+		sparks.emitting = val
 
 @onready var fire: GPUParticles3D = $Fire
 @onready var sparks: GPUParticles3D = $Fire/Sparks

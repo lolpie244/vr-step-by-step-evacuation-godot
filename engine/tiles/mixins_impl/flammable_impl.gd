@@ -61,7 +61,10 @@ func process_turn(_turn_number):
 	if state != State.BURNING || _turn_number == 0 || _ignition_turn == _turn_number:
 		return
 
-	extinguish(0.1)
+	strength -= Constants.IDLE_EXTINGUISH_RATE
+
+	if strength <= 0:
+		state = State.BURNED
 
 	for next_tile in _tile.neighbor_tiles():
 		if FireSpreading.is_spread(_tile, next_tile):
@@ -77,11 +80,17 @@ func extinguish(foam_strength: float):
 	if strength < 0:
 		state = State.NOT_BURNING
 
+	if strength > 1:
+		state = State.BURNED
+		for next_tile in _tile.neighbor_tiles():
+			if next_tile.get_mixin(Flammable):
+				next_tile.get_mixin(Flammable).ignite()
+		strength = 0.9
+
 
 func _on_item_placed(item: Item):
 	if item.material:
-		_item_material = item.material.duplicate()
-		_item_material.wind = _tile_material.wind
+		_item_material = item.material
 
 
 func _on_item_removed(_item: Item):

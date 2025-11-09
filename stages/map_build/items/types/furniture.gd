@@ -7,6 +7,6 @@ extends MapBuilderItemCreator
 
 func _get_impl():
 	var impl := Furniture.new(furniture_type, size)
-	impl.materail = material
+	impl.material = material
 
 	return impl

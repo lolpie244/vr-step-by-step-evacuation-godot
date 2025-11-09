@@ -15,7 +15,6 @@ func set_impl(_impl: Tile):
 	impl = _impl
 
 
-
 func _ready() -> void:
 	sprite.texture = texture
 	background.custom_aabb = AABB()

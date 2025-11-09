@@ -13,7 +13,7 @@ enum FireType {
 # engineered_wood - table; storage
 # g
 
-const CONTACT_HEAT_FRACTION := 0.1
+const CONTACT_HEAT_FRACTION := 0.03
 
 @export var density: float  # kg/m3
 @export var heat_release_rate: float  # W/g

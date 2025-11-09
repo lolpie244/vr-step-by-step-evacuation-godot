@@ -17,12 +17,7 @@ func _add_first_mode_trigger():
 	first_mode_trigger.triggerred.connect(_on_first_mode_trigger_triggerred)
 
 
-func _ready() -> void:
-	_add_first_mode_trigger()
-	GameCore.character_selected.connect(_on_character_selected)
-
-	var character_count := 1
-
+func _add_characters(number: int = 1):
 	var walkable_tiles: Array[Tile] = []
 
 	for x in range(map.impl.rows_count()):
@@ -31,13 +26,43 @@ func _ready() -> void:
 			if Walkable.is_walkable(tile):
 				walkable_tiles.append(tile)
 
-	character_count = min(walkable_tiles.size(), character_count)
+	number = min(walkable_tiles.size(), number)
 
-	for i in range(character_count):
+	for i in range(number):
 		var id = randi_range(0, walkable_tiles.size() - 1)
 		var tile := walkable_tiles[id]
 		map.add_character(Character.Type.CIVILIAN, tile.pos)
 		walkable_tiles.remove_at(id)
+
+
+func _add_flames(number: int = 1):
+	var flammable_tiles: Array[Tile] = []
+
+	for x in range(map.impl.rows_count()):
+		for y in range(map.impl.columns_count()):
+			var tile = map.impl.get_tile(x, y)
+			if (
+				tile.get_mixin(Flammable)
+				and tile.get_mixin(ItemHolder)
+				and tile.get_mixin(ItemHolder).get_item() is Furniture
+			):
+				flammable_tiles.append(tile)
+
+	number = min(flammable_tiles.size(), number)
+
+	for i in range(number):
+		var id = randi_range(0, flammable_tiles.size() - 1)
+		var tile := flammable_tiles[id]
+		tile.get_mixin(Flammable).ignite()
+		flammable_tiles.remove_at(id)
+
+
+func _ready() -> void:
+	_add_first_mode_trigger()
+	GameCore.character_selected.connect(_on_character_selected)
+
+	_add_characters(1)
+	_add_flames(1)
 
 	GameCore.next_turn()
 

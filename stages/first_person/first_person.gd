@@ -39,6 +39,8 @@ func _add_child_node(tile: TileNode):
 
 
 func _ready() -> void:
+	context.character.death.connect(_on_character_death)
+
 	for tile in context.character.visible_tiles():
 		_add_child_node(tile_factory.create(tile))
 
@@ -58,9 +60,9 @@ func _ready() -> void:
 
 	var ext_impls: Array[Extinguisher] = []
 
-	for ext_type in [Extinguisher.Type.POWDER, Extinguisher.Type.CO2]:
-		var ext_impl := Extinguisher.new(ext_type)
-		ext_impls.append(ext_impl)
+	for item in context.character.inventory:
+		if item is Extinguisher:
+			ext_impls.append(item)
 
 	point_generator.points_count = ext_impls.size()
 
@@ -71,6 +73,11 @@ func _ready() -> void:
 		ext.triggerred.connect(func(): extinguisher_selected.emit())
 		extinguisher_selected.connect(ext.remove)
 		ext.spawn()
+
+
+func _on_character_death(character: Character):
+	if character == context.character:
+		SceneManager.pop_scene()
 
 
 func _on_exit_trigger_triggerred() -> void:

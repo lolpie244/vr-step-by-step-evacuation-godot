@@ -1,14 +1,17 @@
 class_name Character
-extends Node3D
+extends RefCounted
 
 signal tile_changed(tile: Tile)
 signal look_direction_changed(direction: Vector2)
 signal highlihted
+signal death(character: Character)
 
 enum Type { CIVILIAN }
 
 @export var base_speed: int = 5
 @export var type: Type = Type.CIVILIAN
+
+var inventory: Array[Item] = []
 
 var _speed: int
 var _walkable: Walkable
@@ -108,3 +111,7 @@ func _highlight(value: bool):
 		info.tile.highlight = value
 
 	highlihted.emit()
+
+
+func kill():
+	death.emit(self)

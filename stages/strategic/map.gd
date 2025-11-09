@@ -5,7 +5,6 @@ var _tile_nodes: Array
 var _characters: Array[CharacterStrategic]
 var _items: Array[ItemNode]
 
-
 @onready var tile_factory = $TileFactory
 @onready var character_factory: CharacterNodeFactory = $CharacterFactory
 @onready var item_factory: ItemFactory = $ItemFactory
@@ -45,14 +44,17 @@ func reset_map():
 	for item in impl.items:
 		var node: ItemNode = item_factory.create(item)
 		_items.append(node)
+		item.removed.connect(_on_item_removed)
 		item.restore_position()
 
 
 func add_character(type: Character.Type, pos: Vector2i):
-	var character_impl: Character = impl.create_character(type)
-	var character: CharacterStrategic = character_factory.create(character_impl)
-	_characters.append(character)
-	character.impl.place(impl.get_tile(pos.x, pos.y))
+	var character: Character = impl.create_character(type)
+	var character_node: CharacterStrategic = character_factory.create(character)
+	_characters.append(character_node)
+
+	character.death.connect(_on_character_death)
+	character.place(impl.get_tile(pos.x, pos.y))
 
 	return character
 
@@ -69,3 +71,11 @@ func get_item_node(item: Item) -> ItemNode:
 		if node.impl() == item:
 			return node
 	return null
+
+
+func _on_item_removed(item: Item):
+	_items.erase(get_item_node(item))
+
+
+func _on_character_death(character: Character):
+	_characters.erase(get_character_node(character))

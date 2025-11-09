@@ -47,7 +47,10 @@ func remove_item():
 
 
 func _on_item_removed(item: Item):
+	if _item:
+		_item.removed.disconnect(_on_item_removed)
 	_item = null
+
 	if _is_owner:
 		item_removed.emit(item)
 
@@ -64,10 +67,13 @@ func _highlight_tiles(val: bool):
 func _update_walkable():
 	var walkable: Walkable = _tile.get_mixin(Walkable)
 	if walkable:
-		walkable.set_blocker(self, self.has_item())
+		walkable.set_blocker(self, has_item() and !get_item().is_walkable)
 
 
 func _on_flammable_state_changed(_flammable: Flammable, state: Flammable.State):
+	if !has_item():
+		return
+
 	if state == Flammable.State.BURNING:
 		for tile in _item.tiles():
 			var flammable: Flammable = tile.get_mixin(Flammable)

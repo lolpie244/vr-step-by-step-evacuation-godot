@@ -3,6 +3,7 @@ extends Node3D
 var impl: Walkable
 
 var _bodies_in_snap_zone_area: Array[XRToolsPickable] = []
+var _character_node: CharacterStrategic
 
 @onready var tile: TileNode = get_parent()
 @onready var map: StrategicMap = Utils.find_parent_that_implements(tile, "Map")
@@ -14,6 +15,7 @@ func _ready() -> void:
 	impl = tile.impl.get_or_create_mixin(Walkable)
 
 	impl.on_chacter_placed.connect(_on_character_placed)
+	impl.chacter_removed.connect(_on_character_removed)
 	hide()
 
 
@@ -48,31 +50,42 @@ func _on_snap_zone_body_exited(body: Node3D) -> void:
 		impl.get_tile().highlight = false
 
 
-func _on_character_placed(character: Character):
-	var character_node: CharacterStrategic = map.get_character_node(character)
-
-	if character_node.get_parent() == null:
-		get_parent().add_child(character_node)
-
-	if character_node.get_parent() != get_parent():
-		character_node.reparent(get_parent(), false)
-
-	character_node.position = self.position
-	character_node.rotation = self.rotation
-
-	character_node.scale = Vector3.ONE
-
-	var character_scale_local = map.model_scale(character_node.model)
-	var character_scale_global = character_node.global_basis.get_scale().x
-	character_node.scale = Vector3.ONE * (character_scale_local / character_scale_global)
-	impl.get_tile().highlight = false
-
-	var parent = character_node.get_parent()
-	while parent:
-		parent = parent.get_parent()
-
-
 func _character_dropped(craracter_rigid: RigidBody3D):
 	var character: Character = craracter_rigid.get_parent().impl
 	character.place(impl.get_tile())
 	impl.get_tile().highlight = false
+
+
+func _on_character_placed(character: Character):
+	_character_node = map.get_character_node(character)
+
+	if _character_node.get_parent() == null:
+		tile.add_child(_character_node)
+
+	if _character_node.get_parent() != tile:
+		_character_node.reparent(tile, false)
+
+	_character_node.position = self.position
+	_character_node.rotation = self.rotation
+
+	_character_node.scale = Vector3.ONE
+
+	var character_scale_local = map.model_scale(_character_node.model)
+	var character_scale_global = _character_node.global_basis.get_scale().x
+	_character_node.scale = Vector3.ONE * (character_scale_local / character_scale_global)
+	impl.get_tile().highlight = false
+
+	character.death.connect(_on_character_death)
+
+
+func _on_character_removed(character: Character):
+	if character != impl._character:
+		return
+	character.death.disconnect(_on_character_death)
+	_character_node = null
+
+
+func _on_character_death(character: Character):
+	if character != impl._character or !_character_node:
+		return
+	tile.remove_child(_character_node)
