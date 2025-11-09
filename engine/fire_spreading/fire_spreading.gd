@@ -3,7 +3,6 @@ extends Node
 # Constants
 
 # fraction of heat that actually reaches the neighbor through direct contact
-const CONTACT_HEAT_FRACTION := 0.1
 const MAX_STRENGHT := 20  # max wind vector strength
 const MAX_STRENGHT_PROB := 0.3  # probability that fire will spread with wind with MAX_STRENGHT
 
@@ -22,11 +21,9 @@ func _fixed_prob(from: Tile, to: Tile) -> float:
 	var to_mat = to.get_mixin(Flammable).material
 
 	var delta_t = to_mat.ignition_temp - Constants.ROOM_TEMPERATURE
-	var hrr = CONTACT_HEAT_FRACTION * from_mat.heat_release_rate * 1000
-	var release_rate = pow(delta_t / hrr, 2)
-	var flammable_rate = to_mat.density * to_mat.thermal_conductivity * to_mat.heat_capacity
+	var heating_rate = pow(delta_t / from_mat.hrr, 2)
 
-	return 1 - exp(-Constants.TIME_PER_TURN / (PI / 4 * flammable_rate * release_rate))
+	return 1 - exp(-Constants.TIME_PER_TURN / (PI / 4 * to_mat.flammable_rate * heating_rate))
 
 
 func _dynamic_prob(from: Tile, to: Tile) -> float:
@@ -53,11 +50,13 @@ func is_spread(from: Tile, to: Tile) -> bool:
 	var fixed_prob = _fixed_prob(from, to)
 	var dynamic_prob = _dynamic_prob(from, to)
 
-	print("COORD ", from.pos, to.pos)
-	print("DIRECTION ", from.direction_to(to))
-	print("FIXED ", fixed_prob)
-	print("DYNAMIC ", dynamic_prob)
-	print("RESULT ", fixed_prob + dynamic_prob)
-	print("---------")
+	if Constants.DEBUG_MODE:
+		print("Fire spreading:")
+		print("	COORD ", from.pos, to.pos)
+		print("	DIRECTION ", from.direction_to(to))
+		print("	FIXED ", fixed_prob)
+		print("	DYNAMIC ", dynamic_prob)
+		print("	RESULT ", fixed_prob + dynamic_prob)
+		print("")
 
 	return randf_range(0, 1) < fixed_prob + dynamic_prob

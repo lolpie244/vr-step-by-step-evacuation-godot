@@ -1,0 +1,85 @@
+[gd_scene load_steps=17 format=3 uid="uid://kx1pwc0tgm1k"]
+
+[ext_resource type="Script" uid="uid://cys6tspoeq6tp" path="res://stages/map_build/items/item_builder.gd" id="1_783aa"]
+[ext_resource type="Script" uid="uid://dhsu5kqu25kgt" path="res://stages/map_build/items/item.gd" id="2_tsmcg"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="3_6eefo"]
+[ext_resource type="Script" uid="uid://bpdbyih4vl5m5" path="res://common/sprite_with_material.gd" id="3_tsmcg"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_7j8my"]
+[ext_resource type="Animation" uid="uid://dgfeikrugfewi" path="res://addons/godot-xr-tools/hands/animations/left/Cup.res" id="5_gjeav"]
+[ext_resource type="Script" uid="uid://dwkncdtofp2bq" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="6_gqsjk"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="7_nuex5"]
+[ext_resource type="Animation" uid="uid://do01jton6rk42" path="res://addons/godot-xr-tools/hands/animations/right/Cup.res" id="8_n3oiv"]
+[ext_resource type="PackedScene" uid="uid://ce7vysyvondf8" path="res://addons/godot-xr-tools/objects/snap_zone.tscn" id="9_0np08"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uwq1m"]
+radius = 0.06
+
+[sub_resource type="Resource" id="Resource_tcfhl"]
+script = ExtResource("6_gqsjk")
+closed_pose = ExtResource("5_gjeav")
+metadata/_custom_type_script = "uid://dwkncdtofp2bq"
+
+[sub_resource type="Resource" id="Resource_iw50a"]
+script = ExtResource("6_gqsjk")
+closed_pose = ExtResource("8_n3oiv")
+metadata/_custom_type_script = "uid://dwkncdtofp2bq"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lkrs2"]
+radius = 0.10941376
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_783aa"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tsmcg"]
+material = SubResource("StandardMaterial3D_783aa")
+radius = 0.01
+height = 0.02
+
+[node name="ItemBuilder" type="Node3D"]
+script = ExtResource("1_783aa")
+
+[node name="Item" type="Node3D" parent="."]
+script = ExtResource("2_tsmcg")
+
+[node name="Sprite" type="Sprite3D" parent="Item"]
+centered = false
+texture_filter = 0
+script = ExtResource("3_tsmcg")
+
+[node name="BodyOrigin" type="Node3D" parent="."]
+
+[node name="Body" parent="BodyOrigin" instance=ExtResource("3_6eefo")]
+second_hand_grab = 1
+
+[node name="CollisionShape3D" parent="BodyOrigin/Body" index="0"]
+shape = SubResource("SphereShape3D_uwq1m")
+
+[node name="GrabPointHandLeft" parent="BodyOrigin/Body" instance=ExtResource("4_7j8my")]
+transform = Transform3D(6.764924e-09, -1, -7.923193e-08, -0.9063077, -3.961597e-08, 0.42261824, -0.42261824, 6.894955e-08, -0.9063077, -0.05, 0, 0.06)
+visible = true
+hand_pose = SubResource("Resource_tcfhl")
+
+[node name="GrabPointHandRight" parent="BodyOrigin/Body" instance=ExtResource("7_nuex5")]
+transform = Transform3D(-4.371139e-08, -1, 0, 0.90630776, -3.961597e-08, 0.42261827, -0.42261827, 1.8473232e-08, 0.90630776, -0.05, 0, -0.07483623)
+hand_pose = SubResource("Resource_iw50a")
+
+[node name="Area3D" type="Area3D" parent="BodyOrigin/Body"]
+collision_layer = 268435456
+collision_mask = 268435456
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyOrigin/Body/Area3D"]
+shape = SubResource("SphereShape3D_lkrs2")
+debug_color = Color(0.945178, 3.7541986e-06, 0.5959446, 0.41960785)
+
+[node name="OriginPoint" type="MeshInstance3D" parent="BodyOrigin/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04869926, -0.008754261)
+mesh = SubResource("SphereMesh_tsmcg")
+
+[node name="SnapZone" parent="BodyOrigin" instance=ExtResource("9_0np08")]
+grab_distance = 0.04
+initial_object = NodePath("../Body")
+
+[connection signal="action_pressed" from="BodyOrigin/Body" to="." method="_on_action_pressed"]
+[connection signal="dropped" from="BodyOrigin/Body" to="." method="_on_model_dropped"]
+
+[editable path="BodyOrigin/Body"]

@@ -3,7 +3,7 @@ extends NodeFactory
 
 
 func create(impl: Character) -> CharacterStrategic:
-	var result := _instances[impl.type][0].duplicate(Utils.DEFAULT_DUPLICATE) as CharacterStrategic
+	var result := get_duplicate(_instances[impl.type][0]) as CharacterStrategic
 	result.init(impl)
 
 	return result

@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://1ic3ptqr60e3"]
+
+[ext_resource type="PackedScene" uid="uid://bhk1lv5gkewif" path="res://stages/first_person/extinguishers/extinguisher/extinguisher.tscn" id="1_oowb2"]
+[ext_resource type="ArrayMesh" uid="uid://b83i1v03sxjwn" path="res://assets/items/extinguisher_co2/handle.res" id="2_y1us0"]
+[ext_resource type="PackedScene" uid="uid://bjtw6tj6r0x2v" path="res://assets/items/extinguisher_co2/model.glb" id="3_oi1al"]
+[ext_resource type="ArrayMesh" uid="uid://50emcamf1dee" path="res://assets/items/extinguisher_co2/pin.res" id="3_y1us0"]
+[ext_resource type="ArrayMesh" uid="uid://81il2f8leghe" path="res://assets/items/extinguisher_co2/holder.res" id="4_y7cef"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oowb2"]
+height = 0.32375002
+radius = 0.08
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oi1al"]
+size = Vector3(0.08, 0.02, 0.02)
+
+[node name="CO2Extinguisher" instance=ExtResource("1_oowb2")]
+
+[node name="HoseEndOrigin" parent="." index="0"]
+transform = Transform3D(1.00013, 0, 0, 0, 1.0001271, 0, 0, 0, 1.0001271, 0, 0.35428384, 0.1854759)
+
+[node name="Pickup" parent="HoseEndOrigin" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.029996186)
+
+[node name="HandleOrigin" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005, 0.40946046, -0.116)
+
+[node name="CollisionShape3D" parent="HandleOrigin/Pickup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004999999, -0.0021020174, 0.04717432)
+
+[node name="Mesh" parent="HandleOrigin/Pickup" index="1"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.00551942, -0.0366022, 0.114676)
+mesh = ExtResource("2_y1us0")
+
+[node name="GrabPointHandLeft" parent="HandleOrigin/Pickup" index="2"]
+transform = Transform3D(-1, 0, -8.742278e-08, -5.8644513e-08, 0.7416247, 0.67081505, 6.483489e-08, 0.67081505, -0.7416247, 0, -0.059617877, 0.14726344)
+
+[node name="GrabPointHandRight" parent="HandleOrigin/Pickup" index="3"]
+transform = Transform3D(-1, 5.8610556e-08, -6.486559e-08, 0, 0.74197584, 0.6704266, 8.742278e-08, 0.6704266, -0.74197584, 0.021560311, -0.060000002, 0.147)
+
+[node name="CollisionShape3D" parent="Body" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07005021, 0)
+shape = SubResource("CylinderShape3D_oowb2")
+
+[node name="PinOrigin" parent="Body" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.027524654, 0.35968277, 0)
+
+[node name="Mesh" parent="Body/PinOrigin" index="0"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = ExtResource("3_y1us0")
+
+[node name="CollisionShape3D" parent="Body/PinOrigin/Pickup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0039550997, -0.0011279285, 7.450581e-09)
+shape = SubResource("BoxShape3D_oi1al")
+
+[node name="GrabPointHandRight" parent="Body/PinOrigin/Pickup" index="1"]
+transform = Transform3D(-0.44619763, 0, -0.8949342, 0, 1, 0, 0.8949342, 0, -0.44619763, 0.014417455, 0.009877771, 0.031479836)
+
+[node name="GrabPointHandLeft" parent="Body/PinOrigin/Pickup" index="2"]
+transform = Transform3D(-0.2706004, 0.9626918, 0, -0.4083733, -0.11478854, 0.9055688, 0.8717836, 0.24504729, 0.42419943, 0, -0.03691134, -0.033208653)
+
+[node name="Model" parent="Body" index="2" instance=ExtResource("3_oi1al")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="Holder" parent="." index="4"]
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0, 0, 0)
+visible = false
+mesh = ExtResource("4_y7cef")
+
+[editable path="HoseEndOrigin/Pickup"]
+[editable path="HandleOrigin/Pickup"]
+[editable path="Body"]
+[editable path="Body/PinOrigin/Pickup"]

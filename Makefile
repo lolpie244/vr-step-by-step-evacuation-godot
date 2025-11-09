@@ -1,5 +1,10 @@
 PROJECT_DIR := $(CURDIR)
+
+ifneq ("$(wildcard ${PROJECT_DIR}/.venv)","")
 VENV := source ${PROJECT_DIR}/.venv/bin/activate &&
+else
+VENV :=
+endif
 
 
 .PHONY: setup
@@ -12,8 +17,8 @@ setup:
 
 .PHONY: format
 format:
-	 gdformat `git ls-files "*.gd"`
+	 ${VENV} gdformat `git ls-files "*.gd"`
 
 .PHONY: lint
 lint:
-	 gdlint `git ls-files "*.gd"` 2> lint.log
+	 ${VENV} gdlint `git ls-files "*.gd"` 2> lint.log

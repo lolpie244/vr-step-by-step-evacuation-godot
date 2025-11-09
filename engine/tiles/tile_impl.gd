@@ -12,7 +12,7 @@ enum Type {
 
 const WALL_LIKE_TYPES := [Type.WALL, Type.WINDOW, Type.DOOR]
 
-const IMPLMENTS := "Tile"
+const IMPLEMENTS := "Tile"
 
 var grid: MapGrid
 var type: Type = Type.NONE

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmvb1dap8a5x5"]
+
+[ext_resource type="PackedScene" uid="uid://bjtw6tj6r0x2v" path="res://assets/items/extinguisher_co2/model.glb" id="1_8rxqy"]
+[ext_resource type="ArrayMesh" uid="uid://b83i1v03sxjwn" path="res://assets/items/extinguisher_co2/handle.res" id="2_ecugm"]
+[ext_resource type="ArrayMesh" path="res://assets/items/extinguisher_co2/holder.res" id="3_bxn1c"]
+[ext_resource type="ArrayMesh" uid="uid://50emcamf1dee" path="res://assets/items/extinguisher_co2/pin.res" id="4_b666f"]
+
+[node name="Model" type="Node3D"]
+
+[node name="Body" parent="." instance=ExtResource("1_8rxqy")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 1.4883358, 0)
+mesh = ExtResource("2_ecugm")
+
+[node name="Holder" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.018358648, 0, 0)
+mesh = ExtResource("3_bxn1c")
+
+[node name="Pin" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.00028041005, 1.4392093, -0.10263875)
+mesh = ExtResource("4_b666f")

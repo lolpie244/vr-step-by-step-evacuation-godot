@@ -1,5 +1,5 @@
 class_name ShadowCasting
-extends Node
+extends RefCounted
 
 enum Direction {
 	NORTH,

@@ -2,19 +2,29 @@ class_name Walkable
 extends TileMixin
 
 signal on_chacter_placed(character: Character)
+signal chacter_removed(character: Character)
 
-var enabled: bool = true
+var enabled: bool:
+	get():
+		return _blockers.size() == 0
+
+var _character: Character
+var _blockers: Array
 
 
 func init():
 	var flammable: Flammable = _tile.get_mixin(Flammable)
 	if flammable:
 		flammable.state_changed.connect(_on_flammable_state_changed)
-		_on_flammable_state_changed(flammable.state)
 
 
 func place_character(character: Character) -> bool:
-	on_chacter_placed.emit(character)
+	_character = character
+
+	on_chacter_placed.emit(_character)
+	_character.tile_changed.connect(_on_character_tile_changed)
+	_character.death.connect(_on_character_death)
+	set_blocker(self, true)
 	return true
 
 
@@ -36,7 +46,7 @@ func reachable_neighbors() -> Array[Walkable]:
 		if tile.pos.x != _tile.pos.x && tile.pos.y != _tile.pos.y:
 			continue
 
-		if _is_walkable(tile):
+		if is_walkable(tile):
 			result.append(tile.get_mixin(Walkable))
 
 	return result
@@ -73,11 +83,44 @@ func reachable_tiles(_speed: int) -> Array[ReachableResult]:
 	return result
 
 
-func _is_walkable(tile: Tile):
-	var mixin = tile.get_mixin(Walkable)
-	var blockable = tile.get_mixin(Blockable)
-	return mixin != null && (!blockable || !blockable.blocking)
+static func is_walkable(tile: Tile):
+	return tile and tile.get_mixin(Walkable) and tile.get_mixin(Walkable).enabled
 
 
-func _on_flammable_state_changed(state: Flammable.State):
-	enabled = (state == Flammable.State.NOT_BURNING)
+func set_blocker(blocker, is_blocking: bool):
+	if is_blocking:
+		if not blocker in _blockers:
+			_blockers.append(blocker)
+	else:
+		_blockers.erase(blocker)
+
+
+func remove_character():
+	if !_character:
+		return
+	_character.death.disconnect(_on_character_death)
+
+	set_blocker(self, false)
+	chacter_removed.emit(_character)
+
+	_character = null
+
+
+func _on_character_tile_changed(tile: Tile):
+	if tile == _tile:
+		return
+
+	remove_character()
+
+
+func _on_character_death(character: Character):
+	if character == _character:
+		remove_character()
+
+
+func _on_flammable_state_changed(_flammable: Flammable, state: Flammable.State):
+	if !_character:
+		return
+
+	if state == Flammable.State.BURNING:
+		_character.kill()

@@ -1,7 +1,10 @@
-class_name FirstPerson
+class_name FirstPersonScene
 extends Node3D
 
-const TILE_SIZE := 2.0
+signal extinguisher_selected
+
+const TILE_SIZE := 2.2
+const IMPLEMENTS := "FirstPersonScene"
 
 
 class Context:
@@ -13,9 +16,14 @@ class Context:
 
 var context: Context
 var grid := GameCore.grid
+var items: Dictionary[Item, ItemNode] = {}
 
-@onready var factory: FirstPersonTileFactory = $Factory
+@onready var tile_factory: TileFactory = $TileFactory
+@onready var item_factory: ItemFactory = $ItemFactory
+@onready var extinguisher_factory: FirstPersonExtinguisherFactory = $ExtinguisherFactory
 @onready var player: PlayerVR = $PlayerVR
+@onready var point_generator: SpawnPointGenerator = $PlayerVR/SpawnPointGenerator
+@onready var exit_trigger: RopeTrigger = $PlayerVR/ExitTrigger
 
 
 func _add_child_node(tile: TileNode):
@@ -25,27 +33,51 @@ func _add_child_node(tile: TileNode):
 	tile.position = grid.tile_position(TILE_SIZE, tile_pos.x, tile_pos.y)
 	tile.scale = Vector3.ONE * grid.model_scale(TILE_SIZE, tile)
 
+	var item_holder: ItemHolder = tile.impl.get_mixin(ItemHolder)
+	if item_holder and item_holder.get_item() and not items.has(item_holder.get_item()):
+		items[item_holder.get_item()] = null
+
 
 func _ready() -> void:
-	for tile in context.character.visible_tiles():
-		_add_child_node(factory.create(tile))
+	context.character.death.connect(_on_character_death)
 
-	var character_tile = factory.create(context.character.get_tile())
+	for tile in context.character.visible_tiles():
+		_add_child_node(tile_factory.create(tile))
+
+	var character_tile = tile_factory.create(context.character.get_tile())
 	_add_child_node(character_tile)
+
+	for item in items.keys():
+		items[item] = item_factory.create(item)
+		item.restore_position()
 
 	player.rotate_y(context.character._look_direction.angle() - deg_to_rad(180))
 
 	player.position.x = character_tile.position.x
 	player.position.z = character_tile.position.z
 
-	$ItemDropper.global_position = player.global_position
-	$ItemDropper.position.x += 0.6
+	exit_trigger.spawn()
 
-	$ExitTrigger.global_position = player.global_position
-	$ExitTrigger.position.x -= 0.4
+	var ext_impls: Array[Extinguisher] = []
 
-	$ItemDropper.spawn()
-	$ExitTrigger.spawn()
+	for item in context.character.inventory:
+		if item is Extinguisher:
+			ext_impls.append(item)
+
+	point_generator.points_count = ext_impls.size()
+
+	for ext_impl in ext_impls:
+		var ext := extinguisher_factory.create(ext_impl, point_generator.get_point())
+		add_child(ext)
+		ext.look_at(player.global_position)
+		ext.triggerred.connect(func(): extinguisher_selected.emit())
+		extinguisher_selected.connect(ext.remove)
+		ext.spawn()
+
+
+func _on_character_death(character: Character):
+	if character == context.character:
+		SceneManager.pop_scene()
 
 
 func _on_exit_trigger_triggerred() -> void:

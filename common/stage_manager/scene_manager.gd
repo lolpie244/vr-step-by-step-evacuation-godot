@@ -7,6 +7,7 @@ var _scene_stack: Array = []
 func _ready() -> void:
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
+	_scene_stack.append(current_scene)
 
 
 func _open_eyes(scene):
@@ -32,7 +33,6 @@ func load_scene(scene: PackedScene, context = null):
 		scene_instance.context = context
 
 	_scene_stack.push_back(scene_instance)
-
 	scene_instance.ready.connect(func(): call_deferred("_open_eyes", scene_instance))
 
 	call_deferred("_add_scene", scene_instance)
@@ -64,3 +64,16 @@ func _deferred_pop_scene():
 
 	if free_scene:
 		free_scene.free()
+
+
+func replace_scene(scene: PackedScene, context = null):
+	if _scene_stack.size():
+		await _close_eyes(current_scene)
+		current_scene = null
+		(
+			(func(free_scene):
+				if free_scene:
+					free_scene.free())
+			. call_deferred(_scene_stack.back())
+		)
+	load_scene(scene, context)

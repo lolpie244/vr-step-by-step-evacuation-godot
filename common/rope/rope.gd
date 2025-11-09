@@ -14,6 +14,8 @@ signal max_extend(end_position: Vector3)
 @export var attached_to_start: PhysicsBody3D
 @export var attached_to_end: PhysicsBody3D
 
+@export var _original_curve: Curve3D
+
 var points: Array[Vector3]
 var segments: Array[RigidBody3D]
 var joints: Array[PinJoint3D]
@@ -25,6 +27,17 @@ var _attached_to_end_offset: Vector3
 
 
 func _ready() -> void:
+	if _original_curve:
+		curve = _original_curve.duplicate(true)
+	else:
+		_original_curve = curve.duplicate(true)
+
+	if get_child_count():
+		for child in get_children():
+			if child is RigidBody3D or child is PinJoint3D:
+				remove_child(child)
+				child.queue_free()
+
 	var segment_length = curve.get_baked_length() / segments_count
 
 	for i in range(segments_count + 1):

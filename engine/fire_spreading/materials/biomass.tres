@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FlammableMaterial" load_steps=2 format=3 uid="uid://tvaqm0dixkhe"]
+
+[ext_resource type="Script" uid="uid://dia4t2q2n027r" path="res://engine/fire_spreading/materials/material.gd" id="1_3lxq1"]
+
+[resource]
+script = ExtResource("1_3lxq1")
+density = 43.0
+heat_release_rate = 170.0
+carbon_monoxide_yield = 0.04
+heat_capacity = 1800.0
+thermal_conductivity = 0.15
+ignition_temp = 573.15
+metadata/_custom_type_script = "uid://dia4t2q2n027r"

@@ -1,28 +1,19 @@
 class_name MapGrid
-extends Node3D
+extends RefCounted
 
 signal new_grid
-signal resized(Vector2)
 
 var tiles: Array
 var characters: Array[Character]
+var items: Array
 
 var size: Vector2:
 	get():
 		return Vector2(rows_count(), columns_count())
 
 
-func set_tiles(tile_types: Array):
-	if tile_types.is_empty():
-		return
-
-	self.resize(tile_types.size(), tile_types[0].size())
-	for x in range(rows_count()):
-		for y in range(columns_count()):
-			if tile_types[x][y]:
-				create_tile(tile_types[x][y], x, y)
-
-	new_grid.emit()
+func _init(grid_size: Vector2i = Vector2i.ZERO):
+	resize(grid_size.x, grid_size.y)
 
 
 func is_empty():
@@ -36,7 +27,7 @@ func _in_range(x: int, y: int) -> bool:
 # TODO: Copy content
 func resize(n: int, m: int):
 	tiles = Utils.get_matrix(n, m, null)
-	resized.emit(size)
+	new_grid.emit()
 
 
 func rows_count() -> int:
@@ -58,6 +49,15 @@ func create_character(type: Character.Type) -> Character:
 	var character := Character.new(type)
 	characters.append(character)
 	return character
+
+
+func add_item(item: Item):
+	items.append(item)
+	item.removed.connect(_on_item_removed)
+
+
+func _on_item_removed(item: Item):
+	items.erase(item)
 
 
 func set_tile(x: int, y: int, tile: Tile):

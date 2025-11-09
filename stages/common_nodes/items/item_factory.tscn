@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxrxfl7pkartx"]
+
+[ext_resource type="Script" uid="uid://d4ejfb1nmyp08" path="res://stages/common_nodes/items/item_factory.gd" id="1_bhhwk"]
+[ext_resource type="Script" uid="uid://bki20d72c3opp" path="res://stages/common_nodes/items/item_node.gd" id="2_if636"]
+
+[node name="ItemFactory" type="Node3D"]
+script = ExtResource("1_bhhwk")
+metadata/_custom_type_script = "uid://5hidv4t3hoob"
+
+[node name="BedSingle" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.BED"
+size = Vector2i(1, 2)
+
+[node name="BedDouble" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.BED"
+size = Vector2i(2, 2)
+
+[node name="Table" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.TABLE"
+
+[node name="ExtinguisherPowder" type="Node3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+script = ExtResource("2_if636")
+type = "Extinguisher.POWDER"
+
+[node name="ExtinguisherCO2" type="Node3D" parent="."]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
+script = ExtResource("2_if636")
+type = "Extinguisher.CO2"
+
+[node name="Couch" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.COUCH"
+size = Vector2i(2, 1)
+
+[node name="Lamp" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.LAMP"
+
+[node name="Plant" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.PLANT"
+
+[node name="Storage" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.STORAGE"
+size = Vector2i(2, 1)
+
+[node name="WallArt" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.WALL_ART"

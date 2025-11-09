@@ -1,0 +1,124 @@
+[gd_scene load_steps=19 format=3 uid="uid://doi1d80atmp60"]
+
+[ext_resource type="PackedScene" uid="uid://bhk1lv5gkewif" path="res://stages/first_person/extinguishers/extinguisher/extinguisher.tscn" id="1_ts6p0"]
+[ext_resource type="Script" uid="uid://bn3cd3iea35mh" path="res://stages/first_person/extinguishers/types/powder_hose_end.gd" id="2_ev8eh"]
+[ext_resource type="ArrayMesh" uid="uid://5pnlsqp6h81v" path="res://assets/items/extinguisher_powder/hose_end.res" id="3_tx3j7"]
+[ext_resource type="ArrayMesh" uid="uid://dc4nb2ciahe14" path="res://assets/items/extinguisher_powder/handle.res" id="4_ybqna"]
+[ext_resource type="ArrayMesh" uid="uid://cvkq7s1uob7tx" path="res://assets/items/extinguisher_powder/pin.res" id="5_r474x"]
+[ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="5_tx3j7"]
+[ext_resource type="Animation" uid="uid://dgfeikrugfewi" path="res://addons/godot-xr-tools/hands/animations/left/Cup.res" id="5_ybqna"]
+[ext_resource type="PackedScene" uid="uid://mqnsmnitytdi" path="res://assets/items/extinguisher_powder/model.glb" id="6_ekdd7"]
+[ext_resource type="PackedScene" uid="uid://dk6f6uvskip7d" path="res://common/rope/rope.tscn" id="7_j73n2"]
+[ext_resource type="Animation" uid="uid://do01jton6rk42" path="res://addons/godot-xr-tools/hands/animations/right/Cup.res" id="7_r474x"]
+[ext_resource type="ArrayMesh" uid="uid://cvj1tefh81k5p" path="res://assets/items/extinguisher_powder/holder.res" id="8_ev8eh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bs6bj"]
+size = Vector3(0.049999997, 0.04, 0.14999999)
+
+[sub_resource type="Resource" id="Resource_ybqna"]
+script = ExtResource("5_tx3j7")
+closed_pose = ExtResource("5_ybqna")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="Resource" id="Resource_r474x"]
+script = ExtResource("5_tx3j7")
+closed_pose = ExtResource("7_r474x")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d0ce0"]
+height = 0.523
+radius = 0.109
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r474x"]
+size = Vector3(0.023742676, 0.020629883, 0.013687134)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d0ce0"]
+size = Vector3(0.0312347, 0.0326538, 0.0518799)
+
+[sub_resource type="Curve3D" id="Curve3D_nu4d3"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00799024, 0.360254, 0.0862992, 0, 0.0110817, -0.0415566, 0, -0.0110817, 0.0415566, 0.0065734, 0.360137, 0.11826, 0, 0, 0, 0, 0, 0, 0.0115787, 0.340185, 0.161146, 0, 0, 0, 0, 0, 0, 0.0123479, 0.159094, 0.185829, 0, 0, 0, 0, 0, 0, 0.0143751, -0.0454934, 0.19598),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="PowderExtinguisher" instance=ExtResource("1_ts6p0")]
+
+[node name="HoseEndOrigin" parent="." index="0"]
+transform = Transform3D(1.00013, 0, 0, 0, -4.3716945e-08, -1.0001271, 0, 1.0001271, -4.3716945e-08, 0, -0.143, 0.187)
+script = ExtResource("2_ev8eh")
+is_pickable = true
+
+[node name="CollisionShape3D" parent="HoseEndOrigin/Pickup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0050000297, -4.4703484e-08, -0.024999648)
+shape = SubResource("BoxShape3D_bs6bj")
+
+[node name="Mesh" parent="HoseEndOrigin/Pickup" index="1"]
+transform = Transform3D(0.38637033, 0.017977346, -0.10195484, 0.1031337, -0.032504573, 0.38510633, 0.009022982, -0.39827168, -0.036032192, 0, 0, 0)
+mesh = ExtResource("3_tx3j7")
+
+[node name="HandleOrigin" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.407, -0.092)
+
+[node name="Mesh" parent="HandleOrigin/Pickup" index="1"]
+mesh = ExtResource("4_ybqna")
+
+[node name="GrabPointHandLeft" parent="HandleOrigin/Pickup" index="2"]
+transform = Transform3D(-1, -6.6178615e-08, 5.7123845e-08, 0, 0.6534206, 0.7569951, -8.742278e-08, 0.7569951, -0.6534206, 0, -0.030752897, 0.08853161)
+hand_pose = SubResource("Resource_ybqna")
+
+[node name="GrabPointHandRight" parent="HandleOrigin/Pickup" index="3"]
+transform = Transform3D(-1, 6.017787e-08, -6.341424e-08, -8.652446e-09, 0.65368485, 0.7567669, 8.6993545e-08, 0.7567669, -0.65368485, 0, -0.030999988, 0.089)
+hand_pose = SubResource("Resource_r474x")
+
+[node name="CollisionShape3D" parent="Body" index="0"]
+shape = SubResource("CylinderShape3D_d0ce0")
+
+[node name="PinOrigin" parent="Body" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012, 0.394, -0.016)
+
+[node name="Mesh" parent="Body/PinOrigin" index="0"]
+mesh = ExtResource("5_r474x")
+
+[node name="CollisionShape3D" parent="Body/PinOrigin/Pickup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013348385, 0.001862824, 0.0020523053)
+shape = SubResource("BoxShape3D_r474x")
+
+[node name="GrabPointHandRight" parent="Body/PinOrigin/Pickup" index="1"]
+transform = Transform3D(-0.44604144, 0, -0.895012, 0, 1, 0, 0.895012, 0, -0.44604144, 0.016280122, 0.0077115297, 0.034771547)
+
+[node name="GrabPointHandLeft" parent="Body/PinOrigin/Pickup" index="2"]
+transform = Transform3D(-0.27120528, 0.96252143, -4.2073157e-08, -0.40839234, -0.11507078, 0.9055244, 0.87158674, 0.24558298, 0.42429423, -0.0035944087, -0.03302923, -0.034564152)
+
+[node name="Model" parent="Body" index="2" instance=ExtResource("6_ekdd7")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="HoseStart" type="StaticBody3D" parent="Body" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.368081, 0.0660115)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/HoseStart" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00800323, -0.00509644, 0.00347902)
+shape = SubResource("BoxShape3D_d0ce0")
+
+[node name="Rope" parent="." index="3" node_paths=PackedStringArray("attached_to_start", "attached_to_end") instance=ExtResource("7_j73n2")]
+transform = Transform3D(1.00995, 0, 0, 0, 1.00995, 0, 0, 0, 1.00995, 0, 0, 0)
+curve = SubResource("Curve3D_nu4d3")
+segments_count = 10
+mesh_sides = 5
+thickness = 0.01
+fixed_start_points = 2
+attached_to_start = NodePath("../Body/HoseStart")
+attached_to_end = NodePath("../HoseEndOrigin/Pickup")
+
+[node name="Holder" parent="." index="5"]
+transform = Transform3D(6.119594e-09, -9.240331e-16, -0.14, -2.1139412e-08, -0.14, 0, -0.14, 2.1139412e-08, -6.119594e-09, -0.049999997, 0, 0.01)
+visible = false
+mesh = ExtResource("8_ev8eh")
+
+[connection signal="max_extend" from="Rope" to="HoseEndOrigin" method="_on_rope_max_extend"]
+
+[editable path="HoseEndOrigin/Pickup"]
+[editable path="HandleOrigin/Pickup"]
+[editable path="Body"]
+[editable path="Body/PinOrigin/Pickup"]

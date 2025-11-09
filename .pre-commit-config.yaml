@@ -10,3 +10,11 @@ repos:
         name: Gdstript formatter
         entry: gdformat
         pass_filenames: true
+        language: system
+        files: \.gd$
+    -   id: gdsctipt-linter
+        name: Gdstript linter
+        entry: gdlint
+        pass_filenames: true
+        language: system
+        files: \.gd$
