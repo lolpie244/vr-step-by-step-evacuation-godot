@@ -1,0 +1,68 @@
+[gd_scene load_steps=15 format=3 uid="uid://bd6jf6p57yppl"]
+
+[ext_resource type="PackedScene" uid="uid://tojpii1rkq2c" path="res://stages/common_nodes/tiles/tile_factory.tscn" id="1_lnyr2"]
+[ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic_modes/strategic/tiles/mixins/flammable.tscn" id="3_jcfbc"]
+[ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="4_cqx0e"]
+[ext_resource type="Script" uid="uid://bh8wiw1xq5mtt" path="res://stages/common_nodes/tiles/meshes/tile.gd" id="4_mf7cg"]
+[ext_resource type="PackedScene" uid="uid://e1y7abr4iowb" path="res://assets/tiles/highres/floor.glb" id="5_fc8km"]
+[ext_resource type="Script" uid="uid://dnw7qlihelwdy" path="res://stages/first_person_modes/base_scene/tiles/mixins/item_holder.gd" id="7_cqx0e"]
+[ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://stages/common_nodes/tiles/meshes/wall.gd" id="7_jcfbc"]
+[ext_resource type="PackedScene" uid="uid://b1wwedv5gihfr" path="res://assets/tiles/highres/wall.glb" id="7_mf7cg"]
+[ext_resource type="PackedScene" uid="uid://bo3vblsvejx6g" path="res://stages/first_person_modes/base_scene/tiles/mixins/flammable.tscn" id="8_r8kke"]
+[ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://stages/common_nodes/tiles/meshes/wall_like.gd" id="9_cqx0e"]
+[ext_resource type="PackedScene" uid="uid://dhmdasbpo4tyk" path="res://assets/tiles/highres/window.glb" id="9_jcfbc"]
+[ext_resource type="Script" uid="uid://bmmb8iqnumlel" path="res://stages/first_person_modes/base_scene/tiles/types/door.gd" id="11_jcfbc"]
+[ext_resource type="PackedScene" uid="uid://blgfoi38wvcev" path="res://assets/tiles/highres/doorway.glb" id="12_cqx0e"]
+[ext_resource type="PackedScene" uid="uid://odp3axm76813" path="res://assets/tiles/highres/door.glb" id="13_cqx0e"]
+
+[node name="TileNodeFactory" instance=ExtResource("1_lnyr2")]
+metadata/_custom_type_script = "uid://5hidv4t3hoob"
+
+[node name="Model" parent="Floor" index="0" instance=ExtResource("5_fc8km")]
+script = ExtResource("4_mf7cg")
+
+[node name="Flammable" parent="Floor" index="1" instance=ExtResource("8_r8kke")]
+transform = Transform3D(0.4, 0, 0, 0, 0.2, 0, 0, 0, 0.4, 0, 0.05, 0)
+visible = false
+material = ExtResource("4_cqx0e")
+
+[node name="ItemHolder" type="Node3D" parent="Floor" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049999997, 0)
+script = ExtResource("7_cqx0e")
+
+[node name="Model" parent="Wall" index="0" instance=ExtResource("7_mf7cg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+script = ExtResource("7_jcfbc")
+
+[node name="FloorModel" parent="Wall" index="1" instance=ExtResource("5_fc8km")]
+script = ExtResource("4_mf7cg")
+
+[node name="ItemHolder" type="Node3D" parent="Wall" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.01000005)
+script = ExtResource("7_cqx0e")
+contact_point = 2
+
+[node name="Model" parent="Window" index="0" instance=ExtResource("9_jcfbc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+script = ExtResource("9_cqx0e")
+
+[node name="FloorModel" parent="Window" index="1" instance=ExtResource("5_fc8km")]
+script = ExtResource("4_mf7cg")
+
+[node name="Door" parent="." index="3"]
+script = ExtResource("11_jcfbc")
+
+[node name="Model" parent="Door" index="0" instance=ExtResource("12_cqx0e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+script = ExtResource("9_cqx0e")
+
+[node name="Door" parent="Door/Model" index="1" instance=ExtResource("13_cqx0e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.040000003, 0.17)
+
+[node name="FloorModel" parent="Door" index="1" instance=ExtResource("5_fc8km")]
+script = ExtResource("4_mf7cg")
+
+[node name="Flammable" parent="Door" index="2" instance=ExtResource("3_jcfbc")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.05, 0)
+visible = false
+material = ExtResource("4_cqx0e")

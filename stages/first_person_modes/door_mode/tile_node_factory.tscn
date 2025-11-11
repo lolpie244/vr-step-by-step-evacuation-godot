@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://cblo60njuvhr"]
+
+[ext_resource type="PackedScene" uid="uid://bd6jf6p57yppl" path="res://stages/first_person_modes/base_scene/tiles/tile_factory.tscn" id="1_02fyf"]
+[ext_resource type="Script" uid="uid://cu3s6jcadguhk" path="res://stages/first_person_modes/door_mode/door.gd" id="2_cnu2b"]
+[ext_resource type="PackedScene" uid="uid://duxe0itkdum21" path="res://stages/first_person_modes/door_mode/handle.tscn" id="2_fggs4"]
+
+[sub_resource type="Animation" id="Animation_2ynrm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/Door:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5707964, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cnu2b"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/Door:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5707964, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ynrm"]
+_data = {
+&"RESET": SubResource("Animation_2ynrm"),
+&"open": SubResource("Animation_cnu2b")
+}
+
+[node name="TileNodeFactory" instance=ExtResource("1_02fyf")]
+
+[node name="Door" parent="." index="3"]
+visible = true
+script = ExtResource("2_cnu2b")
+
+[node name="Animation" type="AnimationPlayer" parent="Door" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_2ynrm")
+}
+
+[node name="Door" parent="Door/Model" index="1"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.040000003, 0.17)
+
+[node name="Handle_001" parent="Door/Model/Door" index="0"]
+visible = false
+
+[node name="Handle1" parent="Door/Model/Door" index="1" instance=ExtResource("2_fggs4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02585616, 0.34, -0.32141894)
+
+[node name="Handle2" parent="Door/Model/Door" index="2" instance=ExtResource("2_fggs4")]
+transform = Transform3D(-1, -7.642742e-15, -8.742278e-08, 0, -1, 8.742278e-08, -8.742278e-08, 8.742278e-08, 1, -0.026211992, 0.34, -0.32141894)
+
+[connection signal="triggered" from="Door/Model/Door/Handle1" to="Door" method="_on_handle_triggered"]
+[connection signal="triggered" from="Door/Model/Door/Handle2" to="Door" method="_on_handle_triggered"]
+
+[editable path="Door/Model/Door"]

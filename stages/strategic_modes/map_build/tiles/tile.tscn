@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://i1y2m2yr4feo"]
+
+[ext_resource type="Texture2D" uid="uid://dl5uixkged3pc" path="res://assets/tiles/2d/backgorund.svg" id="1_iqavk"]
+[ext_resource type="Script" uid="uid://cb7pmktov48xi" path="res://stages/strategic_modes/map_build/tiles/tile.gd" id="1_y5v3p"]
+[ext_resource type="Script" uid="uid://bpdbyih4vl5m5" path="res://common/sprite_with_material.gd" id="3_cjbwy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y5v3p"]
+size = Vector3(1, 0.018676758, 1)
+
+[node name="Tile" type="Area3D"]
+collision_layer = 268435456
+collision_mask = 268435456
+script = ExtResource("1_y5v3p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0015258789, 0)
+shape = SubResource("BoxShape3D_y5v3p")
+
+[node name="Background" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+transparent = false
+texture_filter = 0
+texture = ExtResource("1_iqavk")
+script = ExtResource("3_cjbwy")
+
+[node name="Texture" type="Sprite3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+
+[node name="DebugText" type="Label3D" parent="Background"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742277e-08, 0, -8.742277e-08, -1, 0, 0, 0)
+visible = false
+modulate = Color(0, 0, 0, 1)

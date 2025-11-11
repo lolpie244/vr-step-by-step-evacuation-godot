@@ -34,7 +34,7 @@ static func transpose(arr: Array):
 
 static func _collect_aabb(node: Node3D, result: AABB) -> AABB:
 	if node.has_method(&"get_aabb"):
-		result = result.merge(node.call("get_aabb"))
+		result = result.merge(node.transform * node.call("get_aabb"))
 
 	for child in node.get_children():
 		if is_instance_of(child, Node3D):

@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://5yiw52cjl5d8"]
+
+[ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person_modes/base_scene/first_person.tscn" id="1_qjvmb"]
+[ext_resource type="Script" uid="uid://bd5lwa63771i5" path="res://stages/first_person_modes/extinguisher_mode/extinguisher_mode.gd" id="2_px4vj"]
+[ext_resource type="PackedScene" uid="uid://r785x2cppa1g" path="res://stages/first_person_modes/extinguisher_mode/extinguishers/extinguisher_factory.tscn" id="3_bb7l2"]
+
+[node name="FirstPerson" instance=ExtResource("1_qjvmb")]
+script = ExtResource("2_px4vj")
+
+[node name="ExtinguisherFactory" parent="." index="2" instance=ExtResource("3_bb7l2")]

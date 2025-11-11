@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://do3ay7q1fqko6"]
+
+[ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person_modes/base_scene/first_person.tscn" id="1_x31o5"]
+[ext_resource type="Script" uid="uid://bvjv6ik63y4yp" path="res://stages/first_person_modes/door_mode/door_mode.gd" id="2_2pltd"]
+[ext_resource type="PackedScene" uid="uid://cblo60njuvhr" path="res://stages/first_person_modes/door_mode/tile_node_factory.tscn" id="2_tyic5"]
+
+[node name="DoorMode" instance=ExtResource("1_x31o5")]
+script = ExtResource("2_2pltd")
+tile_factory_scene = ExtResource("2_tyic5")

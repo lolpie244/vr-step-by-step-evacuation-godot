@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=3 uid="uid://duxe0itkdum21"]
+
+[ext_resource type="Script" uid="uid://b6j844iifapeu" path="res://stages/first_person_modes/door_mode/handle.gd" id="1_1mbwj"]
+[ext_resource type="PackedScene" uid="uid://3f4ldcpfj1d4" path="res://assets/tiles/highres/door_handle.glb" id="1_6conj"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="2_2uknv"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="3_x2his"]
+[ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="4_7oft6"]
+[ext_resource type="Animation" uid="uid://dqa0h82y3qn1t" path="res://addons/godot-xr-tools/hands/animations/left/Grip 1.res" id="4_jukrj"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="6_jukrj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x2his"]
+radius = 0.050743405
+
+[sub_resource type="Resource" id="Resource_jukrj"]
+script = ExtResource("4_7oft6")
+open_pose = ExtResource("4_jukrj")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[node name="Handle" type="Node3D"]
+script = ExtResource("1_1mbwj")
+
+[node name="Model" parent="." instance=ExtResource("1_6conj")]
+
+[node name="Pickup" parent="." instance=ExtResource("2_2uknv")]
+collision_mask = 65536
+freeze = true
+ranged_grab_method = 0
+
+[node name="CollisionShape3D" parent="Pickup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015, 0, 0.04199092)
+shape = SubResource("SphereShape3D_x2his")
+
+[node name="GrabPointHandLeft" parent="Pickup" instance=ExtResource("3_x2his")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, -0.07076012, -0.012273785, 0.0092627555)
+hand_pose = SubResource("Resource_jukrj")
+
+[node name="GrabPointHandRight" parent="Pickup" instance=ExtResource("6_jukrj")]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, -0.071, -0.012, 0.11140841)
+
+[connection signal="dropped" from="Pickup" to="." method="_on_pickup_dropped"]
+[connection signal="grabbed" from="Pickup" to="." method="_on_pickup_grabbed"]
+[connection signal="picked_up" from="Pickup" to="." method="_on_pickup_picked_up"]
+
+[editable path="Pickup"]

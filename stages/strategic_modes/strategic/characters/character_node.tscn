@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt0c2knjayatq"]
+
+[ext_resource type="Script" uid="uid://devne4hv6ewey" path="res://stages/strategic_modes/strategic/characters/character_node.gd" id="1_ttjnq"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="2_wugyj"]
+[ext_resource type="Script" uid="uid://dt3gq1lngn7uv" path="res://stages/strategic_modes/strategic/characters/pickable.gd" id="3_p4i5w"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_12a1t"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="5_5l0jg"]
+
+[node name="Character" type="Node3D"]
+script = ExtResource("1_ttjnq")
+
+[node name="PickableObject" parent="." instance=ExtResource("2_wugyj")]
+mass = 0.001
+gravity_scale = 0.0
+freeze = true
+freeze_mode = 0
+script = ExtResource("3_p4i5w")
+ranged_grab_method = 2
+
+[node name="GrabPointHandLeft" parent="PickableObject" instance=ExtResource("4_12a1t")]
+
+[node name="GrabPointHandRight" parent="PickableObject" instance=ExtResource("5_5l0jg")]
+
+[editable path="PickableObject"]
