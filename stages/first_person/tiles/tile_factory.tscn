@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bd6jf6p57yppl"]
+[gd_scene load_steps=15 format=3 uid="uid://bd6jf6p57yppl"]
 
 [ext_resource type="PackedScene" uid="uid://tojpii1rkq2c" path="res://stages/common_nodes/tiles/tile_factory.tscn" id="1_lnyr2"]
 [ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic/tiles/mixins/flammable.tscn" id="3_jcfbc"]
@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://bo3vblsvejx6g" path="res://stages/first_person/tiles/mixins/flammable.tscn" id="8_r8kke"]
 [ext_resource type="Script" uid="uid://coj4l0sewloq8" path="res://stages/common_nodes/tiles/meshes/wall_like.gd" id="9_cqx0e"]
 [ext_resource type="PackedScene" uid="uid://dhmdasbpo4tyk" path="res://assets/tiles/highres/window.glb" id="9_jcfbc"]
+[ext_resource type="Script" uid="uid://bmmb8iqnumlel" path="res://stages/first_person/tiles/types/door.gd" id="11_jcfbc"]
 [ext_resource type="PackedScene" uid="uid://blgfoi38wvcev" path="res://assets/tiles/highres/doorway.glb" id="12_cqx0e"]
+[ext_resource type="PackedScene" uid="uid://odp3axm76813" path="res://assets/tiles/highres/door.glb" id="13_cqx0e"]
 
 [node name="TileNodeFactory" instance=ExtResource("1_lnyr2")]
 metadata/_custom_type_script = "uid://5hidv4t3hoob"
@@ -47,9 +49,15 @@ script = ExtResource("9_cqx0e")
 [node name="FloorModel" parent="Window" index="2" instance=ExtResource("5_fc8km")]
 script = ExtResource("4_mf7cg")
 
+[node name="Door" parent="." index="3"]
+script = ExtResource("11_jcfbc")
+
 [node name="Model" parent="Door" index="1" instance=ExtResource("12_cqx0e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 script = ExtResource("9_cqx0e")
+
+[node name="Door" parent="Door/Model" index="1" instance=ExtResource("13_cqx0e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.040000003, 0.17)
 
 [node name="FloorModel" parent="Door" index="2" instance=ExtResource("5_fc8km")]
 script = ExtResource("4_mf7cg")
