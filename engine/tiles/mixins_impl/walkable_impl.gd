@@ -42,10 +42,7 @@ class ReachableResult:
 func reachable_neighbors() -> Array[Walkable]:
 	var result: Array[Walkable] = []
 
-	for tile in _tile.neighbor_tiles():
-		if tile.pos.x != _tile.pos.x && tile.pos.y != _tile.pos.y:
-			continue
-
+	for tile in _tile.direct_neighbor_tiles():
 		if is_walkable(tile):
 			result.append(tile.get_mixin(Walkable))
 

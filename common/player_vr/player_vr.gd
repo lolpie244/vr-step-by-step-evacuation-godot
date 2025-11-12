@@ -4,6 +4,8 @@ extends XROrigin3D
 var xr_interface: OpenXRInterface = XRServer.find_interface("OpenXR")
 
 @onready var camera: XRCamera3D = $XRCamera3D
+@onready var left_hand: XRController3D = $LeftHand
+@onready var right_hand: XRController3D = $RightHand
 @onready var _blink_length: float = $AnimationPlayer.get_animation("blink").length
 
 

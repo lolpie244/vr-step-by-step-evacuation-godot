@@ -36,7 +36,7 @@ static func scene() -> PackedScene:
 	return null
 
 
-func _add_child_node(tile: TileNode):
+func _add_tile_node(tile: TileNode):
 	self.add_child(tile)
 	tile.init()
 	var tile_pos := tile.impl.pos
@@ -56,10 +56,10 @@ func _ready():
 	context.character.death.connect(_on_character_death)
 
 	for tile in context.character.visible_tiles():
-		_add_child_node(tile_factory.create(tile))
+		_add_tile_node(tile_factory.create(tile))
 
 	var character_tile = tile_factory.create(context.character.get_tile())
-	_add_child_node(character_tile)
+	_add_tile_node(character_tile)
 
 	for item in items.keys():
 		items[item] = item_factory.create(item)

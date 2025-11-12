@@ -10,6 +10,8 @@ var impl: Blockable
 func _ready():
 	if !tile.impl:
 		return
-
 	impl = tile.impl.get_or_create_mixin(Blockable)
+
+
+func init():
 	impl.blocking = blocking

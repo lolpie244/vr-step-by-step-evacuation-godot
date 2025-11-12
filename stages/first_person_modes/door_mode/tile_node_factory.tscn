@@ -62,7 +62,8 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02585616, 0.34, -0.32141894)
 
 [node name="Handle2" parent="Door/Model/Door" index="2" instance=ExtResource("2_fggs4")]
-transform = Transform3D(-1, -7.642742e-15, -8.742278e-08, 0, -1, 8.742278e-08, -8.742278e-08, 8.742278e-08, 1, -0.026211992, 0.34, -0.32141894)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026211992, 0.34, -0.32141894)
+reverse = true
 
 [connection signal="triggered" from="Door/Model/Door/Handle1" to="Door" method="_on_handle_triggered"]
 [connection signal="triggered" from="Door/Model/Door/Handle2" to="Door" method="_on_handle_triggered"]
