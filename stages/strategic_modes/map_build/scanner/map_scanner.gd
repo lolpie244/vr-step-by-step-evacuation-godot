@@ -28,8 +28,14 @@ func _on_scene_anchor_created(scene_node: Object, _spatial_entity: Object) -> vo
 	_anchors.append(scene_node)
 
 
-func _set_tile(map: MapGrid, anchor: TileXRAnchor, start: Vector2, end: Vector2):
+func _set_tile(map: MapGrid, anchor: TileXRAnchor):
 	var skip := false
+	var start: Vector2i = floor(anchor.left_corner / Constants.TILE_SIZE_IN_REAL_LIFE)
+	var end: Vector2i = ceil(anchor.right_corner / Constants.TILE_SIZE_IN_REAL_LIFE)
+	end = Vector2i(
+		min(map.size.x, max(end.x, start.x + 1)),
+		min(map.size.y, max(end.y, start.y + 1)),
+	)
 	for x in range(start.x, end.x):
 		if skip:
 			break
@@ -43,13 +49,27 @@ func _set_tile(map: MapGrid, anchor: TileXRAnchor, start: Vector2, end: Vector2)
 					break
 
 
-func _set_furniture(map: MapGrid, anchor: FurnitureXRAnchor, start: Vector2, end: Vector2):
-	for x in range(start.x, end.x):
-		for y in range(end.y - 1, start.y - 1, -1):
-			if anchor.item.is_valid_placement(map.get_tile(x, y), anchor.item.get_direction()):
-				map.add_item(anchor.item)
-				anchor.item.place(map.get_tile(x, y), anchor.item.get_direction())
-				return
+func _set_furniture(map: MapGrid, anchor: FurnitureXRAnchor):
+	var center := (
+		(anchor.left_corner + anchor.right_corner) / 2.0 / Constants.TILE_SIZE_IN_REAL_LIFE
+	)
+	var start := center - anchor.item.size / 2.0
+
+	var base_tile: Tile = map.get_tile(round(start.x), round(start.y))
+	var result_tile: Tile = null
+	var distance: float = INF
+	for tile in base_tile.neighbor_tiles() + [base_tile]:
+		if anchor.item.is_valid_placement(tile, anchor.item._direction):
+			var tile_distance := start.distance_squared_to(tile.pos)
+			if tile_distance < distance:
+				distance = tile_distance
+				result_tile = tile
+
+	if !result_tile:
+		return
+
+	map.add_item(anchor.item)
+	anchor.item.place(result_tile, anchor.item.get_direction())
 
 
 func _set_map_data():
@@ -83,25 +103,17 @@ func _set_map_data():
 				return false
 			return a.get_type() > b.get_type()
 	)
-
 	var size: Vector2i = ceil((right_corner - left_corner) / Constants.TILE_SIZE_IN_REAL_LIFE)
 	var map := MapGrid.new(size)
 
 	for anchor in _anchors:
-		var left := anchor.left_corner - left_corner
-		var right := left + anchor.size
-
-		var start: Vector2i = floor(left / Constants.TILE_SIZE_IN_REAL_LIFE)
-		var end: Vector2i = ceil(right / Constants.TILE_SIZE_IN_REAL_LIFE)
-		end = Vector2i(
-			min(size.x, max(end.x, start.x + 1)),
-			min(size.y, max(end.y, start.y + 1)),
-		)
+		anchor.left_corner -= left_corner
+		anchor.right_corner -= left_corner
 
 		if anchor is TileXRAnchor:
-			_set_tile(map, anchor, start, end)
+			_set_tile(map, anchor)
 		if anchor is FurnitureXRAnchor:
-			_set_furniture(map, anchor, start, end)
+			_set_furniture(map, anchor)
 
 	scene_manager.remove_scene_anchors()
 	map_scanned.emit(map)

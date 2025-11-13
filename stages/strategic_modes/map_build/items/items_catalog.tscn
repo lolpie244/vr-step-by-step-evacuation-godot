@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bwn675hfdya30" path="res://assets/items/2d/table.png" id="5_riqh8"]
 [ext_resource type="Texture2D" uid="uid://b24qubxum1pe2" path="res://assets/items/2d/bed_double.png" id="6_5r8mr"]
 [ext_resource type="PackedScene" uid="uid://did5xwtowinu4" path="res://assets/items/table.glb" id="6_lf17y"]
-[ext_resource type="Script" uid="uid://dwkncdtofp2bq" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="7_0jw6i"]
+[ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="7_0jw6i"]
 [ext_resource type="PackedScene" uid="uid://dykiurcxj4q1w" path="res://assets/items/bed_double.glb" id="7_3x5ot"]
 [ext_resource type="Script" uid="uid://dbgxt7re6vu3i" path="res://stages/strategic_modes/map_build/items/types/extinguisher.gd" id="7_lf17y"]
 [ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="7_m8e2c"]
@@ -232,14 +232,13 @@ rotateable = false
 transform = Transform3D(-1.8358783e-09, 0, -0.042, 0, 0.042, 0, 0.042, 0, -1.8358783e-09, 0, -0.030301977, -0.008459911)
 
 [node name="PC" parent="." instance=ExtResource("1_7ps7r")]
-visible = false
 script = ExtResource("2_qrrd0")
 furniture_type = 8
 material = ExtResource("19_uxuoc")
 icon = ExtResource("32_1qqxw")
 
 [node name="Model" parent="PC" instance=ExtResource("33_v5o7r")]
-transform = Transform3D(-2.6226832e-09, 0, 0.06, 0, 0.06, 0, -0.06, 0, -2.6226832e-09, 0, -0.035088234, -0.010889513)
+transform = Transform3D(-2.6226832e-09, 0, -0.06, 0, 0.06, 0, 0.06, 0, -2.6226832e-09, 0, -0.035088234, -0.010889513)
 
 [node name="TV" parent="." instance=ExtResource("1_7ps7r")]
 visible = false
@@ -258,7 +257,7 @@ transform = Transform3D(-0.07335822, -0.99602085, -0.05060641, 0.8198613, -0.089
 hand_pose = SubResource("Resource_hjhaj")
 
 [node name="OriginPoint" parent="TV/BodyOrigin/Body" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.020203114, -0.025821377, -0.0050154813)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0055621713, -0.025821377, -0.0050154813)
 
 [node name="Model" parent="TV" instance=ExtResource("35_hjhaj")]
 transform = Transform3D(-0.06, 0, -5.2453664e-09, 0, 0.06, 0, 5.2453664e-09, 0, -0.06, 0.03228526, -0.024975555, -0.0040829964)

@@ -26,4 +26,4 @@ func is_multiple_tiles() -> bool:
 
 func set_label(label: String):
 	super.set_label(label)
-	_type = LABEL_TO_TYPE.get(label, Tile.Type.NONE)
+	_type = LABEL_TO_TYPE.get(label, null)

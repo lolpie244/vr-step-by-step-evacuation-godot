@@ -8,7 +8,7 @@ const LABEL_TO_IMPL := {
 	"bed": "Furniture.BED",
 	"lamp": "Furniture.LAMP",
 	"plant": "Furniture.PLANT",
-	"screen": "",
+	"screen": "Furniture.SCREEN",
 	"storage": "Furniture.STORAGE",
 }
 
@@ -24,7 +24,8 @@ func get_type() -> Furniture.Type:
 
 
 func init():
-	var size_in_tiles: Vector2i = self.size / Constants.TILE_SIZE_IN_REAL_LIFE
+	var size_in_tiles: Vector2 = self.size / Constants.TILE_SIZE_IN_REAL_LIFE
+
 	item = ItemsCollection.get_item_with_closest_size(
 		LABEL_TO_IMPL.get(_label), size_in_tiles, true
 	)
