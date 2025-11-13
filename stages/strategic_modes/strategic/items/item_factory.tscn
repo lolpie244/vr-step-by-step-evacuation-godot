@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxfojo8jvfcd5"]
+[gd_scene load_steps=15 format=3 uid="uid://cxfojo8jvfcd5"]
 
 [ext_resource type="PackedScene" uid="uid://cxrxfl7pkartx" path="res://stages/common_nodes/items/item_factory.tscn" id="1_lnyr2"]
 [ext_resource type="PackedScene" uid="uid://bk5imvrho04nk" path="res://assets/items/bed_single.glb" id="3_dws7h"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://d164o4dsp48te" path="res://assets/items/plant.glb" id="10_60hsf"]
 [ext_resource type="PackedScene" uid="uid://dgkmha45o8aws" path="res://assets/items/storage.glb" id="11_sx6ke"]
 [ext_resource type="PackedScene" uid="uid://bjp6x67n53lfw" path="res://assets/items/wall_art.glb" id="12_dws7h"]
+[ext_resource type="PackedScene" uid="uid://br3uurkot1ch4" path="res://assets/items/pc.glb" id="13_yr2ul"]
+[ext_resource type="PackedScene" uid="uid://dj4hgryowvxmk" path="res://assets/items/tv.glb" id="14_0y5el"]
 
 [node name="StrategicItemFactory" instance=ExtResource("1_lnyr2")]
 
@@ -80,4 +82,16 @@ script = ExtResource("4_fxm5s")
 visible = false
 
 [node name="Model" parent="WallArt" index="0" instance=ExtResource("12_dws7h")]
+script = ExtResource("4_fxm5s")
+
+[node name="PC" parent="." index="10"]
+visible = false
+
+[node name="Model" parent="PC" index="0" instance=ExtResource("13_yr2ul")]
+script = ExtResource("4_fxm5s")
+
+[node name="TV" parent="." index="11"]
+visible = false
+
+[node name="Model" parent="TV" index="0" instance=ExtResource("14_0y5el")]
 script = ExtResource("4_fxm5s")

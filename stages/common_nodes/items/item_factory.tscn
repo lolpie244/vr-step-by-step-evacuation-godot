@@ -52,3 +52,12 @@ size = Vector2i(2, 1)
 [node name="WallArt" type="Node3D" parent="."]
 script = ExtResource("2_if636")
 type = "Furniture.WALL_ART"
+
+[node name="PC" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.SCREEN"
+
+[node name="TV" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "Furniture.Furniture.SCREEN"
+size = Vector2i(1, 2)

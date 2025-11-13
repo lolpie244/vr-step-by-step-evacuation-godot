@@ -15,6 +15,8 @@ func _ready():
 		func(): return Furniture.new(Furniture.Type.TABLE),
 		func(): return Furniture.new(Furniture.Type.LAMP),
 		func(): return Furniture.new(Furniture.Type.PLANT),
+		func(): return Furniture.new(Furniture.Type.SCREEN),
+		func(): return Furniture.new(Furniture.Type.SCREEN, Vector2i(2, 1)),
 	]
 
 	for item_constructor in list_of_items:

@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dl5uixkged3pc"
-path.etc2="res://.godot/imported/backgorund.svg-d282d02d93602563aa7b098d791493da.etc2.ctex"
+path.s3tc="res://.godot/imported/backgorund.svg-d282d02d93602563aa7b098d791493da.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/tiles/2d/backgorund.svg"
-dest_files=["res://.godot/imported/backgorund.svg-d282d02d93602563aa7b098d791493da.etc2.ctex"]
+dest_files=["res://.godot/imported/backgorund.svg-d282d02d93602563aa7b098d791493da.s3tc.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 class_name Furniture
 extends Item
 
-enum Type { UNKNOWN, BED, TABLE, COUCH, PLANT, STORAGE, WALL_ART, LAMP }
+enum Type { UNKNOWN, BED, TABLE, COUCH, PLANT, STORAGE, WALL_ART, LAMP, SCREEN }
 
 var type: Type
 

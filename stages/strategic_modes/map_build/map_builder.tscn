@@ -145,6 +145,14 @@ visible = true
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.7454768, 0.92243624, 1.8219397)
 visible = true
 
+[node name="PC" parent="ItemsCatalog" index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7484413, 0.4569659, 1.8931476)
+visible = true
+
+[node name="TV" parent="ItemsCatalog" index="10"]
+transform = Transform3D(0.1572791, 0, -0.9875542, 0, 1, 0, 0.9875542, 0, 0.1572791, -0.75148505, 0.44707283, 2.013813)
+visible = true
+
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]
 [connection signal="openxr_fb_scene_data_missing" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_data_missing"]
@@ -171,3 +179,5 @@ visible = true
 [editable path="ItemsCatalog/Lamp/BodyOrigin/Body"]
 [editable path="ItemsCatalog/Plant"]
 [editable path="ItemsCatalog/Plant/BodyOrigin/Body"]
+[editable path="ItemsCatalog/TV"]
+[editable path="ItemsCatalog/TV/BodyOrigin/Body"]

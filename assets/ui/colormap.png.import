@@ -3,9 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvrse8je00aau"
-path.etc2="res://.godot/imported/colormap.png-b01eaaab149b6233f2e42a53593fe7bd.etc2.ctex"
+path.s3tc="res://.godot/imported/colormap.png-b01eaaab149b6233f2e42a53593fe7bd.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +15,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/ui/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-b01eaaab149b6233f2e42a53593fe7bd.etc2.ctex"]
+dest_files=["res://.godot/imported/colormap.png-b01eaaab149b6233f2e42a53593fe7bd.s3tc.ctex"]
 
 [params]
 

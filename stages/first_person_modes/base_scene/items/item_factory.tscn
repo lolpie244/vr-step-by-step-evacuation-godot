@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://daywd25eg72y1"]
+[gd_scene load_steps=14 format=3 uid="uid://daywd25eg72y1"]
 
 [ext_resource type="PackedScene" uid="uid://cxrxfl7pkartx" path="res://stages/common_nodes/items/item_factory.tscn" id="1_lnyr2"]
 [ext_resource type="PackedScene" uid="uid://dykiurcxj4q1w" path="res://assets/items/bed_double.glb" id="3_i17s5"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://d164o4dsp48te" path="res://assets/items/plant.glb" id="9_7ull0"]
 [ext_resource type="PackedScene" uid="uid://dgkmha45o8aws" path="res://assets/items/storage.glb" id="10_beaqf"]
 [ext_resource type="PackedScene" uid="uid://bjp6x67n53lfw" path="res://assets/items/wall_art.glb" id="11_hd7v5"]
+[ext_resource type="PackedScene" uid="uid://br3uurkot1ch4" path="res://assets/items/pc.glb" id="12_tyw6j"]
+[ext_resource type="PackedScene" uid="uid://dj4hgryowvxmk" path="res://assets/items/tv.glb" id="13_08cb7"]
 
 [node name="FirstPersonItemFactory" instance=ExtResource("1_lnyr2")]
 
@@ -74,3 +76,13 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 visible = false
 
 [node name="Model" parent="WallArt" index="0" instance=ExtResource("11_hd7v5")]
+
+[node name="PC" parent="." index="10"]
+visible = false
+
+[node name="Model" parent="PC" index="0" instance=ExtResource("12_tyw6j")]
+
+[node name="TV" parent="." index="11"]
+visible = false
+
+[node name="Model" parent="TV" index="0" instance=ExtResource("13_08cb7")]
