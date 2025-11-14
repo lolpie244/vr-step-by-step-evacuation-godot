@@ -29,4 +29,4 @@ func init():
 	item = ItemsCollection.get_item_with_closest_size(
 		LABEL_TO_IMPL.get(_label), size_in_tiles, true
 	)
-	item._direction = Utils.direction_from_angle(self.global_rotation_degrees)
+	item._direction = Utils.direction_from_angle(self.global_rotation_degrees.y)

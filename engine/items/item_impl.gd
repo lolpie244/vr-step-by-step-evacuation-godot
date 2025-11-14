@@ -26,7 +26,7 @@ func _init(_size: Vector2i = Vector2i.ONE):
 
 
 func _is_valid_tile(tile: Tile) -> bool:
-	return tile and tile.get_mixin(ItemHolder) and tile.get_mixin(ItemHolder).can_hold_item(self)
+	return not tile.is_wall_like
 
 
 func get_direction() -> Utils.Direction:
@@ -62,7 +62,12 @@ func valid() -> bool:
 		return false
 
 	for tile in tiles():
-		if !_is_valid_tile(tile):
+		if not (
+			tile
+			and tile.get_mixin(ItemHolder)
+			and tile.get_mixin(ItemHolder).can_hold_item(self)
+			and _is_valid_tile(tile)
+		):
 			return false
 	return true
 

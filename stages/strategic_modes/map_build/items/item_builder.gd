@@ -42,6 +42,10 @@ func _distance_to_tile(tile: Tile2D):
 	return origin_point.global_position.distance_to(tile.global_position)
 
 
+func _rotation() -> float:
+	return model.global_rotation_degrees.y
+
+
 func _on_action_pressed(_pickable: Variant) -> void:
 	var tile: Tile2D = null
 
@@ -55,7 +59,7 @@ func _on_action_pressed(_pickable: Variant) -> void:
 	var direction: Utils.Direction = Utils.Direction.UP
 
 	if rotateable:
-		direction = Utils.direction_from_angle(model.global_rotation_degrees)
+		direction = Utils.direction_from_angle(_rotation())
 
 	if impl.is_valid_placement(tile.impl, direction):
 		create_node(impl)

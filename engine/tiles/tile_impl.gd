@@ -108,6 +108,11 @@ func direct_neighbor_tiles() -> Array[Tile]:
 	return result
 
 
+func tile_in_direction(direction: Utils.Direction) -> Tile:
+	var offset = round(Vector2(0, 1).rotated(deg_to_rad(90) * direction))
+	return grid.get_tile(pos.x + offset.x, pos.y + offset.y)
+
+
 func process_turn(_turn_number: int):
 	for mixin in mixins:
 		mixin.process_turn(_turn_number)

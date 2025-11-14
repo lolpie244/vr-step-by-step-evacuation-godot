@@ -43,6 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 script = ExtResource("8_iqaq3")
 
 [node name="Wall" parent="." index="1"]
+visible = true
 script = ExtResource("2_6vjt4")
 
 [node name="Animation" parent="Wall" index="0" instance=ExtResource("2_gyo66")]
@@ -55,7 +56,7 @@ script = ExtResource("10_rgv0y")
 script = ExtResource("4_iqaq3")
 
 [node name="ItemHolder" type="Node3D" parent="Wall" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00048363954, 0.6, 0)
 script = ExtResource("8_iqaq3")
 contact_point = 2
 

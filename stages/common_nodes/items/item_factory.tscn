@@ -61,3 +61,7 @@ type = "Furniture.SCREEN"
 script = ExtResource("2_if636")
 type = "Furniture.SCREEN"
 size = Vector2i(2, 1)
+
+[node name="FireAlarm" type="Node3D" parent="."]
+script = ExtResource("2_if636")
+type = "FireAlarm"

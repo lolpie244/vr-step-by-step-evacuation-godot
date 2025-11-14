@@ -1,0 +1,90 @@
+[gd_scene load_steps=16 format=3 uid="uid://bxh01pirs3jg8"]
+
+[ext_resource type="Script" uid="uid://cmxt0v1elxxmk" path="res://stages/first_person_modes/fire_alarm_mode/fire_alarm.gd" id="1_lbesx"]
+[ext_resource type="PackedScene" uid="uid://u0d5pi3nkhea" path="res://assets/items/fire_alarm/model.glb" id="2_rhmqe"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="3_rhmqe"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_h52yh"]
+[ext_resource type="Animation" uid="uid://bi1l6lre2w2lp" path="res://addons/godot-xr-tools/hands/animations/left/Hold.res" id="5_f17dk"]
+[ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="5_yooxo"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="7_f17dk"]
+[ext_resource type="Animation" uid="uid://bv5tuc1kjv0k5" path="res://addons/godot-xr-tools/hands/animations/right/Hold.res" id="8_gghjt"]
+[ext_resource type="Script" uid="uid://nb5nkghse2pg" path="res://stages/first_person_modes/fire_alarm_mode/button.gd" id="9_mpbu4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpbu4"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mpbu4"]
+material = SubResource("StandardMaterial3D_mpbu4")
+size = Vector2(0.005, 0.01)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g2ugt"]
+radius = 0.051700816
+
+[sub_resource type="Resource" id="Resource_f17dk"]
+script = ExtResource("5_yooxo")
+open_pose = ExtResource("5_f17dk")
+closed_pose = ExtResource("5_f17dk")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="Resource" id="Resource_gghjt"]
+script = ExtResource("5_yooxo")
+open_pose = ExtResource("8_gghjt")
+closed_pose = ExtResource("8_gghjt")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d1i3p"]
+size = Vector3(0.048416138, 0.05003357, 0.009156005)
+
+[node name="FireAlarm" type="Node3D"]
+script = ExtResource("1_lbesx")
+
+[node name="Model" parent="." instance=ExtResource("2_rhmqe")]
+
+[node name="Button" parent="Model/Base" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.017)
+
+[node name="Fixators" type="Node3D" parent="Model/Base" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.024, 0.015)
+
+[node name="Fixator" type="MeshInstance3D" parent="Model/Base/Fixators"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.019810319, 0, 0)
+mesh = SubResource("PlaneMesh_mpbu4")
+skeleton = NodePath("../../..")
+
+[node name="Fixator2" type="MeshInstance3D" parent="Model/Base/Fixators"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.02, 0, 0)
+mesh = SubResource("PlaneMesh_mpbu4")
+skeleton = NodePath("../../..")
+
+[node name="Pickup" parent="." instance=ExtResource("3_rhmqe")]
+collision_layer = 16777216
+collision_mask = 16777216
+freeze = true
+picked_up_layer = 16777216
+ranged_grab_method = 0
+
+[node name="CollisionShape3D" parent="Pickup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05166673, 0)
+shape = SubResource("SphereShape3D_g2ugt")
+
+[node name="GrabPointHandLeft" parent="Pickup" instance=ExtResource("4_h52yh")]
+transform = Transform3D(-0.007888756, 0.9999689, 0, 0.73396784, 0.005790273, -0.6791594, -0.6791383, -0.005357723, -0.73399067, 0.004631076, -0.036885895, 0.083712876)
+hand_pose = SubResource("Resource_f17dk")
+
+[node name="GrabPointHandRight" parent="Pickup" instance=ExtResource("7_f17dk")]
+transform = Transform3D(0.008726561, -0.9999619, 0, -0.86270154, -0.007528705, -0.5056574, 0.50563806, 0.0044126506, -0.8627343, 0, -0.049261115, 0.08538068)
+hand_pose = SubResource("Resource_gghjt")
+
+[node name="ButtonBody" type="StaticBody3D" parent="."]
+script = ExtResource("9_mpbu4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtonBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00017547607, -0.00020599365, 0.00870789)
+shape = SubResource("BoxShape3D_d1i3p")
+
+[connection signal="dropped" from="Pickup" to="." method="_on_pickup_dropped"]
+[connection signal="picked_up" from="Pickup" to="." method="_on_pickup_picked_up"]
+[connection signal="triggered" from="ButtonBody" to="." method="_on_button_triggered"]
+
+[editable path="Model"]
+[editable path="Pickup"]

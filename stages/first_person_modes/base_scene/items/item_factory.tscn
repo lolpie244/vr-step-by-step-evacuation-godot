@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://daywd25eg72y1"]
+[gd_scene load_steps=16 format=3 uid="uid://daywd25eg72y1"]
 
 [ext_resource type="PackedScene" uid="uid://cxrxfl7pkartx" path="res://stages/common_nodes/items/item_factory.tscn" id="1_lnyr2"]
 [ext_resource type="PackedScene" uid="uid://dykiurcxj4q1w" path="res://assets/items/bed_double.glb" id="3_i17s5"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://bjp6x67n53lfw" path="res://assets/items/wall_art.glb" id="11_hd7v5"]
 [ext_resource type="PackedScene" uid="uid://br3uurkot1ch4" path="res://assets/items/pc.glb" id="12_tyw6j"]
 [ext_resource type="PackedScene" uid="uid://dj4hgryowvxmk" path="res://assets/items/tv.glb" id="13_08cb7"]
+[ext_resource type="Script" uid="uid://buljaj24n4wb1" path="res://stages/common_nodes/items/wall_item_node.gd" id="14_mmenc"]
+[ext_resource type="PackedScene" uid="uid://u0d5pi3nkhea" path="res://assets/items/fire_alarm/model.glb" id="15_030at"]
 
 [node name="FirstPersonItemFactory" instance=ExtResource("1_lnyr2")]
 
@@ -88,3 +90,9 @@ visible = false
 
 [node name="Model" parent="TV" index="0" instance=ExtResource("13_08cb7")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="FireAlarm" parent="." index="12"]
+script = ExtResource("14_mmenc")
+
+[node name="Model" parent="FireAlarm" index="0" instance=ExtResource("15_030at")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0.027637403)

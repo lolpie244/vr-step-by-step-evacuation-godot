@@ -92,8 +92,8 @@ static func signed_ratio(_min: float, _max: float, value: float) -> float:
 	return (value - mid) / half_range
 
 
-static func direction_from_angle(rotation_degrees: Vector3) -> Utils.Direction:
-	match snapped(rotation_degrees.y, 90):
+static func direction_from_angle(rotation_degrees: float) -> Utils.Direction:
+	match snapped(rotation_degrees, 90):
 		-90:
 			return Utils.Direction.RIGHT
 		90:

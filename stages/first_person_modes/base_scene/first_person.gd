@@ -33,7 +33,7 @@ static func is_applicable(_context) -> bool:
 
 
 static func scene() -> PackedScene:
-	return null
+	return preload("first_person.tscn")
 
 
 func _add_tile_node(tile: TileNode):
@@ -71,6 +71,11 @@ func _ready():
 	player.position.z = character_tile.position.z
 
 	exit_trigger.spawn()
+
+
+func look_at_tile(tile: TileNode):
+	player.look_at(tile.global_position)
+	player.rotation = Vector3(0, player.rotation.y, 0)
 
 
 func _on_character_death(character: Character):

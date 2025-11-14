@@ -29,6 +29,9 @@ script = ExtResource("3_kxwn1")
 type = 2
 texture = ExtResource("3_10rko")
 
+[node name="ItemHolder" type="Node" parent="Wall"]
+script = ExtResource("3_lkb72")
+
 [node name="Window" parent="." instance=ExtResource("2_lhilw")]
 visible = false
 script = ExtResource("5_lkb72")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://b80h6lkl843dr"]
+[gd_scene load_steps=47 format=3 uid="uid://b80h6lkl843dr"]
 
 [ext_resource type="Script" uid="uid://criypdphkofqa" path="res://stages/strategic_modes/map_build/items/items_catalog.gd" id="1_05res"]
 [ext_resource type="PackedScene" uid="uid://kx1pwc0tgm1k" path="res://stages/strategic_modes/map_build/items/item_builder.tscn" id="1_7ps7r"]
@@ -35,6 +35,9 @@
 [ext_resource type="PackedScene" uid="uid://br3uurkot1ch4" path="res://assets/items/pc.glb" id="33_v5o7r"]
 [ext_resource type="Texture2D" uid="uid://k8icfmes646b" path="res://assets/items/2d/tv.png" id="34_c68be"]
 [ext_resource type="PackedScene" uid="uid://dj4hgryowvxmk" path="res://assets/items/tv.glb" id="35_hjhaj"]
+[ext_resource type="Script" uid="uid://b1dkpahe7y0ax" path="res://stages/strategic_modes/map_build/items/types/fire_alarm.gd" id="36_2d7lx"]
+[ext_resource type="Texture2D" uid="uid://doh1epedub41c" path="res://assets/items/2d/alarm.png" id="37_ioork"]
+[ext_resource type="PackedScene" uid="uid://u0d5pi3nkhea" path="res://assets/items/fire_alarm/model.glb" id="38_e21ju"]
 
 [sub_resource type="Resource" id="Resource_m8e2c"]
 script = ExtResource("7_0jw6i")
@@ -232,6 +235,7 @@ rotateable = false
 transform = Transform3D(-1.8358783e-09, 0, -0.042, 0, 0.042, 0, 0.042, 0, -1.8358783e-09, 0, -0.030301977, -0.008459911)
 
 [node name="PC" parent="." instance=ExtResource("1_7ps7r")]
+visible = false
 script = ExtResource("2_qrrd0")
 furniture_type = 8
 material = ExtResource("19_uxuoc")
@@ -261,6 +265,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0055621713, -0.025821377, 
 
 [node name="Model" parent="TV" instance=ExtResource("35_hjhaj")]
 transform = Transform3D(-0.06, 0, -5.2453664e-09, 0, 0.06, 0, 5.2453664e-09, 0, -0.06, 0.03228526, -0.024975555, -0.0040829964)
+
+[node name="FireAlarm" parent="." instance=ExtResource("1_7ps7r")]
+visible = false
+script = ExtResource("36_2d7lx")
+icon = ExtResource("37_ioork")
+
+[node name="Model" parent="FireAlarm" instance=ExtResource("38_e21ju")]
+transform = Transform3D(-0.45, 3.934025e-08, 1.7196169e-15, 0, -1.9670125e-08, 0.45, 3.934025e-08, 0.45, 1.9670125e-08, 0, -0.019508105, -0.0056320317)
 
 [editable path="BedSingle"]
 [editable path="BedSingle/BodyOrigin/Body"]

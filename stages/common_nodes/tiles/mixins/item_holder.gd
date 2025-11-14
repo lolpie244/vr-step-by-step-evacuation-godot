@@ -31,13 +31,13 @@ func _get_contact_point(node: Node3D) -> Vector3:
 		ContactPoint.TOP:
 			return node.position + Vector3(0, aabb.size.y, 0)
 		ContactPoint.BACK:
-			return aabb.get_center() - Vector3(aabb.size.x / 2, 0, 0)
-		ContactPoint.FRONT:
-			return aabb.get_center() + Vector3(aabb.size.x / 2, 0, 0)
-		ContactPoint.LEFT:
 			return aabb.get_center() - Vector3(0, 0, aabb.size.z / 2)
-		ContactPoint.RIGHT:
+		ContactPoint.FRONT:
 			return aabb.get_center() + Vector3(0, 0, aabb.size.z / 2)
+		ContactPoint.LEFT:
+			return aabb.get_center() - Vector3(aabb.size.x / 2, 0, 0)
+		ContactPoint.RIGHT:
+			return aabb.get_center() + Vector3(aabb.size.x / 2, 0, 0)
 
 	return node.position
 

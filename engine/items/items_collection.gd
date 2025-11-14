@@ -5,9 +5,6 @@ var _items: Dictionary[String, Array] = {}
 
 func _ready():
 	var list_of_items: Array[Callable] = [
-		func(): return Extinguisher.new(Extinguisher.Type.POWDER),
-		func(): return Extinguisher.new(Extinguisher.Type.CO2),
-		func(): return Extinguisher.new(Extinguisher.Type.WATER),
 		func(): return Furniture.new(Furniture.Type.BED, Vector2i(1, 2)),
 		func(): return Furniture.new(Furniture.Type.BED, Vector2i(2, 2)),
 		func(): return Furniture.new(Furniture.Type.STORAGE, Vector2i(2, 1)),

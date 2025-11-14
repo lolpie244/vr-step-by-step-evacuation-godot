@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxfojo8jvfcd5"]
+[gd_scene load_steps=17 format=3 uid="uid://cxfojo8jvfcd5"]
 
 [ext_resource type="PackedScene" uid="uid://cxrxfl7pkartx" path="res://stages/common_nodes/items/item_factory.tscn" id="1_lnyr2"]
 [ext_resource type="PackedScene" uid="uid://bk5imvrho04nk" path="res://assets/items/bed_single.glb" id="3_dws7h"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://bjp6x67n53lfw" path="res://assets/items/wall_art.glb" id="12_dws7h"]
 [ext_resource type="PackedScene" uid="uid://br3uurkot1ch4" path="res://assets/items/pc.glb" id="13_yr2ul"]
 [ext_resource type="PackedScene" uid="uid://dj4hgryowvxmk" path="res://assets/items/tv.glb" id="14_0y5el"]
+[ext_resource type="PackedScene" uid="uid://u0d5pi3nkhea" path="res://assets/items/fire_alarm/model.glb" id="15_oqgxq"]
+[ext_resource type="Script" uid="uid://buljaj24n4wb1" path="res://stages/common_nodes/items/wall_item_node.gd" id="15_siqnw"]
 
 [node name="StrategicItemFactory" instance=ExtResource("1_lnyr2")]
 
@@ -94,4 +96,12 @@ script = ExtResource("4_fxm5s")
 visible = false
 
 [node name="Model" parent="TV" index="0" instance=ExtResource("14_0y5el")]
+script = ExtResource("4_fxm5s")
+
+[node name="FireAlarm" parent="." index="12"]
+visible = false
+script = ExtResource("15_siqnw")
+
+[node name="Model" parent="FireAlarm" index="0" instance=ExtResource("15_oqgxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.024)
 script = ExtResource("4_fxm5s")

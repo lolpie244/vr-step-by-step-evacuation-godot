@@ -31,9 +31,7 @@ func _ready():
 		if not tile in tiles:
 			_add_tile_node(tile_factory.create(tile))
 
-	player.look_at(_door_tile.global_position)
-	player.rotation = Vector3(0, player.rotation.y, 0)
-
+	look_at_tile(_door_tile)
 	_door_tile.impl.get_mixin(Blockable).blocking_changed.connect(_on_door_blocking_changed)
 
 	player.left_hand.rumble_strength = 0.3

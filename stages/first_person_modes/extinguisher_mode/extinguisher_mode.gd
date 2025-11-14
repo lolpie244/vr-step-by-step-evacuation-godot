@@ -6,12 +6,16 @@ signal extinguisher_selected
 @onready var extinguisher_factory: FirstPersonExtinguisherFactory = $ExtinguisherFactory
 
 
-static func is_applicable(_context: Context) -> bool:
-	for tile in _context.character.get_tile().neighbor_tiles():
+static func _get_burning_tile(character_tile: Tile) -> Tile:
+	for tile in character_tile.neighbor_tiles():
 		var flammable: Flammable = tile.get_mixin(Flammable)
 		if flammable and flammable.state == Flammable.State.BURNING:
-			return true
-	return false
+			return tile
+	return null
+
+
+static func is_applicable(_context: Context) -> bool:
+	return _get_burning_tile(_context.character.get_tile()) != null
 
 
 static func scene() -> PackedScene:
@@ -28,6 +32,8 @@ func _ready() -> void:
 			ext_impls.append(item)
 
 	point_generator.points_count = ext_impls.size()
+	var burning_tile_node := tiles[_get_burning_tile(context.character.get_tile())]
+	look_at_tile(burning_tile_node)
 
 	for ext_impl in ext_impls:
 		var ext := extinguisher_factory.create(ext_impl, point_generator.get_point())

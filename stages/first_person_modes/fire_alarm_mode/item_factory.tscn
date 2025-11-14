@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dulpnfuqjb3a"]
+
+[ext_resource type="PackedScene" uid="uid://daywd25eg72y1" path="res://stages/first_person_modes/base_scene/items/item_factory.tscn" id="1_ubov3"]
+[ext_resource type="PackedScene" uid="uid://bxh01pirs3jg8" path="res://stages/first_person_modes/fire_alarm_mode/fire_alarm.tscn" id="2_xve25"]
+
+[node name="FirstPersonItemFactory" instance=ExtResource("1_ubov3")]
+
+[node name="Model" parent="FireAlarm" index="0"]
+process_mode = 4
+visible = false
+
+[node name="FireAlarm" parent="FireAlarm" index="1" instance=ExtResource("2_xve25")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0.028)
+
+[editable path="FireAlarm/Model"]

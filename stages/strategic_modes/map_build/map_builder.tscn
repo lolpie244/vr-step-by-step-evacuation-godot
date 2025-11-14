@@ -153,6 +153,10 @@ visible = true
 transform = Transform3D(0.1572791, 0, -0.9875542, 0, 1, 0, 0.9875542, 0, 0.1572791, -0.75148505, 0.44707283, 2.013813)
 visible = true
 
+[node name="FireAlarm" parent="ItemsCatalog" index="11"]
+transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, -0.7335771, 0.8629166, 1.9291518)
+visible = true
+
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]
 [connection signal="openxr_fb_scene_data_missing" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_data_missing"]
