@@ -1,6 +1,7 @@
 extends Node
 
 signal character_selected(character: Character)
+signal alarm_triggered
 
 var grid := MapGrid.new()
 
@@ -26,6 +27,7 @@ var selected_character: Character:
 			callable.call()
 
 var _current_turn: int = -1
+var _alarm_triggered: bool = false
 
 
 func next_turn():
@@ -40,3 +42,16 @@ func set_grid(new_grid: MapGrid):
 			grid.disconnect(signal_info["name"], connection["callable"])
 
 	grid = new_grid
+
+
+func trigger_alarm():
+	if _alarm_triggered:
+		return
+	_alarm_triggered = true
+	alarm_triggered.emit()
+
+
+func reset():
+	_alarm_triggered = false
+	_current_turn = -1
+	selected_character = null

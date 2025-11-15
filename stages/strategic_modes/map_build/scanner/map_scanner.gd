@@ -56,6 +56,9 @@ func _set_furniture(map: MapGrid, anchor: FurnitureXRAnchor):
 	var start := center - anchor.item.size / 2.0
 
 	var base_tile: Tile = map.get_tile(round(start.x), round(start.y))
+	if !base_tile:
+		base_tile = Tile.new(Tile.Type.NONE, map, round(start.x), round(start.y))
+
 	var result_tile: Tile = null
 	var distance: float = INF
 	for tile in base_tile.neighbor_tiles() + [base_tile]:

@@ -27,4 +27,10 @@ func _ready():
 	_character_tile = tiles[context.character.get_tile()]
 	player.position += (_alarm_tile.global_position - _character_tile.global_position) * 0.7
 
+	GameCore.alarm_triggered.connect(_on_alarm_triggered)
 	look_at_tile(_alarm_tile)
+
+
+func _on_alarm_triggered():
+	await Engine.get_main_loop().create_timer(0.2).timeout
+	exit()

@@ -7,7 +7,7 @@ signal extinguisher_selected
 
 
 static func _get_burning_tile(character_tile: Tile) -> Tile:
-	for tile in character_tile.neighbor_tiles():
+	for tile in character_tile.direct_neighbor_tiles():
 		var flammable: Flammable = tile.get_mixin(Flammable)
 		if flammable and flammable.state == Flammable.State.BURNING:
 			return tile
@@ -15,7 +15,7 @@ static func _get_burning_tile(character_tile: Tile) -> Tile:
 
 
 static func is_applicable(_context: Context) -> bool:
-	return _get_burning_tile(_context.character.get_tile()) != null
+	return _context.character.inventory.size() != 0 and _get_burning_tile(_context.character.get_tile()) != null
 
 
 static func scene() -> PackedScene:

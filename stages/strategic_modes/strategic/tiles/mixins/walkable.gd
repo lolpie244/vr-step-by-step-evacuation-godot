@@ -57,7 +57,10 @@ func _character_dropped(craracter_rigid: RigidBody3D):
 
 
 func _on_character_placed(character: Character):
-	_character_node = map.get_character_node(character)
+	var character_node = map.get_character_node(character)
+	if character_node != _character_node:
+		_character_node = character_node
+		character.death.connect(_on_character_death)
 
 	if _character_node.get_parent() == null:
 		tile.add_child(_character_node)
@@ -74,8 +77,6 @@ func _on_character_placed(character: Character):
 	var character_scale_global = _character_node.global_basis.get_scale().x
 	_character_node.scale = Vector3.ONE * (character_scale_local / character_scale_global)
 	impl.get_tile().highlight = false
-
-	character.death.connect(_on_character_death)
 
 
 func _on_character_removed(character: Character):

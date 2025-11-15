@@ -3,6 +3,7 @@ extends TileMixin
 
 signal on_chacter_placed(character: Character)
 signal chacter_removed(character: Character)
+signal enabled_changed(value: bool)
 
 var enabled: bool:
 	get():
@@ -10,6 +11,7 @@ var enabled: bool:
 
 var _character: Character
 var _blockers: Array
+var _reachable_by: Array[Character]
 
 
 func init():
@@ -17,13 +19,21 @@ func init():
 	if flammable:
 		flammable.state_changed.connect(_on_flammable_state_changed)
 
+	enabled_changed.connect(_on_enabled_changed)
+
+
+func get_character() -> Character:
+	return _character
+
 
 func place_character(character: Character) -> bool:
-	_character = character
+	if _character != character:
+		_character = character
+		_character.tile_changed.connect(_on_character_tile_changed)
+		_character.death.connect(_on_character_death)
+		set_reachable(character, true)
 
 	on_chacter_placed.emit(_character)
-	_character.tile_changed.connect(_on_character_tile_changed)
-	_character.death.connect(_on_character_death)
 	set_blocker(self, true)
 	return true
 
@@ -65,7 +75,6 @@ func reachable_tiles(_speed: int) -> Array[ReachableResult]:
 
 		for walkable in current_walkable.reachable_neighbors():
 			var tile := walkable.get_tile()
-
 			if used.has(tile.get_instance_id()):
 				continue
 			result.append(
@@ -85,11 +94,15 @@ static func is_walkable(tile: Tile):
 
 
 func set_blocker(blocker, is_blocking: bool):
+	var old_state := enabled
 	if is_blocking:
 		if not blocker in _blockers:
 			_blockers.append(blocker)
 	else:
 		_blockers.erase(blocker)
+
+	if enabled != old_state:
+		enabled_changed.emit(enabled)
 
 
 func remove_character():
@@ -101,6 +114,13 @@ func remove_character():
 	chacter_removed.emit(_character)
 
 	_character = null
+
+
+func set_reachable(by: Character, reachable: bool):
+	if reachable and not by in _reachable_by:
+		_reachable_by.append(by)
+	if !reachable:
+		_reachable_by.erase(by)
 
 
 func _on_character_tile_changed(tile: Tile):
@@ -121,3 +141,12 @@ func _on_flammable_state_changed(_flammable: Flammable, state: Flammable.State):
 
 	if state == Flammable.State.BURNING:
 		_character.kill()
+
+
+func _on_enabled_changed(_value: bool):
+	for tile in _tile.direct_neighbor_tiles():
+		var walkable: Walkable = tile.get_mixin(Walkable)
+		if walkable:
+			for character in walkable._reachable_by:
+				if character.get_tile():
+					character.reset_reachable()

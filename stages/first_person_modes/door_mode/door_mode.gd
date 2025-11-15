@@ -1,7 +1,7 @@
 class_name FirstPersonModeDoor
 extends FirstPersonScene
 
-var _door_tile: TileNode
+var _door_tile: FirstPersonDoor
 var _character_tile: TileNode
 
 
@@ -63,3 +63,7 @@ func _on_door_blocking_changed(blocking: bool):
 		if flammable and flammable.state == Flammable.State.BURNING:
 			_door_tile.impl.get_mixin(Flammable).ignite()
 			_character_tile.impl.get_mixin(Flammable).ignite()
+			return
+
+	await _door_tile.animation.animation_finished
+	exit()

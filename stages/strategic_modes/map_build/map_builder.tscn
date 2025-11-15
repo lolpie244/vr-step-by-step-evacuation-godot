@@ -146,7 +146,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.7
 visible = true
 
 [node name="PC" parent="ItemsCatalog" index="9"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7484413, 0.4569659, 1.8931476)
+transform = Transform3D(-0.9999808, 0, 0.0062132254, 0, 1, 0, -0.0062132254, 0, -0.9999808, -0.7484413, 0.4569659, 1.8833197)
 visible = true
 
 [node name="TV" parent="ItemsCatalog" index="10"]
