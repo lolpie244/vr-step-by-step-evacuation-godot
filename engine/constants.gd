@@ -6,4 +6,4 @@ const TILE_SIZE_IN_REAL_LIFE: float = 0.7  # meter
 const TILE_SIZE_IN_PX: int = 300  # pixels
 const IDLE_EXTINGUISH_RATE: float = 0.25  # per turn
 
-const DEBUG_MODE: bool = false
+const DEBUG_MODE: bool = true

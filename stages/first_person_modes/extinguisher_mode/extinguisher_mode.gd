@@ -15,7 +15,10 @@ static func _get_burning_tile(character_tile: Tile) -> Tile:
 
 
 static func is_applicable(_context: Context) -> bool:
-	return _context.character.inventory.size() != 0 and _get_burning_tile(_context.character.get_tile()) != null
+	return (
+		_context.character.inventory.size() != 0
+		and _get_burning_tile(_context.character.get_tile()) != null
+	)
 
 
 static func scene() -> PackedScene:

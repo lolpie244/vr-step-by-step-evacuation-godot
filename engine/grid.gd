@@ -5,7 +5,7 @@ signal new_grid
 
 var tiles: Array
 var characters: Array[Character]
-var items: Array
+var items: Array[Item]
 
 var size: Vector2:
 	get():

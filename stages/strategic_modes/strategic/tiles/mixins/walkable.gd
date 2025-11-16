@@ -14,8 +14,8 @@ func _ready() -> void:
 		return
 	impl = tile.impl.get_or_create_mixin(Walkable)
 
-	impl.on_chacter_placed.connect(_on_character_placed)
-	impl.chacter_removed.connect(_on_character_removed)
+	impl.character_placed.connect(_on_character_placed)
+	impl.character_removed.connect(_on_character_removed)
 	hide()
 
 

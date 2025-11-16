@@ -1,8 +1,8 @@
 class_name Walkable
 extends TileMixin
 
-signal on_chacter_placed(character: Character)
-signal chacter_removed(character: Character)
+signal character_placed(character: Character)
+signal character_removed(character: Character)
 signal enabled_changed(value: bool)
 
 var enabled: bool:
@@ -33,7 +33,7 @@ func place_character(character: Character) -> bool:
 		_character.death.connect(_on_character_death)
 		set_reachable(character, true)
 
-	on_chacter_placed.emit(_character)
+	character_placed.emit(_character)
 	set_blocker(self, true)
 	return true
 
@@ -111,7 +111,7 @@ func remove_character():
 	_character.death.disconnect(_on_character_death)
 
 	set_blocker(self, false)
-	chacter_removed.emit(_character)
+	character_removed.emit(_character)
 
 	_character = null
 

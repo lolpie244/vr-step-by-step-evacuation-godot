@@ -108,3 +108,7 @@ func restore_position():
 func remove():
 	self._tile = null
 	removed.emit(self)
+
+
+func main_tile() -> Tile:
+	return _tile

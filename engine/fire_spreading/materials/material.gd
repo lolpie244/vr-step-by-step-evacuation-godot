@@ -9,11 +9,8 @@ enum FireType {
 	E,  # Energy
 	F,  # Oils
 }
-# polyurethane_foam.tres - couch
-# engineered_wood - table; storage
-# g
 
-const CONTACT_HEAT_FRACTION := 0.03
+const CONTACT_HEAT_FRACTION := 0.08
 
 @export var density: float  # kg/m3
 @export var heat_release_rate: float  # W/g

@@ -4,6 +4,7 @@ extends RefCounted
 signal tile_changed(tile: Tile)
 signal look_direction_changed(direction: Vector2)
 signal highlihted
+signal saved(character: Character)
 signal death(character: Character)
 signal enabled_changed(value: bool)
 
@@ -165,10 +166,18 @@ func _highlight(value: bool):
 	highlihted.emit()
 
 
-func kill():
+func _remove():
 	enabled = false
 	_walkable = null
 	_visible = []
 	_reachable = []
 
+
+func save():
+	_remove()
+	saved.emit(self)
+
+
+func kill():
+	_remove()
 	death.emit(self)

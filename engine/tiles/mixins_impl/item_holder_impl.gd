@@ -2,7 +2,9 @@ class_name ItemHolder
 extends TileMixin
 
 signal item_placed(item: Item)
+signal item_part_placed(item: Item)
 signal item_removed(item: Item)
+signal item_part_removed(item: Item)
 
 var _item: Item
 var _is_owner: bool
@@ -37,6 +39,8 @@ func place_item(item: Item):
 
 	if _is_owner:
 		item_placed.emit(item)
+	else:
+		item_part_placed.emit(item)
 
 
 func remove_item():
@@ -53,6 +57,8 @@ func _on_item_removed(item: Item):
 
 	if _is_owner:
 		item_removed.emit(item)
+	else:
+		item_part_removed.emit(item)
 
 
 func _highlight_tiles(val: bool):

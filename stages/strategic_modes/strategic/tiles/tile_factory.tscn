@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccurrtskck65e"]
+[gd_scene load_steps=21 format=3 uid="uid://ccurrtskck65e"]
 
 [ext_resource type="PackedScene" uid="uid://tojpii1rkq2c" path="res://stages/common_nodes/tiles/tile_factory.tscn" id="1_lnyr2"]
 [ext_resource type="Script" uid="uid://bfmm217nls2yw" path="res://stages/strategic_modes/strategic/tiles/tile_node.gd" id="2_6vjt4"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dw3akdt3g0l34" path="res://assets/tiles/lowres/wall.glb" id="14_yswa7"]
 [ext_resource type="PackedScene" uid="uid://rmbgsi5t7co2" path="res://assets/tiles/lowres/door.glb" id="15_iqaq3"]
 [ext_resource type="PackedScene" uid="uid://2fm68kemnq60" path="res://assets/tiles/lowres/window.glb" id="16_clihy"]
+[ext_resource type="Script" uid="uid://c2hg8o44pk1xd" path="res://stages/common_nodes/tiles/mixins/exit_capable.gd" id="20_fqw1w"]
 
 [node name="TileFactory" instance=ExtResource("1_lnyr2")]
 
@@ -115,3 +116,6 @@ script = ExtResource("10_iqaq3")
 
 [node name="Visible" type="Node" parent="Door" index="5"]
 script = ExtResource("10_rpi85")
+
+[node name="ExitCapable" type="Node" parent="Door" index="6"]
+script = ExtResource("20_fqw1w")

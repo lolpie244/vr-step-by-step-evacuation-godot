@@ -67,7 +67,7 @@ func remove():
 	if _tile:
 		var walkable: Walkable = _tile.get_mixin(Walkable)
 		if walkable:
-			walkable.on_chacter_placed.disconnect(_on_character_placed)
+			walkable.character_placed.disconnect(_on_character_placed)
 
 
 func _process(delta):
@@ -77,7 +77,7 @@ func _process(delta):
 func _on_placed(tile: Tile):
 	var walkable: Walkable = tile.get_mixin(Walkable)
 	if walkable:
-		walkable.on_chacter_placed.connect(_on_character_placed)
+		walkable.character_placed.connect(_on_character_placed)
 
 
 func _on_character_placed(character: Character):

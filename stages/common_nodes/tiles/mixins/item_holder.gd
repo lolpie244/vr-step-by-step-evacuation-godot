@@ -1,6 +1,11 @@
 class_name ItemHolderNode
 extends Node3D
 
+signal item_node_placed(item_node: ItemNode)
+signal item_node_part_placed(item_node: ItemNode)
+signal item_node_removed(item_node: ItemNode)
+signal item_node_part_removed(item_node: ItemNode)
+
 enum ContactPoint { BOTTOM, TOP, BACK, FRONT, LEFT, RIGHT }
 
 @export var contact_point: ContactPoint = ContactPoint.BOTTOM
@@ -17,6 +22,8 @@ func _ready() -> void:
 	impl = tile.impl.get_or_create_mixin(ItemHolder)
 	impl.item_placed.connect(_on_item_placed)
 	impl.item_removed.connect(_on_item_removed)
+	impl.item_part_placed.connect(_on_item_part_placed)
+	impl.item_part_removed.connect(_on_item_part_removed)
 
 
 func _get_item_node(_item: Item) -> ItemNode:
@@ -55,10 +62,21 @@ func _on_item_placed(item: Item):
 	item_node.position = self.position - _get_contact_point(item_node) + item_node.position
 	item_node.rotation.y = -item.rotation
 
+	item_node_placed.emit(item_node)
+
+
+func _on_item_part_placed(item: Item):
+	item_node_part_placed.emit(_get_item_node(item))
+
+
+func _on_item_part_removed(item: Item):
+	item_node_part_removed.emit(_get_item_node(item))
+
 
 func _on_item_removed(_item: Item):
 	if !item_node:
 		return
 
 	tile.remove_child(item_node)
+	item_node_removed.emit(item_node)
 	item_node = null

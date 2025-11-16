@@ -48,28 +48,19 @@ func _add_characters(number: int = 1, burning_tile: Tile = null):
 
 
 func _add_flames(number: int = 1) -> Array[Tile]:
-	var flammable_tiles: Array[Tile] = []
+	var items: Array[Item] = map.impl.items.filter(
+		func(item: Item): return item is Furniture and item.main_tile() != null
+	)
 
-	for x in range(map.impl.rows_count()):
-		for y in range(map.impl.columns_count()):
-			var tile = map.impl.get_tile(x, y)
-			if (
-				tile
-				and tile.get_mixin(Flammable)
-				and tile.get_mixin(ItemHolder)
-				and tile.get_mixin(ItemHolder).get_item() is Furniture
-			):
-				flammable_tiles.append(tile)
-
-	number = min(flammable_tiles.size(), number)
+	number = min(items.size(), number)
 	var burning_tiles: Array[Tile] = []
 
 	for i in range(number):
-		var id = randi_range(0, flammable_tiles.size() - 1)
-		var tile := flammable_tiles[id]
-		tile.get_mixin(Flammable).ignite()
-		burning_tiles.append(tile)
-		flammable_tiles.remove_at(id)
+		var id = randi_range(0, items.size() - 1)
+		var item := items[id]
+		item.main_tile().get_mixin(Flammable).ignite()
+		burning_tiles.append(item.main_tile())
+		items.remove_at(id)
 
 	return burning_tiles
 
@@ -78,7 +69,7 @@ func _ready() -> void:
 	_add_first_mode_trigger()
 	GameCore.character_selected.connect(_on_character_selected)
 
-	#var burning_tile := _add_flames(1)[0]
+	var burning_tile := _add_flames(1)[0]
 	#_add_characters(3, burning_tile)
 	_add_characters(1)
 	map.impl.characters[0].enabled = true
