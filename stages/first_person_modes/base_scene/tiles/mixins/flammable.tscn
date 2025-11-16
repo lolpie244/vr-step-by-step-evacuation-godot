@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://bo3vblsvejx6g"]
+[gd_scene load_steps=28 format=3 uid="uid://bo3vblsvejx6g"]
 
 [ext_resource type="Script" uid="uid://cpdug00n5hbd4" path="res://stages/common_nodes/tiles/mixins/flammable.gd" id="1_a0ddl"]
 [ext_resource type="PackedScene" uid="uid://bypa1gccleaiv" path="res://stages/common_nodes/fire/fire.tscn" id="2_3n17a"]
+[ext_resource type="Material" uid="uid://1nmnrtc0u44p" path="res://stages/common_nodes/tiles/mixins/flammable_material.tres" id="2_bi7tn"]
 [ext_resource type="Script" uid="uid://ddox0tc1rgbmr" path="res://stages/first_person_modes/base_scene/tiles/mixins/flammable_area.gd" id="3_3n17a"]
 
-[sub_resource type="Shader" id="Shader_b3chl"]
+[sub_resource type="Shader" id="Shader_3ssm5"]
 code = "
 // NOTE: Shader automatically converted from Godot Engine 4.2.stable's StandardMaterial3D.
 // Original author: MMqd (https://github.com/MMqd/plancks-law-colors)
@@ -101,13 +102,13 @@ void fragment() {
 }
 "
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bi7tn"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mdfy5"]
 load_path = "res://.godot/imported/color_temp_600_60000.exr-0614c61a5b5bfc57600770438983f1cc.ctex"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ssm5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tlnsr"]
 resource_local_to_scene = true
 render_priority = 0
-shader = SubResource("Shader_b3chl")
+shader = SubResource("Shader_3ssm5")
 shader_parameter/albedo = Color(0, 0, 0, 1)
 shader_parameter/point_size = 0.0
 shader_parameter/roughness = 0.0
@@ -118,39 +119,39 @@ shader_parameter/uv1_scale = Vector3(0, 0, 0)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(0, 0, 0)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_plancks_emission = SubResource("CompressedTexture2D_bi7tn")
+shader_parameter/texture_plancks_emission = SubResource("CompressedTexture2D_mdfy5")
 shader_parameter/plancks_emission_energy = 0.1
 shader_parameter/plancks_emission_temperature_celcius = 1300.0
 shader_parameter/temperature_cooling_rate = 0.0
 shader_parameter/use_color_as_age = true
 
-[sub_resource type="Curve" id="Curve_mdfy5"]
+[sub_resource type="Curve" id="Curve_kn0p3"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.921318), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_tlnsr"]
-curve = SubResource("Curve_mdfy5")
+[sub_resource type="CurveTexture" id="CurveTexture_g0fld"]
+curve = SubResource("Curve_kn0p3")
 
-[sub_resource type="Gradient" id="Gradient_kn0p3"]
+[sub_resource type="Gradient" id="Gradient_hmqtu"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_g0fld"]
-gradient = SubResource("Gradient_kn0p3")
-
-[sub_resource type="Curve" id="Curve_hmqtu"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_v0je7"]
-curve = SubResource("Curve_hmqtu")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v0je7"]
+gradient = SubResource("Gradient_hmqtu")
 
 [sub_resource type="Curve" id="Curve_38iu4"]
-_data = [Vector2(0, 0), 0.0, 11.8854, 0, 0, Vector2(0.0752212, 1), 0.0653553, 0.0653553, 0, 0, Vector2(1, 0), -2.36526, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_jmv0q"]
 curve = SubResource("Curve_38iu4")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g10pg"]
+[sub_resource type="Curve" id="Curve_g10pg"]
+_data = [Vector2(0, 0), 0.0, 11.8854, 0, 0, Vector2(0.0752212, 1), 0.0653553, 0.0653553, 0, 0, Vector2(1, 0), -2.36526, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_r0brw"]
+curve = SubResource("Curve_g10pg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qq5vf"]
 resource_local_to_scene = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
@@ -167,42 +168,42 @@ linear_accel_min = 22.28
 linear_accel_max = 30.28
 radial_accel_min = -2.0
 radial_accel_max = -2.0
-radial_accel_curve = SubResource("CurveTexture_v0je7")
+radial_accel_curve = SubResource("CurveTexture_jmv0q")
 tangential_accel_min = -0.250002
 tangential_accel_max = 0.249998
-scale_curve = SubResource("CurveTexture_jmv0q")
-color_ramp = SubResource("GradientTexture1D_g0fld")
-anim_offset_curve = SubResource("CurveTexture_tlnsr")
+scale_curve = SubResource("CurveTexture_r0brw")
+color_ramp = SubResource("GradientTexture1D_v0je7")
+anim_offset_curve = SubResource("CurveTexture_g0fld")
 turbulence_enabled = true
 turbulence_influence_min = 0.0
 turbulence_influence_max = 0.02
 
-[sub_resource type="BoxMesh" id="BoxMesh_r0brw"]
+[sub_resource type="BoxMesh" id="BoxMesh_s76ay"]
 resource_local_to_scene = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4npka"]
 resource_local_to_scene = true
 
-[sub_resource type="Gradient" id="Gradient_qq5vf"]
+[sub_resource type="Gradient" id="Gradient_g0gi7"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_s76ay"]
-gradient = SubResource("Gradient_qq5vf")
-
-[sub_resource type="Curve" id="Curve_g0gi7"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_un7rq"]
-curve = SubResource("Curve_g0gi7")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_un7rq"]
+gradient = SubResource("Gradient_g0gi7")
 
 [sub_resource type="Curve" id="Curve_jtfji"]
-_data = [Vector2(0, 0), 0.0, 11.8854, 0, 0, Vector2(0.0752212, 1), 0.0653553, 0.0653553, 0, 0, Vector2(0.687386, 0.584734), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.36526, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_bda15"]
 curve = SubResource("Curve_jtfji")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hwtv0"]
+[sub_resource type="Curve" id="Curve_hwtv0"]
+_data = [Vector2(0, 0), 0.0, 11.8854, 0, 0, Vector2(0.0752212, 1), 0.0653553, 0.0653553, 0, 0, Vector2(0.687386, 0.584734), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.36526, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yutu7"]
+curve = SubResource("Curve_hwtv0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jllpa"]
 resource_local_to_scene = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
@@ -219,18 +220,18 @@ linear_accel_min = 28.0
 linear_accel_max = 36.0
 radial_accel_min = -2.0
 radial_accel_max = -2.0
-radial_accel_curve = SubResource("CurveTexture_un7rq")
+radial_accel_curve = SubResource("CurveTexture_bda15")
 tangential_accel_min = -0.250002
 tangential_accel_max = 0.249998
 scale_min = 0.75
 scale_max = 1.25
-scale_curve = SubResource("CurveTexture_bda15")
-color_ramp = SubResource("GradientTexture1D_s76ay")
+scale_curve = SubResource("CurveTexture_yutu7")
+color_ramp = SubResource("GradientTexture1D_un7rq")
 turbulence_enabled = true
 turbulence_influence_min = 0.0
 turbulence_influence_max = 0.02
 
-[sub_resource type="QuadMesh" id="QuadMesh_yutu7"]
+[sub_resource type="QuadMesh" id="QuadMesh_28ort"]
 resource_local_to_scene = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_a0ddl"]
@@ -239,21 +240,21 @@ radius = 0.822281
 [node name="Flammable" type="Node3D"]
 script = ExtResource("1_a0ddl")
 particles_scale = 0.4
+material_overlay = ExtResource("2_bi7tn")
 
 [node name="Fire" parent="." instance=ExtResource("2_3n17a")]
 
 [node name="Fire" parent="Fire" index="0"]
-material_override = SubResource("ShaderMaterial_3ssm5")
+material_override = SubResource("ShaderMaterial_tlnsr")
 cast_shadow = 0
-amount = 100
-process_material = SubResource("ParticleProcessMaterial_g10pg")
-draw_pass_1 = SubResource("BoxMesh_r0brw")
+process_material = SubResource("ParticleProcessMaterial_qq5vf")
+draw_pass_1 = SubResource("BoxMesh_s76ay")
 
 [node name="Sparks" parent="Fire/Fire" index="0"]
 material_override = SubResource("ShaderMaterial_4npka")
 cast_shadow = 0
-process_material = SubResource("ParticleProcessMaterial_hwtv0")
-draw_pass_1 = SubResource("QuadMesh_yutu7")
+process_material = SubResource("ParticleProcessMaterial_jllpa")
+draw_pass_1 = SubResource("QuadMesh_28ort")
 
 [node name="Area3D" type="Area3D" parent="."]
 script = ExtResource("3_3n17a")

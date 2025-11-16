@@ -2,7 +2,8 @@ class_name Flammable
 extends TileMixin
 
 signal state_changed(flammable: Flammable, state: State)
-signal strength_changed(strength: float)
+signal strength_changed(flammable: Flammable, strength: float)
+signal durability_changed(flammable: Flammable, durability: float)
 
 enum State {
 	NOT_BURNING,
@@ -12,12 +13,19 @@ enum State {
 
 var wind := Vector2.ZERO
 
-var strength := 0.95:
+var strength: float = 0:
 	set(value):
 		if strength == value:
 			return
 		strength = value
-		strength_changed.emit(value)
+		strength_changed.emit(self, value)
+
+var durability: float = 1:
+	set(value):
+		if durability == value:
+			return
+		durability = value
+		durability_changed.emit(self, value)
 
 var state := State.NOT_BURNING:
 	set(value):
@@ -53,6 +61,7 @@ func can_burn():
 
 
 func ignite():
+	strength = min(0.95, durability)
 	state = State.BURNING
 	_ignition_turn = GameCore.current_turn
 
@@ -62,9 +71,12 @@ func process_turn(_turn_number):
 		return
 
 	strength -= Constants.IDLE_EXTINGUISH_RATE
+	durability -= Constants.IDLE_EXTINGUISH_RATE
 
-	if strength <= 0:
+	if durability <= 0:
 		state = State.BURNED
+	elif strength < 0:
+		strength = 0.1
 
 	for next_tile in _tile.neighbor_tiles():
 		if FireSpreading.is_spread(_tile, next_tile):
@@ -82,10 +94,12 @@ func extinguish(foam_strength: float):
 
 	if strength > 1:
 		state = State.BURNED
+
 		for next_tile in _tile.neighbor_tiles():
 			if next_tile.get_mixin(Flammable):
 				next_tile.get_mixin(Flammable).ignite()
-		strength = 0.9
+		strength = 0.0
+		durability = 0.0
 
 
 func _on_item_placed(item: Item):

@@ -17,5 +17,5 @@ func _ready() -> void:
 func _on_triggerred() -> void:
 	$Rope.drop_end()
 	extinguisher.reparent(get_parent())
-	self.remove()
+	#self.remove()
 	extinguisher.enabled = true
