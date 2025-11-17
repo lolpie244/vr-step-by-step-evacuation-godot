@@ -10,7 +10,7 @@ enum FireType {
 	F,  # Oils
 }
 
-const CONTACT_HEAT_FRACTION := 0.04
+const CONTACT_HEAT_FRACTION := 0.01
 
 @export var density: float  # kg/m3
 @export var heat_release_rate: float  # W/g

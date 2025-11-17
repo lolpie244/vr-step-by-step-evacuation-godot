@@ -57,13 +57,18 @@ func init():
 
 
 func can_burn():
-	return state == State.NOT_BURNING
+	var blockable: Blockable = _tile.get_mixin(Blockable)
+	return state == State.NOT_BURNING and (!blockable or !blockable.blocking)
 
 
 func ignite():
 	strength = min(0.95, durability)
 	state = State.BURNING
 	_ignition_turn = GameCore.current_turn
+
+	var smokable: Smokable = _tile.get_mixin(Smokable)
+	if smokable:
+		smokable.smoke()
 
 
 func process_turn(_turn_number):

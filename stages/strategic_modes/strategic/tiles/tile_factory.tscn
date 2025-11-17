@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ccurrtskck65e"]
+[gd_scene load_steps=23 format=3 uid="uid://ccurrtskck65e"]
 
 [ext_resource type="PackedScene" uid="uid://tojpii1rkq2c" path="res://stages/common_nodes/tiles/tile_factory.tscn" id="1_lnyr2"]
 [ext_resource type="Script" uid="uid://bfmm217nls2yw" path="res://stages/strategic_modes/strategic/tiles/tile_node.gd" id="2_6vjt4"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://stages/common_nodes/tiles/meshes/wall.gd" id="10_rgv0y"]
 [ext_resource type="Script" uid="uid://bqtway1528nam" path="res://stages/common_nodes/tiles/mixins/visible.gd" id="10_rpi85"]
 [ext_resource type="PackedScene" uid="uid://de5yi52b46csn" path="res://assets/tiles/lowres/doorway.glb" id="11_h3phj"]
+[ext_resource type="PackedScene" uid="uid://cidnmt50gituj" path="res://stages/common_nodes/tiles/mixins/smokable.tscn" id="12_7kpfk"]
 [ext_resource type="Material" uid="uid://1nmnrtc0u44p" path="res://stages/common_nodes/tiles/mixins/flammable_material.tres" id="12_ffxeg"]
 [ext_resource type="PackedScene" uid="uid://buc13bh6jsim4" path="res://assets/tiles/lowres/floor.glb" id="12_hfmqf"]
 [ext_resource type="Script" uid="uid://sbndkrhaa26" path="res://stages/common_nodes/tiles/mixins/wind_source.gd" id="12_iqaq3"]
@@ -25,6 +26,7 @@
 [node name="TileFactory" instance=ExtResource("1_lnyr2")]
 
 [node name="Floor" parent="." index="0"]
+visible = true
 script = ExtResource("2_6vjt4")
 
 [node name="Animation" parent="Floor" index="0" instance=ExtResource("2_gyo66")]
@@ -42,15 +44,18 @@ material_overlay = ExtResource("12_ffxeg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 visible = false
 
-[node name="ItemHolder" type="Node3D" parent="Floor" index="4"]
+[node name="Smokable" parent="Floor" index="4" instance=ExtResource("12_7kpfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+
+[node name="ItemHolder" type="Node3D" parent="Floor" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 script = ExtResource("8_iqaq3")
 
-[node name="Visible" type="Node" parent="Floor" index="5"]
+[node name="Visible" type="Node" parent="Floor" index="6"]
 script = ExtResource("10_rpi85")
 
 [node name="Wall" parent="." index="1"]
-visible = true
 script = ExtResource("2_6vjt4")
 
 [node name="Animation" parent="Wall" index="0" instance=ExtResource("2_gyo66")]
@@ -95,6 +100,7 @@ script = ExtResource("10_iqaq3")
 script = ExtResource("10_rpi85")
 
 [node name="Door" parent="." index="3"]
+visible = true
 script = ExtResource("14_rgv0y")
 
 [node name="Animation" parent="Door" index="0" instance=ExtResource("2_gyo66")]
@@ -113,11 +119,21 @@ script = ExtResource("4_iqaq3")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.06, 0)
 visible = false
 
-[node name="Blockable" type="Node" parent="Door" index="4"]
+[node name="Flammable" parent="Door" index="4" instance=ExtResource("8_spxjo")]
+transform = Transform3D(0.3, 0, 0, 0, 1.2, 0, 0, 0, 0.3, 0, 0.05, 0)
+visible = false
+material = ExtResource("9_xt87q")
+material_overlay = ExtResource("12_ffxeg")
+
+[node name="Smokable" parent="Door" index="5" instance=ExtResource("12_7kpfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+
+[node name="Blockable" type="Node" parent="Door" index="6"]
 script = ExtResource("10_iqaq3")
 
-[node name="Visible" type="Node" parent="Door" index="5"]
+[node name="Visible" type="Node" parent="Door" index="7"]
 script = ExtResource("10_rpi85")
 
-[node name="ExitCapable" type="Node" parent="Door" index="6"]
+[node name="ExitCapable" type="Node" parent="Door" index="8"]
 script = ExtResource("20_fqw1w")
