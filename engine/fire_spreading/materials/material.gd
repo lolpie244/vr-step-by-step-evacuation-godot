@@ -28,4 +28,4 @@ var hrr: float:
 
 var flammable_rate: float:
 	get():
-		return density * thermal_conductivity * heat_capacity
+		return sqrt(density * thermal_conductivity * heat_capacity)
