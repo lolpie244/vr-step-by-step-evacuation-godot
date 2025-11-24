@@ -1,0 +1,107 @@
+[gd_scene load_steps=17 format=3 uid="uid://cxfojo8jvfcd5"]
+
+[ext_resource type="PackedScene" uid="uid://cxrxfl7pkartx" path="res://stages/common_nodes/items/item_factory.tscn" id="1_lnyr2"]
+[ext_resource type="PackedScene" uid="uid://bk5imvrho04nk" path="res://assets/items/bed_single.glb" id="3_dws7h"]
+[ext_resource type="PackedScene" uid="uid://did5xwtowinu4" path="res://assets/items/table.glb" id="4_bweog"]
+[ext_resource type="Script" uid="uid://dkfkpnb2ubu0l" path="res://common/mesh_with_material.gd" id="4_fxm5s"]
+[ext_resource type="PackedScene" uid="uid://dykiurcxj4q1w" path="res://assets/items/bed_double.glb" id="4_r7xmi"]
+[ext_resource type="PackedScene" uid="uid://c3wpeixkcvp70" path="res://assets/items/extinguisher_powder/model.tscn" id="5_g0mgb"]
+[ext_resource type="PackedScene" uid="uid://dmvb1dap8a5x5" path="res://assets/items/extinguisher_co2/model.tscn" id="6_fxm5s"]
+[ext_resource type="PackedScene" uid="uid://dh478tuxbj4wu" path="res://assets/items/couch.glb" id="8_0w7ki"]
+[ext_resource type="PackedScene" uid="uid://yey46q8xynr" path="res://assets/items/lamp.glb" id="9_0w7ki"]
+[ext_resource type="PackedScene" uid="uid://d164o4dsp48te" path="res://assets/items/plant.glb" id="10_60hsf"]
+[ext_resource type="PackedScene" uid="uid://dgkmha45o8aws" path="res://assets/items/storage.glb" id="11_sx6ke"]
+[ext_resource type="PackedScene" uid="uid://bjp6x67n53lfw" path="res://assets/items/wall_art.glb" id="12_dws7h"]
+[ext_resource type="PackedScene" uid="uid://br3uurkot1ch4" path="res://assets/items/pc.glb" id="13_yr2ul"]
+[ext_resource type="PackedScene" uid="uid://dj4hgryowvxmk" path="res://assets/items/tv.glb" id="14_0y5el"]
+[ext_resource type="PackedScene" uid="uid://u0d5pi3nkhea" path="res://assets/items/fire_alarm/model.glb" id="15_oqgxq"]
+[ext_resource type="Script" uid="uid://buljaj24n4wb1" path="res://stages/common_nodes/items/wall_item_node.gd" id="15_siqnw"]
+
+[node name="StrategicItemFactory" instance=ExtResource("1_lnyr2")]
+
+[node name="BedSingle" parent="." index="0"]
+visible = false
+
+[node name="Model" parent="BedSingle" index="0" instance=ExtResource("3_dws7h")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+script = ExtResource("4_fxm5s")
+
+[node name="BedDouble" parent="." index="1"]
+visible = false
+
+[node name="Model" parent="BedDouble" index="0" instance=ExtResource("4_r7xmi")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+script = ExtResource("4_fxm5s")
+
+[node name="Table" parent="." index="2"]
+visible = false
+
+[node name="Model" parent="Table" index="0" instance=ExtResource("4_bweog")]
+script = ExtResource("4_fxm5s")
+
+[node name="ExtinguisherPowder" parent="." index="3"]
+visible = false
+
+[node name="Model" parent="ExtinguisherPowder" index="0" instance=ExtResource("5_g0mgb")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.14, 0)
+script = ExtResource("4_fxm5s")
+
+[node name="ExtinguisherCO2" parent="." index="4"]
+visible = false
+
+[node name="Model" parent="ExtinguisherCO2" index="0" instance=ExtResource("6_fxm5s")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.05, 0)
+script = ExtResource("4_fxm5s")
+
+[node name="Couch" parent="." index="5"]
+visible = false
+
+[node name="Model" parent="Couch" index="0" instance=ExtResource("8_0w7ki")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+script = ExtResource("4_fxm5s")
+
+[node name="Lamp" parent="." index="6"]
+visible = false
+
+[node name="Model" parent="Lamp" index="0" instance=ExtResource("9_0w7ki")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+script = ExtResource("4_fxm5s")
+
+[node name="Plant" parent="." index="7"]
+visible = false
+
+[node name="Model" parent="Plant" index="0" instance=ExtResource("10_60hsf")]
+script = ExtResource("4_fxm5s")
+
+[node name="Storage" parent="." index="8"]
+visible = false
+
+[node name="Model" parent="Storage" index="0" instance=ExtResource("11_sx6ke")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+script = ExtResource("4_fxm5s")
+
+[node name="WallArt" parent="." index="9"]
+visible = false
+
+[node name="Model" parent="WallArt" index="0" instance=ExtResource("12_dws7h")]
+script = ExtResource("4_fxm5s")
+
+[node name="PC" parent="." index="10"]
+visible = false
+
+[node name="Model" parent="PC" index="0" instance=ExtResource("13_yr2ul")]
+script = ExtResource("4_fxm5s")
+
+[node name="TV" parent="." index="11"]
+visible = false
+
+[node name="Model" parent="TV" index="0" instance=ExtResource("14_0y5el")]
+script = ExtResource("4_fxm5s")
+
+[node name="FireAlarm" parent="." index="12"]
+visible = false
+script = ExtResource("15_siqnw")
+
+[node name="Model" parent="FireAlarm" index="0" instance=ExtResource("15_oqgxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.024)
+script = ExtResource("4_fxm5s")

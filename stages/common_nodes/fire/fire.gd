@@ -2,7 +2,7 @@
 class_name FireEffect
 extends Node3D
 
-var fire_scale: Vector2
+var fire_scale: float
 var particles_scale: float = 1
 
 var cooling_coef = 0.2:
@@ -23,7 +23,7 @@ var enabled := false:
 
 func _process(_delta: float) -> void:
 	var new_scale = global_basis.get_scale()
-	new_scale = Vector2(new_scale.x, new_scale.z)
+	new_scale = min(new_scale.x, new_scale.z)
 
 	if !enabled || fire_scale == new_scale:
 		return
@@ -32,8 +32,8 @@ func _process(_delta: float) -> void:
 
 	var time_scale: float = root.global_basis.get_scale().y
 
-	(fire.draw_pass_1 as BoxMesh).size = Vector3.ONE * fire_scale.x * particles_scale
-	(sparks.draw_pass_1 as QuadMesh).size = fire_scale * particles_scale
+	(fire.draw_pass_1 as BoxMesh).size = Vector3.ONE * fire_scale * particles_scale
+	(sparks.draw_pass_1 as QuadMesh).size = Vector2.ONE * fire_scale * particles_scale
 
 	fire.speed_scale = time_scale
 	sparks.speed_scale = time_scale

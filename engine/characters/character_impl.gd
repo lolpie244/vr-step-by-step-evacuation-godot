@@ -4,7 +4,9 @@ extends RefCounted
 signal tile_changed(tile: Tile)
 signal look_direction_changed(direction: Vector2)
 signal highlihted
+signal saved(character: Character)
 signal death(character: Character)
+signal enabled_changed(value: bool)
 
 enum Type { CIVILIAN }
 
@@ -13,21 +15,58 @@ enum Type { CIVILIAN }
 
 var inventory: Array[Item] = []
 
+var enabled: bool = false:
+	set(value):
+		if value == enabled:
+			return
+		enabled = value
+		reset_visible()
+		enabled_changed.emit(enabled)
+
 var _speed: int
-var _walkable: Walkable
-var _reachable: Array[Walkable.ReachableResult] = []
 var _is_selected: bool = false
 var _is_highlighted: bool = false
+
+var _walkable: Walkable:
+	set(value):
+		if _walkable:
+			_walkable.set_reachable(self, false)
+		_walkable = value
+		if _walkable:
+			_walkable.set_reachable(self, true)
 
 var _look_direction: Vector2 = Vector2.ZERO:
 	set(value):
 		_look_direction = value
 		look_direction_changed.emit(value)
 
+var _reachable: Array[Walkable.ReachableResult] = []:
+	set(val):
+		for reachable in _reachable:
+			reachable.tile.get_mixin(Walkable).set_reachable(self, false)
+
+		_reachable = val
+
+		for reachable in _reachable:
+			reachable.tile.get_mixin(Walkable).set_reachable(self, true)
+
+var _visible: Array[Tile] = []:
+	set(val):
+		for tile in _visible:
+			tile.get_mixin(Visible).set_visible(self, false)
+
+		_visible = val
+		if !enabled:
+			return
+		for tile in _visible:
+			tile.get_mixin(Visible).set_visible(self, true)
+
 
 func _init(_type: Type):
 	_speed = base_speed
 	type = _type
+
+	GameCore.alarm_triggered.connect(func(): self.enabled = true)
 
 
 func process_turn(_turn_number: int):
@@ -54,10 +93,19 @@ func place(tile: Tile):
 	_speed -= next_tile.distance
 	_walkable = next_tile.tile.get_mixin(Walkable)
 	_reachable = _walkable.reachable_tiles(_speed)
+	_visible = visible_tiles()
 	_look_direction = next_tile.direction
 	tile_changed.emit(_walkable.get_tile())
 
 	return true
+
+
+func reset_visible():
+	_visible = visible_tiles()
+
+
+func reset_reachable():
+	_reachable = _walkable.reachable_tiles(_speed)
 
 
 func restore():
@@ -75,7 +123,12 @@ func is_reachable(walkable: Walkable) -> Walkable.ReachableResult:
 
 
 func visible_tiles() -> Array[Tile]:
-	return ShadowCasting.visible_tiles(_walkable.get_tile())
+	if !_walkable:
+		return []
+
+	var result := ShadowCasting.visible_tiles(_walkable.get_tile())
+	result.append(_walkable.get_tile())
+	return result
 
 
 func get_tile() -> Tile:
@@ -113,5 +166,18 @@ func _highlight(value: bool):
 	highlihted.emit()
 
 
+func _remove():
+	enabled = false
+	_walkable = null
+	_visible = []
+	_reachable = []
+
+
+func save():
+	_remove()
+	saved.emit(self)
+
+
 func kill():
+	_remove()
 	death.emit(self)

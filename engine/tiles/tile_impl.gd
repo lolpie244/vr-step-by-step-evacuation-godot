@@ -85,13 +85,32 @@ func neighbor_tiles() -> Array[Tile]:
 
 	for i in range(-1, 2):
 		for j in range(-1, 2):
-			if i == 0 && j == 0:
+			if i == 0 and j == 0:
 				continue
 
 			var tile: Tile = grid.get_tile(_x + i, _y + j)
 			if tile != null:
 				result.append(tile)
 	return result
+
+
+func direct_neighbor_tiles() -> Array[Tile]:
+	var result: Array[Tile] = []
+
+	for i in range(-1, 2):
+		for j in range(-1, 2):
+			if i == 0 and j == 0 or i != 0 and j != 0:
+				continue
+
+			var tile: Tile = grid.get_tile(_x + i, _y + j)
+			if tile != null:
+				result.append(tile)
+	return result
+
+
+func tile_in_direction(direction: Utils.Direction) -> Tile:
+	var offset = round(Vector2(0, 1).rotated(deg_to_rad(90) * direction))
+	return grid.get_tile(pos.x + offset.x, pos.y + offset.y)
 
 
 func process_turn(_turn_number: int):

@@ -19,6 +19,15 @@ func init():
 	self.set_open(is_open)
 
 
+func _set_wind(mixin: RefCounted, wind_strength: Vector2, state: bool):
+	if !mixin:
+		return
+	if state:
+		mixin.wind = (mixin.wind + wind_strength) / 2.0
+	else:
+		mixin.wind = mixin.wind * 2.0 - wind_strength
+
+
 func set_open(state: bool):
 	var used := {_tile.get_instance_id(): true}
 	var queue: Array = [Pair.new(_tile, WIND_STRENGHT)]
@@ -42,13 +51,8 @@ func set_open(state: bool):
 				continue
 
 			var wind_strength := tile.direction_to(current_tile).normalized() * strength
-			var flammable: Flammable = tile.get_mixin(Flammable)
-
-			if flammable:
-				if state:
-					flammable.wind = (flammable.wind + wind_strength) / 2.0
-				else:
-					flammable.wind = flammable.wind * 2.0 - wind_strength
+			_set_wind(tile.get_mixin(Flammable), wind_strength, state)
+			_set_wind(tile.get_mixin(Smokable), wind_strength, state)
 
 			used[tile.get_instance_id()] = true
 			queue.append(Pair.new(tile, strength - 1))

@@ -1,4 +1,6 @@
-extends Node3D
+extends Node
+
+@export var blocking: bool = true
 
 var impl: Blockable
 
@@ -8,5 +10,8 @@ var impl: Blockable
 func _ready():
 	if !tile.impl:
 		return
-
 	impl = tile.impl.get_or_create_mixin(Blockable)
+
+
+func init():
+	impl.blocking = blocking

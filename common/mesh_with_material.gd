@@ -1,15 +1,21 @@
 class_name MeshWithMaterial
 extends Node3D
 
+var overlay_material: Material:
+	set = set_overlay_material
+
 var _materials: Array[ShaderMaterial] = []
 
 
-func set_material(_material: ShaderMaterial):
+func _get_meshes() -> Array:
 	var meshes: Array = Utils.find_children_with_type(self, MeshInstance3D, true)
 	if is_instance_of(self, MeshInstance3D):
 		meshes.append(self)
+	return meshes
 
-	for mesh in meshes:
+
+func set_material(_material: ShaderMaterial):
+	for mesh in _get_meshes():
 		for i in mesh.get_surface_override_material_count():
 			var active_material: StandardMaterial3D = mesh.get_active_material(i)
 			var material := _material.duplicate(Utils.DEFAULT_DUPLICATE)
@@ -18,6 +24,12 @@ func set_material(_material: ShaderMaterial):
 			mesh.set_surface_override_material(i, material)
 
 			_materials.append(material)
+
+
+func set_overlay_material(_material: Material):
+	overlay_material = _material
+	for mesh in _get_meshes():
+		mesh.material_overlay = overlay_material
 
 
 func set_material_parameter(parameter: StringName, value):

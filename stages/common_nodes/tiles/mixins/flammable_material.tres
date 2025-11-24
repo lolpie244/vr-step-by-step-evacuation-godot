@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://1nmnrtc0u44p"]
+
+[ext_resource type="Shader" uid="uid://c8uxgqlv4iy8o" path="res://stages/common_nodes/tiles/mixins/flammable_material.gdshader" id="1_c6dlv"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_c6dlv")
+shader_parameter/durability = 1.0

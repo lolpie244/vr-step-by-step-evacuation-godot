@@ -32,13 +32,13 @@ static func transpose(arr: Array):
 	return new_arr
 
 
-static func _collect_aabb(node: Node3D, result: AABB) -> AABB:
+static func _collect_aabb(node: Node3D, result: AABB, transform: Transform3D) -> AABB:
 	if node.has_method(&"get_aabb"):
-		result = result.merge(node.call("get_aabb"))
+		result = result.merge(transform * node.transform * node.call("get_aabb"))
 
 	for child in node.get_children():
 		if is_instance_of(child, Node3D):
-			result = _collect_aabb(child, result)
+			result = _collect_aabb(child, result, transform * child.transform)
 
 	return result
 
@@ -46,7 +46,7 @@ static func _collect_aabb(node: Node3D, result: AABB) -> AABB:
 static func get_aabb(node: Node3D) -> AABB:
 	if node.has_method(&"get_aabb"):
 		return node.call("get_aabb")
-	return _collect_aabb(node, AABB())
+	return _collect_aabb(node, AABB(), Transform3D())
 
 
 static func find_children_with_type(node: Node, type_ref, recursive) -> Array:
@@ -92,8 +92,8 @@ static func signed_ratio(_min: float, _max: float, value: float) -> float:
 	return (value - mid) / half_range
 
 
-static func direction_from_angle(rotation_degrees: Vector3) -> Utils.Direction:
-	match snapped(rotation_degrees.y, 90):
+static func direction_from_angle(rotation_degrees: float) -> Utils.Direction:
+	match snapped(rotation_degrees, 90):
 		-90:
 			return Utils.Direction.RIGHT
 		90:

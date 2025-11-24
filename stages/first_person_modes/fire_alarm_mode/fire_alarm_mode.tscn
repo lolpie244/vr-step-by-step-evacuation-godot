@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://7c8lgm7dut8d"]
+
+[ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person_modes/base_scene/first_person.tscn" id="1_w41xt"]
+[ext_resource type="Script" uid="uid://ci5fj13ffdka2" path="res://stages/first_person_modes/fire_alarm_mode/fire_alarm_mode.gd" id="2_jheh6"]
+[ext_resource type="PackedScene" uid="uid://dulpnfuqjb3a" path="res://stages/first_person_modes/fire_alarm_mode/item_factory.tscn" id="3_27pfn"]
+
+[node name="FireAlarmMode" instance=ExtResource("1_w41xt")]
+script = ExtResource("2_jheh6")
+item_factory_scene = ExtResource("3_27pfn")

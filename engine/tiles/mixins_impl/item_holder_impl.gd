@@ -2,7 +2,9 @@ class_name ItemHolder
 extends TileMixin
 
 signal item_placed(item: Item)
+signal item_part_placed(item: Item)
 signal item_removed(item: Item)
+signal item_part_removed(item: Item)
 
 var _item: Item
 var _is_owner: bool
@@ -14,6 +16,7 @@ func init():
 	var flammable: Flammable = _tile.get_mixin(Flammable)
 	if flammable:
 		flammable.state_changed.connect(_on_flammable_state_changed)
+		flammable.strength_changed.connect(_on_flammable_strength_changed)
 
 
 func get_item() -> Item:
@@ -37,6 +40,8 @@ func place_item(item: Item):
 
 	if _is_owner:
 		item_placed.emit(item)
+	else:
+		item_part_placed.emit(item)
 
 
 func remove_item():
@@ -53,6 +58,8 @@ func _on_item_removed(item: Item):
 
 	if _is_owner:
 		item_removed.emit(item)
+	else:
+		item_part_removed.emit(item)
 
 
 func _highlight_tiles(val: bool):
@@ -82,3 +89,18 @@ func _on_flammable_state_changed(_flammable: Flammable, state: Flammable.State):
 
 	if state == Flammable.State.BURNED:
 		remove_item()
+
+
+func _on_flammable_strength_changed(_flammable: Flammable, strength: float):
+	if !has_item():
+		return
+
+	var flammable_tile := _flammable.get_tile()
+	if !flammable_tile != _item.main_tile():
+		_item.main_tile().get_mixin(Flammable).strength = _flammable.strength
+		return
+
+	for tile in _item.tiles():
+		var flammable: Flammable = tile.get_mixin(Flammable)
+		if flammable:
+			flammable.strength = _flammable.strength

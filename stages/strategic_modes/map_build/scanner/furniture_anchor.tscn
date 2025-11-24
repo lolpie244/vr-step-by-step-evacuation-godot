@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cub7v4mtm41il"]
+
+[ext_resource type="Script" uid="uid://qg8221px4emd" path="res://stages/strategic_modes/map_build/scanner/furniture_anchor.gd" id="1_yrx62"]
+
+[node name="FurnitureAnchor" type="Node3D"]
+script = ExtResource("1_yrx62")

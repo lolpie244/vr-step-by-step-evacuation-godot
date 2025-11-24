@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhom4xv1uq0ax"]
+
+[ext_resource type="Script" uid="uid://dqe37lduk82tn" path="res://stages/first_person_modes/mode_selector.gd" id="1_vgqyc"]
+
+[node name="ModeSelector" type="Node3D"]
+script = ExtResource("1_vgqyc")
