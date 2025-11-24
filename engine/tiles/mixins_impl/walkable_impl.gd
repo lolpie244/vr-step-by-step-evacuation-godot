@@ -31,6 +31,7 @@ func place_character(character: Character) -> bool:
 		_character = character
 		_character.tile_changed.connect(_on_character_tile_changed)
 		_character.death.connect(_on_character_death)
+		_character.saved.connect(_on_character_saved)
 		set_reachable(character, true)
 
 	character_placed.emit(_character)
@@ -109,6 +110,7 @@ func remove_character():
 	if !_character:
 		return
 	_character.death.disconnect(_on_character_death)
+	_character.saved.disconnect(_on_character_saved)
 
 	set_blocker(self, false)
 	character_removed.emit(_character)
@@ -131,6 +133,11 @@ func _on_character_tile_changed(tile: Tile):
 
 
 func _on_character_death(character: Character):
+	if character == _character:
+		remove_character()
+
+
+func _on_character_saved(character: Character):
 	if character == _character:
 		remove_character()
 
