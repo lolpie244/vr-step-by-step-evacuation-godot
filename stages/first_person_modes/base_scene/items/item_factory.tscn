@@ -23,14 +23,14 @@
 visible = false
 
 [node name="Model" parent="BedSingle" index="0" instance=ExtResource("3_rua83")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("3_030at")
 
 [node name="BedDouble" parent="." index="1"]
 visible = false
 
 [node name="Model" parent="BedDouble" index="0" instance=ExtResource("3_i17s5")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("3_030at")
 
 [node name="Table" parent="." index="2"]
@@ -59,7 +59,7 @@ script = ExtResource("3_030at")
 visible = false
 
 [node name="Model" parent="Couch" index="0" instance=ExtResource("7_ha47m")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("3_030at")
 
 [node name="Lamp" parent="." index="6"]
@@ -80,7 +80,7 @@ script = ExtResource("3_030at")
 visible = false
 
 [node name="Model" parent="Storage" index="0" instance=ExtResource("10_beaqf")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("3_030at")
 
 [node name="WallArt" parent="." index="9"]
@@ -94,7 +94,7 @@ script = ExtResource("3_030at")
 visible = false
 
 [node name="Model" parent="PC" index="0" instance=ExtResource("12_tyw6j")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("3_030at")
 
 [node name="TV" parent="." index="11"]
