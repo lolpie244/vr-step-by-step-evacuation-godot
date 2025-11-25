@@ -26,7 +26,7 @@ func _close_eyes():
 
 	if current_scene.get("IMPLEMENTS"):
 		_scene_change_timer = Metrics.start_timer(
-			current_scene.get("IMPLEMENTS"), "SceneChange {0} takes {1} ms"
+			current_scene.get("IMPLEMENTS"), "SceneChange"
 		)
 
 
