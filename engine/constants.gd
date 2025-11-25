@@ -10,3 +10,5 @@ const SMOKE_STRENGTH_INSCREASE_RATE: float = 0.2  # per turn
 const DEBUG_MODE: bool = false
 
 const METRICS_FPS_PUBLISH_FREQUENCY = 2.0  # seconds
+const METRICS_SERVER := "https://aboriginally-irreproachable-jair.ngrok-free.dev"
+const SEND_METRICS := true
