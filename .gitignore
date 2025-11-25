@@ -27,3 +27,4 @@ lint.log
 
 __pycache__
 .env
+*.apk
