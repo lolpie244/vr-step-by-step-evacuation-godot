@@ -8,3 +8,5 @@ const IDLE_EXTINGUISH_RATE: float = 0.25  # per turn
 const SMOKE_STRENGTH_INSCREASE_RATE: float = 0.2  # per turn
 
 const DEBUG_MODE: bool = false
+
+const METRICS_FPS_PUBLISH_FREQUENCY = 2.0  # seconds

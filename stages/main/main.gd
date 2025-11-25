@@ -1,4 +1,5 @@
 extends Node3D
+const IMPLEMENTS := "MainScene"
 
 @export var strategic_scene: PackedScene
 @export var map_builder_scene: PackedScene
@@ -41,7 +42,6 @@ func _ready():
 	print("OpenXR is initialized")
 
 	SceneManager.load_scene(map_builder_scene)
-	#SceneManager.load_scene(strategic_scene)
 
 
 func _enter_scene():

@@ -1,4 +1,5 @@
 extends MapScene
+const IMPLEMENTS := "StrategicScene"
 
 @export var next_scene: PackedScene
 @export var rope_trigger: PackedScene

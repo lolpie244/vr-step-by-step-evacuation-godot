@@ -3,13 +3,14 @@ extends Node
 
 signal map_scanned(map: MapGrid)
 var _anchors: Array[XRAnchor] = []
+var _scanner_timer := Metrics.ExecutionTimer.new("MapScan")
 
 @onready var scene_manager: OpenXRFbSceneManager = $"../PlayerVR/SceneManager"
 
 
 func start_scan() -> void:
 	scene_manager.request_scene_capture()
-
+	_scanner_timer.start()
 	while not scene_manager.are_scene_anchors_created() or _anchors.size() == 0:
 		await Engine.get_main_loop().create_timer(0.1).timeout
 
@@ -119,6 +120,7 @@ func _set_map_data():
 			_set_furniture(map, anchor)
 
 	scene_manager.remove_scene_anchors()
+	_scanner_timer.stop()
 	map_scanned.emit(map)
 
 

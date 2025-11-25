@@ -32,7 +32,9 @@ var _alarm_triggered: bool = false
 
 func next_turn():
 	_current_turn += 1
+	var timer := Metrics.start_timer("Turn")
 	grid.process_turn(_current_turn)
+	timer.stop()
 
 
 func set_grid(new_grid: MapGrid):

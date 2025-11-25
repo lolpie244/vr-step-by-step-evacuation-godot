@@ -2,6 +2,7 @@ extends Node
 
 var current_scene: Node = null
 var _scene_stack: Array = []
+var _scene_change_timer: Metrics.ExecutionTimer
 
 
 func _ready() -> void:
@@ -11,6 +12,8 @@ func _ready() -> void:
 
 
 func _open_eyes():
+	if _scene_change_timer:
+		_scene_change_timer.stop()
 	var player_vr: PlayerVR = Utils.find_child_with_type(current_scene, PlayerVR, true)
 	if player_vr != null:
 		player_vr.open_eyes()
@@ -20,6 +23,11 @@ func _close_eyes():
 	var player_vr: PlayerVR = Utils.find_child_with_type(current_scene, PlayerVR, true)
 	if player_vr != null:
 		await player_vr.close_eyes()
+
+	if current_scene.get("IMPLEMENTS"):
+		_scene_change_timer = Metrics.start_timer(
+			current_scene.get("IMPLEMENTS"), "SceneChange {0} takes {1} ms"
+		)
 
 
 func load_scene(scene: PackedScene, context = null):
