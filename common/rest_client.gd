@@ -18,7 +18,7 @@ func connect_to_server(url: String, port: int = -1):
 		await Engine.get_main_loop().process_frame
 
 	if http.get_status() != HTTPClient.STATUS_CONNECTED:
-		printerr("RESTClient, incorrect status: ", http.get_status())
+		printerr("RESTClient, incorrect status: ", http.get_status(), " ", url)
 		return
 
 	_http = http

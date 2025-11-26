@@ -50,6 +50,8 @@ func _on_action_pressed(_pickable: Variant) -> void:
 	var tile: Tile2D = null
 
 	for tile_body in area.get_overlapping_areas():
+		if not tile_body is Tile2D:
+			continue
 		if tile == null or _distance_to_tile(tile_body) < _distance_to_tile(tile):
 			tile = tile_body
 	if !tile:
