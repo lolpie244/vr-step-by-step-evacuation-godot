@@ -7,10 +7,12 @@ const IMPLEMENTS := "MainScene"
 
 var _initialized := false
 
+
 func _get_configuration_warning():
 	if not strategic_scene or not fallback_scene:
 		return "Scene's are missing"
 	return ""
+
 
 func _enter_scene():
 	SceneManager.load_scene(strategic_scene)
@@ -23,7 +25,6 @@ func _on_xr_started() -> void:
 	Metrics.init()
 	#Metrics.enabled = false
 	SceneManager.load_scene(map_builder_scene)
-
 
 
 func _on_xr_failed_to_initialize() -> void:

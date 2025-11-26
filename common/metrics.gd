@@ -27,6 +27,8 @@ var enabled: bool = true
 
 var _http := RESTClient.new()
 var _client_id: int
+var _fps: float = -1
+
 
 func init():
 	if !enabled:
@@ -36,6 +38,30 @@ func init():
 		await _http.connect_to_server(Constants.METRICS_SERVER)
 		_client_id = await _get_client_id()
 	start_fps_counter()
+
+
+func reset_fps_counter():
+	_fps = -1
+
+
+func start_timer(timer_name: String, details = "") -> ExecutionTimer:
+	var timer := ExecutionTimer.new(timer_name, details)
+	timer.start()
+
+	return timer
+
+
+func start_fps_counter():
+	while enabled:
+		await Engine.get_main_loop().create_timer(Constants.METRICS_FPS_PUBLISH_FREQUENCY).timeout
+		_publish("fps", {"fps": _fps})
+		reset_fps_counter()
+
+
+func _process(_delta):
+	if _fps < 0:
+		_fps = Engine.get_frames_per_second()
+	_fps = (_fps + Engine.get_frames_per_second()) / 2.0
 
 
 func _get_client_id() -> int:
@@ -57,16 +83,3 @@ func _publish(topic: String, message: Dictionary):
 		return
 
 	_http.post("/{0}".format([topic]), message)
-
-
-func start_timer(timer_name: String, details = "") -> ExecutionTimer:
-	var timer := ExecutionTimer.new(timer_name, details)
-	timer.start()
-
-	return timer
-
-
-func start_fps_counter():
-	while enabled:
-		await Engine.get_main_loop().create_timer(Constants.METRICS_FPS_PUBLISH_FREQUENCY).timeout
-		_publish("fps", {"fps": Engine.get_frames_per_second()})

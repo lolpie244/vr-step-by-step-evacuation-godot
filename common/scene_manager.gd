@@ -25,9 +25,7 @@ func _close_eyes():
 		await player_vr.close_eyes()
 
 	if current_scene.get("IMPLEMENTS"):
-		_scene_change_timer = Metrics.start_timer(
-			current_scene.get("IMPLEMENTS"), "SceneChange"
-		)
+		_scene_change_timer = Metrics.start_timer(current_scene.get("IMPLEMENTS"), "SceneChange")
 
 
 func load_scene(scene: PackedScene, context = null):
