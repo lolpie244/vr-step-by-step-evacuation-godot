@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bd6jf6p57yppl"]
+[gd_scene load_steps=16 format=3 uid="uid://bd6jf6p57yppl"]
 
 [ext_resource type="PackedScene" uid="uid://tojpii1rkq2c" path="res://stages/common_nodes/tiles/tile_factory.tscn" id="1_lnyr2"]
-[ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic_modes/strategic/tiles/mixins/flammable.tscn" id="3_jcfbc"]
+[ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://engine/characters/flammable.tscn" id="3_jcfbc"]
 [ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="4_cqx0e"]
 [ext_resource type="Script" uid="uid://bh8wiw1xq5mtt" path="res://stages/common_nodes/tiles/meshes/tile.gd" id="4_mf7cg"]
 [ext_resource type="PackedScene" uid="uid://e1y7abr4iowb" path="res://assets/tiles/highres/floor.glb" id="5_fc8km"]
+[ext_resource type="PackedScene" uid="uid://cidnmt50gituj" path="res://stages/common_nodes/tiles/mixins/smokable.tscn" id="7_3mrhf"]
 [ext_resource type="Script" uid="uid://dnw7qlihelwdy" path="res://stages/first_person_modes/base_scene/tiles/mixins/item_holder.gd" id="7_cqx0e"]
 [ext_resource type="Script" uid="uid://8t57lye75wlq" path="res://stages/common_nodes/tiles/meshes/wall.gd" id="7_jcfbc"]
 [ext_resource type="PackedScene" uid="uid://b1wwedv5gihfr" path="res://assets/tiles/highres/wall.glb" id="7_mf7cg"]
@@ -29,6 +30,9 @@ material = ExtResource("4_cqx0e")
 [node name="ItemHolder" type="Node3D" parent="Floor" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.049999997, 0)
 script = ExtResource("7_cqx0e")
+
+[node name="Smokable" parent="Floor" index="3" instance=ExtResource("7_3mrhf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8339799, 0)
 
 [node name="Wall" parent="." index="1"]
 visible = true
@@ -69,3 +73,6 @@ script = ExtResource("4_mf7cg")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.05, 0)
 visible = false
 material = ExtResource("4_cqx0e")
+
+[node name="Smokable" parent="Door" index="3" instance=ExtResource("7_3mrhf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8339799, 0)

@@ -3,16 +3,17 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ci1epb0m0nel5"
+path.s3tc="res://.godot/imported/colormap.png-3b72b771dcdddc8ba8eb3f1a2cd2b152.s3tc.ctex"
 path.etc2="res://.godot/imported/colormap.png-3b72b771dcdddc8ba8eb3f1a2cd2b152.etc2.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/colormap.png"
-dest_files=["res://.godot/imported/colormap.png-3b72b771dcdddc8ba8eb3f1a2cd2b152.etc2.ctex"]
+dest_files=["res://.godot/imported/colormap.png-3b72b771dcdddc8ba8eb3f1a2cd2b152.s3tc.ctex", "res://.godot/imported/colormap.png-3b72b771dcdddc8ba8eb3f1a2cd2b152.etc2.ctex"]
 
 [params]
 

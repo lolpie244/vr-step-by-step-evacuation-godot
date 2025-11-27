@@ -6,9 +6,8 @@ var character
 
 @onready var map: Map = $Map
 
-
-func _ready() -> void:
-	map.add_furniture(Furniture.Type.BED, Vector2(1, 2), Utils.Direction.UP, 7, 2)
+#func _ready() -> void:
+#map.add_furniture(Furniture.Type.BED, Vector2(1, 2), Utils.Direction.UP, 7, 2)
 
 #func _input(_event: InputEvent):
 #var x = character._x

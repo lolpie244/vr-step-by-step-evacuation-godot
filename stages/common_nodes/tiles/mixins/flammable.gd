@@ -9,6 +9,7 @@ extends Node3D
 var impl: Flammable
 var _fire_enabled: bool = true
 var _fire_transform: Transform3D
+var _old_position: Vector3
 
 @onready var tile: TileNode = get_parent()
 @onready var fire: FireEffect = Utils.find_child_with_type(self, FireEffect, false)
@@ -85,15 +86,18 @@ func _on_item_part_removed(_item: ItemNode) -> void:
 func _on_item_placed(item: ItemNode) -> void:
 	if !is_inside_tree():
 		return
-	_set_matetial_overlay(item)
-	_fire_transform = fire.transform
-	fire.reparent(item)
+
 	var item_aabb: AABB = Utils.get_aabb(item)
 	var item_size: Vector3 = item_aabb.size
 	if item.impl().get_direction() in [Utils.Direction.LEFT, Utils.Direction.RIGHT]:
 		item_size = Vector3(item_size.z, item_size.y, item_size.x)
 
-	fire.position = item_aabb.get_center()
+	_set_matetial_overlay(item)
+	_fire_transform = fire.transform
+	_old_position = self.global_position
+	self.global_position = item.to_global(item_aabb.get_center())
+
+	fire.reparent(item)
 	_full_fire_scale *= (
 		(fire.scale / _fire_transform.basis.get_scale()) * Vector3(item_size.x, 1, item_size.z)
 	)
@@ -102,6 +106,7 @@ func _on_item_placed(item: ItemNode) -> void:
 
 func _on_item_removed(_item: ItemNode) -> void:
 	fire.reparent(self, false)
+	self.global_position = _old_position
 	fire.transform = _fire_transform
 
 

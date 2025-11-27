@@ -1,4 +1,5 @@
 extends MapScene
+const IMPLEMENTS := "StrategicScene"
 
 @export var next_scene: PackedScene
 @export var rope_trigger: PackedScene
@@ -70,8 +71,7 @@ func _ready() -> void:
 	GameCore.character_selected.connect(_on_character_selected)
 
 	var burning_tile := _add_flames(1)[0]
-	#_add_characters(3, burning_tile)
-	_add_characters(1)
+	_add_characters(3, burning_tile)
 	map.impl.characters[0].enabled = true
 
 	GameCore.next_turn()

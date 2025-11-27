@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b50lh3ohab6x6" path="res://ui/mesh_rope_trigger.tscn" id="9_rvqsj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ybnn0"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+sky_horizon_color = Color(0.79485637, 0.80195653, 0.8126074, 1)
 ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 
 [sub_resource type="Sky" id="Sky_5f22i"]
@@ -16,6 +16,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ybnn0")
 
 [sub_resource type="Environment" id="Environment_xp1sn"]
 background_mode = 2
+background_energy_multiplier = 1.2
 sky = SubResource("Sky_5f22i")
 tonemap_mode = 2
 
@@ -26,6 +27,13 @@ item_factory_scene = ExtResource("7_bh2mi")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xp1sn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.37188494, 0.9269651, 0.049369257, 0.12690175, -0.0019172055, 0.99191344, 0.9195638, 0.37514272, -0.11692051, -0.099999905, 2.3030589, 0.5470469)
+shadow_enabled = true
+shadow_blur = 3.0
+directional_shadow_max_distance = 10.0
+sky_mode = 2
 
 [node name="PlayerVR" parent="." instance=ExtResource("2_5f22i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
@@ -38,11 +46,5 @@ angle_between = 90.0
 [node name="ExitTrigger" parent="PlayerVR" instance=ExtResource("9_rvqsj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55529743, 0, 0)
 visible = true
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PlayerVR"]
-transform = Transform3D(-0.37188494, 0.92696524, 0.04936923, 0.17315114, 0.017019019, 0.9847485, 0.9119871, 0.37476134, -0.16683418, 0, 2.7920198, -0.46465564)
-light_energy = 0.4
-shadow_enabled = true
-directional_shadow_max_distance = 7.0
 
 [connection signal="triggerred" from="PlayerVR/ExitTrigger" to="." method="_on_exit_trigger_triggerred"]

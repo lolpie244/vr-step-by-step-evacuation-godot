@@ -23,3 +23,8 @@ third-party/
 
 docs.txt
 lint.log
+*.log
+
+__pycache__
+.env
+*.apk

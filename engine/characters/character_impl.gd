@@ -72,7 +72,7 @@ func _init(_type: Type):
 func process_turn(_turn_number: int):
 	_speed = base_speed
 	if _walkable:
-		_reachable = _walkable.reachable_tiles(_speed)
+		reset_reachable()
 
 
 func place(tile: Tile):
@@ -92,8 +92,8 @@ func place(tile: Tile):
 	select(false)
 	_speed -= next_tile.distance
 	_walkable = next_tile.tile.get_mixin(Walkable)
-	_reachable = _walkable.reachable_tiles(_speed)
-	_visible = visible_tiles()
+	reset_reachable()
+	reset_visible()
 	_look_direction = next_tile.direction
 	tile_changed.emit(_walkable.get_tile())
 
@@ -101,11 +101,15 @@ func place(tile: Tile):
 
 
 func reset_visible():
+	var timer := Metrics.start_timer("CharacterVisible")
 	_visible = visible_tiles()
+	timer.stop()
 
 
 func reset_reachable():
+	var timer := Metrics.start_timer("CharacterReachable")
 	_reachable = _walkable.reachable_tiles(_speed)
+	timer.stop()
 
 
 func restore():

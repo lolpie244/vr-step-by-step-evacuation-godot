@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqtxj2so0sfad"]
+
+[ext_resource type="Script" uid="uid://cpdug00n5hbd4" path="res://stages/common_nodes/tiles/mixins/flammable.gd" id="1_6n2qq"]
+[ext_resource type="Shader" uid="uid://c8uxgqlv4iy8o" path="res://stages/common_nodes/tiles/mixins/flammable_material.gdshader" id="2_so36p"]
+[ext_resource type="PackedScene" uid="uid://bypa1gccleaiv" path="res://stages/common_nodes/fire/fire.tscn" id="3_i01cp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50yve"]
+render_priority = 0
+shader = ExtResource("2_so36p")
+shader_parameter/durability = 1.0
+
+[node name="Flammable" type="Node3D"]
+script = ExtResource("1_6n2qq")
+material_overlay = SubResource("ShaderMaterial_50yve")
+
+[node name="Fire" parent="." instance=ExtResource("3_i01cp")]
+
+[node name="Fire" parent="Fire" index="0"]
+amount = 20
+
+[node name="Sparks" parent="Fire/Fire" index="0"]
+amount = 10
+
+[editable path="Fire"]

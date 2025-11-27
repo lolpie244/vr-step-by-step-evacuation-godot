@@ -1,4 +1,5 @@
 extends Node3D
+const IMPLEMENTS := "FirstPersonModeSelector"
 
 static var _modes := [
 	FirstPersonModeExtinguisher, FirstPersonModeDoor, FirstPersonModeFireAlarm, FirstPersonScene

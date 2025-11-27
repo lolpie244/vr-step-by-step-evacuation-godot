@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dg8yw4gd22lsl" path="res://stages/strategic_modes/strategic/tiles/tile_animation.tscn" id="2_gyo66"]
 [ext_resource type="Script" uid="uid://bh8wiw1xq5mtt" path="res://stages/common_nodes/tiles/meshes/tile.gd" id="4_iqaq3"]
 [ext_resource type="Script" uid="uid://rp42a1e0us78" path="res://stages/strategic_modes/strategic/tiles/mixins/item_holder.gd" id="8_iqaq3"]
-[ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://stages/strategic_modes/strategic/tiles/mixins/flammable.tscn" id="8_spxjo"]
+[ext_resource type="PackedScene" uid="uid://bqtxj2so0sfad" path="res://engine/characters/flammable.tscn" id="8_spxjo"]
 [ext_resource type="Resource" uid="uid://cefo1surrq1n7" path="res://engine/fire_spreading/materials/oak.tres" id="9_xt87q"]
 [ext_resource type="PackedScene" uid="uid://4if45fr7sjl6" path="res://stages/strategic_modes/strategic/tiles/mixins/walkable.tscn" id="10_45704"]
 [ext_resource type="Script" uid="uid://c6v71rpuh3i6h" path="res://stages/common_nodes/tiles/mixins/blockable.gd" id="10_iqaq3"]

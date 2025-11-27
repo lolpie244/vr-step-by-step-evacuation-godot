@@ -15,6 +15,9 @@ setup:
 		pre-commit install
 	chmod +x ${PROJECT_DIR}/.git/hooks/pre-commit
 
+	git lfs install
+	git lfs pull
+
 .PHONY: format
 format:
 	 ${VENV} gdformat `git ls-files "*.gd"`

@@ -1,12 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl4tmx46jq22n"]
+[gd_scene load_steps=6 format=3 uid="uid://dl4tmx46jq22n"]
 
 [ext_resource type="Script" uid="uid://cduhit474hdr0" path="res://stages/main/main.gd" id="1_60rri"]
 [ext_resource type="PackedScene" uid="uid://flu7j32ifd3y" path="res://stages/strategic_modes/strategic/strategic.tscn" id="2_60rri"]
 [ext_resource type="PackedScene" uid="uid://dxrf0lnhl7s2f" path="res://stages/test/Test.tscn" id="3_5powy"]
 [ext_resource type="PackedScene" uid="uid://xnfqapr2ajxs" path="res://stages/strategic_modes/map_build/map_builder.tscn" id="3_j6wwd"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="5_usqqw"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_60rri")
 strategic_scene = ExtResource("2_60rri")
 map_builder_scene = ExtResource("3_j6wwd")
 fallback_scene = ExtResource("3_5powy")
+
+[node name="StartXR" parent="." instance=ExtResource("5_usqqw")]
+
+[connection signal="xr_failed_to_initialize" from="StartXR" to="." method="_on_xr_failed_to_initialize"]
+[connection signal="xr_started" from="StartXR" to="." method="_on_xr_started"]
