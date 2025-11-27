@@ -62,7 +62,7 @@ func can_burn():
 
 
 func ignite():
-	strength = min(0.95, durability)
+	strength = max(0.1, durability)
 	state = State.BURNING
 	_ignition_turn = GameCore.current_turn
 
@@ -75,13 +75,13 @@ func process_turn(_turn_number):
 	if state != State.BURNING || _turn_number == 0 || _ignition_turn == _turn_number:
 		return
 
-	strength -= Constants.IDLE_EXTINGUISH_RATE
-	durability -= Constants.IDLE_EXTINGUISH_RATE
+	strength += Constants.IDLE_FLAME_INCREASE
+	durability -= Constants.IDLE_FLAME_INCREASE
 
 	if durability <= 0:
 		state = State.BURNED
-	elif strength < 0:
-		strength = 0.1
+	elif strength > 1:
+		strength = 1
 
 	for next_tile in _tile.neighbor_tiles():
 		if FireSpreading.is_spread(_tile, next_tile):

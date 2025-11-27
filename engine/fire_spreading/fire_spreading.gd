@@ -59,4 +59,4 @@ func is_spread(from: Tile, to: Tile) -> bool:
 		print("	RESULT ", fixed_prob + dynamic_prob)
 		print("")
 
-	return randf_range(0, 1) < fixed_prob + dynamic_prob
+	return randf_range(0, 1) < from.get_mixin(Flammable).strength * (fixed_prob + dynamic_prob)
