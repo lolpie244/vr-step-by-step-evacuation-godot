@@ -8,10 +8,14 @@ var _visible_by: Array[Character] = []
 
 func init():
 	var flammable: Flammable = _tile.get_mixin(Flammable)
+	var smokable: Smokable = _tile.get_mixin(Smokable)
 	var blockable: Blockable = _tile.get_mixin(Blockable)
 
 	if flammable:
 		flammable.state_changed.connect(_on_flammable_state_changed)
+
+	if smokable:
+		smokable.state_changed.connect(_on_smokable_state_changed)
 
 	if blockable:
 		blockable.blocking_changed.connect(_on_blockable_changed)
@@ -42,6 +46,12 @@ func set_visible(by: Character, visible: bool):
 
 func _on_flammable_state_changed(_flammable: Flammable, state: Flammable.State):
 	if state == Flammable.State.BURNING:
+		for character in _visible_by:
+			character.enabled = true
+
+
+func _on_smokable_state_changed(_smokable: Smokable, state: Smokable.State):
+	if state == Smokable.State.SMOKE:
 		for character in _visible_by:
 			character.enabled = true
 
