@@ -57,3 +57,4 @@ func reset():
 	_alarm_triggered = false
 	_current_turn = -1
 	selected_character = null
+	grid.reset()

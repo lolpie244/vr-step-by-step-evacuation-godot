@@ -53,6 +53,8 @@ func init():
 	var item_holder: ItemHolder = _tile.get_mixin(ItemHolder)
 	if item_holder:
 		item_holder.item_placed.connect(_on_item_placed)
+		item_holder.item_part_placed.connect(_on_item_placed)
+		item_holder.item_part_removed.connect(_on_item_removed)
 		item_holder.item_removed.connect(_on_item_removed)
 
 
@@ -62,7 +64,7 @@ func can_burn():
 
 
 func ignite():
-	strength = max(0.1, durability)
+	strength = 0.1
 	state = State.BURNING
 	_ignition_turn = GameCore.current_turn
 
@@ -76,7 +78,7 @@ func process_turn(_turn_number):
 		return
 
 	strength += Constants.IDLE_FLAME_INCREASE
-	durability -= Constants.IDLE_FLAME_INCREASE
+	durability -= Constants.IDLE_DURABILITY_DECREASE * strength
 
 	if durability <= 0:
 		state = State.BURNED

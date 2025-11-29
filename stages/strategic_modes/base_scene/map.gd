@@ -11,23 +11,23 @@ var cutoff_material: ShaderMaterial
 
 var zoom: float:
 	get():
-		return map_items.scale.x
+		return map_nodes.scale.x
 	set(new_zoom):
 		if new_zoom <= 0:
 			return
-		map_items.scale = Vector3.ONE * new_zoom
+		map_nodes.scale = Vector3.ONE * new_zoom
 
 var offset: Vector2:
 	get():
-		return Vector2(map_items.position.x, map_items.position.z)
+		return Vector2(map_nodes.position.x, map_nodes.position.z)
 	set(new_offset):
-		map_items.position.x = new_offset.x
-		map_items.position.z = new_offset.y
+		map_nodes.position.x = new_offset.x
+		map_nodes.position.z = new_offset.y
 
 var _tile_size: float
 
 @onready var impl: MapGrid = GameCore.grid
-@onready var map_items = $MapItems
+@onready var map_nodes = $MapItems
 
 
 func _ready() -> void:
@@ -48,12 +48,12 @@ func _ready() -> void:
 	cutoff_material.set_shader_parameter("border_color", Color.RED)
 
 
-func place_item(node: Node3D, x: int, y: int):
+func place_node(node: Node3D, x: int, y: int):
 	if !node.get_parent():
-		map_items.add_child(node)
+		map_nodes.add_child(node)
 
 	if node.get_parent() != self:
-		node.reparent(map_items)
+		node.reparent(map_nodes)
 
 	if node.has_method(&"init"):
 		node.init()
@@ -63,7 +63,7 @@ func place_item(node: Node3D, x: int, y: int):
 
 
 func remove_item(node: Node3D):
-	map_items.remove_child(node)
+	map_nodes.remove_child(node)
 
 
 func model_scale(model):
@@ -72,3 +72,4 @@ func model_scale(model):
 
 func set_size(size: Vector2):
 	_tile_size = min(self.get_aabb().size.x / size.x, self.get_aabb().size.z / size.y)
+	impl.resize(size.x, size.y)

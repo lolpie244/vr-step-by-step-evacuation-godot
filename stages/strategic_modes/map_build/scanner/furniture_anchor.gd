@@ -38,10 +38,10 @@ func origin_tile() -> Vector2:
 
 	match item.get_direction():
 		Utils.Direction.DOWN:
-			return canter + half_size
+			return center + half_size
 		Utils.Direction.RIGHT:
-			return canter - half_size * Vector2(-1, 1)
+			return center - half_size * Vector2(-1, 1)
 		Utils.Direction.LEFT:
-			return canter - half_size * Vector2(1, -1)
+			return center - half_size * Vector2(1, -1)
 		_:
 			return center - half_size

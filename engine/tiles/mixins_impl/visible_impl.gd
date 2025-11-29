@@ -50,7 +50,7 @@ func _on_flammable_state_changed(_flammable: Flammable, state: Flammable.State):
 			character.enabled = true
 
 
-func _on_smokable_state_changed(_smokable: Smokable, state: Smokable.State):
+func _on_smokable_state_changed(state: Smokable.State):
 	if state == Smokable.State.SMOKE:
 		for character in _visible_by:
 			character.enabled = true

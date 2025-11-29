@@ -30,6 +30,12 @@ func resize(n: int, m: int):
 	new_grid.emit()
 
 
+func reset():
+	characters = []
+	items = []
+	resize(rows_count(), columns_count())
+
+
 func rows_count() -> int:
 	return tiles.size()
 

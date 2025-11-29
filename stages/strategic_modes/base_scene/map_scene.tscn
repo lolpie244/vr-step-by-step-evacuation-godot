@@ -17,7 +17,7 @@ sky_material = SubResource("ProceduralSkyMaterial_dspli")
 [sub_resource type="Environment" id="Environment_paqgp"]
 background_mode = 2
 sky = SubResource("Sky_5y27t")
-tonemap_mode = 2
+tonemap_mode = 4
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
 
@@ -55,6 +55,7 @@ light_energy = 0.4
 shadow_enabled = true
 shadow_blur = 3.0
 directional_shadow_max_distance = 10.0
+sky_mode = 2
 
 [connection signal="hinge_moved" from="ScaleLever" to="." method="_on_zoom_lever_moved"]
 [connection signal="moved" from="OffsetJoystick" to="." method="_on_offset_joystick_moved"]
