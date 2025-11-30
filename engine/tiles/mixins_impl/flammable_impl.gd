@@ -77,6 +77,8 @@ func process_turn(_turn_number):
 	if state != State.BURNING || _turn_number == 0 || _ignition_turn == _turn_number:
 		return
 
+	var timer := Metrics.start_timer("FireSpreading")
+
 	strength += Constants.IDLE_FLAME_INCREASE
 	durability -= Constants.IDLE_DURABILITY_DECREASE * strength
 
@@ -88,6 +90,7 @@ func process_turn(_turn_number):
 	for next_tile in _tile.neighbor_tiles():
 		if FireSpreading.is_spread(_tile, next_tile):
 			next_tile.get_mixin(Flammable).ignite()
+	timer.stop()
 
 
 func extinguish(foam_strength: float):

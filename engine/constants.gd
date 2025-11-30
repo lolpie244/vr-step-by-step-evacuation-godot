@@ -10,6 +10,6 @@ const SMOKE_STRENGTH_INSCREASE_RATE: float = 0.2  # per turn
 
 const DEBUG_MODE: bool = false
 
-const METRICS_FPS_PUBLISH_FREQUENCY = 1.5  # seconds
+const METRICS_PUBLISH_FREQUENCY = 1.5  # seconds
 const METRICS_SERVER := "https://eucalyptic-overvaluably-kina.ngrok-free.dev"
-const SEND_METRICS := false
+const SEND_METRICS := true

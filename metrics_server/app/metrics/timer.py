@@ -1,7 +1,8 @@
 import db
 from models import BaseModel
 from sqlmodel import Field
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
+from typing import List
 
 
 class Timer(BaseModel, table=True):
@@ -19,3 +20,14 @@ async def create_timer_entry(timer: Timer, session: db.SessionDep):
     session.commit()
     session.refresh(timer)
     return timer
+
+
+@router.post("/timer/batch")
+async def create_timer_batch(timers: List[Timer], session: db.SessionDep):
+    session.add_all(timers)
+    session.commit()
+
+    for timer in timers:
+        session.refresh(timer)
+
+    return timers
