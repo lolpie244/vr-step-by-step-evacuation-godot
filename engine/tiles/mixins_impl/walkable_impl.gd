@@ -34,8 +34,9 @@ func place_character(character: Character) -> bool:
 		_character.saved.connect(_on_character_saved)
 		set_reachable(character, true)
 
-	character_placed.emit(_character)
 	set_blocker(self, true)
+	character_placed.emit(_character)
+
 	return true
 
 

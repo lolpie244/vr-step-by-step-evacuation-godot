@@ -99,7 +99,7 @@ func _publish_batch(topic: String, messages: Array[Dictionary]):
 		message["client_id"] = _client_id
 
 	if !_http.is_valid():
-		print("[METRICS] {0}: {1}".format([topic, messages]))
+		print("[METRICS] {0}: ".format([topic]), messages)
 		return
 
 	await _http.post("/{0}/batch".format([topic]), messages)

@@ -12,4 +12,4 @@ const DEBUG_MODE: bool = false
 
 const METRICS_PUBLISH_FREQUENCY = 1.5  # seconds
 const METRICS_SERVER := "https://eucalyptic-overvaluably-kina.ngrok-free.dev"
-const SEND_METRICS := true
+const SEND_METRICS := false

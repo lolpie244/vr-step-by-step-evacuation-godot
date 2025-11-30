@@ -72,4 +72,4 @@ func model_scale(model):
 
 func set_size(size: Vector2):
 	_tile_size = min(self.get_aabb().size.x / size.x, self.get_aabb().size.z / size.y)
-	impl.resize(size.x, size.y)
+	impl.resize(int(size.x), int(size.y))

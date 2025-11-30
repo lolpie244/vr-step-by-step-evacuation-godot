@@ -22,8 +22,8 @@ func _on_xr_started() -> void:
 	if _initialized:
 		return
 	_initialized = true
+	Metrics.enabled = false
 	Metrics.init()
-	#Metrics.enabled = false
 	SceneManager.load_scene(map_builder_scene)
 
 
