@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bytc3ysax4av"]
+[gd_scene load_steps=16 format=3 uid="uid://bytc3ysax4av"]
 
 [ext_resource type="Script" uid="uid://bc07tu5tn18x8" path="res://stages/strategic_modes/base_scene/map_scene.gd" id="1_ur71p"]
 [ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/player_vr.tscn" id="2_k51vb"]
@@ -28,9 +28,6 @@ tonemap_exposure = 1.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0dt8"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.09803922)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_euwkl"]
-size = Vector3(2.3814697, 0.14355469, 1.9888916)
 
 [node name="MapScene" type="Node3D"]
 script = ExtResource("1_ur71p")
@@ -91,12 +88,6 @@ transform = Transform3D(1.0709727, 0, 0, 0, 1, 0, 0, 0, 1.3216733, 0, -0.3684496
 
 [node name="Ceil" parent="Environment/Room" instance=ExtResource("9_3brmv")]
 transform = Transform3D(1.3710396, 0, 0, 0, 1, 0, 0, 0, 1.3216733, 0, 1.7035446, 1.7702377)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Room/Ceil"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Room/Ceil/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017272957, 0.07080078, 0.13800037)
-shape = SubResource("BoxShape3D_euwkl")
 
 [node name="Table" parent="Environment" instance=ExtResource("10_afuan")]
 transform = Transform3D(0.68470037, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.4125632, 1.2220747)
