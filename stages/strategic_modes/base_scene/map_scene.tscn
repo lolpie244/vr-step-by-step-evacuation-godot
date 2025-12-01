@@ -69,22 +69,28 @@ sky_mode = 2
 [node name="Room" type="Node" parent="Environment"]
 
 [node name="door" parent="Environment/Room" instance=ExtResource("7_1tdme")]
-transform = Transform3D(-1.1055838, 0, -8.742278e-08, 0, 1, 0, 9.66532e-08, 0, -1, 0, -0.2668382, 3.3456082)
+transform = Transform3D(-0.9, 0, -1.2275959e-07, 0, 0.813, 0, 1.3589622e-07, 0, -0.813, 0, -0.2668382, 3.3378067)
 
 [node name="wall" parent="Environment/Room" instance=ExtResource("8_afuan")]
-transform = Transform3D(1.3353101, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25928515, 0.55237377)
+transform = Transform3D(1.3586138, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.25928515, 0.55237377)
 
 [node name="wall2" parent="Environment/Room" instance=ExtResource("8_afuan")]
-transform = Transform3D(-5.2413707e-08, 0, 1, 0, 1, 0, -1.1990858, 0, -4.371139e-08, -1.4312742, -0.25928515, 1.8843714)
+transform = Transform3D(-5.224998e-08, 0, 0.8, 0, 0.8, 0, -1.1953403, 0, -3.4969112e-08, -1.4312742, -0.25928515, 1.8843714)
 
 [node name="wall3" parent="Environment/Room" instance=ExtResource("8_afuan")]
-transform = Transform3D(-4.843575e-08, 0, 1, 0, 1, 0, -1.1080809, 0, -4.371139e-08, 1.4564604, -0.25928515, 1.8938149)
+transform = Transform3D(-5.109396e-08, 0, 0.8, 0, 0.8, 0, -1.1688936, 0, -3.4969112e-08, 1.3933653, -0.25928515, 1.8938149)
+
+[node name="wall4" parent="Environment/Room" instance=ExtResource("8_afuan")]
+transform = Transform3D(1.1688936, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.9364302, -0.25928515, 3.3525147)
+
+[node name="wall5" parent="Environment/Room" instance=ExtResource("8_afuan")]
+transform = Transform3D(1.1688936, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -1.9723222, -0.25928515, 3.3525147)
 
 [node name="Floor" parent="Environment/Room" instance=ExtResource("9_3brmv")]
 transform = Transform3D(1.0709727, 0, 0, 0, 1, 0, 0, 0, 1.3216733, 0, -0.36844966, 1.7702377)
 
 [node name="Ceil" parent="Environment/Room" instance=ExtResource("9_3brmv")]
-transform = Transform3D(1.3710396, 0, 0, 0, 1, 0, 0, 0, 1.3216733, 0, 2.2160282, 1.7702377)
+transform = Transform3D(1.3710396, 0, 0, 0, 1, 0, 0, 0, 1.3216733, 0, 1.7035446, 1.7702377)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/Room/Ceil"]
 

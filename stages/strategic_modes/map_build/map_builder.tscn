@@ -37,10 +37,10 @@ scene = ExtResource("3_6sc0j")
 visible = false
 
 [node name="ScaleLever" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5192419, 0.458555, 1.35959)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47107926, 0.3526316, 1.35959)
 
 [node name="OffsetJoystick" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5268856, 0.459, 1.36)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4782623, 0.35307658, 1.36)
 
 [node name="Map" parent="." index="4"]
 transform = Transform3D(0.3989233, 0, 0, 0, 0.2768486, -0.35045773, 0, 0.9363054, 0.10362402, 0, 0.87870705, 1.0165468)
@@ -50,8 +50,14 @@ shader_axis = 1
 [node name="TileFactory" parent="Map" index="0" instance=ExtResource("6_n64ml")]
 transform = Transform3D(2.453425, 0, 0, 0, 0.29185784, 0.98706675, 0, -2.5761464, 0.76172006, 0, -1.257102, 1.4780504)
 
+[node name="Floor" parent="Environment/Room" index="6"]
+transform = Transform3D(1.0709727, 0, 0, 0, 1, 0, 0, 0, 1.3216733, 0, -0.33477086, 1.7702377)
+
+[node name="Table" parent="Environment" index="1"]
+transform = Transform3D(0.548, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.31429726, 1.3645244)
+
 [node name="Shelf" parent="Environment" index="2" instance=ExtResource("12_4lc88")]
-transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, -0.7661468, 0, 1.9650824)
+transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, -0.766, -0.21, 1.965)
 
 [node name="Easel" parent="Environment" index="3" instance=ExtResource("10_xncoq")]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 1.1232382, 0.8277863)
@@ -63,30 +69,30 @@ transform = Transform3D(1.3, -3.3121538e-08, -2.842171e-14, 3.1798645e-08, 1.248
 script = ExtResource("3_nt64x")
 
 [node name="ScanRoomButton" parent="." index="8" instance=ExtResource("9_meh3h")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0.32808077, 0.36471325, 1.4553176)
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0.32808077, 0.25878984, 1.4553176)
 
 [node name="ExitButton" parent="." index="9" instance=ExtResource("9_meh3h")]
-transform = Transform3D(0.9659756, 0, 0.25863364, 0, 1, 0, -0.25863364, 0, 0.9659756, -0.28351954, 0.4685651, 1.2388928)
+transform = Transform3D(0.9659756, 0, 0.25863364, 0, 1, 0, -0.25863364, 0, 0.9659756, -0.2101528, 0.3626417, 1.2388928)
 
 [node name="Pens" type="Node" parent="." index="10"]
 
 [node name="Floor" parent="Pens" index="0" instance=ExtResource("8_qwooh")]
-transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.29770142, 0.47205818, 1.3984342)
+transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.29770142, 0.36613476, 1.3984342)
 type = 1
 color = Color(1, 1, 1, 1)
 
 [node name="Wall" parent="Pens" index="1" instance=ExtResource("8_qwooh")]
-transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.17978781, 0.47205818, 1.3984342)
+transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.17978781, 0.36613476, 1.3984342)
 type = 2
 color = Color(1, 0, 1, 1)
 
 [node name="Window" parent="Pens" index="2" instance=ExtResource("8_qwooh")]
-transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, -0.04427558, 0.47205818, 1.3984342)
+transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, -0.04427558, 0.36613476, 1.3984342)
 type = 3
 color = Color(0.9999998, 0.41498008, 0.12962487, 1)
 
 [node name="Door" parent="Pens" index="3" instance=ExtResource("8_qwooh")]
-transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.061435938, 0.47205818, 1.3984342)
+transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.061435938, 0.36613476, 1.3984342)
 type = 4
 color = Color(1, 0, 0, 1)
 
@@ -141,6 +147,7 @@ transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 
 visible = true
 
 [node name="MapCapture" type="SubViewport" parent="." index="12"]
+render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="MapCapture" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.9634156, 0.268012, 0, -0.268012, 0.96341556, 0, 0.9279138, 1.2149659)

@@ -20,6 +20,7 @@ var _items: Array[MapBuilderItem] = []
 func _ready() -> void:
 	tile_factory.set_material(map.cutoff_material)
 	item_catalog.set_material(map.cutoff_material)
+
 	map_capture_camera.rotation_degrees.x = map.rotation_degrees.x - 90
 	_set_map(impl)
 
