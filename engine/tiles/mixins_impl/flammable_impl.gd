@@ -53,6 +53,8 @@ func init():
 	var item_holder: ItemHolder = _tile.get_mixin(ItemHolder)
 	if item_holder:
 		item_holder.item_placed.connect(_on_item_placed)
+		item_holder.item_part_placed.connect(_on_item_placed)
+		item_holder.item_part_removed.connect(_on_item_removed)
 		item_holder.item_removed.connect(_on_item_removed)
 
 
@@ -62,7 +64,10 @@ func can_burn():
 
 
 func ignite():
-	strength = max(0.1, durability)
+	if state != State.NOT_BURNING:
+		return
+
+	strength = 0.1
 	state = State.BURNING
 	_ignition_turn = GameCore.current_turn
 
@@ -71,21 +76,33 @@ func ignite():
 		smokable.smoke()
 
 
+func burn():
+	if state == State.BURNED:
+		return
+
+	strength = 0
+	durability = 0
+	state = State.BURNED
+
+
 func process_turn(_turn_number):
 	if state != State.BURNING || _turn_number == 0 || _ignition_turn == _turn_number:
 		return
 
+	var timer := Metrics.start_timer("FireSpreading")
+
 	strength += Constants.IDLE_FLAME_INCREASE
-	durability -= Constants.IDLE_FLAME_INCREASE
+	durability -= Constants.IDLE_DURABILITY_DECREASE * strength
 
 	if durability <= 0:
-		state = State.BURNED
+		burn()
 	elif strength > 1:
 		strength = 1
 
 	for next_tile in _tile.neighbor_tiles():
 		if FireSpreading.is_spread(_tile, next_tile):
 			next_tile.get_mixin(Flammable).ignite()
+	timer.stop()
 
 
 func extinguish(foam_strength: float):

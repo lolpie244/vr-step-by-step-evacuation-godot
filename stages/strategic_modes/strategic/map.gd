@@ -22,6 +22,11 @@ func _ready() -> void:
 
 
 func reset_map():
+	for tiles_array in _tile_nodes:
+		for tile in tiles_array:
+			if tile:
+				map_nodes.remove_child(tile)
+
 	_tile_nodes = Utils.get_matrix(impl.rows_count(), impl.columns_count())
 
 	_tile_size = min(
@@ -39,7 +44,7 @@ func reset_map():
 	for x in range(impl.rows_count()):
 		for y in range(impl.columns_count()):
 			if _tile_nodes[x][y]:
-				place_item(_tile_nodes[x][y], x, y)
+				place_node(_tile_nodes[x][y], x, y)
 
 	for item in impl.items:
 		var node: ItemNode = item_factory.create(item)

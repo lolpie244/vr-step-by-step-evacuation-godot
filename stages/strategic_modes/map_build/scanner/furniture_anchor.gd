@@ -30,3 +30,18 @@ func init():
 		LABEL_TO_IMPL.get(_label), size_in_tiles, true
 	)
 	item._direction = Utils.direction_from_angle(self.global_rotation_degrees.y)
+
+
+func origin_tile() -> Vector2:
+	var center := (left_corner + right_corner) / 2.0 / Constants.TILE_SIZE_IN_REAL_LIFE
+	var half_size := item.size / 2.0
+
+	match item.get_direction():
+		Utils.Direction.DOWN:
+			return center + half_size
+		Utils.Direction.RIGHT:
+			return center - half_size * Vector2(-1, 1)
+		Utils.Direction.LEFT:
+			return center - half_size * Vector2(1, -1)
+		_:
+			return center - half_size

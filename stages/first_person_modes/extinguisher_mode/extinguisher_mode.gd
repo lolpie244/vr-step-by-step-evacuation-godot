@@ -37,6 +37,7 @@ func _ready() -> void:
 	point_generator.points_count = ext_impls.size()
 	var burning_tile_node := tiles[_get_burning_tile(context.character.get_tile())]
 	look_at_tile(burning_tile_node)
+	burning_tile_node.impl.get_mixin(Flammable).state_changed.connect(_on_flammable_state_changed)
 
 	for ext_impl in ext_impls:
 		var ext := extinguisher_factory.create(ext_impl, point_generator.get_point())
@@ -45,3 +46,10 @@ func _ready() -> void:
 		ext.triggerred.connect(func(): extinguisher_selected.emit())
 		extinguisher_selected.connect(ext.remove)
 		ext.spawn()
+
+
+func _on_flammable_state_changed(_flammable: Flammable, _state: Flammable.State):
+	var tile := _flammable.get_tile()
+	var item_holder := tile.get_mixin(ItemHolder) as ItemHolder
+
+	exit()

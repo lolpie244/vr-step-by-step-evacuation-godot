@@ -13,12 +13,16 @@ var _items: Array[MapBuilderItem] = []
 @onready var tile_factory: MapBuildTileFactory = $Map/TileFactory
 @onready var item_catalog: ItemsCatalog = $ItemsCatalog
 
+@onready var map_capture: SubViewport = $MapCapture
+@onready var map_capture_camera: Camera3D = $MapCapture/Camera3D
+
 
 func _ready() -> void:
 	tile_factory.set_material(map.cutoff_material)
 	item_catalog.set_material(map.cutoff_material)
+
+	map_capture_camera.rotation_degrees.x = map.rotation_degrees.x - 90
 	_set_map(impl)
-	#map_scanner.start_scan()
 
 
 func _set_map(grid: MapGrid):
@@ -55,7 +59,7 @@ func _reset_map():
 			if !impl.get_tile(x, y):
 				impl.create_tile(Tile.Type.FLOOR, x, y)
 			_tile_nodes[x][y] = tile_factory.create(impl.get_tile(x, y))
-			map.place_item(_tile_nodes[x][y], x, y)
+			map.place_node(_tile_nodes[x][y], x, y)
 
 	for item in impl.items:
 		item_catalog.create(item)
@@ -64,7 +68,7 @@ func _reset_map():
 func _reacreate_tile(x: int, y: int):
 	map.remove_item(_tile_nodes[x][y])
 	_tile_nodes[x][y] = tile_factory.create(impl.get_tile(x, y))
-	map.place_item(_tile_nodes[x][y], x, y)
+	map.place_node(_tile_nodes[x][y], x, y)
 
 	var item_holder = _tile_nodes[x][y].impl.get_mixin(ItemHolder)
 	if item_holder and item_holder.get_item():
@@ -87,20 +91,9 @@ func _on_tile_type_changed(type: Tile.Type, pos: Vector2i) -> void:
 				_reacreate_tile(pos.x + i, pos.y + j)
 
 
-func _on_exit_button_released(_button: Variant) -> void:
-	impl.strip()
-	_clear()
-	GameCore.set_grid(impl)
-	SceneManager.replace_scene(strategic)
-
-
 func add_item_node(item_node: MapBuilderItem):
 	_items.append(item_node)
 	item_node.impl.removed.connect(_on_item_removed)
-
-
-func _on_item_removed(item: Item):
-	_items.erase(get_item_node(item))
 
 
 func get_item_node(item: Item) -> MapBuilderItem:
@@ -110,5 +103,17 @@ func get_item_node(item: Item) -> MapBuilderItem:
 	return null
 
 
+func _on_item_removed(item: Item):
+	_items.erase(get_item_node(item))
+
+
 func _on_scan_room_button_released(_button: Variant) -> void:
 	map_scanner.start_scan()
+
+
+func _on_exit_button_released(_button: Variant) -> void:
+	impl.strip()
+	_clear()
+	GameCore.evacuation_plan = map_capture.get_texture().get_image()
+	GameCore.set_grid(impl)
+	SceneManager.replace_scene(strategic)

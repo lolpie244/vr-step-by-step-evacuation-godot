@@ -6,6 +6,7 @@ from fastapi import APIRouter
 
 class Fps(BaseModel, table=True):
     fps: int = Field(nullable=False)
+    details: str | None = Field()
 
 
 router = APIRouter()

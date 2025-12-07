@@ -31,7 +31,7 @@ void fragment() {
 	vec2 vertexDistance = abs(plane_pos - wvtx);
 	if (vertexDistance.x > plane_size.x || vertexDistance.y > plane_size.y) discard;
 
-    vec2 plane_size_ext = plane_size * 1.2;
+    vec2 plane_size_ext = plane_size * 1.3;
 
 	float dist_to_edge = min(
 	    plane_size_ext.x - vertexDistance.x,

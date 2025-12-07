@@ -28,7 +28,7 @@ particles_scale = 0.1
 [node name="Particles" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.124, 0, 0, 0, 0.124, 0, 0, 0, 0.124, 0, 0, 0)
 cast_shadow = 0
-amount = 100
+amount = 50
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_32cnx")
 draw_pass_1 = SubResource("PlaneMesh_eg10q")

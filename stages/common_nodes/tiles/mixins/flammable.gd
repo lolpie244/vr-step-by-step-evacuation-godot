@@ -95,7 +95,9 @@ func _on_item_placed(item: ItemNode) -> void:
 	_set_matetial_overlay(item)
 	_fire_transform = fire.transform
 	_old_position = self.global_position
-	self.global_position = item.to_global(item_aabb.get_center())
+	self.global_position = item.to_global(
+		item_aabb.get_center() - Vector3(0, 0.2, 0) * item_aabb.get_center()
+	)
 
 	fire.reparent(item)
 	_full_fire_scale *= (

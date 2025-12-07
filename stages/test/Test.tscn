@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dxrf0lnhl7s2f"]
+[gd_scene load_steps=14 format=3 uid="uid://dxrf0lnhl7s2f"]
 
 [ext_resource type="Script" uid="uid://b8avi6cjwyrsf" path="res://stages/test/test.gd" id="1_c6hbk"]
 [ext_resource type="PackedScene" uid="uid://cgdwn2epdpwlb" path="res://stages/first_person_modes/base_scene/first_person.tscn" id="2_c6hbk"]
@@ -28,6 +28,9 @@ tonemap_mode = 2
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.0980392)
 
+[sub_resource type="LabelSettings" id="LabelSettings_tcst7"]
+font_size = 50
+
 [node name="Test" type="Node3D"]
 script = ExtResource("1_c6hbk")
 next_scene = ExtResource("2_c6hbk")
@@ -36,13 +39,14 @@ next_scene = ExtResource("2_c6hbk")
 environment = SubResource("Environment_c6hbk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.37188494, 0.9269652, 0.049369283, 0.021858782, -0.044424266, 0.9987737, 0.9280216, 0.37250802, -0.0037416369, -0.099999905, 1.3000007, -0.3999999)
-light_energy = 0.4
+transform = Transform3D(-0.24750584, 0.62405056, 0.7411489, 0.2784188, -0.686876, 0.6713303, 0.9280215, 0.372508, -0.0037416136, 1.2000002, 1.3000007, -0.3999999)
+light_energy = 0.2
 shadow_enabled = true
 directional_shadow_max_distance = 7.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.6039586, 0.7970157, 0, -0.7970157, 0.6039586, 0, 0.48782, 0.38010994)
+projection = 1
 fov = 62.74711
 
 [node name="Map" type="MeshInstance3D" parent="."]
@@ -59,3 +63,12 @@ cutoff_shader = ExtResource("4_tcst7")
 [node name="TileFactory" parent="Map" instance=ExtResource("6_8stuw")]
 
 [node name="ItemFactory" parent="Map" instance=ExtResource("7_tcst7")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_top = 1.0
+offset_right = 139.0
+offset_bottom = 93.0
+text = "0"
+label_settings = SubResource("LabelSettings_tcst7")

@@ -26,7 +26,6 @@
 [node name="TileFactory" instance=ExtResource("1_lnyr2")]
 
 [node name="Floor" parent="." index="0"]
-visible = true
 script = ExtResource("2_6vjt4")
 
 [node name="Animation" parent="Floor" index="0" instance=ExtResource("2_gyo66")]
@@ -100,7 +99,6 @@ script = ExtResource("10_iqaq3")
 script = ExtResource("10_rpi85")
 
 [node name="Door" parent="." index="3"]
-visible = true
 script = ExtResource("14_rgv0y")
 
 [node name="Animation" parent="Door" index="0" instance=ExtResource("2_gyo66")]

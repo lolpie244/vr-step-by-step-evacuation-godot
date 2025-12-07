@@ -81,11 +81,15 @@ func _on_flammable_state_changed(_flammable: Flammable, state: Flammable.State):
 	if !has_item():
 		return
 
-	if state == Flammable.State.BURNING:
-		for tile in _item.tiles():
-			var flammable: Flammable = tile.get_mixin(Flammable)
-			if flammable and flammable.state == Flammable.State.NOT_BURNING:
+	for tile in _item.tiles():
+		var flammable: Flammable = tile.get_mixin(Flammable)
+		if !flammable:
+			continue
+		match state:
+			Flammable.State.BURNING:
 				flammable.ignite()
+			Flammable.State.BURNED:
+				flammable.burn()
 
 	if state == Flammable.State.BURNED:
 		remove_item()

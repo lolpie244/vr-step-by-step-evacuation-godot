@@ -1,19 +1,33 @@
-[gd_scene load_steps=19 format=3 uid="uid://doi1d80atmp60"]
+[gd_scene load_steps=25 format=3 uid="uid://doi1d80atmp60"]
 
 [ext_resource type="PackedScene" uid="uid://bhk1lv5gkewif" path="res://stages/first_person_modes/extinguisher_mode/extinguishers/extinguisher/extinguisher.tscn" id="1_ts6p0"]
 [ext_resource type="Script" uid="uid://bn3cd3iea35mh" path="res://stages/first_person_modes/extinguisher_mode/extinguishers/types/powder_hose_end.gd" id="2_ev8eh"]
 [ext_resource type="ArrayMesh" uid="uid://5pnlsqp6h81v" path="res://assets/items/extinguisher_powder/hose_end.res" id="3_tx3j7"]
+[ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_7s768"]
 [ext_resource type="ArrayMesh" uid="uid://dc4nb2ciahe14" path="res://assets/items/extinguisher_powder/handle.res" id="4_ybqna"]
+[ext_resource type="Animation" uid="uid://dqa0h82y3qn1t" path="res://addons/godot-xr-tools/hands/animations/left/Grip 1.res" id="5_lhms7"]
 [ext_resource type="ArrayMesh" uid="uid://cvkq7s1uob7tx" path="res://assets/items/extinguisher_powder/pin.res" id="5_r474x"]
 [ext_resource type="Script" uid="uid://c4itu8s6yackn" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="5_tx3j7"]
 [ext_resource type="Animation" uid="uid://dgfeikrugfewi" path="res://addons/godot-xr-tools/hands/animations/left/Cup.res" id="5_ybqna"]
 [ext_resource type="PackedScene" uid="uid://mqnsmnitytdi" path="res://assets/items/extinguisher_powder/model.glb" id="6_ekdd7"]
 [ext_resource type="PackedScene" uid="uid://dk6f6uvskip7d" path="res://common/rope/rope.tscn" id="7_j73n2"]
+[ext_resource type="PackedScene" uid="uid://ctw7nbntd5pcj" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_right.tscn" id="7_p17gb"]
 [ext_resource type="Animation" uid="uid://do01jton6rk42" path="res://addons/godot-xr-tools/hands/animations/right/Cup.res" id="7_r474x"]
 [ext_resource type="ArrayMesh" uid="uid://cvj1tefh81k5p" path="res://assets/items/extinguisher_powder/holder.res" id="8_ev8eh"]
+[ext_resource type="Animation" uid="uid://daqddcrbpam0c" path="res://addons/godot-xr-tools/hands/animations/right/Grip 1.res" id="8_w6003"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bs6bj"]
 size = Vector3(0.049999997, 0.04, 0.14999999)
+
+[sub_resource type="Resource" id="Resource_lhms7"]
+script = ExtResource("5_tx3j7")
+closed_pose = ExtResource("5_lhms7")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
+
+[sub_resource type="Resource" id="Resource_w6003"]
+script = ExtResource("5_tx3j7")
+closed_pose = ExtResource("8_w6003")
+metadata/_custom_type_script = "uid://c4itu8s6yackn"
 
 [sub_resource type="Resource" id="Resource_ybqna"]
 script = ExtResource("5_tx3j7")
@@ -38,7 +52,7 @@ size = Vector3(0.0312347, 0.0326538, 0.0518799)
 [sub_resource type="Curve3D" id="Curve3D_nu4d3"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00799024, 0.360254, 0.0862992, 0, 0.0110817, -0.0415566, 0, -0.0110817, 0.0415566, 0.0065734, 0.360137, 0.11826, 0, 0, 0, 0, 0, 0, 0.0115787, 0.340185, 0.161146, 0, 0, 0, 0, 0, 0, 0.0123479, 0.159094, 0.185829, 0, 0, 0, 0, 0, 0, 0.0143751, -0.0454934, 0.19598),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00799024, 0.360254, 0.058906816, 0, 0.0110817, -0.0415566, 0, -0.0110817, 0.0415566, 0.0065734, 0.360137, 0.09720175, 0, 0, 0, 0, 0, 0, 0.0115787, 0.340185, 0.161146, 0, 0, 0, 0, 0, 0, 0.0123479, 0.159094, 0.185829, 0, 0, 0, 0, 0, 0, -0.0037475969, -0.053513885, 0.18786149),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
@@ -50,6 +64,9 @@ transform = Transform3D(1.00013, 0, 0, 0, -4.3716945e-08, -1.0001271, 0, 1.00012
 script = ExtResource("2_ev8eh")
 is_pickable = true
 
+[node name="Pickup" parent="HoseEndOrigin" index="0"]
+ranged_grab_method = 0
+
 [node name="CollisionShape3D" parent="HoseEndOrigin/Pickup" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0050000297, -4.4703484e-08, -0.024999648)
 shape = SubResource("BoxShape3D_bs6bj")
@@ -57,6 +74,14 @@ shape = SubResource("BoxShape3D_bs6bj")
 [node name="Mesh" parent="HoseEndOrigin/Pickup" index="1"]
 transform = Transform3D(0.38637033, 0.017977346, -0.10195484, 0.1031337, -0.032504573, 0.38510633, 0.009022982, -0.39827168, -0.036032192, 0, 0, 0)
 mesh = ExtResource("3_tx3j7")
+
+[node name="GrabPointHandLeft" parent="HoseEndOrigin/Pickup" index="4" instance=ExtResource("4_7s768")]
+transform = Transform3D(-1, 5.3076435e-15, -8.742276e-08, -4.0188606e-08, 0.8880716, 0.45970413, 7.76377e-08, 0.45970413, -0.8880716, -0.009122478, -0.0028873682, 0.038597062)
+hand_pose = SubResource("Resource_lhms7")
+
+[node name="GrabPointHandRight" parent="HoseEndOrigin/Pickup" index="5" instance=ExtResource("7_p17gb")]
+transform = Transform3D(-1, 0, -8.742278e-08, -4.053237e-08, 0.8860256, 0.46363628, 7.745882e-08, 0.46363628, -0.8860256, -0.0036797058, 0.004733011, 0.043983325)
+hand_pose = SubResource("Resource_w6003")
 
 [node name="HandleOrigin" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.407, -0.092)

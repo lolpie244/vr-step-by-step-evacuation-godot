@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://flu7j32ifd3y"]
+[gd_scene load_steps=24 format=3 uid="uid://flu7j32ifd3y"]
 
 [ext_resource type="Script" uid="uid://dbgvinydau6i6" path="res://stages/strategic_modes/strategic/strategic.gd" id="1_dspli"]
 [ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/strategic_modes/base_scene/map_scene.tscn" id="1_mavd1"]
@@ -9,12 +9,46 @@
 [ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/button.tscn" id="6_v5dbt"]
 [ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic_modes/strategic/characters/character_factory.tscn" id="7_vy2ce"]
 [ext_resource type="PackedScene" uid="uid://cxfojo8jvfcd5" path="res://stages/strategic_modes/strategic/items/item_factory.tscn" id="8_vy2ce"]
+[ext_resource type="PackedScene" uid="uid://dk6f6uvskip7d" path="res://common/rope/rope.tscn" id="11_17bcf"]
+[ext_resource type="Script" uid="uid://c1vovqujr6r5b" path="res://addons/godot-xr-tools/objects/pickable.gd" id="12_yfoml"]
+[ext_resource type="PackedScene" uid="uid://c3wpeixkcvp70" path="res://assets/items/extinguisher_powder/model.tscn" id="13_0kd0p"]
+[ext_resource type="PackedScene" uid="uid://dmvb1dap8a5x5" path="res://assets/items/extinguisher_co2/model.tscn" id="14_0kd0p"]
+[ext_resource type="PackedScene" uid="uid://ilgmyssxlf6h" path="res://assets/environment_props/wall_shelf.glb" id="14_yfoml"]
+[ext_resource type="PackedScene" uid="uid://bjp6x67n53lfw" path="res://assets/items/wall_art.glb" id="15_0kd0p"]
+[ext_resource type="Script" uid="uid://dw2y5guq5ka5i" path="res://stages/strategic_modes/strategic/map_plan_sprite.gd" id="16_1whxo"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0dt8"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.0980392)
+
+[sub_resource type="Curve3D" id="Curve3D_1whxo"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 2.22, 0, 0, 0, 0, 0, 0, 0, 0, 1.719, 0, 0, 0, 0, 0, 0, 0, 0, 1.481, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_17bcf"]
+radius = 0.11328125
+height = 0.35049438
+
+[sub_resource type="Curve3D" id="Curve3D_yfoml"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 2.22, 0, 0, 0, 0, 0, 0, 0, 0, 1.719, 0, 0, 0, 0, 0, 0, 0, 0, 1.481, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0kd0p"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1whxo"]
+material = SubResource("StandardMaterial3D_0kd0p")
+size = Vector2(0.8, 0.6)
+orientation = 2
 
 [node name="Strategic" instance=ExtResource("1_mavd1")]
 script = ExtResource("1_dspli")
@@ -44,7 +78,85 @@ cast_shadow = 0
 [node name="RopeTriggerOrigin" type="Node3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31713516, 0.9533406, 1.402024)
 
+[node name="CharacterShelf" type="Node" parent="Environment" index="2"]
+
+[node name="wall_shelf" parent="Environment/CharacterShelf" index="0" instance=ExtResource("14_yfoml")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.7977617, 0.74014205)
+
+[node name="wall_shelf2" parent="Environment/CharacterShelf" index="1" instance=ExtResource("14_yfoml")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.9880663, 0.74014205)
+
+[node name="Extinguishers" type="Node" parent="Environment" index="3"]
+
+[node name="Powder" type="Node3D" parent="Environment/Extinguishers" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1225668, -0.48517376, 1.837713)
+
+[node name="Rope" parent="Environment/Extinguishers/Powder" index="0" node_paths=PackedStringArray("attached_to_end") instance=ExtResource("11_17bcf")]
+curve = SubResource("Curve3D_1whxo")
+segments_count = 6
+mesh_sides = 6
+thickness = 0.01
+fixed_start = true
+attached_to_end = NodePath("../XRToolsPickable")
+
+[node name="XRToolsPickable" type="RigidBody3D" parent="Environment/Extinguishers/Powder" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.2473023, 0)
+freeze_mode = 1
+script = ExtResource("12_yfoml")
+ranged_grab_method = 0
+
+[node name="Model" parent="Environment/Extinguishers/Powder/XRToolsPickable" index="0" instance=ExtResource("13_0kd0p")]
+transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0, 0, 0)
+
+[node name="Holder" parent="Environment/Extinguishers/Powder/XRToolsPickable/Model" index="4"]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Extinguishers/Powder/XRToolsPickable" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.024108887, 0)
+shape = SubResource("CapsuleShape3D_17bcf")
+
+[node name="CO2" type="Node3D" parent="Environment/Extinguishers" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1225668, -0.48517376, 2.5541556)
+
+[node name="Rope" parent="Environment/Extinguishers/CO2" index="0" node_paths=PackedStringArray("attached_to_end") instance=ExtResource("11_17bcf")]
+curve = SubResource("Curve3D_yfoml")
+segments_count = 6
+mesh_sides = 6
+thickness = 0.01
+fixed_start = true
+attached_to_end = NodePath("../XRToolsPickable")
+
+[node name="XRToolsPickable" type="RigidBody3D" parent="Environment/Extinguishers/CO2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1.2692105, 0)
+freeze_mode = 1
+script = ExtResource("12_yfoml")
+ranged_grab_method = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Extinguishers/CO2/XRToolsPickable" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1.0000012, 0, 0, 0, 1.0000012, 0, 0.07395977, -4.7683716e-07)
+shape = SubResource("CapsuleShape3D_17bcf")
+
+[node name="Model" parent="Environment/Extinguishers/CO2/XRToolsPickable" index="1" instance=ExtResource("14_0kd0p")]
+transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0, 0, 0)
+
+[node name="Holder" parent="Environment/Extinguishers/CO2/XRToolsPickable/Model" index="2"]
+visible = false
+
+[node name="wall_art" parent="Environment" index="4" instance=ExtResource("15_0kd0p")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.2822357, 0.90082407, 2.1094651)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/wall_art" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00801754)
+mesh = SubResource("PlaneMesh_1whxo")
+
+[node name="Sprite3D" type="Sprite3D" parent="Environment/wall_art" index="2"]
+transform = Transform3D(-0.12, 0, -1.8119495e-08, 0, 0.12, 0, 1.8119495e-08, 0, -0.12, 0, 0, 0.008922815)
+flip_h = true
+script = ExtResource("16_1whxo")
+
 [connection signal="released" from="ExitButton" to="." method="_on_button_released"]
 
 [editable path="ExitButton"]
 [editable path="ExitButton/next_button"]
+[editable path="Environment/Extinguishers/Powder/XRToolsPickable/Model"]
+[editable path="Environment/Extinguishers/CO2/XRToolsPickable/Model"]

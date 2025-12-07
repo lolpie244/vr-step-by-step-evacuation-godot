@@ -51,10 +51,7 @@ func _set_tile(map: MapGrid, anchor: TileXRAnchor):
 
 
 func _set_furniture(map: MapGrid, anchor: FurnitureXRAnchor):
-	var center := (
-		(anchor.left_corner + anchor.right_corner) / 2.0 / Constants.TILE_SIZE_IN_REAL_LIFE
-	)
-	var start := center - anchor.item.size / 2.0
+	var start := anchor.origin_tile()
 
 	var base_tile: Tile = map.get_tile(round(start.x), round(start.y))
 	if !base_tile:

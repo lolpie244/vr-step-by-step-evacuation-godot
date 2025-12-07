@@ -3,6 +3,7 @@ extends Node
 signal character_selected(character: Character)
 signal alarm_triggered
 
+var evacuation_plan: Image
 var grid := MapGrid.new()
 
 var current_turn: int:
@@ -57,3 +58,4 @@ func reset():
 	_alarm_triggered = false
 	_current_turn = -1
 	selected_character = null
+	grid.reset()

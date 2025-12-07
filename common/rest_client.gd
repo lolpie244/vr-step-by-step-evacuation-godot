@@ -24,7 +24,7 @@ func connect_to_server(url: String, port: int = -1):
 	_http = http
 
 
-func _receive() -> Dictionary:
+func _receive():
 	while _http.get_status() == HTTPClient.STATUS_REQUESTING:
 		_http.poll()
 		await Engine.get_main_loop().process_frame
@@ -57,7 +57,7 @@ func _wait():
 		await Engine.get_main_loop().process_frame
 
 
-func post(url: String, payload: Dictionary) -> Dictionary:
+func post(url: String, payload):
 	if !is_valid():
 		return {}
 	await _wait()

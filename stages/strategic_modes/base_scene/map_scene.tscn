@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bytc3ysax4av"]
+[gd_scene load_steps=16 format=3 uid="uid://bytc3ysax4av"]
 
 [ext_resource type="Script" uid="uid://bc07tu5tn18x8" path="res://stages/strategic_modes/base_scene/map_scene.gd" id="1_ur71p"]
 [ext_resource type="PackedScene" uid="uid://71bi5i7varcy" path="res://common/player_vr/player_vr.tscn" id="2_k51vb"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" uid="uid://dipxj05bpeml6" path="res://stages/strategic_modes/base_scene/map.gd" id="4_k51vb"]
 [ext_resource type="PackedScene" uid="uid://dkw8t7skkorcm" path="res://ui/joystick.tscn" id="5_pe05o"]
 [ext_resource type="Shader" uid="uid://ds1y664nk12st" path="res://stages/strategic_modes/base_scene/cutoff.gdshader" id="6_1dq7g"]
+[ext_resource type="PackedScene" uid="uid://dxx4ynrgmhkqr" path="res://assets/environment_props/door.glb" id="7_1tdme"]
+[ext_resource type="PackedScene" uid="uid://d4be1kd4vn7t3" path="res://assets/environment_props/wall.glb" id="8_afuan"]
+[ext_resource type="PackedScene" uid="uid://b0klvotfq1wxd" path="res://assets/environment_props/floor.glb" id="9_3brmv"]
+[ext_resource type="PackedScene" uid="uid://batkiyhm3xw05" path="res://assets/environment_props/table.glb" id="10_afuan"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dspli"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -17,7 +21,7 @@ sky_material = SubResource("ProceduralSkyMaterial_dspli")
 [sub_resource type="Environment" id="Environment_paqgp"]
 background_mode = 2
 sky = SubResource("Sky_5y27t")
-tonemap_mode = 2
+tonemap_exposure = 1.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
 
@@ -51,10 +55,42 @@ cutoff_shader = ExtResource("6_1dq7g")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.37188494, 0.9269651, 0.049369257, 0.12690175, -0.0019172018, 0.99191344, 0.9195638, 0.37514275, -0.11692051, -0.099999905, 1.7407222, 0.5470469)
-light_energy = 0.4
+light_energy = 2.0
 shadow_enabled = true
 shadow_blur = 3.0
 directional_shadow_max_distance = 10.0
+sky_mode = 2
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Room" type="Node" parent="Environment"]
+
+[node name="door" parent="Environment/Room" instance=ExtResource("7_1tdme")]
+transform = Transform3D(-0.9, 0, -1.2275959e-07, 0, 0.813, 0, 1.3589622e-07, 0, -0.813, 0, -0.2668382, 3.3378067)
+
+[node name="wall" parent="Environment/Room" instance=ExtResource("8_afuan")]
+transform = Transform3D(1.3586138, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.25928515, 0.55237377)
+
+[node name="wall2" parent="Environment/Room" instance=ExtResource("8_afuan")]
+transform = Transform3D(-5.224998e-08, 0, 0.8, 0, 0.8, 0, -1.1953403, 0, -3.4969112e-08, -1.4312742, -0.25928515, 1.8843714)
+
+[node name="wall3" parent="Environment/Room" instance=ExtResource("8_afuan")]
+transform = Transform3D(-5.109396e-08, 0, 0.8, 0, 0.8, 0, -1.1688936, 0, -3.4969112e-08, 1.3933653, -0.25928515, 1.8938149)
+
+[node name="wall4" parent="Environment/Room" instance=ExtResource("8_afuan")]
+transform = Transform3D(1.1688936, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.9364302, -0.25928515, 3.3525147)
+
+[node name="wall5" parent="Environment/Room" instance=ExtResource("8_afuan")]
+transform = Transform3D(1.1688936, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -1.9723222, -0.25928515, 3.3525147)
+
+[node name="Floor" parent="Environment/Room" instance=ExtResource("9_3brmv")]
+transform = Transform3D(1.0709727, 0, 0, 0, 1, 0, 0, 0, 1.3216733, 0, -0.36844966, 1.7702377)
+
+[node name="Ceil" parent="Environment/Room" instance=ExtResource("9_3brmv")]
+transform = Transform3D(1.3710396, 0, 0, 0, 1, 0, 0, 0, 1.3216733, 0, 1.7035446, 1.7702377)
+
+[node name="Table" parent="Environment" instance=ExtResource("10_afuan")]
+transform = Transform3D(0.68470037, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.4125632, 1.2220747)
 
 [connection signal="hinge_moved" from="ScaleLever" to="." method="_on_zoom_lever_moved"]
 [connection signal="moved" from="OffsetJoystick" to="." method="_on_offset_joystick_moved"]

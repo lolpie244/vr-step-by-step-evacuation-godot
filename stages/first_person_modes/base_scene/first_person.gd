@@ -79,6 +79,7 @@ func look_at_tile(tile: TileNode):
 
 
 func exit() -> void:
+	context.character.death.disconnect(_on_character_death)
 	var player_rotation = player.camera.rotation.y
 	context.character._look_direction = Vector2(cos(player_rotation), sin(player_rotation))
 	SceneManager.pop_scene()

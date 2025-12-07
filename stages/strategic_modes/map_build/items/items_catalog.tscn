@@ -67,7 +67,7 @@ metadata/_custom_type_script = "uid://dwkncdtofp2bq"
 
 [sub_resource type="Resource" id="Resource_fnwg3"]
 script = ExtResource("7_0jw6i")
-open_pose = ExtResource("18_5ixe5")
+open_pose = ExtResource("19_fnwg3")
 closed_pose = ExtResource("19_fnwg3")
 metadata/_custom_type_script = "uid://dwkncdtofp2bq"
 

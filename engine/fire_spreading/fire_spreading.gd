@@ -6,7 +6,7 @@ extends Node
 const MAX_STRENGHT := 20  # max wind vector strength
 const MAX_STRENGHT_PROB := 0.3  # probability that fire will spread with wind with MAX_STRENGHT
 
-const K1 := 1.5  # wind influence coef
+const K1 := 1.3  # wind influence coef
 var k2 := -log(1 - MAX_STRENGHT_PROB) / MAX_STRENGHT  # wind vector length to probability
 
 
@@ -23,7 +23,7 @@ func _fixed_prob(from: Tile, to: Tile) -> float:
 	var delta_t = to_mat.ignition_temp - Constants.ROOM_TEMPERATURE
 	var heating_rate = pow(delta_t / from_mat.hrr, 2)
 
-	return 1 - exp(-Constants.TIME_PER_TURN / (PI / 4 * to_mat.flammable_rate * heating_rate))
+	return 1 - exp(-Constants.TIME_PER_TURN / (to_mat.flammable_rate * heating_rate))
 
 
 func _dynamic_prob(from: Tile, to: Tile) -> float:
@@ -59,4 +59,4 @@ func is_spread(from: Tile, to: Tile) -> bool:
 		print("	RESULT ", fixed_prob + dynamic_prob)
 		print("")
 
-	return randf_range(0, 1) < from.get_mixin(Flammable).strength * (fixed_prob + dynamic_prob)
+	return randf() < from.get_mixin(Flammable).strength * (fixed_prob + dynamic_prob)
