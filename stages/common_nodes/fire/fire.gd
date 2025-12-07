@@ -2,8 +2,9 @@
 class_name FireEffect
 extends Node3D
 
+@export var particles_scale: float = 1
+
 var fire_scale: float
-var particles_scale: float = 1
 
 var cooling_coef = 0.2:
 	set(val):
@@ -23,6 +24,7 @@ var enabled := false:
 
 func _process(_delta: float) -> void:
 	var new_scale = global_basis.get_scale()
+
 	new_scale = min(new_scale.x, new_scale.z)
 
 	if !enabled || fire_scale == new_scale:
@@ -42,6 +44,9 @@ func _process(_delta: float) -> void:
 
 
 func _ready():
+	fire.emitting = enabled
+	sparks.emitting = enabled
+
 	fire.draw_pass_1 = fire.draw_pass_1.duplicate(true)
 	fire.process_material = fire.process_material.duplicate(true)
 	fire.material_override = fire.material_override.duplicate(true)

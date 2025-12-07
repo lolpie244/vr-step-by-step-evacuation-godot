@@ -1,9 +1,19 @@
+class_name StrategicScene
 extends MapScene
 const IMPLEMENTS := "StrategicScene"
+
+
+class Context:
+	var character_count: int
+
+	func _init(_character_count: int):
+		self.character_count = _character_count
+
 
 @export var next_scene: PackedScene
 @export var rope_trigger: PackedScene
 
+var context: Context
 var first_mode_trigger: RopeTrigger
 
 
@@ -71,7 +81,7 @@ func _ready() -> void:
 	GameCore.character_selected.connect(_on_character_selected)
 
 	var burning_tile := _add_flames(1)[0]
-	_add_characters(3, burning_tile)
+	_add_characters(context.character_count, burning_tile)
 	map.impl.characters[0].enabled = true
 
 	GameCore.next_turn()
@@ -85,8 +95,8 @@ func _on_first_mode_trigger_triggerred() -> void:
 
 	var character := GameCore.selected_character
 	GameCore.selected_character = null
-	var context := FirstPersonScene.Context.new(character)
-	SceneManager.load_scene(next_scene, context)
+	var first_person_context := FirstPersonScene.Context.new(character)
+	SceneManager.load_scene(next_scene, first_person_context)
 
 
 func _on_character_selected(character: Character) -> void:

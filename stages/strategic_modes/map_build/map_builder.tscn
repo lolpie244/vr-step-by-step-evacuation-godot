@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://xnfqapr2ajxs"]
+[gd_scene load_steps=23 format=3 uid="uid://xnfqapr2ajxs"]
 
 [ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/strategic_modes/base_scene/map_scene.tscn" id="1_mavd1"]
 [ext_resource type="Script" uid="uid://cklvbndqqhyfp" path="res://stages/strategic_modes/map_build/map_builder.gd" id="1_og28i"]
@@ -8,12 +8,26 @@
 [ext_resource type="Shader" uid="uid://b36ybr0m8b7m" path="res://stages/strategic_modes/map_build/cutoff.gdshader" id="5_jfixn"]
 [ext_resource type="PackedScene" uid="uid://cub7v4mtm41il" path="res://stages/strategic_modes/map_build/scanner/furniture_anchor.tscn" id="5_ltwy7"]
 [ext_resource type="PackedScene" uid="uid://cilrgs5jxvr7y" path="res://stages/strategic_modes/map_build/tiles/tile_factory.tscn" id="6_n64ml"]
-[ext_resource type="PackedScene" uid="uid://4xjuluon04x0" path="res://stages/strategic_modes/map_build/tile_type_pen.tscn" id="8_qwooh"]
 [ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://ui/button.tscn" id="9_meh3h"]
 [ext_resource type="PackedScene" uid="uid://c50qun606ebvi" path="res://assets/environment_props/easel.glb" id="10_xncoq"]
 [ext_resource type="PackedScene" uid="uid://btcfofdv2pwcs" path="res://assets/environment_props/canvas.glb" id="11_4lc88"]
+[ext_resource type="PackedScene" uid="uid://ilgmyssxlf6h" path="res://assets/environment_props/wall_shelf.glb" id="11_5a30f"]
 [ext_resource type="PackedScene" uid="uid://bvra5d3gdimpq" path="res://assets/environment_props/shelf.glb" id="12_4lc88"]
 [ext_resource type="PackedScene" uid="uid://b80h6lkl843dr" path="res://stages/strategic_modes/map_build/items/items_catalog.tscn" id="13_cb5rl"]
+[ext_resource type="PackedScene" uid="uid://4xjuluon04x0" path="res://stages/strategic_modes/map_build/ui_elements/tile_type_pen.tscn" id="14_3h4ar"]
+[ext_resource type="PackedScene" uid="uid://0chyj5rbw2dl" path="res://ui/dial.tscn" id="14_d8g78"]
+[ext_resource type="Script" uid="uid://1xll040bdmsv" path="res://stages/strategic_modes/map_build/ui_elements/character_dial.gd" id="15_bm6mf"]
+[ext_resource type="ArrayMesh" uid="uid://c517pgebqksa5" path="res://assets/characters/character_mesh.res" id="16_o8spt"]
+[ext_resource type="PackedScene" uid="uid://bypa1gccleaiv" path="res://stages/common_nodes/fire/fire.tscn" id="17_bm6mf"]
+[ext_resource type="Script" uid="uid://xo82r6aj31sk" path="res://stages/strategic_modes/map_build/ui_elements/fire_dial.gd" id="17_o8spt"]
+[ext_resource type="PackedScene" uid="uid://b50lh3ohab6x6" path="res://ui/mesh_rope_trigger.tscn" id="20_3mdy1"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_5a30f"]
+transform_format = 1
+instance_count = 9
+visible_instance_count = 3
+mesh = ExtResource("16_o8spt")
+buffer = PackedFloat32Array(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0.5, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0.5, 1, 0, 0, 0.5, 0, 1, 0, 0, 0, 0, 1, 0.5, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0.5, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0.5, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1)
 
 [node name="MapBuilder" instance=ExtResource("1_mavd1")]
 script = ExtResource("1_og28i")
@@ -50,6 +64,12 @@ shader_axis = 1
 [node name="TileFactory" parent="Map" index="0" instance=ExtResource("6_n64ml")]
 transform = Transform3D(2.453425, 0, 0, 0, 0.29185784, 0.98706675, 0, -2.5761464, 0.76172006, 0, -1.257102, 1.4780504)
 
+[node name="wall2" parent="Environment/Room" index="2"]
+transform = Transform3D(-5.224998e-08, 0, 0.8, 0, 0.8, 0, -1.1953403, 0, -3.4969112e-08, -0.99179995, -0.25928515, 1.8843714)
+
+[node name="wall3" parent="Environment/Room" index="3"]
+transform = Transform3D(-5.109396e-08, 0, 0.8, 0, 0.8, 0, -1.1688936, 0, -3.4969112e-08, 1.1202826, -0.25928515, 1.8938149)
+
 [node name="Floor" parent="Environment/Room" index="6"]
 transform = Transform3D(1.0709727, 0, 0, 0, 1, 0, 0, 0, 1.3216733, 0, -0.33477086, 1.7702377)
 
@@ -65,38 +85,39 @@ transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 1
 [node name="Canvas" parent="Environment/Easel" index="1" instance=ExtResource("11_4lc88")]
 transform = Transform3D(1.3, -3.3121538e-08, -2.842171e-14, 3.1798645e-08, 1.2480775, -0.36373413, 9.267282e-09, 0.36373413, 1.2480775, 3.2177828e-05, -0.27263528, -0.104536235)
 
+[node name="wall_shelf2" parent="Environment" index="4" instance=ExtResource("11_5a30f")]
+transform = Transform3D(-1.4196441e-08, 0, -1.0298597, 0, 0.59999996, 0, 0.3247767, 0, -4.5016595e-08, 0.8677792, 0.60319096, 2.0495296)
+
 [node name="MapScanner" type="Node3D" parent="." index="7"]
 script = ExtResource("3_nt64x")
 
 [node name="ScanRoomButton" parent="." index="8" instance=ExtResource("9_meh3h")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0.32808077, 0.25878984, 1.4553176)
+transform = Transform3D(0.8748734, 0, 0.48435163, 0, 1, 0, -0.48435163, 0, 0.8748734, -0.20556429, 0.36514196, 1.2780362)
 
-[node name="ExitButton" parent="." index="9" instance=ExtResource("9_meh3h")]
-transform = Transform3D(0.9659756, 0, 0.25863364, 0, 1, 0, -0.25863364, 0, 0.9659756, -0.2101528, 0.3626417, 1.2388928)
+[node name="Pens" type="Node3D" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.25915292, 0.36962396, 1.4423127)
 
-[node name="Pens" type="Node" parent="." index="10"]
-
-[node name="Floor" parent="Pens" index="0" instance=ExtResource("8_qwooh")]
-transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.29770142, 0.36613476, 1.3984342)
+[node name="Floor" parent="Pens" index="0" instance=ExtResource("14_3h4ar")]
+transform = Transform3D(0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, 0, 0, 0, 1, 0, 0, 0)
 type = 1
-color = Color(1, 1, 1, 1)
+color = Color(1, 1, 1, 0.99607843)
 
-[node name="Wall" parent="Pens" index="1" instance=ExtResource("8_qwooh")]
-transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.17978781, 0.36613476, 1.3984342)
+[node name="Wall" parent="Pens" index="1" instance=ExtResource("14_3h4ar")]
+transform = Transform3D(0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, 0, 0, 0, 1, -0.09529625, 0, 0)
 type = 2
-color = Color(1, 0, 1, 1)
+color = Color(0.8030281, 0.0005332887, 0.8085564, 0.99607843)
 
-[node name="Window" parent="Pens" index="2" instance=ExtResource("8_qwooh")]
-transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, -0.04427558, 0.36613476, 1.3984342)
-type = 3
-color = Color(0.9999998, 0.41498008, 0.12962487, 1)
-
-[node name="Door" parent="Pens" index="3" instance=ExtResource("8_qwooh")]
-transform = Transform3D(0.9568136, -0.29070228, -4.371139e-08, 4.182365e-08, -1.2706999e-08, 1, -0.29070228, -0.9568136, 1.9106855e-15, 0.061435938, 0.36613476, 1.3984342)
+[node name="Door" parent="Pens" index="2" instance=ExtResource("14_3h4ar")]
+transform = Transform3D(0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, 0, 0, 0, 1, -0.18595107, 0, 0)
 type = 4
-color = Color(1, 0, 0, 1)
+color = Color(1, 0, 0, 0.99607843)
 
-[node name="ItemsCatalog" parent="." index="11" instance=ExtResource("13_cb5rl")]
+[node name="Window" parent="Pens" index="3" instance=ExtResource("14_3h4ar")]
+transform = Transform3D(0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, 0, 0, 0, 1, -0.28754887, 0, 0)
+type = 3
+color = Color(0.90466106, 0.47947353, 0, 0.99607843)
+
+[node name="ItemsCatalog" parent="." index="10" instance=ExtResource("13_cb5rl")]
 
 [node name="BedSingle" parent="ItemsCatalog" index="0"]
 transform = Transform3D(0.95461535, 0, -0.29784143, 0, 1, 0, 0.29784143, 0, 0.95461535, -0.7579842, 0.6511028, 1.7329466)
@@ -146,7 +167,7 @@ visible = true
 transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, -0.7335771, 0.8629166, 1.9291518)
 visible = true
 
-[node name="MapCapture" type="SubViewport" parent="." index="12"]
+[node name="MapCapture" type="SubViewport" parent="." index="11"]
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="MapCapture" index="0"]
@@ -154,16 +175,48 @@ transform = Transform3D(1, 0, 0, 0, 0.9634156, 0.268012, 0, -0.268012, 0.9634155
 projection = 1
 size = 0.7562317
 
+[node name="Settings" type="Node3D" parent="." index="12"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.81207347, 0.61532354, 2.062616)
+
+[node name="CharacterDial" parent="Settings" index="0" instance=ExtResource("14_d8g78")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0.122, 0, 0)
+script = ExtResource("15_bm6mf")
+min_value = 1.0
+max_value = 9.0
+default = 3.0
+step = 1.0
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Settings/CharacterDial" index="2"]
+transform = Transform3D(0.09999994, 0, 4.440892e-16, 0, 0.1, 0, -4.440892e-16, 0, 0.09999994, -0.045997143, 0.023464978, -0.14291835)
+multimesh = SubResource("MultiMesh_5a30f")
+
+[node name="FireDial" parent="Settings" index="1" instance=ExtResource("14_d8g78")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12220985, 0, 0)
+script = ExtResource("17_o8spt")
+min_value = 0.1
+
+[node name="FireOrigin" type="Node3D" parent="Settings/FireDial" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.16, 0, 0, 0, 1, 0, 0.036758304, -0.09110737)
+
+[node name="Fire" parent="Settings/FireDial/FireOrigin" index="0" instance=ExtResource("17_bm6mf")]
+transform = Transform3D(0.06, 0, 0, 0, 0.05, 0, 0, 0, 0.06, 0, 0, 0)
+particles_scale = 0.7
+
+[node name="ExitTrigger" parent="." index="13" instance=ExtResource("20_3mdy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5644965, 0.94870645, 1.2501694)
+
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]
 [connection signal="openxr_fb_scene_data_missing" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_data_missing"]
 [connection signal="map_scanned" from="MapScanner" to="." method="_on_map_scanner_map_scanned"]
 [connection signal="released" from="ScanRoomButton" to="." method="_on_scan_room_button_released"]
-[connection signal="released" from="ExitButton" to="." method="_on_exit_button_released"]
 [connection signal="type_changed" from="Pens/Floor" to="." method="_on_tile_type_changed"]
 [connection signal="type_changed" from="Pens/Wall" to="." method="_on_tile_type_changed"]
-[connection signal="type_changed" from="Pens/Window" to="." method="_on_tile_type_changed"]
 [connection signal="type_changed" from="Pens/Door" to="." method="_on_tile_type_changed"]
+[connection signal="type_changed" from="Pens/Window" to="." method="_on_tile_type_changed"]
+[connection signal="value_changed" from="Settings/CharacterDial" to="Settings/CharacterDial" method="_on_value_changed"]
+[connection signal="value_changed" from="Settings/FireDial" to="Settings/FireDial" method="_on_value_changed"]
+[connection signal="triggerred" from="ExitTrigger" to="." method="_on_exit_rope_triggered"]
 
 [editable path="ItemsCatalog"]
 [editable path="ItemsCatalog/BedSingle"]
