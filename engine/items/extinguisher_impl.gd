@@ -62,12 +62,12 @@ func extinguish(flammable: Flammable):
 
 
 func remove():
-	super.remove()
-
 	if _tile:
 		var walkable: Walkable = _tile.get_mixin(Walkable)
 		if walkable:
 			walkable.character_placed.disconnect(_on_character_placed)
+
+	super.remove()
 
 
 func _process(delta):

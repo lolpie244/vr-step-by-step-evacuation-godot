@@ -16,6 +16,7 @@ script = ExtResource("2_4qmov")
 
 [node name="Rope" parent="." index="0"]
 curve = SubResource("Curve3D_tion3")
+segments_count = 10
 
 [node name="End" parent="." index="3"]
 visible = true

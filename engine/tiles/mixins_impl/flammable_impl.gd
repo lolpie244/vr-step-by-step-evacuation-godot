@@ -64,6 +64,9 @@ func can_burn():
 
 
 func ignite():
+	if state != State.NOT_BURNING:
+		return
+
 	strength = 0.1
 	state = State.BURNING
 	_ignition_turn = GameCore.current_turn
@@ -71,6 +74,15 @@ func ignite():
 	var smokable: Smokable = _tile.get_mixin(Smokable)
 	if smokable:
 		smokable.smoke()
+
+
+func burn():
+	if state == State.BURNED:
+		return
+
+	strength = 0
+	durability = 0
+	state = State.BURNED
 
 
 func process_turn(_turn_number):
@@ -83,7 +95,7 @@ func process_turn(_turn_number):
 	durability -= Constants.IDLE_DURABILITY_DECREASE * strength
 
 	if durability <= 0:
-		state = State.BURNED
+		burn()
 	elif strength > 1:
 		strength = 1
 

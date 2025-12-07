@@ -49,4 +49,7 @@ func _ready() -> void:
 
 
 func _on_flammable_state_changed(_flammable: Flammable, _state: Flammable.State):
+	var tile := _flammable.get_tile()
+	var item_holder := tile.get_mixin(ItemHolder) as ItemHolder
+
 	exit()
