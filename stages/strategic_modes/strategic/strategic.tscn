@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://flu7j32ifd3y"]
+[gd_scene load_steps=28 format=3 uid="uid://flu7j32ifd3y"]
 
 [ext_resource type="Script" uid="uid://dbgvinydau6i6" path="res://stages/strategic_modes/strategic/strategic.gd" id="1_dspli"]
 [ext_resource type="PackedScene" uid="uid://bytc3ysax4av" path="res://stages/strategic_modes/base_scene/map_scene.tscn" id="1_mavd1"]
@@ -10,12 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://bbgo00lho5osc" path="res://stages/strategic_modes/strategic/characters/character_factory.tscn" id="7_vy2ce"]
 [ext_resource type="PackedScene" uid="uid://cxfojo8jvfcd5" path="res://stages/strategic_modes/strategic/items/item_factory.tscn" id="8_vy2ce"]
 [ext_resource type="PackedScene" uid="uid://dk6f6uvskip7d" path="res://common/rope/rope.tscn" id="11_17bcf"]
-[ext_resource type="Script" uid="uid://c1vovqujr6r5b" path="res://addons/godot-xr-tools/objects/pickable.gd" id="12_yfoml"]
+[ext_resource type="Script" uid="uid://dls6pubamjvdr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="12_yfoml"]
 [ext_resource type="PackedScene" uid="uid://c3wpeixkcvp70" path="res://assets/items/extinguisher_powder/model.tscn" id="13_0kd0p"]
 [ext_resource type="PackedScene" uid="uid://dmvb1dap8a5x5" path="res://assets/items/extinguisher_co2/model.tscn" id="14_0kd0p"]
 [ext_resource type="PackedScene" uid="uid://ilgmyssxlf6h" path="res://assets/environment_props/wall_shelf.glb" id="14_yfoml"]
 [ext_resource type="PackedScene" uid="uid://bjp6x67n53lfw" path="res://assets/items/wall_art.glb" id="15_0kd0p"]
 [ext_resource type="Script" uid="uid://dw2y5guq5ka5i" path="res://stages/strategic_modes/strategic/map_plan_sprite.gd" id="16_1whxo"]
+[ext_resource type="ArrayMesh" uid="uid://c517pgebqksa5" path="res://assets/characters/character_mesh.res" id="17_2vjv4"]
+[ext_resource type="ArrayMesh" uid="uid://bsdlf0asyw542" path="res://assets/characters/gravestone.res" id="18_csx67"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a0dt8"]
 
@@ -49,6 +51,14 @@ point_count = 3
 material = SubResource("StandardMaterial3D_0kd0p")
 size = Vector2(0.8, 0.6)
 orientation = 2
+
+[sub_resource type="MultiMesh" id="MultiMesh_csx67"]
+transform_format = 1
+mesh = ExtResource("17_2vjv4")
+
+[sub_resource type="MultiMesh" id="MultiMesh_1jcno"]
+transform_format = 1
+mesh = ExtResource("18_csx67")
 
 [node name="Strategic" instance=ExtResource("1_mavd1")]
 script = ExtResource("1_dspli")
@@ -153,6 +163,14 @@ mesh = SubResource("PlaneMesh_1whxo")
 transform = Transform3D(-0.12, 0, -1.8119495e-08, 0, 0.12, 0, 1.8119495e-08, 0, -0.12, 0, 0, 0.008922815)
 flip_h = true
 script = ExtResource("16_1whxo")
+
+[node name="SavedCharacters" type="MultiMeshInstance3D" parent="." index="9"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.5408418, 1.0002459, 0.7417974)
+multimesh = SubResource("MultiMesh_csx67")
+
+[node name="DeadCharacters" type="MultiMeshInstance3D" parent="." index="10"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.541, 0.81302506, 0.742)
+multimesh = SubResource("MultiMesh_1jcno")
 
 [connection signal="released" from="ExitButton" to="." method="_on_button_released"]
 

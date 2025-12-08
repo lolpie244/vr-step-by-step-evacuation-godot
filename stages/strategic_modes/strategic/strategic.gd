@@ -16,6 +16,18 @@ class Context:
 var context: Context
 var first_mode_trigger: RopeTrigger
 
+@onready var saved_characters_shelf: MultiMesh = $SavedCharacters.multimesh
+@onready var dead_characters_shelf: MultiMesh = $DeadCharacters.multimesh
+
+
+func _fill_shelf_multimesh(multimesh: MultiMesh, number: int):
+	multimesh.instance_count = number
+	multimesh.visible_instance_count = 0
+	for i in range(number):
+		var mesh_transform := Transform3D.IDENTITY
+		mesh_transform.origin = Vector3(1 * i, 0, 0)
+		multimesh.set_instance_transform(i, mesh_transform)
+
 
 func _add_first_mode_trigger():
 	if first_mode_trigger:
@@ -44,6 +56,10 @@ func _add_characters(number: int = 1, burning_tile: Tile = null):
 		var tile := walkable_tiles[id]
 		map.add_character(Character.Type.CIVILIAN, tile.pos)
 		walkable_tiles.remove_at(id)
+
+	for character in map.impl.characters:
+		character.death.connect(_on_character_death)
+		character.saved.connect(_on_character_saved)
 
 	if !burning_tile:
 		return
@@ -84,6 +100,8 @@ func _ready() -> void:
 	_add_characters(context.character_count, burning_tile)
 	map.impl.characters[0].enabled = true
 
+	_fill_shelf_multimesh(saved_characters_shelf, context.character_count)
+	_fill_shelf_multimesh(dead_characters_shelf, context.character_count)
 	GameCore.next_turn()
 
 
@@ -105,3 +123,11 @@ func _on_character_selected(character: Character) -> void:
 
 func _enter_scene():
 	_add_first_mode_trigger()
+
+
+func _on_character_saved(_character: Character):
+	saved_characters_shelf.visible_instance_count += 1
+
+
+func _on_character_death(_character: Character):
+	dead_characters_shelf.visible_instance_count += 1

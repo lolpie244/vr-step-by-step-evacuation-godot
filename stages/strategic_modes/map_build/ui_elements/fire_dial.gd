@@ -6,6 +6,8 @@ extends Dial
 
 func _ready() -> void:
 	fire.enabled = true
+	value = Constants.fire_spreading_rate
+
 	_on_value_changed(value)
 
 

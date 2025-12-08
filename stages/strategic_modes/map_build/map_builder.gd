@@ -18,6 +18,7 @@ var _items: Array[MapBuilderItem] = []
 
 @onready var exit_trigger: RopeTrigger = $ExitTrigger
 @onready var character_dial: Dial = $Settings/CharacterDial
+@onready var fire_dial: Dial = $Settings/FireDial
 
 
 func _ready() -> void:
@@ -132,5 +133,8 @@ func _on_exit_rope_triggered() -> void:
 	_clear()
 	GameCore.evacuation_plan = map_capture.get_texture().get_image()
 	GameCore.set_grid(impl)
+
+	Constants.fire_spreading_rate = fire_dial.value
 	var strategic_context := StrategicScene.Context.new(int(character_dial.value))
+
 	SceneManager.replace_scene(strategic, strategic_context)
