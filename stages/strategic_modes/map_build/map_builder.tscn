@@ -203,7 +203,7 @@ transform = Transform3D(0.06, 0, 0, 0, 0.05, 0, 0, 0, 0.06, 0, 0, 0)
 particles_scale = 0.7
 
 [node name="ExitTrigger" parent="." index="13" instance=ExtResource("20_3mdy1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5644965, 0.94870645, 1.2501694)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5644965, 0.8569626, 1.4580177)
 
 [connection signal="openxr_fb_scene_anchor_created" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_anchor_created"]
 [connection signal="openxr_fb_scene_capture_completed" from="PlayerVR/SceneManager" to="MapScanner" method="_on_scene_capture_completed"]
