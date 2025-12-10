@@ -18,6 +18,8 @@ setup:
 	git lfs install
 	git lfs pull
 
+	${PROJECT_DIR}/third-party/godot_openxr_vendors.sh
+
 .PHONY: format
 format:
 	 ${VENV} gdformat `git ls-files "*.gd"`

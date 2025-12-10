@@ -48,8 +48,6 @@ In strategic mode, the user sees the map from above and can move active characte
 ### First person
 In first-person mode, the user plays as the selected character and sees the map from that character’s point of view
 
-**Supported actions**:
-
 **Extinguish fire**: the user can extinguish fire
 Condition: The user is near a tile that is on fire
 
@@ -83,11 +81,9 @@ Steps:
 - After the alarm is activated, all characters on the map become active
 
 ## Requirements
-<details>
-  <summary>Requirements</summary>
-    <li><a>Meta Quest 2/3/3s/Pro</a></li>
-    <li><a>Godot 4.4+</a></li>
-</details>
+* Meta Quest 2/3/3s/Pro
+* Godot 4.4+
+* Git LFS
 
 ## Build
 To setup development environment use command:

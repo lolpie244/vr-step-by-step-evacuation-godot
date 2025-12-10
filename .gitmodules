@@ -1,0 +1,12 @@
+[submodule "third-party/godot-xr-tools"]
+	path = third-party/godot-xr-tools
+	url = https://github.com/GodotVR/godot-xr-tools
+[submodule "third-party/godot_openxr_vendors"]
+	path = third-party/godot_openxr_vendors
+	url = https://github.com/GodotVR/godot_openxr_vendors.git
+[submodule "third-party/Gut"]
+	path = third-party/Gut
+	url = https://github.com/bitwes/Gut
+[submodule "third-party/godot_debug_draw_3d"]
+	path = third-party/godot_debug_draw_3d
+	url = https://github.com/DmitriySalnikov/godot_debug_draw_3d
