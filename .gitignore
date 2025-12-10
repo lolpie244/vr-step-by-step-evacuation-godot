@@ -18,8 +18,7 @@ mono_crash.*.json
 
 *.pipe
 
-addons
-third-party/
+third-party/godot_openxr_vendors/
 
 docs.txt
 lint.log

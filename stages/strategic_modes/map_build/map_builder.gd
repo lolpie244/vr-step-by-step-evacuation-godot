@@ -16,6 +16,10 @@ var _items: Array[MapBuilderItem] = []
 @onready var map_capture: SubViewport = $MapCapture
 @onready var map_capture_camera: Camera3D = $MapCapture/Camera3D
 
+@onready var exit_trigger: RopeTrigger = $ExitTrigger
+@onready var character_dial: Dial = $Settings/CharacterDial
+@onready var fire_dial: Dial = $Settings/FireDial
+
 
 func _ready() -> void:
 	tile_factory.set_material(map.cutoff_material)
@@ -23,6 +27,13 @@ func _ready() -> void:
 
 	map_capture_camera.rotation_degrees.x = map.rotation_degrees.x - 90
 	_set_map(impl)
+
+
+func validate_map() -> void:
+	if _items.size():
+		exit_trigger.spawn()
+	else:
+		exit_trigger.remove()
 
 
 func _set_map(grid: MapGrid):
@@ -64,6 +75,8 @@ func _reset_map():
 	for item in impl.items:
 		item_catalog.create(item)
 
+	validate_map()
+
 
 func _reacreate_tile(x: int, y: int):
 	map.remove_item(_tile_nodes[x][y])
@@ -90,10 +103,14 @@ func _on_tile_type_changed(type: Tile.Type, pos: Vector2i) -> void:
 			if impl._in_range(pos.x + i, pos.y + j):
 				_reacreate_tile(pos.x + i, pos.y + j)
 
+	validate_map()
+
 
 func add_item_node(item_node: MapBuilderItem):
 	_items.append(item_node)
 	item_node.impl.removed.connect(_on_item_removed)
+
+	validate_map()
 
 
 func get_item_node(item: Item) -> MapBuilderItem:
@@ -111,9 +128,13 @@ func _on_scan_room_button_released(_button: Variant) -> void:
 	map_scanner.start_scan()
 
 
-func _on_exit_button_released(_button: Variant) -> void:
+func _on_exit_rope_triggered() -> void:
 	impl.strip()
 	_clear()
 	GameCore.evacuation_plan = map_capture.get_texture().get_image()
 	GameCore.set_grid(impl)
-	SceneManager.replace_scene(strategic)
+
+	Constants.fire_spreading_rate = fire_dial.value
+	var strategic_context := StrategicScene.Context.new(int(character_dial.value))
+
+	SceneManager.replace_scene(strategic, strategic_context)

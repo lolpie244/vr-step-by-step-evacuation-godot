@@ -66,7 +66,10 @@ func _on_impl_strength_changed(_flammable: Flammable, strength: float) -> void:
 		return
 
 	fire.cooling_coef = 1 - strength
-	fire.scale = _full_fire_scale * strength
+	if strength != 0:
+		fire.scale = _full_fire_scale * strength
+	else:
+		fire.enabled = false
 
 
 func _on_impl_durability_changed(_flammable: Flammable, durability: float) -> void:

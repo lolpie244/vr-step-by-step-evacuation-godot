@@ -4,7 +4,7 @@ extends Node
 
 # fraction of heat that actually reaches the neighbor through direct contact
 const MAX_STRENGHT := 20  # max wind vector strength
-const MAX_STRENGHT_PROB := 0.3  # probability that fire will spread with wind with MAX_STRENGHT
+const MAX_STRENGHT_PROB := 0.6  # probability that fire will spread with wind with MAX_STRENGHT
 
 const K1 := 1.3  # wind influence coef
 var k2 := -log(1 - MAX_STRENGHT_PROB) / MAX_STRENGHT  # wind vector length to probability
@@ -59,4 +59,11 @@ func is_spread(from: Tile, to: Tile) -> bool:
 		print("	RESULT ", fixed_prob + dynamic_prob)
 		print("")
 
-	return randf() < from.get_mixin(Flammable).strength * (fixed_prob + dynamic_prob)
+	return (
+		randf()
+		< (
+			from.get_mixin(Flammable).strength
+			* (fixed_prob + dynamic_prob)
+			* Constants.fire_spreading_rate
+		)
+	)
