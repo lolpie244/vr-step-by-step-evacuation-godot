@@ -12,6 +12,9 @@
 </details>
 
 ## Overview
+https://github.com/user-attachments/assets/abec3222-f376-4e73-aec2-23d4c5b87ab4
+
+
 STEP-BY-STEP Evacuation is a step-by-step VR game for Meta Quest 3/3s that teaches evacuation procedures. The game consist of three different game modes:
 
 ### Map Build
