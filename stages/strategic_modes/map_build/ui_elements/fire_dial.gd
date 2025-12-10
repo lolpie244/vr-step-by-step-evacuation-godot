@@ -8,6 +8,8 @@ func _ready() -> void:
 	fire.enabled = true
 	value = Constants.fire_spreading_rate
 
+	_on_value_changed(value)
+
 
 func _on_value_changed(_value: float) -> void:
 	fire.cooling_coef = 1 - value

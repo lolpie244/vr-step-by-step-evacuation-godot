@@ -36,12 +36,4 @@ func origin_tile() -> Vector2:
 	var center := (left_corner + right_corner) / 2.0 / Constants.TILE_SIZE_IN_REAL_LIFE
 	var half_size := item.size / 2.0
 
-	match item.get_direction():
-		Utils.Direction.DOWN:
-			return center + half_size
-		Utils.Direction.RIGHT:
-			return center - half_size * Vector2(-1, 1)
-		Utils.Direction.LEFT:
-			return center - half_size * Vector2(1, -1)
-		_:
-			return center - half_size
+	return center - half_size

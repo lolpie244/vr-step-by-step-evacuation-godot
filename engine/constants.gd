@@ -1,6 +1,6 @@
 extends Node
 
-const TIME_PER_TURN: float = 20  # seconds
+const TIME_PER_TURN: float = 26  # seconds
 const ROOM_TEMPERATURE: float = 293  # kelvin
 const TILE_SIZE_IN_REAL_LIFE: float = 0.7  # meter
 const TILE_SIZE_IN_PX: int = 300  # pixels
