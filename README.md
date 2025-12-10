@@ -50,7 +50,7 @@ In strategic mode, the user sees the map from above and can move active characte
 
 ### First person
 In first-person mode, the user plays as the selected character and sees the map from that character’s point of view
-
+- - -
 **Extinguish fire**: the user can extinguish fire
 Condition: The user is near a tile that is on fire
 
