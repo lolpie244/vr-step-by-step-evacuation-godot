@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://0chyj5rbw2dl"]
+
+[ext_resource type="PackedScene" uid="uid://d2qb052uyt4k5" path="res://assets/ui/dial.glb" id="1_csds7"]
+[ext_resource type="Script" uid="uid://di5chnsj2lm6d" path="res://ui/dial.gd" id="1_v252k"]
+[ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="2_v252k"]
+[ext_resource type="Script" uid="uid://dm0qe8w1syp6" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="3_wxa75"]
+[ext_resource type="Resource" uid="uid://brci6umrcd157" path="res://addons/godot-xr-tools/rumble/tap_rumble.tres" id="4_wd8dc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gtgih"]
+size = Vector3(0.170562, 0.0142351175, 0.092065796)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wxa75"]
+size = Vector3(1.3271484, 0.19345093, 0.48461914)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v252k"]
+size = Vector3(0.53131104, 0.057861328, 0.5331421)
+
+[node name="Dial" type="Node3D"]
+script = ExtResource("1_v252k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0427296, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000319824, 0.049871445, 0.04669074)
+shape = SubResource("BoxShape3D_gtgih")
+
+[node name="dial" parent="." instance=ExtResource("1_csds7")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Rumbler" type="Node" parent="."]
+script = ExtResource("3_wxa75")
+event = ExtResource("4_wd8dc")
+
+[node name="MinusAreaButton" parent="." instance=ExtResource("2_v252k")]
+transform = Transform3D(0.0396237, 0, 0, 0, 0.039623663, 0, 0, 0, 0.039623663, 0.03990404, 0.029659975, 0.038854796)
+button = NodePath("../dial/minus")
+displacement = Vector3(0, -0.04, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MinusAreaButton"]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1, 0.00048851967, -0.021011353, 0.004516661)
+shape = SubResource("BoxShape3D_wxa75")
+
+[node name="PlusAreaButton" parent="." instance=ExtResource("2_v252k")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.0413072, 0.029705206, 0.038491018)
+button = NodePath("../dial/plus")
+displacement = Vector3(0, -0.04, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlusAreaButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.152293e-05, -0.0095025, 0.0028381646)
+shape = SubResource("BoxShape3D_v252k")
+
+[connection signal="body_entered" from="MinusAreaButton" to="Rumbler" method="rumble_hand"]
+[connection signal="body_exited" from="MinusAreaButton" to="Rumbler" method="cancel_hand"]
+[connection signal="button_released" from="MinusAreaButton" to="." method="_on_minus_released"]
+[connection signal="body_entered" from="PlusAreaButton" to="Rumbler" method="rumble_hand"]
+[connection signal="body_exited" from="PlusAreaButton" to="Rumbler" method="cancel_hand"]
+[connection signal="button_released" from="PlusAreaButton" to="." method="_on_plus_released"]
+
+[editable path="dial"]
