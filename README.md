@@ -1,8 +1,5 @@
 <p align="center">
-  <h1 align="center">3D editor</h1>
-</p>
-<p align="center">
-	VR STEP-BY-STEP Evacuation
+  <h1 align="center">VR STEP-BY-STEP Evacuation</h1>
 </p>
 <details>
 <summary>Table of Contents</summary>
